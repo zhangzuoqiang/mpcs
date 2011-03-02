@@ -8,7 +8,7 @@ import thread.ChatThread;
 import utils.OutTxt;
 
 /**
- * 多线程Socket服务器
+ * 多线程Socket服务器 主方法
  * ipAddr: 172.25.135.248
  * @author zhangzuoqiang
  * <br/>2011-3-2
