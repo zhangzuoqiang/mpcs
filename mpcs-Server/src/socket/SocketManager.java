@@ -5,20 +5,19 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Vector;
 
-/**
- * Ïß³Ì¹ÜÀíÀà
- * @author zhangzuoqiang
- * <br/>2011-3-2
- */
 
 public class SocketManager extends Vector<Socket>{
    
+    /**
+    * çº¿ç¨‹ç®¡ç†ç±»
+    * @author Jaja as-max.cn
+    */
     private static final long serialVersionUID = 1L;
    
     private static SocketManager thisClass=null;
    
     /**
-    * »ñµÃ´ËÀàµ¥Ò»ÊµÀı
+    * è·å¾—æ­¤ç±»å•ä¸€å®ä¾‹
     * @return
     */
     public static SocketManager getSingleSocketManager(){
@@ -33,8 +32,8 @@ public class SocketManager extends Vector<Socket>{
     }
    
     /**
-    * ÏòËùÓĞ¿Í»§¶Ë¹ã²¥Ò»ÌõÏûÏ¢
-    * @param value ÏûÏ¢ÄÚÈİ
+    * å‘æ‰€æœ‰å®¢æˆ·ç«¯å¹¿æ’­ä¸€æ¡æ¶ˆæ¯
+    * @param value æ¶ˆæ¯å†…å®¹
     */
     public synchronized void sendToAll(String value){
         PrintStream ps;

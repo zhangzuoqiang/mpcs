@@ -10,29 +10,37 @@ import socket.SocketManager;
 import utils.OutTxt;
 
 /**
- * ÎªÃ¿Ò»¸öÁ¬½Ó¿ª±ÙÒ»¸öÏß³Ì
+ * ä¸ºæ¯ä¸€ä¸ªè¿æ¥å¼€è¾Ÿä¸€ä¸ªçº¿ç¨‹
  * @author zhangzuoqiang
  * <br/>2011-3-2
  */
 
 public class ChatThread extends Thread{
-   
+	
     private BufferedReader br;
     private PrintStream ps;
     private Socket inSocket;
     private SocketManager sm=SocketManager.getSingleSocketManager();
-    private String theLoginName="ÄäÃûÓÃ»§";
+    private String theLoginName="åŒ¿åç”¨æˆ·";
    
-    /**ÏûÏ¢Í·**/
+    /**
+    * æ¶ˆæ¯å¤´
+    */
     private String MSG_HEAD="msg:";
    
-    /**ÔÚÏßÈËÊıĞÅÏ¢Í·**/
+    /**
+    * åœ¨çº¿äººæ•°ä¿¡æ¯å¤´
+    */
     private String ONLINE_NUM="online:";
    
-    /**·şÎñÆ÷¹ã²¥ĞÅÏ¢Í·**/
+    /**
+    * æœåŠ¡å™¨å¹¿æ’­ä¿¡æ¯å¤´
+    */
     private String POST="post:";
    
-    /**µÇÂ½ĞÅÏ¢Í·**/
+    /**
+    * ç™»é™†ä¿¡æ¯å¤´
+    */
     private String LOGIN="login:";
    
     public ChatThread(Socket s){
@@ -53,15 +61,15 @@ public class ChatThread extends Thread{
             while((line=br.readLine())!=null){
                 OutTxt.getSingleOutTxt().append(line+"\n");
                
-                //ÓÃ»§µÇÂ½
+                //ç”¨æˆ·ç™»é™†
                 String loginName=null;
                 loginName=this.getBodyByHead(this.LOGIN, line);
                 if(loginName!=null){
                     this.theLoginName=loginName;
-                    sm.sendToAll("["+this.POST+loginName+" µÇÂ½ÁË]");
+                    sm.sendToAll("["+this.POST+loginName+" ç™»é™†äº†]");
                 }
                
-                //ÓÃ»§·¢ÑÔ
+                //ç”¨æˆ·å‘è¨€
                 String msg=null;
                 msg=this.getBodyByHead(this.MSG_HEAD, line);
                 if(msg!=null){
@@ -81,7 +89,7 @@ public class ChatThread extends Thread{
             ps=null;
            
             sm.remove(inSocket);
-            String sendInfo="["+this.POST+this.theLoginName+" Àë¿ªÁË"+"]["+this.ONLINE_NUM+sm.size()+"]";
+            String sendInfo="["+this.POST+this.theLoginName+" ç¦»å¼€äº†"+"]["+this.ONLINE_NUM+sm.size()+"]";
             sm.sendToAll(sendInfo);
             OutTxt.getSingleOutTxt().append(sendInfo+"\n");
             this.interrupt();
@@ -89,10 +97,10 @@ public class ChatThread extends Thread{
     }
    
     /**
-    * ÓÃÓÚ»ñµÃÏûÏ¢ÄÚÈİ
-    * @param head ÏûÏ¢Í·
-    * @param totalString È«²¿ÏûÏ¢ÄÚÈİ
-    * @return ÏûÏ¢Ìå
+    * ç”¨äºè·å¾—æ¶ˆæ¯å†…å®¹
+    * @param head æ¶ˆæ¯å¤´
+    * @param totalString å…¨éƒ¨æ¶ˆæ¯å†…å®¹
+    * @return æ¶ˆæ¯ä½“
     */
     private String getBodyByHead(String head,String totalString){
         String returnString=null;
