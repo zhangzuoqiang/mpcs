@@ -3,7 +3,7 @@ package utils;
 import java.awt.TextArea;
 
 /**
- * 显示服务器启动消息
+ * 
  * @author zhangzuoqiang
  * <br/>2011-3-2
  */

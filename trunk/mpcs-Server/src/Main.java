@@ -8,7 +8,7 @@ import thread.ChatThread;
 import utils.OutTxt;
 
 /**
- * ¶àÏß³ÌSocket·şÎñÆ÷ Ö÷·½·¨
+ * SocketæœåŠ¡å™¨
  * ipAddr: 172.25.135.248
  * @author zhangzuoqiang
  * <br/>2011-3-2
@@ -35,7 +35,7 @@ public class Main extends JFrame{
 		this.setVisible(true);
 		try{
 			server=new ServerSocket(serverPort);
-			OutTxt.getSingleOutTxt().append(">>·şÎñÆ÷ÒÑ¾­Æô¶¯\n");
+			OutTxt.getSingleOutTxt().append(">>æœåŠ¡å™¨å¯åŠ¨æˆåŠŸ\n");
 			while(true){
 				handleComing(server.accept());
 			}
