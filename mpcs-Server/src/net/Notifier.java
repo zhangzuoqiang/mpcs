@@ -34,7 +34,7 @@ public class Notifier {
     
     /**
      * 添加事件监听器
-     * @param l 监听器
+     * @param listener 监听器
      */
     public void addListener(ServerListener listener) {
         synchronized (listeners) {
