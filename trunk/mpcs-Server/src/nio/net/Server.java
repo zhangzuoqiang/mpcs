@@ -10,7 +10,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
-import config.ServerConfig;
+import mpcs.config.ServerConfig;
 
 /**
  * <p>Title: 主控服务线程</p>

@@ -7,7 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 import java.io.IOException;
 
-import config.ServerConfig;
+import mpcs.config.ServerConfig;
 
 /**
  * <p>Title: 读线程</p>
