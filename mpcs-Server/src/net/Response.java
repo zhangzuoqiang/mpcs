@@ -25,6 +25,7 @@ public class Response {
     public void send(byte[] data) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocate(data.length);
         buffer.put(data, 0, data.length);
+        // 将缓冲区准备为数据传出状态
         buffer.flip();
         sc.write(buffer);
     }

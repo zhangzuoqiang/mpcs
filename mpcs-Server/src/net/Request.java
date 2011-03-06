@@ -1,5 +1,6 @@
 package net;
 
+import java.net.InetAddress;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -12,10 +13,12 @@ public class Request {
     private SocketChannel sc;
     private byte[] dataInput = null;;
     Object obj;
+    
     public Request(SocketChannel sc) {
         this.sc = sc;
     }
-    public java.net.InetAddress getAddress() {
+    
+    public InetAddress getAddress() {
         return sc.socket().getInetAddress();
     }
     public int getPort() {
