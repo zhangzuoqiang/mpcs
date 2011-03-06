@@ -9,6 +9,11 @@ import mpcs.cmd.UserRegisterCmd;
  */
 public class ProtocolDecoder {
 	
+	/**
+	 * 解析用户注册cmd
+	 * @param cmd
+	 * @return
+	 */
 	public static UserRegisterCmd RegisterCmdDecoder(String cmd){
 		UserRegisterCmd rCmd = new UserRegisterCmd();
 		String[] cmdArr = cmd.split("-");
