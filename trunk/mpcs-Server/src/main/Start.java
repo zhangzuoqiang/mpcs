@@ -1,9 +1,7 @@
 package main;
 
 import mpcs.config.ServerConfig;
-import mpcs.handler.LogHandler;
-import mpcs.handler.UserRegisterHandler;
-import nio.net.Notifier;
+import mpcs.utils.HandlerUtil;
 import nio.net.Server;
 
 /**
@@ -16,12 +14,9 @@ public class Start {
     public static void main(String[] args) {
     	
         try {
-            LogHandler loger = new LogHandler();
-            UserRegisterHandler register = new UserRegisterHandler();
-            Notifier notifier = Notifier.getNotifier();
-            notifier.addListener(loger);
-            notifier.addListener(register);
-            
+        	// 注册Handler
+        	HandlerUtil.AddHandlerListener();
+        	
             System.out.println("Server starting ...");
             Server server = new Server(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
