@@ -15,7 +15,7 @@ public class ServerConfig {
 	/**缓冲区大小**/
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/
-	public static final int CONNECT_TIMEOUT = 10000;
+	public static final int CONNECT_TIMEOUT = 1000;
 	/**允许的最大线程数**/
 	public static int MAX_THREADS = 4;
 	/**策略文件**/
