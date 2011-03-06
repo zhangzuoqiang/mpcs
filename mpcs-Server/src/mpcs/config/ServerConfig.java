@@ -17,9 +17,11 @@ public class ServerConfig {
 	/**超时时间,单位毫秒**/
 	public static final int CONNECT_TIMEOUT = 1000;
 	/**每个连接允许的最大读/写线程数**/
-	public static int MAX_THREADS = 4;
-	/**策略文件**/
-	public static final String POLICY_XML = "<cross-domain-policy> "
-		+"<allow-access-from domain=\"*\" to-ports=\"1025-9999\"/>"
-		+"</cross-domain-policy> ";
+	public static final int MAX_THREADS = 4;
+	/**请求策略文件**/
+	public static final String POLICY_REQUEST = "<policy-file-request/>";
+	/**返回策略文件**/
+	public static final String POLICY_XML = "<cross-domain-policy>"
+		   + "<allow-access-from domain=\"127.0.0.1\" to-ports=\"" + LISTENNING_PORT
+		   + "\"/>" + "</cross-domain-policy>\r\n\0";
 }
