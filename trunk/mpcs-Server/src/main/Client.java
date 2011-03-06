@@ -27,9 +27,15 @@ public class Client {
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
             out = new DataOutputStream( (client.getOutputStream()));
             
-            String query = "GB";
-            byte[] request = query.getBytes();
-            out.write(request);
+            out.writeBytes("100101");
+            out.writeBytes("-");
+            out.writeBytes("0");
+            out.writeBytes("-");
+            out.writeBytes("0");
+            out.writeBytes("-");
+            out.writeBytes("csdn.eric@gmail.com");
+            out.writeBytes("-");
+            out.writeBytes("15992827226"); 
             out.flush();
             client.shutdownOutput();
             

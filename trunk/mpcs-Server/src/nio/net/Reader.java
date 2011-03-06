@@ -50,19 +50,19 @@ public class Reader extends Thread {
     	
         ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
         int off = 0;
-        int r = 0;
+        int len = 0;// buffer的长度
         byte[] data = new byte[ServerConfig.BUFFER_SIZE * 5];
 
         while ( true ) {
             buffer.clear();
-            r = sc.read(buffer);
-            if (r == -1) break;
-            if ( (off + r) > data.length) {
+            len = sc.read(buffer);
+            if (len == -1) break;
+            if ( (off + len) > data.length) {// 扩容
                 data = grow(data, ServerConfig.BUFFER_SIZE * 5);
             }
             byte[] buf = buffer.array();
-            System.arraycopy(buf, 0, data, off, r);
-            off += r;
+            System.arraycopy(buf, 0, data, off, len);// 复制数组
+            off += len;
         }
         byte[] req = new byte[off];
         System.arraycopy(data, 0, req, 0, off);

@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import mpcs.config.ServerConfig;
+import mpcs.utils.ProtocolDecoder;
 import nio.net.Request;
 import nio.net.Response;
 import nio.net.event.EventAdapter;
@@ -20,11 +22,19 @@ public class UserRegisterHandler extends EventAdapter {
     
     public void onWrite(Request request, Response response) throws Exception {
         String command = new String(request.getDataInput());
+        
+        ProtocolDecoder.RegisterCmdDecoder(command);
+        
+        
+        
         String time = null;
         Date date = new Date();
         
         // 判断查询命令
-        if (command.equals("GB")) {
+        if (command.equals(ServerConfig.POLICY_REQUEST)) {
+        	response.send(ServerConfig.POLICY_XML.getBytes());
+		}
+        else if (command.equals("GB")) {
             // 中文格式
             DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.CHINA);
             time = cnDate.format(date);
