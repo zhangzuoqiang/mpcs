@@ -1,4 +1,4 @@
-package net;
+package nio.net;
 
 import java.nio.channels.SocketChannel;
 import java.nio.ByteBuffer;

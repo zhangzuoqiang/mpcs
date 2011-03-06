@@ -1,7 +1,7 @@
-package net.event;
+package nio.net.event;
 
-import net.Request;
-import net.Response;
+import nio.net.Request;
+import nio.net.Response;
 
 /**
  * <p>Title: 事件适配器</p>

@@ -1,4 +1,4 @@
-package net;
+package nio.net;
 
 import java.net.InetAddress;
 import java.nio.channels.SocketChannel;
