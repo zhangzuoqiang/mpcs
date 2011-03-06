@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * socket消息抽象类
  * <br/>socket消息结构:
- * <br/>消息头 h1 h2 h3各占2字节（short）
+ * <br/>消息头 h1 h2 h3各占2字节
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
@@ -17,6 +17,9 @@ public abstract class AbstractCommand implements Serializable {
 	private short head1;
 	private short head2;
 	private short head3;
+	
+	public AbstractCommand(){
+	}
 	
 	public AbstractCommand(short h1, short h2, short h3){
 		this.head1 = h1;
