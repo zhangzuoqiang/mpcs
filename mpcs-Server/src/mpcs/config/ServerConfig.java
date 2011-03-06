@@ -16,7 +16,7 @@ public class ServerConfig {
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/
 	public static final int CONNECT_TIMEOUT = 1000;
-	/**允许的最大线程数**/
+	/**每个连接允许的最大读/写线程数**/
 	public static int MAX_THREADS = 4;
 	/**策略文件**/
 	public static final String POLICY_XML = "<cross-domain-policy> "
