@@ -1,6 +1,6 @@
 package mpcs.cmd;
 
-public class UserRegisterCommand extends AbstractCommand {
+public class UserRegisterCmd extends AbstractCmd {
 
 	/****/
 	private static final long serialVersionUID = 1L;
