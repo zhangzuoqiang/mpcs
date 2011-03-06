@@ -55,8 +55,7 @@ public final class Writer extends Thread {
             notifier.fireOnWrite((Request)key.attachment(), response);
 
             // 触发onClosed事件
-            notifier.fireOnClosed((Request)key.attachment());
-            
+            notifier.fireOnClosed((Request)key.attachment());            
             sc.finishConnect();
 			sc.socket().close();
             sc.close();
