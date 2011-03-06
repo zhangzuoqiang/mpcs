@@ -1,6 +1,6 @@
-package net;
+package nio.net;
 
-import net.event.EventAdapter;
+import nio.net.event.EventAdapter;
 
 /**
  * <p>Title: 服务端事件处理器</p>
