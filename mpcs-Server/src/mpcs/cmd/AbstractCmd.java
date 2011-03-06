@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public abstract class AbstractCommand implements Serializable {
+public abstract class AbstractCmd implements Serializable {
 	
 	/****/
 	private static final long serialVersionUID = 1L;
@@ -18,10 +18,10 @@ public abstract class AbstractCommand implements Serializable {
 	private short head2;
 	private short head3;
 	
-	public AbstractCommand(){
+	public AbstractCmd(){
 	}
 	
-	public AbstractCommand(short h1, short h2, short h3){
+	public AbstractCmd(short h1, short h2, short h3){
 		this.head1 = h1;
 		this.head2 = h2;
 		this.head3 = h3;
