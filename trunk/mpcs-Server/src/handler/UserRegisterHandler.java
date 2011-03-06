@@ -1,4 +1,4 @@
-package main;
+package handler;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -9,13 +9,13 @@ import nio.net.Response;
 import nio.net.event.EventAdapter;
 
 /**
- * 时间查询服务的事件处理器类
+ * 用户注册服务的事件处理器类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class TimeHandler extends EventAdapter {
+public class UserRegisterHandler extends EventAdapter {
 	
-    public TimeHandler() {
+    public UserRegisterHandler() {
     }
     
     public void onWrite(Request request, Response response) throws Exception {
@@ -26,8 +26,7 @@ public class TimeHandler extends EventAdapter {
         // 判断查询命令
         if (command.equals("GB")) {
             // 中文格式
-            DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,
-                DateFormat.FULL, Locale.CHINA);
+            DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.CHINA);
             time = cnDate.format(date);
         }
         else {
