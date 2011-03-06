@@ -1,7 +1,7 @@
 package config;
 
 /**
- * 服务器配置 常量存放类
+ * 服务器配置类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
