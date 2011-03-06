@@ -51,6 +51,8 @@ public interface ServerListener {
 
    /**
     * <p>Title: 当客户端与服务器断开连接时触发该事件</p>
+    * <p>Description: 在sc.finishConnect();  sc.socket().close();  sc.close();前调用
+    * <br/>例如在类Writer Line60中。</p>
     * @param request 客户端请求
     */
    public void onClosed(Request request) throws Exception;

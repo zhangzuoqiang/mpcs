@@ -9,7 +9,6 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.Selector;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
-import java.util.Set;
 
 import config.ServerConfig;
 
@@ -68,8 +67,8 @@ public class Server implements Runnable {
                 num = selector.select();
                 
                 if (num > 0) {
-                    Set<SelectionKey> selectedKeys = selector.selectedKeys();
-                    Iterator<SelectionKey> it = selectedKeys.iterator();
+                	// 获得就绪信道的键迭代器
+                    Iterator<SelectionKey> it = selector.selectedKeys().iterator();
                     
                     while (it.hasNext()) {
                         SelectionKey key = (SelectionKey) it.next();
@@ -92,7 +91,7 @@ public class Server implements Runnable {
                        }
                        else if ( (key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ ) {
                            Reader.processRequest(key);  // 提交读服务线程读取客户端数据
-                           key.cancel();
+                           key.cancel();//将本socket的事件在选择器中删除
                        }
                        else if ( (key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE ) {
                            Writer.processRequest(key);  // 提交写服务线程向客户端发送回应数据
@@ -105,10 +104,13 @@ public class Server implements Runnable {
                 }
             }
             catch (Exception e) {
-                notifier.fireOnError("Error occured in Server: " + e.getMessage());
+            	// TODO: 当客户端在读取数据操作执行之前断开连接会产生异常信息
+            	notifier.fireOnError("Error occured in Server: " + e.getMessage());
                 continue;
             }
         }
+        
+        
     }
     
     /**
