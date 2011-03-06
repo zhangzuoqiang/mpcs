@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
-import config.ServerConfig;
+import mpcs.config.ServerConfig;
 
 /**
  * 时间查询服务 客户端程序
