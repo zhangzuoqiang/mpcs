@@ -7,7 +7,7 @@ import java.net.Socket;
 import mpcs.config.ServerConfig;
 
 /**
- * 时间查询服务 客户端程序
+ * 客户端测试程序
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
@@ -40,13 +40,13 @@ public class Client {
             client.shutdownOutput();
             
             in = new DataInputStream(client.getInputStream());
-            byte[] reply = new byte[51];
+            byte[] reply = new byte[8];
             in.read(reply);
-            System.out.println("Time: " + new String(reply, "UTF-8"));
+            System.out.println("Response: " + new String(reply, "UTF-8"));
             
-//            in.close();
-//            out.close();
-//            client.close();
+            in.close();
+            out.close();
+            client.close();
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
