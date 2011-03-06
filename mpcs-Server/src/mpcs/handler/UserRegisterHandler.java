@@ -1,10 +1,7 @@
 package mpcs.handler;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import mpcs.config.ServerConfig;
+import mpcs.cmd.UserRegisterCmd;
+import mpcs.config.GlobalConst;
 import mpcs.utils.ProtocolDecoder;
 import nio.net.Request;
 import nio.net.Response;
@@ -23,31 +20,16 @@ public class UserRegisterHandler extends EventAdapter {
     public void onWrite(Request request, Response response) throws Exception {
         String command = new String(request.getDataInput());
         
-        ProtocolDecoder.RegisterCmdDecoder(command);
-        
-        
-        
-        String time = null;
-        Date date = new Date();
+        UserRegisterCmd regCmd = ProtocolDecoder.RegisterCmdDecoder(command);
         
         // 判断查询命令
-        if (command.equals(ServerConfig.POLICY_REQUEST)) {
-        	response.send(ServerConfig.POLICY_XML.getBytes());
-		}
-        else if (command.equals("GB")) {
-            // 中文格式
-            DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.CHINA);
-            time = cnDate.format(date);
-            response.send(time.getBytes());
-        }
-        else if(command.equals("EN")) {
-            // 英文格式
-            DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.US);
-            time = enDate.format(date);
-            response.send(time.getBytes());
-        }
-        else {
+        if (regCmd.getHead1() == GlobalConst.C_USER_REGISTER) {
+        	response.send((GlobalConst.S_USER_REGISTER + "").getBytes());
         	response.send("0".getBytes());
+        	response.send("0".getBytes());
+		}
+        else {
+        	response.send("-1".getBytes());
 		}
     }
 }
