@@ -145,6 +145,7 @@ public class Server implements Runnable {
             wpool.add(wpool.size(), key);
             wpool.notifyAll();
         }
-        selector.wakeup();  // 解除selector的阻塞状态，以便注册新的通道
+        // 解除selector的阻塞状态，以便注册新的通道
+        selector.wakeup();  
     }
 }
