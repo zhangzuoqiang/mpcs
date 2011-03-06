@@ -1,7 +1,5 @@
 package mpcs.handler;
 
-import java.util.Date;
-
 import nio.net.Request;
 import nio.net.event.EventAdapter;
 
@@ -16,7 +14,7 @@ public class LogHandler extends EventAdapter {
     }
     
     public void onClosed(Request request) throws Exception {
-        String log = new Date().toString() + " from " + request.getAddress().toString();
+        String log = "From " + request.getAddress().toString().substring(1) + " is offLine.";
         System.out.println(log);
     }
     

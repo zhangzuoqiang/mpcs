@@ -28,13 +28,16 @@ public class UserRegisterHandler extends EventAdapter {
             // 中文格式
             DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.CHINA);
             time = cnDate.format(date);
+            response.send(time.getBytes());
         }
-        else {
+        else if(command.equals("EN")) {
             // 英文格式
             DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.US);
             time = enDate.format(date);
+            response.send(time.getBytes());
         }
-        
-        response.send(time.getBytes());
+        else {
+        	response.send("0".getBytes());
+		}
     }
 }

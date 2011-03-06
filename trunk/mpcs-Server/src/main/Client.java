@@ -18,10 +18,10 @@ public class Client {
     
     public static void main(String[] args) 
     {
-        Socket client = null;
-        DataOutputStream out = null;
-        DataInputStream in = null;
-        
+    	Socket client = null;
+    	DataOutputStream out = null;
+    	DataInputStream in = null;
+    	
         try {
             client = new Socket(ServerConfig.SERVER_ADDR, ServerConfig.LISTENNING_PORT);
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
@@ -38,9 +38,9 @@ public class Client {
             in.read(reply);
             System.out.println("Time: " + new String(reply, "UTF-8"));
             
-            in.close();
-            out.close();
-            client.close();
+//            in.close();
+//            out.close();
+//            client.close();
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
