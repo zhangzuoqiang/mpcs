@@ -51,14 +51,14 @@ public class Reader extends Thread {
         ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
         int off = 0;
         int r = 0;
-        byte[] data = new byte[ServerConfig.BUFFER_SIZE * 10];
+        byte[] data = new byte[ServerConfig.BUFFER_SIZE * 5];
 
         while ( true ) {
             buffer.clear();
             r = sc.read(buffer);
             if (r == -1) break;
             if ( (off + r) > data.length) {
-                data = grow(data, ServerConfig.BUFFER_SIZE * 10);
+                data = grow(data, ServerConfig.BUFFER_SIZE * 5);
             }
             byte[] buf = buffer.array();
             System.arraycopy(buf, 0, data, off, r);
