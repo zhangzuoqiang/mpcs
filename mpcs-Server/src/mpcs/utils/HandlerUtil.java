@@ -4,6 +4,11 @@ import mpcs.handler.LogHandler;
 import mpcs.handler.UserRegisterHandler;
 import nio.net.Notifier;
 
+/**
+ * Handler工具类
+ * @author zhangzuoqiang
+ * <br/>Date: 2011-3-6
+ */
 public class HandlerUtil{
 
 	/**
