@@ -5,7 +5,7 @@ import mpcs.utils.HandlerUtil;
 import nio.net.Server;
 
 /**
- * 服务器 启动类
+ * 服务 启动类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
