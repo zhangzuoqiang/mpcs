@@ -38,6 +38,11 @@ public class UserRegisterHandler extends EventAdapter {
 		}
     }
     
+    /**
+     * 检查此邮箱是否可用
+     * @param email
+     * @return
+     */
     private boolean isExist(String email){
     	if (DBUtil.selectByEmail(email)) {
     		return true;
