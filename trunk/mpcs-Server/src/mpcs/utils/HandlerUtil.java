@@ -1,5 +1,6 @@
 package mpcs.utils;
 
+import mpcs.handler.DefaultHandler;
 import mpcs.handler.LogHandler;
 import mpcs.handler.LoginHandler;
 import mpcs.handler.RegisterHandler;
@@ -23,10 +24,12 @@ public final class HandlerUtil{
 		LogHandler loger = new LogHandler();
         RegisterHandler register = new RegisterHandler();
         LoginHandler login = new LoginHandler();
+        DefaultHandler def = new DefaultHandler();
         
         notifier.addListener(loger);
         notifier.addListener(register);
         notifier.addListener(login);
+        notifier.addListener(def);
         //===============所有Handler写在我上面===============
         
         System.out.println("Handler注册完毕~");

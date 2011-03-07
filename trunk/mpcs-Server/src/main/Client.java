@@ -37,14 +37,15 @@ public class Client {
     	    out.writeBytes("-");
     	    out.writeBytes("1230"); 
     	    out.flush();
-    	    client.shutdownOutput();
     	    //================ 测试发送消息 ================
+    	    
     	    
             in = new DataInputStream(client.getInputStream());
             byte[] reply = new byte[10];
             in.read(reply);
             System.out.println("Response: " + new String(reply, "UTF-8"));
             
+            client.shutdownOutput();
             in.close();
             out.close();
             client.close();

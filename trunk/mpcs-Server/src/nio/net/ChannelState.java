@@ -1,7 +1,7 @@
 package nio.net;
 
 /**
- * 记录（读/写）线程信息
+ * <p>Title: 记录（读/写）线程信息</p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
