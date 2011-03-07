@@ -1,5 +1,10 @@
 package mpcs.cmd;
 
+/**
+ * 用户注册 协议类
+ * @author zhangzuoqiang
+ * <br/>Date: 2011-3-7
+ */
 public class UserRegisterCmd extends AbstractCmd {
 
 	/****/
