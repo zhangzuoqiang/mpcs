@@ -11,7 +11,8 @@ package mpcs.config;
 public final class GlobalConst {
 	
 	/**空闲连接**/
-	public static final int IDLE_CONNECTION = 55555;
+	public static final int C_IDLE_CONNECTION = 111111;
+	public static final int S_IDLE_CONNECTION = 555555;
 	/**
 	 * 用户注册
 	 */
