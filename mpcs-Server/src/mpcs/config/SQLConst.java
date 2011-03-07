@@ -2,7 +2,7 @@ package mpcs.config;
 
 /**
  * <p>存放所有SQL语句</p>
- * 命名规则: 功能名
+ * 命名规则: 方式_功能名
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
