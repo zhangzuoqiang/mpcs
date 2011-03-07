@@ -28,6 +28,7 @@ public class Client {
             out = new DataOutputStream( (client.getOutputStream()));
             //================ 测试发送消息 ================
             out.writeBytes("100102");
+//            out.writeBytes("111111");
     	    out.writeBytes("-");
     	    out.writeBytes("0");
     	    out.writeBytes("-");
@@ -35,17 +36,16 @@ public class Client {
     	    out.writeBytes("-");
     	    out.writeBytes("csdn_eric@gmail.com");
     	    out.writeBytes("-");
-    	    out.writeBytes("1230"); 
+    	    out.writeBytes("123"); 
     	    out.flush();
+    	    client.shutdownOutput();
     	    //================ 测试发送消息 ================
     	    
-    	    
             in = new DataInputStream(client.getInputStream());
-            byte[] reply = new byte[10];
+            byte[] reply = new byte[8];
             in.read(reply);
             System.out.println("Response: " + new String(reply, "UTF-8"));
             
-            client.shutdownOutput();
             in.close();
             out.close();
             client.close();
