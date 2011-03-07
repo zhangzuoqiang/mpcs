@@ -27,15 +27,15 @@ public class Client {
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
             out = new DataOutputStream( (client.getOutputStream()));
             
-            out.writeBytes("100101");
+            out.writeBytes("100102");
             out.writeBytes("-");
             out.writeBytes("0");
             out.writeBytes("-");
             out.writeBytes("0");
             out.writeBytes("-");
-            out.writeBytes("csdn.eric@gmail.com");
+            out.writeBytes("csdn.eric@gmail.com0");
             out.writeBytes("-");
-            out.writeBytes("15992827226"); 
+            out.writeBytes("123"); 
             out.flush();
             client.shutdownOutput();
             

@@ -9,7 +9,7 @@ import nio.net.Server;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class Start {
+public final class Start {
 	
     public static void main(String[] args) {
     	

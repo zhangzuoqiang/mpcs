@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import mpcs.config.SQLConst;
 import mpcs.db.ConnectionManager;
 
 /**
@@ -12,7 +11,7 @@ import mpcs.db.ConnectionManager;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class DBUtil {
+public final class DBUtil {
 
 	protected static ConnectionManager cm = ConnectionManager.getInstance();
 	private static Connection conn = null;
@@ -20,7 +19,7 @@ public class DBUtil {
 	private static ResultSet rs = null;
 	
 	/**
-	 * 用户注册操作
+	 * 验证此邮箱是否已注册
 	 * @param email
 	 * @return
 	 */
@@ -29,14 +28,12 @@ public class DBUtil {
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
-			 rs = stmt.executeQuery(SQLConst.SELECT_USER_BY_EMAIL + email + "'");
+			 rs = stmt.executeQuery(SQLangUtil.selectUserByEmail(email));
 			 rs.next();
 			 if (rs.getRow() == 0) {
 				 isExist = false;
-				 System.out.println("注册成功：" + email);
 			}else {
 				isExist = true;
-				System.out.println("该邮箱已被注册：" + rs.getString(1));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,6 +41,32 @@ public class DBUtil {
 			closeAll();
 		}
 		return isExist;
+	}
+	
+	/**
+	 * 添加用户
+	 * @param email
+	 * @param pwd
+	 * @return 0为添加失败，1为添加成功
+	 */
+	public static int addUser(String email, String pwd){
+		int label = 0;
+		boolean succ = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 succ = stmt.execute(SQLangUtil.addUser(email, pwd));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeAll();
+		}
+		if (succ) {
+			label = 1;
+		}else {
+			label = 0;
+		}
+		return label;
 	}
 	
 	/**
@@ -56,9 +79,11 @@ public class DBUtil {
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
-			 rs = stmt.executeQuery(SQLConst.SELECT_PASSWORD_BY_EMAIL + email + "'");
+			 rs = stmt.executeQuery(SQLangUtil.selectPwdByEmail(email));
 			 rs.next();
-			 pwdStr = rs.getString(1);
+			 if (rs.getRow() > 0) {
+				 pwdStr = rs.getString(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

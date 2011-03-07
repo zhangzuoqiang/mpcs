@@ -7,7 +7,7 @@ import mpcs.cmd.UserRegisterCmd;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class ProtocolDecoder {
+public final class ProtocolDecoder {
 	
 	/**
 	 * 解析用户注册cmd

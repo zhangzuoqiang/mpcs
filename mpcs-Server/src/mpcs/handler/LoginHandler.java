@@ -32,14 +32,17 @@ public class LoginHandler extends EventAdapter {
         	if (!isUserExist(loginCmd.getEmail())) {
 				// 不存在此用户
         		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_NO_THIS_USER, 9, 0));
+        		System.out.println("不存在此用户");
         		return;
-			}else if (isPwdWrong(loginCmd.getPassword())) {
+			}else if (isPwdWrong(loginCmd.getEmail())) {
 				// 用户密码错误
 				response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_PASSWORD_WRONG, 9, 0));
+				System.out.println("用户密码错误");
 				return;
 			}else {
 				// 用户登录验证成功
 				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_LOGIN, 0, 0));
+				System.out.println("用户登录验证成功");
 			}
 		}
 	}
@@ -51,7 +54,7 @@ public class LoginHandler extends EventAdapter {
 	 */
 	private boolean isPwdWrong(String email){
 		String pwd = DBUtil.selectPwdByEmail(email);
-		if (loginCmd.getPassword().equals(pwd)) {
+		if (loginCmd.getPassword().equals(pwd) && pwd !="") {
 			return false;
 		}
 		return true;

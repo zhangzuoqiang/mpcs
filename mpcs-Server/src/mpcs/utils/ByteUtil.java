@@ -5,7 +5,7 @@ package mpcs.utils;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class ByteUtil {
+public final class ByteUtil {
 
 	/**
 	 * <p>将消息号常量转换为byte[]</p>
