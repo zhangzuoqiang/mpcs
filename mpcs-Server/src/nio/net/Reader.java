@@ -89,7 +89,7 @@ public class Reader extends Thread {
             	 // calculate the processing time
                 operatedTime = System.currentTimeMillis() - state.getStartTime();
                 // reset the start flag
-                System.out.println("OperatedTime: " + operatedTime + " ms");
+                System.out.println("OperatedTimes: " + operatedTime + " ms");
                 state.setStart(false);
             }
             
