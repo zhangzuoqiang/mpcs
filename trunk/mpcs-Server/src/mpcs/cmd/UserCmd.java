@@ -5,7 +5,7 @@ package mpcs.cmd;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class UserRegisterCmd extends AbstractCmd {
+public class UserCmd extends AbstractCmd {
 
 	/****/
 	private static final long serialVersionUID = 1L;

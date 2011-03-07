@@ -1,6 +1,6 @@
 package mpcs.utils;
 
-import mpcs.cmd.UserRegisterCmd;
+import mpcs.cmd.UserCmd;
 
 /**
  * 协议解析类
@@ -14,8 +14,8 @@ public final class ProtocolDecoder {
 	 * @param cmd
 	 * @return
 	 */
-	public static UserRegisterCmd RegisterCmdDecoder(String cmd){
-		UserRegisterCmd rCmd = new UserRegisterCmd();
+	public static UserCmd UserCmdDecoder(String cmd){
+		UserCmd rCmd = new UserCmd();
 		String[] cmdArr = cmd.split("-");
 		rCmd.setHead1(Integer.parseInt(cmdArr[0]));
 		rCmd.setHead2(Integer.parseInt(cmdArr[1]));

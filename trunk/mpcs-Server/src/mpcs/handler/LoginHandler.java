@@ -1,6 +1,6 @@
 package mpcs.handler;
 
-import mpcs.cmd.UserRegisterCmd;
+import mpcs.cmd.UserCmd;
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.utils.ByteUtil;
@@ -17,14 +17,14 @@ import nio.net.event.EventAdapter;
  */
 public class LoginHandler extends EventAdapter {
 
-	private UserRegisterCmd loginCmd;
+	private UserCmd loginCmd;
 	
 	public LoginHandler(){
 	}
 	
 	public void onWrite(Request request, Response response) throws Exception {
 		String command = new String(request.getDataInput());
-		loginCmd = ProtocolDecoder.RegisterCmdDecoder(command);
+		loginCmd = ProtocolDecoder.UserCmdDecoder(command);
 		
 		// 判断查询命令为用户登录
         if (loginCmd.getHead1() == GlobalConst.C_USER_LOGIN) {

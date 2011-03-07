@@ -1,6 +1,6 @@
 package mpcs.handler;
 
-import mpcs.cmd.UserRegisterCmd;
+import mpcs.cmd.UserCmd;
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.utils.ByteUtil;
@@ -16,14 +16,14 @@ import nio.net.event.EventAdapter;
  * <br/>Date: 2011-3-6
  */
 public final class RegisterHandler extends EventAdapter {
-	private UserRegisterCmd regCmd;
+	private UserCmd regCmd;
     public RegisterHandler() {
     }
     
     public void onWrite(Request request, Response response) throws Exception {
     	
         String command = new String(request.getDataInput());
-        regCmd = ProtocolDecoder.RegisterCmdDecoder(command);
+        regCmd = ProtocolDecoder.UserCmdDecoder(command);
         
         // 判断查询命令为用户注册
         if (regCmd.getHead1() == GlobalConst.C_USER_REGISTER) {
