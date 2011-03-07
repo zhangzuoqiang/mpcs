@@ -20,8 +20,8 @@ public class Client {
     public Client() {
     }
     
-    public static void main(String[] args) 
-    {    	
+    public static void main(String[] args)
+    {
         try {
             client = new Socket(ServerConfig.SERVER_ADDR, ServerConfig.LISTENNING_PORT);
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
