@@ -16,21 +16,22 @@ import nio.net.event.EventAdapter;
  * <br/>Date: 2011-3-6
  */
 public class UserRegisterHandler extends EventAdapter {
-	
+	private UserRegisterCmd regCmd;
     public UserRegisterHandler() {
     }
     
     public void onWrite(Request request, Response response) throws Exception {
     	
         String command = new String(request.getDataInput());
-        UserRegisterCmd regCmd = ProtocolDecoder.RegisterCmdDecoder(command);
+        regCmd = ProtocolDecoder.RegisterCmdDecoder(command);
         
         // 判断查询命令为用户注册
         if (regCmd.getHead1() == GlobalConst.C_USER_REGISTER) {
         	// 执行数据库操作 查询用户
         	if (isExist(regCmd.getEmail())) {
         		//该邮箱已被注册
-        		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_USER_REGISTER, -1, 0));
+        		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_USER_REGISTER, 9, 0));
+        		return;
 			}else {
 				// 注册成功 返回
 				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_REGISTER, 0, 0));

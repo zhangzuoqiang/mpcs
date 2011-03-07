@@ -47,6 +47,27 @@ public class DBUtil {
 	}
 	
 	/**
+	 * 根据email查询pwd，验证用户登录
+	 * @param email
+	 * @return
+	 */
+	public static String selectPwdByEmail(String email){
+		String pwdStr = "";
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLConst.SELECT_PASSWORD_BY_EMAIL + email + "'");
+			 rs.next();
+			 pwdStr = rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeAll();
+		}
+		return pwdStr;
+	}
+	
+	/**
 	 * 关闭相关连接
 	 */
 	protected static void closeAll(){
