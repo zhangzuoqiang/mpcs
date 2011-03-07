@@ -43,6 +43,7 @@ public class LoginHandler extends EventAdapter {
 			}else {
 				// 用户登录验证成功
 				UserList.getUserList().addUser(request.getAddress().toString(), loginCmd);
+				
 				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_LOGIN, 0, 0));
 				System.out.println("用户登录验证成功");
 			}

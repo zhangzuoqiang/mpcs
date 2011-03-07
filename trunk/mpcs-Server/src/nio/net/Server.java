@@ -1,5 +1,6 @@
 package nio.net;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
 import java.net.InetSocketAddress;
@@ -21,6 +22,7 @@ import mpcs.config.ServerConfig;
 public class Server implements Runnable {
 	
     private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();  // 回应池
+    private static HashMap<Integer, ChannelState> idToChannelState;
     private static Selector selector;
     private ServerSocketChannel sschannel;
     private InetSocketAddress address;
@@ -33,6 +35,8 @@ public class Server implements Runnable {
      * @throws Exception
      */
     public Server(int port) throws Exception {
+    	
+    	idToChannelState = new HashMap<Integer, ChannelState>();
     	
         this.port = port;
         // 获取事件触发器
@@ -63,16 +67,33 @@ public class Server implements Runnable {
         // 监听
         while (true) {
             try {
-                int num = 0;
-                num = selector.select();
-                
-                if (num > 0) {
+                int num = selector.select();
+                if (num <=0) {
+                	addRegister();  // 在Selector中注册新的写通道
+				}else{
                 	// 获得就绪信道的键迭代器
                     Iterator<SelectionKey> it = selector.selectedKeys().iterator();
                     
                     while (it.hasNext()) {
                         SelectionKey key = (SelectionKey) it.next();
-                        it.remove();
+                        
+                        if (idToChannelState.get(key.channel().hashCode()) != null) {
+                        	ChannelState state = idToChannelState.get(key.channel().hashCode());
+                            if (state != null) {
+                                if (!state.isStart()) {
+                                    // haven't start yet, change it and save the start time
+                                    state.setStart(true);
+                                    state.setStartTime(System.currentTimeMillis());
+                                }
+                            }
+                        } else {
+                            // no state for this channel now, create a state and subscribe it
+                            ChannelState state = new ChannelState();
+                            idToChannelState.put(key.channel().hashCode(), state);
+                            state.setThreadNum(state.getThreadNum() + 1);
+                            System.out.println("key.channel().hashCode(): " + key.channel().hashCode());
+                        }
+                        
                         // 处理IO事件
                         if ( (key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
                            // Accept the new connection
@@ -97,10 +118,8 @@ public class Server implements Runnable {
                            Writer.processRequest(key);  // 提交写服务线程向客户端发送回应数据
                            key.cancel();
                        }
+                        it.remove();
                     }
-                }
-                else {
-                    addRegister();  // 在Selector中注册新的写通道
                 }
             }
             catch (Exception e) {
@@ -148,5 +167,13 @@ public class Server implements Runnable {
         }
         // 解除selector的阻塞状态，以便注册新的通道
         selector.wakeup();  
+    }
+    
+    /**
+     * 获取ChannelState
+     * @return
+     */
+    public static HashMap<Integer, ChannelState> getChannelState(){
+    	return idToChannelState;
     }
 }

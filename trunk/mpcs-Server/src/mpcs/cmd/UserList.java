@@ -36,8 +36,19 @@ public class UserList {
 	 * @param user
 	 */
 	public void addUser(String ip, UserCmd user){
-		if (!userMap.containsKey(user.getEmail())) {
+		if (!userMap.containsKey(ip)) {
 			userMap.put(ip, user);
+			return;
+		}
+	}
+	
+	/**
+	 * 移除在线用户
+	 * @param ip
+	 */
+	public void removeUser(String ip){
+		if (userMap.containsKey(ip)) {
+			userMap.remove(ip);
 			return;
 		}
 	}

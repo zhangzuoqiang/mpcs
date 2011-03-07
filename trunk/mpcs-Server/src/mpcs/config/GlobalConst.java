@@ -8,8 +8,10 @@ package mpcs.config;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class GlobalConst {
+public final class GlobalConst {
 	
+	/**空闲连接**/
+	public static final int IDLE_CONNECTION = 55555;
 	/**
 	 * 用户注册
 	 */

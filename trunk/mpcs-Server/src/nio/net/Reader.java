@@ -82,6 +82,17 @@ public class Reader extends Thread {
             Request request = (Request)key.attachment();
             request.setDataInput(clientData);
             
+            // calculate the processing time
+            ChannelState state = Server.getChannelState().get(sc.hashCode());
+            long operatedTime = 0;
+            if (state != null) {
+            	 // calculate the processing time
+                operatedTime = System.currentTimeMillis() - state.getStartTime();
+                // reset the start flag
+                System.out.println("OperatedTime: " + operatedTime + " ms");
+                state.setStart(false);
+            }
+            
             // 触发onRead
             notifier.fireOnRead(request);
 
