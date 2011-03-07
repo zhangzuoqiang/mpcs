@@ -44,31 +44,60 @@ public class Notifier {
         }
     }
     
+    /**
+     * 触发Accept事件
+     * @throws Exception
+     */
     public void fireOnAccept() throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onAccept();
     }
     
+    /**
+     * 触发Accepted事件
+     * @param request
+     * @throws Exception
+     */
     public void fireOnAccepted(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onAccepted(request);
     }
     
+    /**
+     * 触发Read事件
+     * @param request
+     * @throws Exception
+     */
     public void fireOnRead(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onRead(request);
     }
     
+    /**
+     * 触发Write事件
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     public void fireOnWrite(Request request, Response response)  throws Exception  {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onWrite(request, response);
     }
     
+    /**
+     * 触发Closed事件
+     * @param request
+     * @throws Exception
+     */
     public void fireOnClosed(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onClosed(request);
     }
     
+    /**
+     * 触发Error事件
+     * @param error
+     */
     public void fireOnError(String error) {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (ServerListener) listeners.get(i)).onError(error);
