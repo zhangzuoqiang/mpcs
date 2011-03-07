@@ -29,4 +29,9 @@ public class Response {
         buffer.flip();
         sc.write(buffer);
     }
+    
+    /**获得SocketChannel**/
+    public SocketChannel getSocketChannel() {
+		return sc;
+	}
 }
