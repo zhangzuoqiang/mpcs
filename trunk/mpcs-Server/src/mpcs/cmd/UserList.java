@@ -1,6 +1,7 @@
-package mpcs.model;
+package mpcs.cmd;
 
 import java.util.HashMap;
+
 
 /**
  * 存储在线用户数据
@@ -9,11 +10,11 @@ import java.util.HashMap;
  */
 public class UserList {
 
-	private HashMap<String,User> userMap;
+	private HashMap<String,UserCmd> userMap;
 	private static UserList instance = null;
 	
 	private UserList(){
-		userMap = new HashMap<String, User>();
+		userMap = new HashMap<String, UserCmd>();
 	}
 	
 	/**
@@ -30,29 +31,14 @@ public class UserList {
     }
 	
 	/**
-	 * 添加在线用户
+	 * 添加在线用户,并且标识用户
+	 * @param ip
 	 * @param user
 	 */
-	public void addUser(User user){
-		if (!userMap.containsKey(user.getUserName())) {
-			userMap.put(user.getUserName(), user);
-		}
-		else {
+	public void addUser(String ip, UserCmd user){
+		if (!userMap.containsKey(user.getEmail())) {
+			userMap.put(ip, user);
 			return;
-		}
-	}
-	
-	/**
-	 * 根据用户名获取用户
-	 * @param name
-	 * @return
-	 */
-	public User getUserByName(String name){
-		if (userMap.containsKey(name)) {
-			return userMap.get(name);
-		}
-		else {
-			return null;
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package mpcs.utils;
 
+import mpcs.cmd.AbstractCmd;
+import mpcs.cmd.BasicInfoCmd;
 import mpcs.cmd.UserCmd;
 
 /**
@@ -23,5 +25,19 @@ public final class ProtocolDecoder {
 		rCmd.setEmail(cmdArr[3]);
 		rCmd.setPassword(cmdArr[4]);
 		return rCmd;
+	}
+	
+	/**
+	 * 解析不含消息体的cmd
+	 * @param cmd
+	 * @return
+	 */
+	public static AbstractCmd AbstractCmdDecoder(String cmd){
+		AbstractCmd abc = new AbstractCmd();
+		String[] cmdArr = cmd.split("-");
+		abc.setHead1(Integer.parseInt(cmdArr[0]));
+		abc.setHead2(Integer.parseInt(cmdArr[1]));
+		abc.setHead3(Integer.parseInt(cmdArr[2]));
+		return abc;
 	}
 }
