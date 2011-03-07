@@ -47,7 +47,7 @@ public class ConnectionManager {
 	 * 获取连接管理类 实例
 	 * @return
 	 */
-	public static ConnectionManager getInstance(){
+	public static final ConnectionManager getInstance(){
 		if (instance == null) {
 			try {
 				instance = new ConnectionManager();
@@ -63,7 +63,7 @@ public class ConnectionManager {
 	 * 获取连接
 	 * @return
 	 */
-    public static synchronized Connection getConnection() {
+    public synchronized final Connection getConnection() {
         try {
             con = ds.getConnection();
         } catch (SQLException e) {

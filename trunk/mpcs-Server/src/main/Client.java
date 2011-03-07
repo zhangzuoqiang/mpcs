@@ -40,7 +40,7 @@ public class Client {
             client.shutdownOutput();
             
             in = new DataInputStream(client.getInputStream());
-            byte[] reply = new byte[8];
+            byte[] reply = new byte[10];
             in.read(reply);
             System.out.println("Response: " + new String(reply, "UTF-8"));
             
