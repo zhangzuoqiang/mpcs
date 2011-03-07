@@ -20,7 +20,7 @@ public class ProtocolDecoder {
 		rCmd.setHead1(Integer.parseInt(cmdArr[0]));
 		rCmd.setHead2(Integer.parseInt(cmdArr[1]));
 		rCmd.setHead3(Integer.parseInt(cmdArr[2]));
-		rCmd.setUsername(cmdArr[3]);
+		rCmd.setEmail(cmdArr[3]);
 		rCmd.setPassword(cmdArr[4]);
 		return rCmd;
 	}
