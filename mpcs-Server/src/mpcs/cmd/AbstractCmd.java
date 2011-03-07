@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public abstract class AbstractCmd implements Serializable {
+public class AbstractCmd implements Serializable {
 	
 	/****/
 	private static final long serialVersionUID = 1L;
