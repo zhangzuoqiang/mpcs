@@ -27,17 +27,19 @@ public class Client {
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
             out = new DataOutputStream( (client.getOutputStream()));
             
+            //================ 测试发送消息 ================
             out.writeBytes("100102");
             out.writeBytes("-");
             out.writeBytes("0");
             out.writeBytes("-");
             out.writeBytes("0");
             out.writeBytes("-");
-            out.writeBytes("csdn.eric@gmail.com0");
+            out.writeBytes("csdn_eric@gmail.com");
             out.writeBytes("-");
-            out.writeBytes("123"); 
+            out.writeBytes("1230"); 
             out.flush();
             client.shutdownOutput();
+          //================ 测试发送消息 ================
             
             in = new DataInputStream(client.getInputStream());
             byte[] reply = new byte[10];
