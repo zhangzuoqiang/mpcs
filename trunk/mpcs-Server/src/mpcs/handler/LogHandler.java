@@ -8,7 +8,7 @@ import nio.net.event.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class LogHandler extends EventAdapter {
+public final class LogHandler extends EventAdapter {
 	
     public LogHandler() {
     }

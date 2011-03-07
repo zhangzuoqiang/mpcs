@@ -15,9 +15,9 @@ import nio.net.event.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class UserRegisterHandler extends EventAdapter {
+public final class RegisterHandler extends EventAdapter {
 	private UserRegisterCmd regCmd;
-    public UserRegisterHandler() {
+    public RegisterHandler() {
     }
     
     public void onWrite(Request request, Response response) throws Exception {
@@ -31,14 +31,33 @@ public class UserRegisterHandler extends EventAdapter {
         	if (isExist(regCmd.getEmail())) {
         		//该邮箱已被注册
         		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_USER_REGISTER, 9, 0));
+        		System.out.println("该邮箱已被注册");
         		return;
 			}else {
-				// 注册成功 返回
-				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_REGISTER, 0, 0));
+				// 添加用户
+				if (addUser(regCmd.getEmail(), regCmd.getPassword()) == 1) {
+					// 注册成功 返回
+					response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_REGISTER, 0, 0));
+					System.out.println("注册成功 返回");
+					return;
+				}else {
+					// 执行数据库操作，添加用户时失败
+	        		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_ADD_USER_FAILED, 9, 0));
+	        		System.out.println("执行数据库操作，添加用户时失败");
+				}
 			}
 		}
     }
     
+    /**
+     * 添加用户
+     * @param email
+     * @param pwd
+     * @return 返回1则成功添加，0则添加失败
+     */
+    private int addUser(String email, String pwd){
+    	return DBUtil.addUser(email, pwd);
+    }
     /**
      * 检查此邮箱是否可用
      * @param email
