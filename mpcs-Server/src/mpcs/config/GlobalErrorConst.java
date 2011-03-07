@@ -8,7 +8,7 @@ package mpcs.config;
  */
 public class GlobalErrorConst {
 
-	/**此用户名已注册**/
+	/**此邮箱已注册**/
 	public static final int E_USER_REGISTER = -100101;
 	
 	
