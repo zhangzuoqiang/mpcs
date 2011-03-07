@@ -18,18 +18,17 @@ public class UserRegisterHandler extends EventAdapter {
     }
     
     public void onWrite(Request request, Response response) throws Exception {
+    	
         String command = new String(request.getDataInput());
-        
         UserRegisterCmd regCmd = ProtocolDecoder.RegisterCmdDecoder(command);
         
-        // 判断查询命令
+        // 判断查询命令为用户注册
         if (regCmd.getHead1() == GlobalConst.C_USER_REGISTER) {
+        	// 执行数据库操作 查询用户
+        	
         	response.send((GlobalConst.S_USER_REGISTER + "").getBytes());
         	response.send("0".getBytes());
         	response.send("0".getBytes());
-		}
-        else {
-        	response.send("-1".getBytes());
 		}
     }
 }
