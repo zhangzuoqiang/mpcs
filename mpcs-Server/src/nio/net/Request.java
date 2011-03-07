@@ -18,7 +18,11 @@ public class Request {
         this.sc = sc;
     }
     
-    public InetAddress getAddress() {
+    /**获得SocketChannel**/
+    public SocketChannel getSocketChannel() {
+		return sc;
+	}
+	public InetAddress getAddress() {
         return sc.socket().getInetAddress();
     }
     public int getPort() {

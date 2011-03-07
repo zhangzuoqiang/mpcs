@@ -2,28 +2,29 @@ package mpcs.cmd;
 
 import java.util.HashMap;
 
+import nio.net.Response;
 
 /**
  * 存储在线用户数据
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class UserList {
+public class ClientList {
 
-	private HashMap<String,UserCmd> userMap;
-	private static UserList instance = null;
+	private HashMap<String,Response> clientMap;
+	private static ClientList instance = null;
 	
-	private UserList(){
-		userMap = new HashMap<String, UserCmd>();
+	private ClientList(){
+		clientMap = new HashMap<String, Response>();
 	}
 	
 	/**
 	 * Singleton 模式，统一服务端在线用户数据
 	 * @return
 	 */
-	public static synchronized UserList getUserList() {
+	public static synchronized ClientList getClientList() {
         if (instance == null) {
-            instance = new UserList();
+            instance = new ClientList();
             return instance;
         }
         else 
@@ -35,9 +36,9 @@ public class UserList {
 	 * @param ip
 	 * @param user
 	 */
-	public void addUser(String ip, UserCmd user){
-		if (!userMap.containsKey(ip)) {
-			userMap.put(ip, user);
+	public void addClient(String ip, Response response){
+		if (!clientMap.containsKey(ip)) {
+			clientMap.put(ip, response);
 			return;
 		}
 	}
@@ -46,9 +47,9 @@ public class UserList {
 	 * 移除在线用户
 	 * @param ip
 	 */
-	public void removeUser(String ip){
-		if (userMap.containsKey(ip)) {
-			userMap.remove(ip);
+	public void removeClient(String ip){
+		if (clientMap.containsKey(ip)) {
+			clientMap.remove(ip);
 			return;
 		}
 	}
@@ -57,8 +58,8 @@ public class UserList {
 	 * 返回在线人数
 	 * @return
 	 */
-	public int getUserListSize(){
-		return userMap.size();
+	public int getClientListSize(){
+		return clientMap.size();
 	}
 	
 }

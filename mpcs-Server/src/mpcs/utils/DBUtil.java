@@ -98,7 +98,7 @@ public final class DBUtil {
 	protected static void closeAll(){
 		if (rs != null) {
             try {
-                
+                rs.close();
             } catch (Exception e) {
             }
         }

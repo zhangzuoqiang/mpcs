@@ -53,6 +53,12 @@ public final class Writer extends Thread {
             
             // 触发onWrite事件
             notifier.fireOnWrite((Request)key.attachment(), response);
+
+            Server.getChannelState().remove(sc.hashCode());
+            ChannelState state = Server.getChannelState().get(sc.hashCode());
+            if (state != null) {
+            	state.setThreadNum(state.getThreadNum() - 1);
+			}
             
             // 触发onClosed事件
             notifier.fireOnClosed((Request)key.attachment());
@@ -60,10 +66,6 @@ public final class Writer extends Thread {
             sc.finishConnect();
 			sc.socket().close();
             sc.close();
-            
-            Server.getChannelState().remove(sc.hashCode());
-            ChannelState state = Server.getChannelState().get(sc.hashCode());
-            state.setThreadNum(state.getThreadNum() - 1);
         }
         catch (Exception e) {
             notifier.fireOnError("Error occured in Writer: " + e.getMessage());

@@ -1,7 +1,7 @@
 package mpcs.handler;
 
 import mpcs.cmd.UserCmd;
-import mpcs.cmd.UserList;
+import mpcs.cmd.ClientList;
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.utils.ByteUtil;
@@ -42,7 +42,7 @@ public class LoginHandler extends EventAdapter {
 				return;
 			}else {
 				// 用户登录验证成功
-				UserList.getUserList().addUser(request.getAddress().toString(), loginCmd);
+				ClientList.getClientList().addClient(request.getAddress().toString(), response);
 				
 				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_LOGIN, 0, 0));
 				System.out.println("用户登录验证成功");
