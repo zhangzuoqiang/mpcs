@@ -13,34 +13,33 @@ import mpcs.config.ServerConfig;
  */
 public class Client {
 	
+	private static Socket client;
+	private static DataOutputStream out ;
+	private static DataInputStream in;
+	
     public Client() {
     }
     
     public static void main(String[] args) 
-    {
-    	Socket client = null;
-    	DataOutputStream out = null;
-    	DataInputStream in = null;
-    	
+    {    	
         try {
             client = new Socket(ServerConfig.SERVER_ADDR, ServerConfig.LISTENNING_PORT);
             client.setSoTimeout(ServerConfig.CONNECT_TIMEOUT);
             out = new DataOutputStream( (client.getOutputStream()));
-            
             //================ 测试发送消息 ================
             out.writeBytes("100102");
-            out.writeBytes("-");
-            out.writeBytes("0");
-            out.writeBytes("-");
-            out.writeBytes("0");
-            out.writeBytes("-");
-            out.writeBytes("csdn_eric@gmail.com");
-            out.writeBytes("-");
-            out.writeBytes("1230"); 
-            out.flush();
-            client.shutdownOutput();
-          //================ 测试发送消息 ================
-            
+    	    out.writeBytes("-");
+    	    out.writeBytes("0");
+    	    out.writeBytes("-");
+    	    out.writeBytes("0");
+    	    out.writeBytes("-");
+    	    out.writeBytes("csdn_eric@gmail.com");
+    	    out.writeBytes("-");
+    	    out.writeBytes("1230"); 
+    	    out.flush();
+    	    client.shutdownOutput();
+    	    //================ 测试发送消息 ================
+    	    
             in = new DataInputStream(client.getInputStream());
             byte[] reply = new byte[10];
             in.read(reply);
