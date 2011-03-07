@@ -62,9 +62,9 @@ public final class DBUtil {
 			closeAll();
 		}
 		if (succ) {
-			label = 1;
-		}else {
 			label = 0;
+		}else {
+			label = 1;
 		}
 		return label;
 	}
