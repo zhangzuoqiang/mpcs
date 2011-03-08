@@ -2,7 +2,7 @@ package NIOServer;
 
 import java.io.IOException;
 
-import mpcs.libs.cmds.ConnectCommand;
+import mpcs.libs.cmds.ConnectCmd;
 import mpcs.libs.configs.ServerConfig;
 import mpcs.libs.core.NIOServer;
 import mpcs.libs.utils.MoreUtil;
@@ -17,7 +17,7 @@ public class StartServer {
 	public static void main(String[] args){
 		try {
 			NIOServer server = new NIOServer(ServerConfig.LISTENNING_PORT);
-			server.registerCommand(1000,new ConnectCommand());
+			server.registerCommand(1000,new ConnectCmd());
 			MoreUtil.trace("listening on " + ServerConfig.LISTENNING_PORT);
 			server.listen();
 		} catch (IOException e) {
