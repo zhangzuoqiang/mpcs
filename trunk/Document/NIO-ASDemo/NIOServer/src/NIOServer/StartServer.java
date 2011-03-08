@@ -14,7 +14,7 @@ import mpcs.libs.utils.MoreUtil;
  */
 public class StartServer {
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception{
 		try {
 			NIOServer server = new NIOServer(ServerConfig.LISTENNING_PORT);
 			server.registerCommand(1000,new ConnectCmd());

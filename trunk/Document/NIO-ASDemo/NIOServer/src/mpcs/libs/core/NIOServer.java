@@ -12,6 +12,7 @@ import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import mpcs.libs.configs.ServerConfig;
@@ -20,23 +21,27 @@ import mpcs.libs.interfaces.ICommand;
 import mpcs.libs.utils.MoreUtil;
 
 public class NIOServer implements Runnable {
-
+	
 	public Selector selector;
-	/**客户端缓存区**/
+	private Notifier notifier;
+	// 回应池
+	private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
+	// 客户端缓存区
 	protected ByteBuffer clientBuffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
-	/**解码**/
+	// 解码
 	protected CharsetDecoder decoder;
-	/**在线用户列表**/
+	// 在线用户列表
 	public List<Integer> ids=new ArrayList<Integer>();
-	/****/
 	private HashMap<Integer,ICommand> commands=new HashMap<Integer,ICommand>();
-
+	
 	public NIOServer(int port) throws IOException {
 		selector = this.getSelector(port);
 		Charset charset = Charset.forName(ServerConfig.LOCAL_CHARSET);
 		decoder = charset.newDecoder();
+		// 获取事件触发器
+        notifier = Notifier.getNotifier();
 	}
-
+	
 	@Override
 	public void run() {
 	}
@@ -62,11 +67,12 @@ public class NIOServer implements Runnable {
 		server.register(selector, SelectionKey.OP_ACCEPT);
 		return selector;
 	}
-
+	
 	/**
 	 * 监听端口
+	 * @throws Exception 
 	 */
-	public void listen() {
+	public void listen() throws Exception {
 		try {
 			while(true){
 				int num=selector.select();
@@ -76,30 +82,36 @@ public class NIOServer implements Runnable {
 					while (iter.hasNext()) {
 						SelectionKey key = iter.next();
 						iter.remove();
-						process(key);
+						processIO(key);
 					}
+				}else {
+					addRegister();
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * 处理I/O事件
 	 * @param key
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	protected void process(SelectionKey key) throws IOException {
+	protected void processIO(SelectionKey key) throws Exception {
 		if (key.isAcceptable()) { 
 			// 接收新的连接请求
 			ServerSocketChannel server = (ServerSocketChannel) key.channel();
+			notifier.fireOnAccept();
 			SocketChannel channel = server.accept();
 			// 设置非阻塞模式
 			channel.configureBlocking(false);
+			// 触发接受连接事件
+            Request request = new Request(channel);
+            notifier.fireOnAccepted(request);
 			// 注册读操作,以进行下一步的读操作
-			channel.register(selector, SelectionKey.OP_READ);
-		} else if (key.isReadable()) { 
+			channel.register(selector, SelectionKey.OP_READ, request);
+		} else if (key.isReadable()) {
 			// 读信息
 			read(key);
 		} else if (key.isWritable()) { 
@@ -143,10 +155,10 @@ public class NIOServer implements Runnable {
 				key.attach(result);
 				//System.out.println("attachment  "+key.attachment().getClass());
 			}
-			
 			clientBuffer.clear();
 		}
 	}
+	
 	/**
 	 * 发送数据
 	 * @param channel
@@ -194,4 +206,29 @@ public class NIOServer implements Runnable {
 		key.interestOps(key.interestOps()&~SelectionKey.OP_WRITE);
 		return l;
 	}
+	
+	 /**
+     * 添加新的通道注册
+     */
+    private void addRegister() {
+        synchronized (wpool) {
+            while (!wpool.isEmpty()) {
+                SelectionKey key = (SelectionKey) wpool.remove(0);
+                SocketChannel schannel = (SocketChannel)key.channel();
+                try {
+                    schannel.register(selector,  SelectionKey.OP_WRITE, key.attachment());
+                }
+                catch (Exception e) {
+                    try {
+                        schannel.finishConnect();
+                        schannel.close();
+                        schannel.socket().close();
+                        notifier.fireOnClosed((Request)key.attachment());
+                    }
+                    catch (Exception e1) {}
+                    notifier.fireOnError("Error occured in addRegister: " + e.getMessage());
+                }
+            }
+        }
+    }
 }
