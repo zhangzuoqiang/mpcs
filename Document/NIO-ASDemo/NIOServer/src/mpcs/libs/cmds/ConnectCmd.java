@@ -13,7 +13,7 @@ import mpcs.libs.interfaces.ICommand;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
  */
-public class ConnectCommand implements ICommand {
+public class ConnectCmd implements ICommand {
 	
 	public int execute(NIOServer server,SocketChannel channel,ByteArrayPacket packet){
 		int playerId=packet.readInt();
