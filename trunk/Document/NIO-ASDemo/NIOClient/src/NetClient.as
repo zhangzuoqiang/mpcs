@@ -28,7 +28,7 @@ package{
 		 * @param	host 服务器IP地址
 		 * @param	port 服务器开放供客户连接的端口
 		 */
-		public function buildConnection(host:String = "127.0.0.1", port:int = 8088):void {
+		public function buildConnection(host:String = "172.25.135.248", port:int = 843):void {
 			socket = new Socket(host, port);
 			socket.addEventListener(Event.CLOSE, closeHandler);
 			socket.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
