@@ -85,11 +85,11 @@ public class NIOServer implements Runnable {
 						processIO(key);
 					}
 				}else {
-					addRegister();
+					addRegister(); // 在Selector中注册新的写通道
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			notifier.fireOnError("Error occured in listen function: " + e.getMessage());
 		}
 	}
 	
@@ -116,22 +116,17 @@ public class NIOServer implements Runnable {
 			read(key);
 		} else if (key.isWritable()) { 
 			// 写事件
-			if(key.isValid()){
+			if(key.isValid()){ // 测试有效性
 				ByteArrayPacket p=new ByteArrayPacket(100);
-				p.writeInt(300);
+				p.writeInt(command);
 				p.writeInt(400);
-				p.writeString("野草工革革", "utf-8");
-				send(key,p);
-			}else {
-				ByteArrayPacket p=new ByteArrayPacket(100);
-				p.writeInt(600);
-				p.writeInt(800);
-				p.writeString("QQQQQQQ", "utf-8");
+				p.writeString("获得服务器返回数据", "utf-8");
 				send(key,p);
 			}
 		}
 	}
 	
+	private int command = 0;
 	/**
 	 * 读取客户端发送的数据
 	 * @param channel
@@ -147,7 +142,7 @@ public class NIOServer implements Runnable {
 			int data_len=packet.readInt();
 			MoreUtil.trace("data_len " + data_len);
 			//读取命令号
-			int command=packet.readShort();
+			command=packet.readShort();
 			
 			if(commands.containsKey(command)){
 				ICommand comm=commands.get(command);
