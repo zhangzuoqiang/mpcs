@@ -6,7 +6,8 @@ import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.utils.ByteUtil;
 import mpcs.utils.DBUtil;
-import mpcs.utils.ProtocolDecoder;
+import mpcs.utils.ParseProtocol;
+import nio.net.Notifier;
 import nio.net.Request;
 import nio.net.Response;
 import nio.net.event.EventAdapter;
@@ -19,32 +20,32 @@ import nio.net.event.EventAdapter;
 public class LoginHandler extends EventAdapter {
 
 	private UserCmd loginCmd;
+	private static Notifier notifier = Notifier.getNotifier();
 	
 	public LoginHandler(){
 	}
 	
 	public void onWrite(Request request, Response response) throws Exception {
 		String command = new String(request.getDataInput());
-		loginCmd = ProtocolDecoder.UserCmdDecoder(command);
+		loginCmd = ParseProtocol.parseUserCmd(command);
 		
 		// 判断查询命令为用户登录
         if (loginCmd.getHead1() == GlobalConst.C_USER_LOGIN) {
         	
         	if (!isUserExist(loginCmd.getEmail())) {
 				// 不存在此用户
-        		response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_NO_THIS_USER, 9, 0));
+        		response.send(ByteUtil.getByteByConst(9, GlobalErrorConst.E_NO_THIS_USER, 0));
         		System.out.println("不存在此用户");
         		return;
 			}else if (isPwdWrong(loginCmd.getEmail())) {
 				// 用户密码错误
-				response.send(ByteUtil.getByteByConst(GlobalErrorConst.E_PASSWORD_WRONG, 9, 0));
-				System.out.println("用户密码错误");
+				response.send(ByteUtil.getByteByConst(9, GlobalErrorConst.E_PASSWORD_WRONG, 0));
+				notifier.fireOnError("Error occured in Login: 用户" + loginCmd.getEmail() + "密码错误");
 				return;
 			}else {
 				// 用户登录验证成功
 				ClientList.getClientList().addClient(request.getAddress().toString(), response);
-				
-				response.send(ByteUtil.getByteByConst(GlobalConst.S_USER_LOGIN, 0, 0));
+				response.send(ByteUtil.getByteByConst(0, GlobalConst.S_USER_LOGIN, 0));
 				System.out.println("用户登录验证成功");
 			}
 		}
