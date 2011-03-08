@@ -5,8 +5,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-import NIOServer.NIOServer;
-
+import mpcs.libs.core.NIOServer;
 import mpcs.libs.data.ByteArrayPacket;
 import mpcs.libs.interfaces.ICommand;
 

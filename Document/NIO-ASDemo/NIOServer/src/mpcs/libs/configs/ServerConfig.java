@@ -12,7 +12,7 @@ public class ServerConfig {
 	public static final String SERVER_ADDR = "172.25.135.248";
 	/**本地服务器监听的端口**/
 	public static final int LISTENNING_PORT = 843;
-	/**缓冲区大小**/
+	/**缓存区大小**/
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/
 	public static final int CONNECT_TIMEOUT = 3000;

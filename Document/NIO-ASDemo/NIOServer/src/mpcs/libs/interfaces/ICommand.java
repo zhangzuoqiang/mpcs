@@ -2,9 +2,8 @@ package mpcs.libs.interfaces;
 
 import java.nio.channels.SocketChannel;
 
+import mpcs.libs.core.NIOServer;
 import mpcs.libs.data.ByteArrayPacket;
-
-import NIOServer.NIOServer;
 
 /**
  * @author zhangzuoqiang
