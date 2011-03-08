@@ -4,7 +4,7 @@ import mpcs.cmd.AbstractCmd;
 import mpcs.cmd.UserCmd;
 
 /**
- * 协议解析类
+ * 服务端 协议解析类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
