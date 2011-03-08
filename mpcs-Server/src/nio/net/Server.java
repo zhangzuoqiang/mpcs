@@ -1,18 +1,23 @@
 package nio.net;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedList;
+import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.channels.Selector;
-import java.nio.channels.SelectionKey;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import mpcs.config.ServerConfig;
 import mpcs.utils.MoreUtils;
+import nio.net.interfaces.ICommand;
 
 /**
  * <p>Title: 主控服务线程</p>
@@ -23,12 +28,15 @@ import mpcs.utils.MoreUtils;
 public class Server implements Runnable {
 	
     private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();  // 回应池
-    private static HashMap<Integer, ChannelState> idToChannelState;
-    private static Selector selector;
-    private ServerSocketChannel sschannel;
-    private InetSocketAddress address;
+    private HashMap<Integer,ICommand> commands=new HashMap<Integer,ICommand>();
+    /**在线用户列表**/
+	public List<Integer> ids=new ArrayList<Integer>();
+    /**客户端缓存区**/
+	protected ByteBuffer clientBuffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
+	private static Selector selector;
     private Notifier notifier;
-    private int port;
+    /**解码**/
+	protected CharsetDecoder decoder;
     
     /**
      * 创建主控服务线程
@@ -36,101 +44,31 @@ public class Server implements Runnable {
      * @throws Exception
      */
     public Server(int port) throws Exception {
-    	
-    	idToChannelState = new HashMap<Integer, ChannelState>();
-    	
-        this.port = port;
+    	selector = this.getSelector(port);
+    	Charset charset = Charset.forName(ServerConfig.LOCAL_CHARSET);
+		decoder = charset.newDecoder();
         // 获取事件触发器
         notifier = Notifier.getNotifier();
         
-        // 创建读写线程池
+        // 创建读/写线程池
         for (int i = 0; i < ServerConfig.MAX_THREADS; i++) {
             Thread reader = new Reader();
             Thread writer = new Writer();
             reader.start();
             writer.start();
         }
-        
-        // 创建无阻塞网络套接
-        selector = Selector.open();
-        sschannel = ServerSocketChannel.open();
-        sschannel.configureBlocking(false);
-        
-        address = new InetSocketAddress(port);
-        ServerSocket ss = sschannel.socket();
-        ss.bind(address);
-        sschannel.register(selector, SelectionKey.OP_ACCEPT);
     }
     
     public void run() {
     	MoreUtils.trace("Server started ...");
-    	MoreUtils.trace("Listening on port: " + port);
-        // 监听
-        while (true) {
-            try {
-                int num = selector.select();
-                if (num > 0){
-                	// 获得就绪信道的键迭代器
-                    Iterator<SelectionKey> it = selector.selectedKeys().iterator();
-                    
-                    while (it.hasNext()) {
-                        SelectionKey key = (SelectionKey) it.next();
-                        
-                        // 记录时间
-                        if (idToChannelState.get(key.channel().hashCode()) != null) {
-                        	ChannelState state = idToChannelState.get(key.channel().hashCode());
-                            if (state != null) {
-                                if (!state.isStart()) {
-                                    // haven't start yet, change it and save the start time
-                                    state.setStart(true);
-                                    state.setStartTime(System.currentTimeMillis());
-                                }
-                            }
-                        } else {
-                            // no state for this channel now, create a state and subscribe it
-                            ChannelState state = new ChannelState();
-                            idToChannelState.put(key.channel().hashCode(), state);
-                            state.setThreadNum(state.getThreadNum() + 1);
-                            MoreUtils.trace("key.channel().hashCode(): " + key.channel().hashCode());
-                        }
-                        
-                        // 处理IO事件
-                        if ( (key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
-                           // Accept the new connection
-                           ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-                           notifier.fireOnAccept();
-                           SocketChannel sc = ssc.accept();
-                           sc.configureBlocking(false);
-                           
-                           // 触发接受连接事件
-                           Request request = new Request(sc);
-                           notifier.fireOnAccepted(request);
-                           
-                           // 注册读操作,以进行下一步的读操作
-                           sc.register(selector,  SelectionKey.OP_READ, request);
-                       }
-                       else if ( (key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ ) {
-                           Reader.processRequest(key);  // 提交读服务线程读取客户端数据
-                           key.cancel();//将本socket的事件在选择器中删除
-                       }
-                       else if ( (key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE ) {
-                           Writer.processRequest(key);  // 提交写服务线程向客户端发送回应数据
-                           key.cancel();
-                       }
-                        it.remove();
-                    }
-                }else {
-                	addRegister();  // 在Selector中注册新的写通道
-				}
-            }
-            catch (Exception e) {
-            	// TODO: 当客户端在读取数据操作执行之前断开连接会产生异常信息
-            	notifier.fireOnError("Error occured in Server: " + e.getMessage());
-            	e.printStackTrace();
-                continue;
-            }
-        }
-        
+    	MoreUtils.trace("Listening on port: " + ServerConfig.LISTENNING_PORT);
+    	
+    	registerCommand(1000,new ConnectCommand());
+    	try {
+			listen();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
     /**
@@ -159,6 +97,85 @@ public class Server implements Runnable {
     }
     
     /**
+	 * 获取Selector,创建无阻塞网络套接
+	 * @param port
+	 * @return
+	 * @throws IOException
+	 */
+	protected Selector getSelector(int port) throws IOException {
+		ServerSocketChannel server = ServerSocketChannel.open();
+		Selector selector = Selector.open();
+		server.socket().bind(new InetSocketAddress(port));
+		server.configureBlocking(false);
+		server.register(selector, SelectionKey.OP_ACCEPT);
+		return selector;
+	}
+    
+    protected Selector getSelector(){
+    	return selector;
+    }
+	
+	public void registerCommand(int commandID,ICommand command){
+		if(!commands.containsKey(commandID)){
+			MoreUtils.trace("registeCommand  "+commandID+"  ,  "+command);
+			commands.put(commandID, command);
+		}
+	}
+	
+	/**
+	 * 监听端口
+	 * @throws Exception 
+	 */
+	public void listen() throws Exception {
+		try {
+			while(true){
+				int num=selector.select();
+				if (num > 0) {
+					// 获得就绪信道的键迭代器
+					Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
+					while (iter.hasNext()) {
+						SelectionKey key = iter.next();
+						iter.remove();
+						processIO(key);//处理I/O操作
+					}
+				}else {
+                	addRegister();  // 在Selector中注册新的写通道
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 处理I/O事件
+	 * @param key
+	 * @throws Exception 
+	 */
+	protected void processIO(SelectionKey key) throws Exception {
+		// if ( (key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) 
+		if (key.isAcceptable()) {
+			// 接收新的连接请求
+			ServerSocketChannel server = (ServerSocketChannel) key.channel();
+			notifier.fireOnAccept();
+			SocketChannel channel = server.accept();
+			// 设置非阻塞模式
+			channel.configureBlocking(false);
+			// 触发接受连接事件
+            Request request = new Request(channel);
+            notifier.fireOnAccepted(request);
+			// 注册读操作,以进行下一步的读操作
+			channel.register(selector, SelectionKey.OP_READ, request);
+		} else if (key.isReadable()) {
+			Reader.processRequest(key);  // 提交读服务线程读取客户端数据
+            key.cancel();//将本socket的事件在选择器中删除
+		} else if (key.isWritable()) {
+			 Writer.processRequest(key);  // 提交写服务线程向客户端发送回应数据
+             key.cancel();
+		}
+	}
+	
+    /**
      * 提交新的客户端写请求于主服务线程的回应池中
      * @param key
      */
@@ -169,13 +186,5 @@ public class Server implements Runnable {
         }
         // 解除selector的阻塞状态，以便注册新的通道
         selector.wakeup();  
-    }
-    
-    /**
-     * 获取ChannelState
-     * @return
-     */
-    public static HashMap<Integer, ChannelState> getChannelState(){
-    	return idToChannelState;
     }
 }

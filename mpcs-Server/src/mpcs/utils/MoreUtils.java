@@ -20,6 +20,6 @@ public final class MoreUtils {
 	 * @param response
 	 */
 	public static void doEmpty(){
-		System.out.println("客户端发送空消息到服务端");
+//		System.out.println("客户端发送空消息到服务端");
 	}
 }

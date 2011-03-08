@@ -35,7 +35,9 @@ public class Reader extends Thread {
                     key = (SelectionKey) pool.remove(0);
                 }
                 // 读取数据
-                read(key);
+                if (key != null) {
+                	 read(key);
+				}
             }
             catch (Exception e) {
             	notifier.fireOnError("Error occured before Reader: " + e.getMessage());
@@ -55,28 +57,14 @@ public class Reader extends Thread {
             SocketChannel sc = (SocketChannel) key.channel();
             byte[] clientData =  readRequest(sc);
             
-//            Response response = new Response(sc);
-//            // 请求策略文件
-//            if (clientData.equals(ServerConfig.POLICY_REQUEST.getBytes())) {
-//            	response.send(ServerConfig.POLICY_XML.getBytes());
-//			}
-            
             Request request = (Request)key.attachment();
             request.setDataInput(clientData);
             
             // 输出客户端所有的请求内容
-            MoreUtils.trace("客户端的请求内容：\n" + new String(request.getDataInput()));
-            
-            // calculate the processing time
-            ChannelState state = Server.getChannelState().get(sc.hashCode());
-            long operatedTime = 0;
-            if (state != null) {
-            	 // calculate the processing time
-                operatedTime = System.currentTimeMillis() - state.getStartTime();
-                // reset the start flag
-                MoreUtils.trace("OperatedTime: " + operatedTime + " ms");
-                state.setStart(false);
-            }
+            String msg = new String(request.getDataInput());
+            if (!msg.equals("")) {
+            	MoreUtils.trace("客户端的请求内容：\n" + msg);
+			}
             
             // 触发onRead
             notifier.fireOnRead(request);
