@@ -26,7 +26,7 @@ public class Server implements Runnable {
     private static Selector selector;
     private ServerSocketChannel sschannel;
     private InetSocketAddress address;
-    protected Notifier notifier;
+    private Notifier notifier;
     private int port;
     
     /**
