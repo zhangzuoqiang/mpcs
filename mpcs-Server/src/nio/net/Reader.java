@@ -43,33 +43,6 @@ public class Reader extends Thread {
     }
 
     /**
-     * 读取客户端发出请求数据
-     * @param sc 套接通道
-     */
-    public static byte[] readRequest(SocketChannel sc) throws IOException {
-    	
-        ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
-        int off = 0;
-        int len = 0;// buffer的长度
-        byte[] data = new byte[ServerConfig.BUFFER_SIZE * 5];
-
-        while ( true ) {
-            buffer.clear();
-            len = sc.read(buffer);
-            if (len == -1) break;
-            if ( (off + len) > data.length) {// 扩容
-                data = grow(data, ServerConfig.BUFFER_SIZE * 5);
-            }
-            byte[] buf = buffer.array();
-            System.arraycopy(buf, 0, data, off, len);// 复制数组
-            off += len;
-        }
-        byte[] req = new byte[off];
-        System.arraycopy(data, 0, req, 0, off);
-        return req;
-    }
-
-    /**
      * 处理连接数据读取
      * @param key SelectionKey
      */
@@ -103,7 +76,34 @@ public class Reader extends Thread {
             notifier.fireOnError("Error occured in Reader: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * 读取客户端发出请求数据
+     * @param sc 套接通道
+     */
+    public static byte[] readRequest(SocketChannel sc) throws IOException {
+    	
+        ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
+        int off = 0;
+        int len = 0;// buffer的长度
+        byte[] data = new byte[ServerConfig.BUFFER_SIZE * 10];
+        
+        while ( true ) {
+            buffer.clear();
+            len = sc.read(buffer);
+            if (len == -1) break;
+            if ( (off + len) > data.length) {// 扩容
+                data = grow(data, ServerConfig.BUFFER_SIZE * 10);
+            }
+            byte[] buf = buffer.array();
+            System.arraycopy(buf, 0, data, off, len);// 复制数组
+            off += len;
+        }
+        byte[] req = new byte[off];
+        System.arraycopy(data, 0, req, 0, off);
+        return req;
+    }
+    
     /**
      * 处理客户请求,管理用户的连接池,并唤醒队列中的线程进行处理
      */
@@ -113,7 +113,7 @@ public class Reader extends Thread {
             pool.notifyAll();
         }
     }
-
+    
     /**
      * 数组扩容
      * @param src byte[] 源数组数据
