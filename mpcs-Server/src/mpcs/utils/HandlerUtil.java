@@ -32,6 +32,6 @@ public final class HandlerUtil{
         notifier.addListener(def);
         //===============所有Handler写在我上面===============
         
-        TraceUtil.trace("Handler注册完毕~");
+        MoreUtils.trace("Handler注册完毕~");
 	}
 }
