@@ -1,6 +1,6 @@
 package mpcs.handler;
 
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 import nio.net.Request;
 import nio.net.event.EventAdapter;
 
@@ -16,11 +16,11 @@ public final class LogHandler extends EventAdapter {
     
     public void onClosed(Request request) throws Exception {
         String log = "From " + request.getAddress().toString().substring(1) + " closed.";
-        TraceUtil.trace(log);
+        MoreUtils.trace(log);
     }
     
     public void onError(String error) {
-    	TraceUtil.trace("Error: " + error);
+    	MoreUtils.trace("Error: " + error);
     }
     
 }

@@ -5,7 +5,7 @@ package mpcs.utils;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
  */
-public final class TraceUtil {
+public final class MoreUtils {
 	
 	/**
 	 * 打印消息
@@ -13,5 +13,13 @@ public final class TraceUtil {
 	 */
 	public static void trace(String msg){
 		System.out.println(msg);
+	}
+	
+	/**
+	 * 处理客户端发送空消息到服务端
+	 * @param response
+	 */
+	public static void doEmpty(){
+		System.out.println("客户端发送空消息到服务端");
 	}
 }

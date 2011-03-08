@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.net.Socket;
 
 import mpcs.config.ServerConfig;
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 
 /**
  * 客户端测试程序
@@ -44,7 +44,7 @@ public class Client {
             in = new DataInputStream(client.getInputStream());
             byte[] reply = new byte[8];
             in.read(reply);
-            TraceUtil.trace("Response: " + new String(reply, "UTF-8"));
+            MoreUtils.trace("Response: " + new String(reply, "UTF-8"));
 //            System.out.println("Response: " + in.readInt());
             
             in.close();
@@ -52,7 +52,7 @@ public class Client {
             client.close();
         }
         catch (Exception e) {
-        	TraceUtil.trace(e.getMessage());
+        	MoreUtils.trace(e.getMessage());
         }
     }
 }

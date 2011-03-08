@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 
 /**
  * c3p0测试程序
@@ -29,7 +29,7 @@ public class C3P0Test {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            TraceUtil.trace(rs.getString(1));
+            MoreUtils.trace(rs.getString(1));
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

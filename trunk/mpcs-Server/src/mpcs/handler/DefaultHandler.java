@@ -4,6 +4,7 @@ import mpcs.cmd.AbstractCmd;
 import mpcs.config.GlobalConst;
 import mpcs.utils.ByteUtil;
 import mpcs.utils.ParseProtocol;
+import mpcs.utils.MoreUtils;
 import nio.net.Request;
 import nio.net.Response;
 import nio.net.event.EventAdapter;
@@ -21,6 +22,10 @@ public class DefaultHandler extends EventAdapter {
 	
 	public void onWrite(Request request, Response response) throws Exception {
 		String command = new String(request.getDataInput());
+		if (command.equals("")) {
+			MoreUtils.doEmpty();
+			return;
+		}
 		defaultCmd = ParseProtocol.parseAbstractCmd(command);
 		
 		// 判断查询命令为 空闲连接

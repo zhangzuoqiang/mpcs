@@ -8,6 +8,8 @@ package mpcs.config;
  */
 public class GlobalErrorConst {
 
+	/**客户端发送的是空消息**/
+	public static final int E_SEND_EMPTY = -99999;	
 	/**此邮箱已注册**/
 	public static final int E_USER_REGISTER = -10101;	
 	/**注册用户失败，操作数据库添加用户时发生**/

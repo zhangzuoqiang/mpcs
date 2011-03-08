@@ -12,7 +12,7 @@ import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
 import mpcs.config.ServerConfig;
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 
 /**
  * <p>Title: 主控服务线程</p>
@@ -63,8 +63,8 @@ public class Server implements Runnable {
     }
     
     public void run() {
-    	TraceUtil.trace("Server started ...");
-    	TraceUtil.trace("Listening on port: " + port);
+    	MoreUtils.trace("Server started ...");
+    	MoreUtils.trace("Listening on port: " + port);
         // 监听
         while (true) {
             try {
@@ -76,6 +76,7 @@ public class Server implements Runnable {
                     while (it.hasNext()) {
                         SelectionKey key = (SelectionKey) it.next();
                         
+                        // 记录时间
                         if (idToChannelState.get(key.channel().hashCode()) != null) {
                         	ChannelState state = idToChannelState.get(key.channel().hashCode());
                             if (state != null) {
@@ -90,7 +91,7 @@ public class Server implements Runnable {
                             ChannelState state = new ChannelState();
                             idToChannelState.put(key.channel().hashCode(), state);
                             state.setThreadNum(state.getThreadNum() + 1);
-                            TraceUtil.trace("key.channel().hashCode(): " + key.channel().hashCode());
+                            MoreUtils.trace("key.channel().hashCode(): " + key.channel().hashCode());
                         }
                         
                         // 处理IO事件
@@ -98,7 +99,6 @@ public class Server implements Runnable {
                            // Accept the new connection
                            ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
                            notifier.fireOnAccept();
-                           
                            SocketChannel sc = ssc.accept();
                            sc.configureBlocking(false);
                            

@@ -2,14 +2,13 @@ package nio.net;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.io.IOException;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
-import java.io.IOException;
-import java.io.InterruptedIOException;
 
 import mpcs.config.ServerConfig;
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 
 /**
  * <p>Title: 读线程</p>
@@ -66,7 +65,7 @@ public class Reader extends Thread {
             request.setDataInput(clientData);
             
             // 输出客户端所有的请求内容
-            TraceUtil.trace("客户端的请求内容：\n" + new String(request.getDataInput()));
+            MoreUtils.trace("客户端的请求内容：\n" + new String(request.getDataInput()));
             
             // calculate the processing time
             ChannelState state = Server.getChannelState().get(sc.hashCode());
@@ -75,7 +74,7 @@ public class Reader extends Thread {
             	 // calculate the processing time
                 operatedTime = System.currentTimeMillis() - state.getStartTime();
                 // reset the start flag
-                TraceUtil.trace("OperatedTimes: " + operatedTime + " ms");
+                MoreUtils.trace("OperatedTime: " + operatedTime + " ms");
                 state.setStart(false);
             }
             
@@ -95,7 +94,7 @@ public class Reader extends Thread {
      * 读取客户端发出请求数据
      * @param sc 套接通道
      */
-    public static byte[] readRequest(SocketChannel sc) throws IOException {
+    public static byte[] readRequest(SocketChannel sc){
     	
         ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
         int off = 0;
@@ -106,11 +105,12 @@ public class Reader extends Thread {
             buffer.clear();
             try {
             	len = sc.read(buffer);
-			} catch (InterruptedIOException e) {
-				notifier.fireOnError("Error occured in read(buffer): " + e.getMessage());
-				e.printStackTrace();
+			} catch (IOException e) {
+				MoreUtils.trace("-----------------------------------");
 				break;
 			}
+            
+            buffer.flip();
             
             if (len == -1) break;
             if ( (off + len) > data.length) {// 扩容

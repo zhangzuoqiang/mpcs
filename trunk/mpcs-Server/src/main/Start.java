@@ -2,7 +2,7 @@ package main;
 
 import mpcs.config.ServerConfig;
 import mpcs.utils.HandlerUtil;
-import mpcs.utils.TraceUtil;
+import mpcs.utils.MoreUtils;
 import nio.net.Notifier;
 import nio.net.Server;
 
@@ -21,7 +21,7 @@ public final class Start {
         	// 注册Handler
         	HandlerUtil.AddHandlerListener();
         	
-        	TraceUtil.trace("Server starting ...");
+        	MoreUtils.trace("Server starting ...");
             Server server = new Server(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
             tServer.start();
