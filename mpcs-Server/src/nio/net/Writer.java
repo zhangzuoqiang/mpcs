@@ -69,6 +69,7 @@ public final class Writer extends Thread {
         }
         catch (Exception e) {
             notifier.fireOnError("Error occured in Writer: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     
