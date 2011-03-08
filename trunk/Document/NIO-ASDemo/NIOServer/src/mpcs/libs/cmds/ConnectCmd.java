@@ -31,7 +31,7 @@ public class ConnectCmd implements ICommand {
 			server.ids.add(playerId);
 			System.out.println("来自 "+playerId+" 连接");
 			try {
-				channel.register(server.selector,SelectionKey.OP_WRITE);
+				channel.register(server.getSelector(),SelectionKey.OP_WRITE);
 			} catch (ClosedChannelException e) {
 				e.printStackTrace();
 			}

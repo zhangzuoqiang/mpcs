@@ -22,7 +22,7 @@ import mpcs.libs.utils.MoreUtil;
 
 public class NIOServer implements Runnable {
 	
-	public Selector selector;
+	private static Selector selector;
 	private Notifier notifier;
 	// 回应池
 	private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
@@ -230,5 +230,22 @@ public class NIOServer implements Runnable {
                 }
             }
         }
+    }
+    
+    /**
+     * 提交新的客户端写请求于主服务线程的回应池中
+     * @param key
+     */
+    public static void processWriteRequest(SelectionKey key) {
+        synchronized (wpool) {
+            wpool.add(wpool.size(), key);
+            wpool.notifyAll();
+        }
+        // 解除selector的阻塞状态，以便注册新的通道
+        selector.wakeup();
+    }
+    
+    public Selector getSelector(){
+    	return selector;
     }
 }
