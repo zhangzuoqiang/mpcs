@@ -8,14 +8,14 @@ import mpcs.cmd.UserCmd;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public final class ProtocolDecoder {
+public final class ParseProtocol {
 	
 	/**
 	 * 解析用户注册cmd
 	 * @param cmd
 	 * @return
 	 */
-	public static UserCmd UserCmdDecoder(String cmd){
+	public static UserCmd parseUserCmd(String cmd){
 		UserCmd rCmd = new UserCmd();
 		String[] cmdArr = cmd.split("-");
 		rCmd.setHead1(Integer.parseInt(cmdArr[0]));
@@ -31,7 +31,7 @@ public final class ProtocolDecoder {
 	 * @param cmd
 	 * @return
 	 */
-	public static AbstractCmd AbstractCmdDecoder(String cmd){
+	public static AbstractCmd parseAbstractCmd(String cmd){
 		AbstractCmd abc = new AbstractCmd();
 		String[] cmdArr = cmd.split("-");
 		abc.setHead1(Integer.parseInt(cmdArr[0]));
