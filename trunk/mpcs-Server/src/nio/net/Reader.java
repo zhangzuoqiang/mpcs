@@ -6,8 +6,10 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 
 import mpcs.config.ServerConfig;
+import mpcs.utils.TraceUtil;
 
 /**
  * <p>Title: 读线程</p>
@@ -19,6 +21,7 @@ public class Reader extends Thread {
 	
     private static List<SelectionKey> pool = new LinkedList<SelectionKey>();
     private static Notifier notifier = Notifier.getNotifier();
+    
     public Reader() {
     }
 
@@ -36,6 +39,8 @@ public class Reader extends Thread {
                 read(key);
             }
             catch (Exception e) {
+            	notifier.fireOnError("Error occured before Reader: " + e.getMessage());
+            	e.printStackTrace();
                 continue;
             }
         }
@@ -56,12 +61,12 @@ public class Reader extends Thread {
 //            if (clientData.equals(ServerConfig.POLICY_REQUEST.getBytes())) {
 //            	response.send(ServerConfig.POLICY_XML.getBytes());
 //			}
-
+            
             Request request = (Request)key.attachment();
             request.setDataInput(clientData);
             
             // 输出客户端所有的请求内容
-            System.out.println("客户端的请求内容：\n" + new String(clientData));
+            TraceUtil.trace("客户端的请求内容：\n" + new String(request.getDataInput()));
             
             // calculate the processing time
             ChannelState state = Server.getChannelState().get(sc.hashCode());
@@ -70,7 +75,7 @@ public class Reader extends Thread {
             	 // calculate the processing time
                 operatedTime = System.currentTimeMillis() - state.getStartTime();
                 // reset the start flag
-                System.out.println("OperatedTimes: " + operatedTime + " ms");
+                TraceUtil.trace("OperatedTimes: " + operatedTime + " ms");
                 state.setStart(false);
             }
             
@@ -99,7 +104,14 @@ public class Reader extends Thread {
         
         while ( true ) {
             buffer.clear();
-            len = sc.read(buffer); 
+            try {
+            	len = sc.read(buffer);
+			} catch (InterruptedIOException e) {
+				notifier.fireOnError("Error occured in read(buffer): " + e.getMessage());
+				e.printStackTrace();
+				break;
+			}
+            
             if (len == -1) break;
             if ( (off + len) > data.length) {// 扩容
                 data = grow(data, ServerConfig.BUFFER_SIZE * 10);

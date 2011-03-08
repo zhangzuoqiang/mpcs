@@ -11,7 +11,7 @@ import java.nio.channels.SocketChannel;
 public class Request {
 	
     private SocketChannel sc;
-    private byte[] dataInput = null;;
+    private byte[] dataInput = null;
     Object obj;
     
     public Request(SocketChannel sc) {

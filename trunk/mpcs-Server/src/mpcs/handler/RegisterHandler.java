@@ -6,6 +6,7 @@ import mpcs.config.GlobalErrorConst;
 import mpcs.utils.ByteUtil;
 import mpcs.utils.DBUtil;
 import mpcs.utils.ParseProtocol;
+import mpcs.utils.TraceUtil;
 import nio.net.Notifier;
 import nio.net.Request;
 import nio.net.Response;
@@ -35,14 +36,14 @@ public final class RegisterHandler extends EventAdapter {
         	if (isExist(regCmd.getEmail())) {
         		//该邮箱已被注册
         		response.send(ByteUtil.getByteByConst(9, GlobalErrorConst.E_USER_REGISTER, 0));
-        		System.out.println("该邮箱已被注册");
+        		TraceUtil.trace("该邮箱已被注册");
         		return;
 			}else {
 				// 添加用户
 				if (addUser(regCmd.getEmail(), regCmd.getPassword()) == 1) {
 					// 注册成功 返回
 					response.send(ByteUtil.getByteByConst(0, GlobalConst.S_USER_REGISTER, 0));
-					System.out.println("注册成功 返回");
+					TraceUtil.trace("注册成功 返回");
 					return;
 				}else {
 					// 执行数据库操作，添加用户时失败

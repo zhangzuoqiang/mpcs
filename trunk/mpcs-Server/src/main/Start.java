@@ -2,6 +2,7 @@ package main;
 
 import mpcs.config.ServerConfig;
 import mpcs.utils.HandlerUtil;
+import mpcs.utils.TraceUtil;
 import nio.net.Notifier;
 import nio.net.Server;
 
@@ -20,13 +21,12 @@ public final class Start {
         	// 注册Handler
         	HandlerUtil.AddHandlerListener();
         	
-            System.out.println("Server starting ...");
+        	TraceUtil.trace("Server starting ...");
             Server server = new Server(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
             tServer.start();
         }
         catch (Exception e) {
-            System.out.println("Server error: " + e.getMessage());
             notifier.fireOnError("Error occured in Start : " + e.getMessage());
             System.exit(-1);
         }

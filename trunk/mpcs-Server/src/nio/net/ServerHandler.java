@@ -1,5 +1,6 @@
 package nio.net;
 
+import mpcs.utils.TraceUtil;
 import nio.net.event.EventAdapter;
 
 /**
@@ -14,11 +15,11 @@ public class ServerHandler extends EventAdapter {
     }
     
     public void onAccept() throws Exception {
-        System.out.println("#onAccept()");
+        TraceUtil.trace("#onAccept()");
     }
     
     public void onAccepted(Request request) throws Exception {
-        System.out.println("#onAccepted()");
+    	TraceUtil.trace("#onAccepted()");
     }
     
     public void onRead(Request request) throws Exception {
@@ -27,20 +28,20 @@ public class ServerHandler extends EventAdapter {
         //    rspData = new java.util.Date().toString().getBytes();
         //}
         //request.attach(rspData);
-        System.out.println("#onRead()");
+    	TraceUtil.trace("#onRead()");
     }
     
     public void onWrite(Request request, Response response) throws Exception {
-        System.out.println("#onWrite()");
+    	TraceUtil.trace("#onWrite()");
         //response.send((byte[])request.attachment());
         //response.send("OK".getBytes());
     }
     
     public void onClosed(Request request) throws Exception {
-        System.out.println("#onClosed()");
+    	TraceUtil.trace("#onClosed()");
     }
     
     public void onError(String error) {
-        System.out.println("#onAError(): " + error);
+    	TraceUtil.trace("#onAError(): " + error);
     }
 }

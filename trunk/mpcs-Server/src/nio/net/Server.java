@@ -12,6 +12,7 @@ import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
 import mpcs.config.ServerConfig;
+import mpcs.utils.TraceUtil;
 
 /**
  * <p>Title: 主控服务线程</p>
@@ -62,15 +63,13 @@ public class Server implements Runnable {
     }
     
     public void run() {
-        System.out.println("Server started ...");
-        System.out.println("Listening on port: " + port);
+    	TraceUtil.trace("Server started ...");
+    	TraceUtil.trace("Listening on port: " + port);
         // 监听
         while (true) {
             try {
                 int num = selector.select();
-                if (num <=0) {
-                	addRegister();  // 在Selector中注册新的写通道
-				}else{
+                if (num > 0){
                 	// 获得就绪信道的键迭代器
                     Iterator<SelectionKey> it = selector.selectedKeys().iterator();
                     
@@ -91,7 +90,7 @@ public class Server implements Runnable {
                             ChannelState state = new ChannelState();
                             idToChannelState.put(key.channel().hashCode(), state);
                             state.setThreadNum(state.getThreadNum() + 1);
-                            System.out.println("key.channel().hashCode(): " + key.channel().hashCode());
+                            TraceUtil.trace("key.channel().hashCode(): " + key.channel().hashCode());
                         }
                         
                         // 处理IO事件
@@ -120,11 +119,14 @@ public class Server implements Runnable {
                        }
                         it.remove();
                     }
-                }
+                }else {
+                	addRegister();  // 在Selector中注册新的写通道
+				}
             }
             catch (Exception e) {
             	// TODO: 当客户端在读取数据操作执行之前断开连接会产生异常信息
             	notifier.fireOnError("Error occured in Server: " + e.getMessage());
+            	e.printStackTrace();
                 continue;
             }
         }

@@ -38,7 +38,6 @@ public class ConnectionManager {
 			ds.setAcquireRetryDelay(1000);
 			
 		} catch (PropertyVetoException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
     }
