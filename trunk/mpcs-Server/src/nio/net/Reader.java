@@ -19,7 +19,6 @@ public class Reader extends Thread {
 	
     private static List<SelectionKey> pool = new LinkedList<SelectionKey>();
     private static Notifier notifier = Notifier.getNotifier();
-
     public Reader() {
     }
 
@@ -51,9 +50,18 @@ public class Reader extends Thread {
         	// 读取客户端数据
             SocketChannel sc = (SocketChannel) key.channel();
             byte[] clientData =  readRequest(sc);
+            
+//            Response response = new Response(sc);
+//            // 请求策略文件
+//            if (clientData.equals(ServerConfig.POLICY_REQUEST.getBytes())) {
+//            	response.send(ServerConfig.POLICY_XML.getBytes());
+//			}
 
             Request request = (Request)key.attachment();
             request.setDataInput(clientData);
+            
+            // 输出客户端所有的请求内容
+            System.out.println("客户端的请求内容：\n" + new String(clientData));
             
             // calculate the processing time
             ChannelState state = Server.getChannelState().get(sc.hashCode());
@@ -74,6 +82,7 @@ public class Reader extends Thread {
         }
         catch (Exception e) {
             notifier.fireOnError("Error occured in Reader: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     
@@ -90,7 +99,7 @@ public class Reader extends Thread {
         
         while ( true ) {
             buffer.clear();
-            len = sc.read(buffer);
+            len = sc.read(buffer); 
             if (len == -1) break;
             if ( (off + len) > data.length) {// 扩容
                 data = grow(data, ServerConfig.BUFFER_SIZE * 10);
