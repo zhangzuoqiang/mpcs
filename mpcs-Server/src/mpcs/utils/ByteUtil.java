@@ -1,7 +1,7 @@
 package mpcs.utils;
 
 /**
- * Byte工具类
+ * Byte工具类 服务端
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
