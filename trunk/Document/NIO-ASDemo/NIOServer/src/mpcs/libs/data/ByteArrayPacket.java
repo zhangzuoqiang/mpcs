@@ -1,14 +1,16 @@
-package NIOServer;
+package mpcs.libs.data;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+
+import mpcs.libs.utils.MoreUtil;
 
 /**
  * ByteArray数据包
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
  */
-public class Packet {
+public class ByteArrayPacket {
 	
 	private ByteBuffer buff;
 	private int length;
@@ -17,20 +19,29 @@ public class Packet {
 	 * 默认构造方法
 	 * 开辟2M的缓存区
 	 */
-	public Packet(){
+	public ByteArrayPacket(){
 		this(1024);
 	}
-	public Packet(int size){
+	
+	/**
+	 * 构造方法  指定缓存区大小
+	 * @param size*
+	 */
+	public ByteArrayPacket(int size){
 		length=size;
 		buff = ByteBuffer.allocate(length);
 	}
-	public Packet(ByteBuffer buffer){
+	
+	/**
+	 * 构造方法  指定ByteBuffer
+	 * @param buffer*
+	 */
+	public ByteArrayPacket(ByteBuffer buffer){
 		buff=buffer;
 		length=buffer.limit();
 	}
 	
-	//写入数据
-	
+	// 写入数据
 	public void writeChar(char value){
 		buff.putChar(value);
 	}
@@ -68,14 +79,13 @@ public class Packet {
 			writeShort(len);
 			writeBytes(str_bytes);
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("不能识别的字符编码");
+			MoreUtil.trace("不能识别的字符编码");
 			e.printStackTrace();
 			System.exit(0);
 		}
 	}
 	
-	//读取数据
-	
+	// 读取数据
 	public char readChar(){
 		return buff.getChar();
 	}
@@ -110,14 +120,14 @@ public class Packet {
 		try {
 			return new String(_bytes,charset);
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("不能识别的字符编码");
+			MoreUtil.trace("不能识别的字符编码");
 			e.printStackTrace();
 			System.exit(0);
 		}
 		return new String(_bytes);
 	}
 	
-	
+	// ByteBuffer相关操作
 	public ByteBuffer byteBuffer(){
 		return buff;
 	}
@@ -146,7 +156,7 @@ public class Packet {
 	}
 	/**
 	 * 实际存在有用数据的长度
-	 * @return
+	 * @return 数据的长度
 	 */
 	public int length(){
 		return length-buff.remaining();
@@ -159,9 +169,13 @@ public class Packet {
 		return length;
 	}
 	
+	/**
+	 * 输出byte[]
+	 * @param bytes
+	 */
 	public void outInfo(byte[] bytes){
-		for(int i=0;i<bytes.length;i++){
-			System.out.println("---------"+bytes[i]);
+		for(int i = 0; i < bytes.length; i++){
+			MoreUtil.trace("--------- "+ bytes[i]);
 		}
 	}
 }

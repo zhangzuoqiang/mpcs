@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import mpcs.libs.cmds.ConnectCommand;
+import mpcs.libs.data.ByteArrayPacket;
+import mpcs.libs.interfaces.ICommand;
+
 /**
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
@@ -94,7 +98,7 @@ public class NIOServer {
 		} else if (key.isWritable()) { // 写事件
 			if(key.isValid()){
 				//SocketChannel channel = (SocketChannel) key.channel();
-				Packet p=new Packet(100);
+				ByteArrayPacket p=new ByteArrayPacket(100);
 				p.writeInt(300);
 				p.writeInt(400);
 				p.writeString("野草工革革", "utf-8");
@@ -113,7 +117,7 @@ public class NIOServer {
 		int count = channel.read(clientBuffer);
 		if(count>0){
 			clientBuffer.flip();
-			Packet packet=new Packet(clientBuffer);
+			ByteArrayPacket packet=new ByteArrayPacket(clientBuffer);
 			//读取包长
 			int data_len=packet.readInt();
 			System.out.println("data_len " + data_len);
@@ -136,7 +140,7 @@ public class NIOServer {
 	 * @param packet
 	 * @throws IOException
 	 */
-	public int send(SelectionKey key,Packet packet) throws IOException{
+	public int send(SelectionKey key,ByteArrayPacket packet) throws IOException{
 		return send(key,packet.byteBuffer());
 	}
 	/**

@@ -1,16 +1,22 @@
-package NIOServer;
+package mpcs.libs.cmds;
 
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+import NIOServer.NIOServer;
+
+import mpcs.libs.data.ByteArrayPacket;
+import mpcs.libs.interfaces.ICommand;
+
 /**
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
  */
 public class ConnectCommand implements ICommand {
-	public int execute(NIOServer server,SocketChannel channel,Packet packet){
+	
+	public int execute(NIOServer server,SocketChannel channel,ByteArrayPacket packet){
 		int playerId=packet.readInt();
 		Iterator<Integer> iters=server.ids.iterator();
 		boolean sucessed=false;
@@ -33,6 +39,7 @@ public class ConnectCommand implements ICommand {
 		}
 		return 2000;
 	}
+	
 	public void write(){
 		
 	}
