@@ -45,6 +45,7 @@ public class Client {
             byte[] reply = new byte[8];
             in.read(reply);
             System.out.println("Response: " + new String(reply, "UTF-8"));
+//            System.out.println("Response: " + in.readInt());
             
             in.close();
             out.close();

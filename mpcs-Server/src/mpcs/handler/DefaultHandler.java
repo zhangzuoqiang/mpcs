@@ -25,8 +25,8 @@ public class DefaultHandler extends EventAdapter {
 		
 		// 判断查询命令为 空闲连接
         if (defaultCmd.getHead1() == GlobalConst.C_IDLE_CONNECTION) {
-        	response.send(ByteUtil.getByteByConst(GlobalConst.C_IDLE_CONNECTION, 
-        			GlobalConst.S_IDLE_CONNECTION, GlobalConst.C_IDLE_CONNECTION));
+        	response.send(ByteUtil.getByteByConst(GlobalConst.S_IDLE_CONNECTION, 
+        			GlobalConst.S_IDLE_CONNECTION, GlobalConst.S_IDLE_CONNECTION));
         }
 	}
 }

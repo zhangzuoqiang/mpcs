@@ -10,8 +10,8 @@ import nio.net.Response;
  * <br/>Date: 2011-3-7
  */
 public class ClientList {
-
-	private HashMap<String,Response> clientMap;
+	
+	private static HashMap<String,Response> clientMap;
 	private static ClientList instance = null;
 	
 	private ClientList(){
@@ -31,6 +31,13 @@ public class ClientList {
         	return instance;
     }
 	
+	/**
+	 * 获取clientMap
+	 * @return
+	 */
+	public static HashMap<String, Response> getClientMap(){
+		return clientMap;
+	}
 	/**
 	 * 添加在线用户,并且标识用户
 	 * @param ip

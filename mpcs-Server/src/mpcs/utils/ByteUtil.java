@@ -19,6 +19,6 @@ public final class ByteUtil {
 	 * @return byte[]
 	 */
 	public static byte[] getByteByConst(int globalError, int globalCst, int extension){
-		return String.valueOf(globalError + globalCst + extension).getBytes();
+		return ("" + globalError + globalCst + extension).getBytes();
 	}
 }
