@@ -3,7 +3,7 @@ package mpcs.handler;
 import mpcs.cmd.AbstractCmd;
 import mpcs.config.GlobalConst;
 import mpcs.utils.ByteUtil;
-import mpcs.utils.ProtocolDecoder;
+import mpcs.utils.ParseProtocol;
 import nio.net.Request;
 import nio.net.Response;
 import nio.net.event.EventAdapter;
@@ -21,11 +21,12 @@ public class DefaultHandler extends EventAdapter {
 	
 	public void onWrite(Request request, Response response) throws Exception {
 		String command = new String(request.getDataInput());
-		defaultCmd = ProtocolDecoder.AbstractCmdDecoder(command);
+		defaultCmd = ParseProtocol.parseAbstractCmd(command);
 		
 		// 判断查询命令为 空闲连接
         if (defaultCmd.getHead1() == GlobalConst.C_IDLE_CONNECTION) {
-        	response.send(ByteUtil.getByteByConst(0, GlobalConst.S_IDLE_CONNECTION, 0));
+        	response.send(ByteUtil.getByteByConst(GlobalConst.C_IDLE_CONNECTION, 
+        			GlobalConst.S_IDLE_CONNECTION, GlobalConst.C_IDLE_CONNECTION));
         }
 	}
 }
