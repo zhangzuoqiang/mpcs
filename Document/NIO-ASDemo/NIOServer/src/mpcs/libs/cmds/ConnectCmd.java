@@ -16,14 +16,14 @@ import mpcs.libs.interfaces.ICommand;
 public class ConnectCmd implements ICommand {
 	
 	public int execute(NIOServer server,SocketChannel channel,ByteArrayPacket packet){
-		int playerId=packet.readInt();
-		Iterator<Integer> iters=server.ids.iterator();
-		boolean sucessed=false;
+		int playerId = packet.readInt();
+		Iterator<Integer> iters = server.ids.iterator();
+		boolean sucessed = false;
 		while(iters.hasNext()){
-			int id=iters.next();
-			if(id==playerId){
+			int id = iters.next();
+			if(id == playerId){
 				System.out.println("此用户已连接！！！");
-				sucessed=true;
+				sucessed = true;
 				break;
 			}
 		}
