@@ -10,7 +10,7 @@ import nio.net.Response;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public abstract class EventAdapter implements ServerListener {
+public abstract class EventAdapter implements IServerListener {
 	
     public EventAdapter() {
     }

@@ -2,7 +2,7 @@ package nio.net;
 
 import java.util.ArrayList;
 
-import nio.net.event.ServerListener;
+import nio.net.event.IServerListener;
 
 /**
  * <p>Title: 事件触发器</p>
@@ -13,11 +13,11 @@ import nio.net.event.ServerListener;
  */
 public class Notifier {
 	
-    private static ArrayList<ServerListener> listeners = null;
+    private static ArrayList<IServerListener> listeners = null;
     private static Notifier instance = null;
     
     private Notifier() {
-        listeners = new ArrayList<ServerListener>();
+        listeners = new ArrayList<IServerListener>();
     }
     
     /**
@@ -37,7 +37,7 @@ public class Notifier {
      * 添加事件监听器
      * @param listener 监听器
      */
-    public void addListener(ServerListener listener) {
+    public void addListener(IServerListener listener) {
         synchronized (listeners) {
             if (!listeners.contains(listener))
                 listeners.add(listener);
@@ -50,7 +50,7 @@ public class Notifier {
      */
     public void fireOnAccept() throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onAccept();
+            ( (IServerListener) listeners.get(i)).onAccept();
     }
     
     /**
@@ -60,7 +60,7 @@ public class Notifier {
      */
     public void fireOnAccepted(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onAccepted(request);
+            ( (IServerListener) listeners.get(i)).onAccepted(request);
     }
     
     /**
@@ -70,7 +70,7 @@ public class Notifier {
      */
     public void fireOnRead(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onRead(request);
+            ( (IServerListener) listeners.get(i)).onRead(request);
     }
     
     /**
@@ -81,7 +81,7 @@ public class Notifier {
      */
     public void fireOnWrite(Request request, Response response)  throws Exception  {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onWrite(request, response);
+            ( (IServerListener) listeners.get(i)).onWrite(request, response);
     }
     
     /**
@@ -91,7 +91,7 @@ public class Notifier {
      */
     public void fireOnClosed(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onClosed(request);
+            ( (IServerListener) listeners.get(i)).onClosed(request);
     }
     
     /**
@@ -100,6 +100,6 @@ public class Notifier {
      */
     public void fireOnError(String error) {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (ServerListener) listeners.get(i)).onError(error);
+            ( (IServerListener) listeners.get(i)).onError(error);
     }
 }

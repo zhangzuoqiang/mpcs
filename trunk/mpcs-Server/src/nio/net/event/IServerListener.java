@@ -9,7 +9,7 @@ import nio.net.Response;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public interface ServerListener {
+public interface IServerListener {
 
    /**
     * <p>Title: 当客户端与服务器从连接开始到最后断开连接期间发生错误时触发该事件</p>
