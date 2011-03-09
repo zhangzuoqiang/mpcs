@@ -15,7 +15,9 @@ package
 		private static var instance:Main;
 		private var registPanel:RegistPanel;
 		private var client:NetClient;
-		private var tf:TextField=new TextField();
+		private var tf:TextField;
+		private var btn:Button;
+		
 		public function Main() 
 		{
 			instance = this;
@@ -30,6 +32,7 @@ package
 			addChild(registPanel);
 			registPanel.addEventListener(NetEvent.NET_CONNECT, requestConnectServer);
 			
+			tf = new TextField();
 			tf.border = true;
 			tf.width = 300;
 			tf.height = 400;
@@ -37,20 +40,42 @@ package
 			tf.y = 50;
 			tf.type = TextFieldType.DYNAMIC;
 			addChild(tf);
+			
+			btn = new Button(40, 20, "清空");
+			btn.x = 310;
+			btn.y = 430;
+			addChild(btn);
+			btn.addEventListener(MouseEvent.CLICK, onClickHandler);
 		}
+		
+		private function onClickHandler(e:MouseEvent):void {
+			tf.text = "";
+		}
+		
 		private function requestConnectServer(e:NetEvent):void {
+//			var message:Packet = new Packet();
+//			message.writeInt(e.playerID);
+//			message.writeInt(0);
+//			message.writeInt(0);
+//			message.writeString("csdn_eric@gmail.com");
+//			message.writeString("123");	
+//			trace("客户端输出： " + e.playerID);
+//			client.sendPacket(message);
+//			trace(message.size());
 			var p:Packet = new Packet();
-			p.writeShort(1000);
+			p.writeInt(111111);
 			p.writeInt(e.playerID);
-			trace("客户端输出： " + e.playerID);
+			trace(e.playerID);
 			client.sendPacket(p);
 		}
+		
 		private function onConnectServerHandler(e:Event):void {
-			tf.appendText("已建立连接\n");
+			tf.appendText("连接成功\n");
 		}
+		
 		private function onReadedDataHandler(e:NetEvent):void {
 			var p:Packet=new Packet(e.bytesData);
-			var info:String = "---" + p.readInt() + "---" + p.readInt()+"---"+p.readString()+"\n";
+			var info:String = "服务器返回的数据： " + p.readInt() + "  " + p.readInt()+"  "+p.readString()+"\n";
 			tf.appendText(info);
 		}
 		

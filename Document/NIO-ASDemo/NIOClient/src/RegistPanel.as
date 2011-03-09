@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.net.Socket;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	
@@ -28,16 +29,24 @@ package
 			tf.y = 20;
 			tf.width = 100;
 			tf.height = 20;
+			tf.text = "100101";
 			addChild(tf);
 			
-			bt = new Button(40, 20);
+			bt = new Button(40, 20, "发送");
 			bt.x = tf.width + tf.x + 10;
 			bt.y = 20;
 			addChild(bt);
 			
 			bt.addEventListener(MouseEvent.CLICK, onClickHandler);
 		}
+		
 		private function onClickHandler(e:MouseEvent):void {
+			
+//			var sock:Socket = Main.getInstance().Client().getSocket();
+//			if(sock == null){
+//				Main.getInstance().Client().buildConnection();
+//			}
+			
 //			if (!int(tf.text)) {
 				var event:NetEvent = new NetEvent(NetEvent.NET_CONNECT);
 				event.playerID = (int)(tf.text);

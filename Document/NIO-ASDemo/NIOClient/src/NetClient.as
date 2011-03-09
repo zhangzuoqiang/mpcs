@@ -6,7 +6,7 @@ package{
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
-
+	
 	/**
 	 * socket客户端，此类适用于  dataLen + data  的数据协议
 	 */
@@ -43,6 +43,7 @@ package{
 			socket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
 			socket.removeEventListener(Event.CONNECT, connectHandler);
 			socket.removeEventListener(ProgressEvent.SOCKET_DATA, receivedHandler);
+			socket = null;
 			dispatchEvent(e);
 			trace("服务器已关闭此连接");
 		}
@@ -58,7 +59,6 @@ package{
 		}
 		private function receivedHandler(e:ProgressEvent):void {
 			dispatchEvent(e);
-			trace("---- 服务端有返回 ----");
 			parse();
 		}
 		
@@ -117,6 +117,10 @@ package{
 		 */
 		public function sendPacket(packet:Packet):void {
 			send(packet.array());
+		}
+		
+		public function getSocket():Socket{
+			return this.socket;
 		}
 	}
 }
