@@ -1,10 +1,11 @@
-package nio.core;
+package handler;
 
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+import nio.core.NIOServer;
 import nio.data.Packet;
 import nio.interfaces.ICmd;
 import nio.utils.MoreUtils;
@@ -14,8 +15,7 @@ import nio.utils.MoreUtils;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-9
  */
-public class ConnectCmd implements ICmd {
-	
+public class ConnectHandler implements ICmd {
 	
 	public int execute(NIOServer server, SocketChannel channel, Packet packet) {
 		int userID = packet.readInt();
