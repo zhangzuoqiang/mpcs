@@ -75,7 +75,7 @@ package
 		
 		private function onReadedDataHandler(e:NetEvent):void {
 			var p:Packet=new Packet(e.bytesData);
-			var info:String = "服务器返回的数据： " + p.readInt() + "  " + p.readInt()+"  "+p.readString()+"\n";
+			var info:String = "服务器返回的数据： " + p.readInt() +"\n";
 			tf.appendText(info);
 		}
 		
