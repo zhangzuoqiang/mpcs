@@ -7,55 +7,46 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import nio.configs.ServerConfig;
+import nio.control.SwitchController;
 import nio.data.Packet;
-import nio.interfaces.ICmd;
+import nio.utils.MoreUtils;
 /**
  * 服务器核心类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-9
  */
-public class NIOServer {
+public class NIOServer implements Runnable{
 	
-	private static int BLOCK = 1024;
+	private static NIOServer instance;
 	public Selector selector;
-	protected ByteBuffer clientBuffer = ByteBuffer.allocate(BLOCK);
-	protected CharsetDecoder decoder;
-	public static CharsetEncoder encoder = Charset.forName("GB2312").newEncoder();
+	protected ByteBuffer clientBuffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
+	public List<Integer> ids = new ArrayList<Integer>();
 	
-	public HashMap<Integer,SelectionKey> rooms=new HashMap<Integer,SelectionKey>();
-	public List<Integer> ids=new ArrayList<Integer>();
-	private HashMap<Integer,ICmd> commands=new HashMap<Integer,ICmd>();
-	
-	public final int CONNECT=1000;
-	public final int SELECT_ROOM=1005;
-	public final int START=1010;
-	public final int RECEIVE_DATA=1015;
-	
-	public final int CONNECT_SUCCESS=2000;
-	public final int SEND_DATA=2005;
-
-	public NIOServer(int port) throws IOException {
-		selector = this.getSelector(port);
-		Charset charset = Charset.forName("GB2312");
-		decoder = charset.newDecoder();
-	}
-	
-	public void registerCommand(int commandID,ICmd command){
-		if(!commands.containsKey(commandID)){
-			System.out.println("registeCommand  "+commandID+"  ,  "+command);
-			commands.put(commandID, command);
+	/**
+	 * 构造方法 
+	 * @param port* 指定端口
+	 */
+	public NIOServer(int port) {
+		instance = this;
+		try {
+			selector = this.getSelector(port);
+		} catch (IOException e) {
+			e.printStackTrace();
+			MoreUtils.trace("Error occured in getSelector: " + e.getMessage());
 		}
 	}
-
-	// 获取Selector
+	
+	/**
+	 * 获取Selector，创建无阻塞网络套接
+	 * @param port
+	 * @return
+	 * @throws IOException
+	 */
 	protected Selector getSelector(int port) throws IOException {
 		ServerSocketChannel server = ServerSocketChannel.open();
 		Selector selector = Selector.open();
@@ -64,18 +55,26 @@ public class NIOServer {
 		server.register(selector, SelectionKey.OP_ACCEPT);
 		return selector;
 	}
+	
+	public void run() {
+		MoreUtils.trace("Server started ...");
+		MoreUtils.trace("listening on " + ServerConfig.LISTENNING_PORT);
+		listen();
+	}
 
-	// 监听端口
+	/**
+	 * 监听端口
+	 */
 	public void listen() {
 		try {
 			while(true){
-				int num=selector.select();
+				int num = selector.select();
 				if (num > 0) {
 					Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
 					while (iter.hasNext()) {
 						SelectionKey key = iter.next();
 						iter.remove();
-						process(key);
+						processIO(key);
 					}
 				}
 			}
@@ -84,8 +83,12 @@ public class NIOServer {
 		}
 	}
 
-	// 处理事件
-	protected void process(SelectionKey key) throws IOException {
+	/**
+	 * 处理IO事件
+	 * @param key
+	 * @throws IOException
+	 */
+	protected void processIO(SelectionKey key) throws IOException {
 		if (key.isAcceptable()) { // 接收请求
 			ServerSocketChannel server = (ServerSocketChannel) key.channel();
 			SocketChannel channel = server.accept();
@@ -94,16 +97,13 @@ public class NIOServer {
 			channel.register(selector, SelectionKey.OP_READ);
 		} else if (key.isReadable()) { // 读信息
 			read(key);
-			//clientBuffer.clear();
 		} else if (key.isWritable()) { // 写事件
 			if(key.isValid()){
-				//SocketChannel channel = (SocketChannel) key.channel();
-				Packet p=new Packet(100);
+				Packet p = new Packet(100);
 				p.writeInt(300);
 				p.writeInt(400);
-				p.writeString("野草工革革", "utf-8");
-				send(key,p);
-				//int attachment=(Integer)key.attachment();
+				p.writeString("客户端你好！", "utf-8");
+				send(key, p);
 			}
 		}
 	}
@@ -112,23 +112,25 @@ public class NIOServer {
 	 * @param channel
 	 * @throws IOException
 	 */
-	public void read(SelectionKey key) throws IOException{
+	public void read(SelectionKey key){
 		SocketChannel channel = (SocketChannel) key.channel();
-		int count = channel.read(clientBuffer);
-		if(count>0){
+		int count = 0;
+		try {
+			count = channel.read(clientBuffer);
+		} catch (IOException e) {
+			MoreUtils.trace("Error occured in read(clientBuffer): " + e.getMessage());
+			key.cancel();
+		}
+		if(count > 0){
 			clientBuffer.flip();
-			Packet packet=new Packet(clientBuffer);
-			//读取包长
-			int data_len=packet.readInt();
-			//读取命令号
-			int command=packet.readShort();
+			Packet packet = new Packet(clientBuffer);
+			// 读取包长
+			packet.readInt();
+			// 读取消息号
+			int command = packet.readInt();
 			
-			if(commands.containsKey(command)){
-				ICmd comm=commands.get(command);
-				int result=comm.execute(this, channel, packet);
-				key.attach(result);
-				//System.out.println("attachment  "+key.attachment().getClass());
-			}
+			// 分发业务逻辑
+			SwitchController.switchCmd(command, this, channel, packet, key);
 			
 			clientBuffer.clear();
 		}
@@ -139,8 +141,8 @@ public class NIOServer {
 	 * @param packet
 	 * @throws IOException
 	 */
-	public int send(SelectionKey key,Packet packet) throws IOException{
-		return send(key,packet.byteBuffer());
+	public int send(SelectionKey key, Packet packet) throws IOException{
+		return send(key, packet.byteBuffer());
 	}
 	/**
 	 * 发送数据
@@ -149,18 +151,18 @@ public class NIOServer {
 	 * @return 发出Bytes的总长度
 	 * @throws IOException
 	 */
-	public int send(SelectionKey key,ByteBuffer buffer) throws IOException{
+	public int send(SelectionKey key, ByteBuffer buffer) throws IOException{
 		SocketChannel channel = (SocketChannel) key.channel();
 		
 		//发送数据的实际长度
-		int dataLen=buffer.limit()-buffer.remaining();
+		int dataLen = buffer.limit() - buffer.remaining();
 		
-		if(buffer.position()>0){
+		if(buffer.position() > 0){
 			buffer.flip();
 		}
 		
 		//发送的bytes，4为数据包的长度信息，为int型，占用4个字节
-		ByteBuffer bts=ByteBuffer.allocate(dataLen+4);
+		ByteBuffer bts = ByteBuffer.allocate(dataLen + 4);
 		//写入数据包的长度
 		bts.putInt(dataLen);
 		//写入数据内容
@@ -169,7 +171,7 @@ public class NIOServer {
 		if(bts.position()>0){
 			bts.flip();
 		}
-		int l=channel.write(bts);
+		int len = channel.write(bts);
 		bts.clear();
 		buffer.clear();
 		
@@ -177,6 +179,10 @@ public class NIOServer {
 		channel.register(selector, SelectionKey.OP_READ);
 		//注销写事件
 		key.interestOps(key.interestOps()&~SelectionKey.OP_WRITE);
-		return l;
+		return len;
+	}
+	
+	public static NIOServer getInstance(){
+		return instance;
 	}
 }

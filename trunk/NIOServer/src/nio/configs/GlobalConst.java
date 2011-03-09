@@ -10,9 +10,9 @@ package nio.configs;
  */
 public final class GlobalConst {
 	
-	/**空闲连接**/
-	public static final int C_IDLE_CONNECTION = 111111;
-	public static final int S_IDLE_CONNECTION = 555555;
+	/**请求连接**/
+	public static final int C_REQUEST_CONNECTION = 111111;
+	public static final int S_REQUEST_CONNECTION = 555555;
 	/**
 	 * 用户注册
 	 */
