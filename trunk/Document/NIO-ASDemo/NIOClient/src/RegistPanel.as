@@ -42,10 +42,10 @@ package
 		
 		private function onClickHandler(e:MouseEvent):void {
 			
-//			var sock:Socket = Main.getInstance().Client().getSocket();
-//			if(sock == null){
-//				Main.getInstance().Client().buildConnection();
-//			}
+			var sock:Socket = Main.getInstance().Client().getSocket();
+			if(sock == null){
+				Main.getInstance().Client().buildConnection();
+			}
 			
 //			if (!int(tf.text)) {
 				var event:NetEvent = new NetEvent(NetEvent.NET_CONNECT);
