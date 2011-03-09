@@ -2,6 +2,7 @@ package mpcs.libs.core;
 
 import java.util.ArrayList;
 
+import mpcs.libs.data.ByteArrayPacket;
 import mpcs.libs.interfaces.IServerListener;
 
 /**
@@ -58,7 +59,7 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    public void fireOnAccepted(Request request) throws Exception {
+    public void fireOnAccepted(ByteArrayPacket request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IServerListener) listeners.get(i)).onAccepted(request);
     }
@@ -68,7 +69,7 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    public void fireOnRead(Request request) throws Exception {
+    public void fireOnRead(ByteArrayPacket request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IServerListener) listeners.get(i)).onRead(request);
     }
@@ -79,7 +80,7 @@ public class Notifier {
      * @param response
      * @throws Exception
      */
-    public void fireOnWrite(Request request, Response response)  throws Exception  {
+    public void fireOnWrite(ByteArrayPacket request, Response response)  throws Exception  {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IServerListener) listeners.get(i)).onWrite(request, response);
     }
@@ -89,7 +90,7 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    public void fireOnClosed(Request request) throws Exception {
+    public void fireOnClosed(ByteArrayPacket request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IServerListener) listeners.get(i)).onClosed(request);
     }

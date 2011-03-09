@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
 
+import mpcs.libs.data.ByteArrayPacket;
+
 /**
  * <p>Title: 回应线程</p>
  * <p>Description: 用于向客户端发送信息</p>
@@ -46,20 +48,18 @@ public final class Writer extends Thread {
      * @param key SelectionKey
      */
     public void write(SelectionKey key) {
-    	SocketChannel sc = null;
         try {
-            sc = (SocketChannel) key.channel();
-            Response response = new Response(sc);
+        	SocketChannel sc = (SocketChannel) key.channel();
+            Response response = new Response(key);
             
             // 触发onWrite事件
-            notifier.fireOnWrite((Request)key.attachment(), response);
-            
-            // 触发onClosed事件
-            notifier.fireOnClosed((Request)key.attachment());
+            notifier.fireOnWrite((ByteArrayPacket) key.attachment(), response);
             
             sc.finishConnect();
 			sc.socket().close();
             sc.close();
+            // 触发onClosed事件
+            notifier.fireOnClosed((ByteArrayPacket) key.attachment());
         }
         catch (Exception e) {
             notifier.fireOnError("Error occured in Writer: " + e.getMessage());

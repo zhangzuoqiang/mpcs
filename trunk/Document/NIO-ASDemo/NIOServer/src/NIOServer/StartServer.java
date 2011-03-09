@@ -3,6 +3,7 @@ package NIOServer;
 import mpcs.libs.configs.ServerConfig;
 import mpcs.libs.core.NIOServer;
 import mpcs.libs.core.Notifier;
+import mpcs.libs.utils.HandlerUtil;
 
 /**
  * 服务 启动类
@@ -15,6 +16,9 @@ public class StartServer {
 	
 	public static void main(String[] args) throws Exception{
 		try {
+			// 注册Handler
+        	HandlerUtil.AddHandlerListener();
+        	
 			NIOServer server = new NIOServer(ServerConfig.LISTENNING_PORT);
 			Thread tServer = new Thread(server);
 	        tServer.start();

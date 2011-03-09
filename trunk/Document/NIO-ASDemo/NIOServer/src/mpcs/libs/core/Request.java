@@ -4,6 +4,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 
+import mpcs.libs.data.ByteArrayPacket;
+
 /**
  * <p>Title: 客户端请求信息类</p>
  * @author zhangzuoqiang
@@ -12,7 +14,7 @@ import java.nio.channels.SocketChannel;
 public class Request {
 	
     private SocketChannel sc;
-    private byte[] dataInput = null;
+    private ByteArrayPacket dataInput = null;
     Object obj;
     
     public Request(SocketChannel sc) {
@@ -56,10 +58,10 @@ public class Request {
     public Object attachment() {
         return obj;
     }
-    public byte[] getDataInput() {
+    public ByteArrayPacket getDataInput() {
         return dataInput;
     }
-    public void setDataInput(byte[] dataInput) {
+    public void setDataInput(ByteArrayPacket dataInput) {
         this.dataInput = dataInput;
     }
 }

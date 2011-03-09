@@ -1,59 +1,75 @@
 package mpcs.libs.core;
 
-import java.nio.channels.SocketChannel;
-import java.nio.ByteBuffer;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+
+import mpcs.libs.data.ByteArrayPacket;
 
 /**
  * <p>Title: 回应器</p>
- *  <p>Description: 用于向客户端发送数据</p>
+ *  <p>Description: 用于服务器分发数据给客户端</p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
 public class Response {
 	
-    private SocketChannel sc;
-	private DataOutputStream dataOutput;
+    private SelectionKey key;
 
-    public Response(SocketChannel sc) {
-        this.sc = sc;
-    }
-
-    /**
-     * <p>Title: 向客户端写数据</p>
-     * @param data byte[] 待回应数据
-     */
-    public void send(byte[] data) throws IOException {
-        ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        buffer.put(data, 0, data.length);
-        // 将缓冲区准备为数据传出状态
-        buffer.flip();
-        sc.write(buffer);
+    public Response(SelectionKey key) {
+        this.key = key;
     }
     
     /**
-     * <p>发送消息头给客户端</p>
-     * 客户端解析：
-	 * <br/>h1: 返回结果为0表示成功;9表示失败（全局错误号）
-	 * <br/>h2: 对应全局消息号
-	 * <br/>h3: 扩展位，默认为0
-     * @param globalError 全局错误号
-     * @param globalCst 全局消息号
-     * @param extension 默认为0
-     * @throws IOException 
-     */
-    public void sendHeadMsgToClient(int globalError, int globalCst, int extension) throws IOException{
-    	dataOutput = new DataOutputStream(sc.socket().getOutputStream());
-    	//编写数据的长度
-		dataOutput.writeInt(globalError);
-		dataOutput.writeInt(globalCst);
-		dataOutput.writeInt(extension);
-		dataOutput.flush();
-    }
-    
-    /**获得SocketChannel**/
-    public SocketChannel getSocketChannel() {
-		return sc;
+	 * <p>Title: 向客户端写数据</p>
+	 * @param channel
+	 * @param packet
+	 * @throws IOException
+	 */
+	public int send(SelectionKey key,ByteArrayPacket packet) throws IOException{
+		return send(key,packet.byteBuffer());
+	}
+	
+	/**
+	 * <p>Title: 向客户端写数据</p>
+	 * @param key
+	 * @param buffer
+	 * @return 发出Bytes的总长度
+	 * @throws IOException
+	 */
+	public int send(SelectionKey key,ByteBuffer buffer) throws IOException{
+		SocketChannel channel = (SocketChannel) key.channel();
+		
+		//发送数据的实际长度
+		int dataLen=buffer.limit()-buffer.remaining();
+		
+		if(buffer.position()>0){
+			buffer.flip();
+		}
+		
+		//发送的bytes，4为数据包的长度信息，int型，占用4个字节
+		ByteBuffer bts = ByteBuffer.allocate(dataLen + 4);
+		//写入数据包的长度
+		bts.putInt(dataLen);
+		//写入数据内容
+		bts.put(buffer);
+		
+		if(bts.position() > 0){
+			bts.flip();
+		}
+		int len = channel.write(bts);
+		bts.clear();
+		buffer.clear();
+		
+		//注册读事件
+		channel.register(NIOServer.getInstance().getSelector(), SelectionKey.OP_READ);
+		//注销写事件
+		key.interestOps(key.interestOps()&~SelectionKey.OP_WRITE);
+		return len;
+	}
+
+	public SelectionKey getKey() {
+		return key;
 	}
 }
