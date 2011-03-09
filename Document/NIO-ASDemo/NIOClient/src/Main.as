@@ -42,7 +42,7 @@ package
 			var p:Packet = new Packet();
 			p.writeShort(1000);
 			p.writeInt(e.playerID);
-			trace(e.playerID);
+			trace("客户端输出： " + e.playerID);
 			client.sendPacket(p);
 		}
 		private function onConnectServerHandler(e:Event):void {

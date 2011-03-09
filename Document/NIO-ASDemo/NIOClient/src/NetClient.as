@@ -58,6 +58,7 @@ package{
 		}
 		private function receivedHandler(e:ProgressEvent):void {
 			dispatchEvent(e);
+			trace("---- 服务端有返回 ----");
 			parse();
 		}
 		
