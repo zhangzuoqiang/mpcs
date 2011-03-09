@@ -2,13 +2,12 @@ package mpcs.libs.core;
 
 import java.util.List;
 import java.util.LinkedList;
-import java.io.IOException;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 
 import mpcs.libs.configs.ServerConfig;
-import mpcs.libs.utils.MoreUtil;
+import mpcs.libs.data.ByteArrayPacket;
 
 /**
  * <p>Title: 读线程</p>
@@ -20,6 +19,8 @@ public class Reader extends Thread {
 	
     private static List<SelectionKey> pool = new LinkedList<SelectionKey>();
     private static Notifier notifier = Notifier.getNotifier();
+    // 客户端缓存区
+	protected ByteBuffer clientBuffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
     
     public Reader() {
     }
@@ -35,9 +36,7 @@ public class Reader extends Thread {
                     key = (SelectionKey) pool.remove(0);
                 }
                 // 读取数据
-                if (key != null) {
-                	 read(key);
-				}
+                read(key);
             }
             catch (Exception e) {
             	notifier.fireOnError("Error occured before Reader: " + e.getMessage());
@@ -51,66 +50,32 @@ public class Reader extends Thread {
      * 处理连接数据读取
      * @param key SelectionKey
      */
-    public void read(SelectionKey key) {
-        try {
-        	// 读取客户端数据
-            SocketChannel sc = (SocketChannel) key.channel();
-            byte[] clientData =  readRequest(sc);
-            
-            Request request = (Request)key.attachment();
-            request.setDataInput(clientData);
-            
-            // 输出客户端所有的请求内容
-            String msg = new String(request.getDataInput());
-            if (!msg.equals("")) {
-            	MoreUtil.trace("客户端的请求内容：\n" + msg);
-			}
-            
-            // 触发onRead
-            notifier.fireOnRead(request);
+    public void read(SelectionKey key){
+    	try {
+    		SocketChannel channel = (SocketChannel) key.channel();
+    		int count = channel.read(clientBuffer);
+    		if(count > 0){
+    			clientBuffer.flip();
+    			ByteArrayPacket packet = new ByteArrayPacket(clientBuffer);
+                
+    			// 触发onRead
+                notifier.fireOnRead(packet);
 
-            // 提交主控线程进行写处理
-            NIOServer.processWriteRequest(key);
-        }
-        catch (Exception e) {
-            notifier.fireOnError("Error occured in Reader: " + e.getMessage());
+                // 提交主控线程进行写处理
+                NIOServer.processWriteRequest(key);
+                
+    			/*// 此部分可以用来限制一个用户多次登录客户端command为客户端的编号
+    			if(NIOServer.getInstance().commands.containsKey(command)){
+    				ICommand comm = NIOServer.getInstance().commands.get(command);
+    				int result = comm.execute(NIOServer.getInstance(), channel, packet);
+    				key.attach(result);
+    			}*/
+    			clientBuffer.clear();
+    		}
+		} catch (Exception e) {
+			notifier.fireOnError("Error occured in Reader: " + e.getMessage());
             e.printStackTrace();
-        }
-    }
-    
-    /**
-     * 读取客户端发出请求数据
-     * @param sc 套接通道
-     */
-    public static byte[] readRequest(SocketChannel sc){
-    	
-        ByteBuffer buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
-        int off = 0;
-        int len = 0;// buffer的长度
-        byte[] data = new byte[ServerConfig.BUFFER_SIZE * 10];
-        
-        while ( true ) {
-            buffer.clear();
-            try {
-            	len = sc.read(buffer);
-			} catch (IOException e) {
-				MoreUtil.trace("-----------------------------------");
-				break;
-			}
-            
-            buffer.flip();
-            
-            if (len == -1) break;
-            if ( (off + len) > data.length) {// 扩容
-                data = grow(data, ServerConfig.BUFFER_SIZE * 10);
-            }
-            byte[] buf = buffer.array();
-            System.arraycopy(buf, 0, data, off, len);// 复制数组
-            off += len;
-        }
-        byte[] req = new byte[off];
-        System.arraycopy(data, 0, req, 0, off);
-        return req;
+		}
     }
     
     /**

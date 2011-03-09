@@ -12,12 +12,12 @@ import com.mchange.v2.c3p0.DataSources;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class ConnectionManager {	
-	private static ConnectionManager instance;
+public class ConnectManager {	
+	private static ConnectManager instance;
 	private static ComboPooledDataSource ds = null;
 	private static Connection con = null;
 	
-	private ConnectionManager(){
+	private ConnectManager(){
 		try {
 			ds = new ComboPooledDataSource();
 			
@@ -46,10 +46,10 @@ public class ConnectionManager {
 	 * 获取连接管理类 实例
 	 * @return
 	 */
-	public static final ConnectionManager getInstance(){
+	public static final ConnectManager getInstance(){
 		if (instance == null) {
 			try {
-				instance = new ConnectionManager();
+				instance = new ConnectManager();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

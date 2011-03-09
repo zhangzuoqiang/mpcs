@@ -12,6 +12,7 @@ import mpcs.libs.interfaces.ICommand;
 import mpcs.libs.utils.MoreUtil;
 
 /**
+ * 用户连接服务器 管理类
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-8
  */
@@ -33,7 +34,7 @@ public class ConnectCmd implements ICommand {
 		}
 		if(!sucessed){
 			server.ids.add(userID);
-			MoreUtil.trace("来自 " + userID + " 连接");
+			MoreUtil.trace("接收命令： " + userID);
 			try {
 				channel.register(server.getSelector(),SelectionKey.OP_WRITE);
 			} catch (ClosedChannelException e) {

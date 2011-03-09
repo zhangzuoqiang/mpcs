@@ -3,6 +3,7 @@ package mpcs.libs.data;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
+import mpcs.libs.configs.ServerConfig;
 import mpcs.libs.utils.MoreUtil;
 
 /**
@@ -17,10 +18,10 @@ public class ByteArrayPacket {
 	
 	/**
 	 * 默认构造方法
-	 * 开辟2M的缓存区
+	 * 开辟1M的缓存区
 	 */
 	public ByteArrayPacket(){
-		this(1024);
+		this(ServerConfig.BUFFER_SIZE);
 	}
 	
 	/**

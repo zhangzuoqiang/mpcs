@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import mpcs.libs.data.ConnectionManager;
+import mpcs.libs.data.ConnectManager;
 
 /**
  * 数据库操作工具类
@@ -13,7 +13,7 @@ import mpcs.libs.data.ConnectionManager;
  */
 public final class DBUtil {
 
-	protected static ConnectionManager cm = ConnectionManager.getInstance();
+	protected static ConnectManager cm = ConnectManager.getInstance();
 	private static Connection conn = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;

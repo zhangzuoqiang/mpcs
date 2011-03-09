@@ -1,7 +1,7 @@
 package mpcs.libs.interfaces;
 
-import mpcs.libs.core.Request;
 import mpcs.libs.core.Response;
+import mpcs.libs.data.ByteArrayPacket;
 
 /**
  * <p>Title: 服务器事件监听器</p>
@@ -30,7 +30,7 @@ public interface IServerListener {
     * <p>Title: 当客户端请求被服务器接受后触发该事件。该事件表明一个新的客户端与服务器正式建立连接。</p>
     * @param request 客户端请求
     */
-   public void onAccepted(Request request) throws Exception;
+   public void onAccepted(ByteArrayPacket request) throws Exception;
 
    /**
     * <p>Title: 当客户端发来数据，并已被服务器控制线程正确读取时，触发该事件。</p>
@@ -39,7 +39,7 @@ public interface IServerListener {
     * 事件处理器不需要在该事件中进行专门的读操作，而只需将控制线程传来的数据进行直接处理即可。</p>
     * @param request 客户端请求
     */
-   public void onRead(Request request) throws Exception;
+   public void onRead(ByteArrayPacket request) throws Exception;
 
    /**
     * <p>Title: 当客户端可以开始接受服务端发送数据时触发该事件</p>
@@ -47,7 +47,7 @@ public interface IServerListener {
     * @param request 客户端请求
     * @param response 服务端回应
     */
-   public void onWrite(Request request, Response response) throws Exception;
+   public void onWrite(ByteArrayPacket request, Response response) throws Exception;
 
    /**
     * <p>Title: 当客户端与服务器断开连接时触发该事件</p>
@@ -55,5 +55,5 @@ public interface IServerListener {
     * <br/>例如在类Writer Line60中。</p>
     * @param request 客户端请求
     */
-   public void onClosed(Request request) throws Exception;
+   public void onClosed(ByteArrayPacket request) throws Exception;
 }

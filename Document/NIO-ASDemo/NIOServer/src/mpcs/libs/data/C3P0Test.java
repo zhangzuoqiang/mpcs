@@ -15,7 +15,7 @@ public class C3P0Test {
 	
 	public static void main(String[] args) {
 		
-        ConnectionManager cm = ConnectionManager.getInstance();
+        ConnectManager cm = ConnectManager.getInstance();
         
         Connection conn = null;
         Statement stmt = null;
