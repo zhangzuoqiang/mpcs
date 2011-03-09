@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import mpcs.libs.cmds.ConnectCmd;
 import mpcs.libs.configs.ServerConfig;
 import mpcs.libs.data.ByteArrayPacket;
 import mpcs.libs.interfaces.ICommand;
@@ -31,8 +32,8 @@ public class NIOServer implements Runnable {
 	// 解码
 	protected CharsetDecoder decoder;
 	// 在线用户列表
-	public List<Integer> ids=new ArrayList<Integer>();
-	private HashMap<Integer,ICommand> commands=new HashMap<Integer,ICommand>();
+	public List<Integer> ids = new ArrayList<Integer>();
+	private HashMap<Integer,ICommand> commands = new HashMap<Integer,ICommand>();
 	
 	public NIOServer(int port) throws IOException {
 		selector = this.getSelector(port);
@@ -40,15 +41,24 @@ public class NIOServer implements Runnable {
 		decoder = charset.newDecoder();
 		// 获取事件触发器
         notifier = Notifier.getNotifier();
+        
 	}
 	
 	@Override
 	public void run() {
+		registerCommand(1000,new ConnectCmd());
+		MoreUtil.trace("listening on " + ServerConfig.LISTENNING_PORT);
+		try {
+			listen();
+		} catch (Exception e) {
+			e.printStackTrace();
+			notifier.fireOnError("Error occured in listen by run: " + e.getMessage());
+		}
 	}
 	
-	public void registerCommand(int commandID,ICommand command){
+	public void registerCommand(int commandID, ICommand command){
 		if(!commands.containsKey(commandID)){
-			MoreUtil.trace("registeCommand  "+commandID+"  ,  "+command);
+			MoreUtil.trace("registeCommand  " + commandID + "  ,  " + command);
 			commands.put(commandID, command);
 		}
 	}
@@ -56,7 +66,7 @@ public class NIOServer implements Runnable {
 	/**
 	 * 获取Selector,创建无阻塞网络套接
 	 * @param port
-	 * @return
+	 * @return Selector
 	 * @throws IOException
 	 */
 	protected Selector getSelector(int port) throws IOException {
@@ -67,6 +77,11 @@ public class NIOServer implements Runnable {
 		server.register(selector, SelectionKey.OP_ACCEPT);
 		return selector;
 	}
+    
+    /**获取选择器**/
+    public Selector getSelector(){
+    	return selector;
+    }
 	
 	/**
 	 * 监听端口
@@ -116,17 +131,10 @@ public class NIOServer implements Runnable {
 			read(key);
 		} else if (key.isWritable()) { 
 			// 写事件
-			if(key.isValid()){ // 测试有效性
-				ByteArrayPacket p=new ByteArrayPacket(100);
-				p.writeInt(command);
-				p.writeInt(400);
-				p.writeString("获得服务器返回数据", "utf-8");
-				send(key,p);
-			}
+			write(key);
 		}
 	}
 	
-	private int command = 0;
 	/**
 	 * 读取客户端发送的数据
 	 * @param channel
@@ -135,22 +143,37 @@ public class NIOServer implements Runnable {
 	public void read(SelectionKey key) throws IOException{
 		SocketChannel channel = (SocketChannel) key.channel();
 		int count = channel.read(clientBuffer);
+		int command = 0;
 		if(count>0){
 			clientBuffer.flip();
-			ByteArrayPacket packet=new ByteArrayPacket(clientBuffer);
+			ByteArrayPacket packet = new ByteArrayPacket(clientBuffer);
 			//读取包长
-			int data_len=packet.readInt();
+			int data_len = packet.readInt();
 			MoreUtil.trace("data_len " + data_len);
 			//读取命令号
-			command=packet.readShort();
+			command = packet.readShort();
 			
 			if(commands.containsKey(command)){
-				ICommand comm=commands.get(command);
+				ICommand comm = commands.get(command);
 				int result = comm.execute(this, channel, packet);
 				key.attach(result);
-				//System.out.println("attachment  "+key.attachment().getClass());
 			}
 			clientBuffer.clear();
+		}
+	}
+	
+	/**
+	 * 写处理
+	 * @param key
+	 * @throws IOException
+	 */
+	public void write(SelectionKey key) throws IOException{
+		if(key.isValid()){ // 测试有效性
+			ByteArrayPacket p = new ByteArrayPacket(100);
+			p.writeInt(300);
+			p.writeInt(400);
+			p.writeString("获得服务器返回数据", "utf-8");
+			send(key,p);
 		}
 	}
 	
@@ -181,17 +204,17 @@ public class NIOServer implements Runnable {
 			buffer.flip();
 		}
 		
-		//发送的bytes，4为数据包的长度信息，为int型，占用4个字节
-		ByteBuffer bts=ByteBuffer.allocate(dataLen + 4);
+		//发送的bytes，4为数据包的长度信息，int型，占用4个字节
+		ByteBuffer bts = ByteBuffer.allocate(dataLen + 4);
 		//写入数据包的长度
 		bts.putInt(dataLen);
 		//写入数据内容
 		bts.put(buffer);
 		
-		if(bts.position()>0){
+		if(bts.position() > 0){
 			bts.flip();
 		}
-		int l=channel.write(bts);
+		int len = channel.write(bts);
 		bts.clear();
 		buffer.clear();
 		
@@ -199,7 +222,7 @@ public class NIOServer implements Runnable {
 		channel.register(selector, SelectionKey.OP_READ);
 		//注销写事件
 		key.interestOps(key.interestOps()&~SelectionKey.OP_WRITE);
-		return l;
+		return len;
 	}
 	
 	 /**
@@ -212,15 +235,15 @@ public class NIOServer implements Runnable {
                 SocketChannel schannel = (SocketChannel)key.channel();
                 try {
                     schannel.register(selector,  SelectionKey.OP_WRITE, key.attachment());
-                }
-                catch (Exception e) {
+                }catch (Exception e) {
                     try {
                         schannel.finishConnect();
                         schannel.close();
                         schannel.socket().close();
                         notifier.fireOnClosed((Request)key.attachment());
+                    }catch (Exception ep) {
+                    	notifier.fireOnError("Error occured in close channel: " + e.getMessage());
                     }
-                    catch (Exception e1) {}
                     notifier.fireOnError("Error occured in addRegister: " + e.getMessage());
                 }
             }
@@ -238,9 +261,5 @@ public class NIOServer implements Runnable {
         }
         // 解除selector的阻塞状态，以便注册新的通道
         selector.wakeup();
-    }
-    
-    public Selector getSelector(){
-    	return selector;
     }
 }
