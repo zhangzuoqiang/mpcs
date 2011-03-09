@@ -1,7 +1,7 @@
+import handler.ConnectHandler;
 import nio.configs.GlobalConst;
 import nio.configs.ServerConfig;
 import nio.control.CmdController;
-import nio.core.ConnectCmd;
 import nio.core.NIOServer;
 import nio.utils.MoreUtils;
 
@@ -26,7 +26,7 @@ public class StartServer {
 	 */
 	private static void registerAllCmds(){
 		// 客户端请求连接
-		CmdController.registerCmd(GlobalConst.C_REQUEST_CONNECTION, new ConnectCmd());
+		CmdController.registerCmd(GlobalConst.C_REQUEST_CONNECTION, new ConnectHandler());
 		// 
 		
 	}
