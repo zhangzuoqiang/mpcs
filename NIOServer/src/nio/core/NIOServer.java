@@ -179,18 +179,4 @@ public class NIOServer {
 		key.interestOps(key.interestOps()&~SelectionKey.OP_WRITE);
 		return l;
 	}
-	
-	public static void main(String[] args) {
-		int port = 8088;
-		try {
-			NIOServer server = new NIOServer(port);
-			server.registerCommand(1000,new ConnectCmd());
-			System.out.println("listening on " + port);
-
-			server.listen();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
