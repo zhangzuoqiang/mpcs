@@ -1,7 +1,9 @@
 import java.io.IOException;
 
+import nio.configs.ServerConfig;
 import nio.core.ConnectCmd;
 import nio.core.NIOServer;
+import nio.utils.MoreUtils;
 
 /**
  * 服务器启动管理 类
@@ -11,11 +13,10 @@ import nio.core.NIOServer;
 public class StartServer {
 	
 	public static void main(String[] args) {
-		int port = 8088;
 		try {
-			NIOServer server = new NIOServer(port);
+			NIOServer server = new NIOServer(ServerConfig.LISTENNING_PORT);
 			server.registerCommand(1000,new ConnectCmd());
-			System.out.println("listening on " + port);
+			MoreUtils.trace("listening on " + ServerConfig.LISTENNING_PORT);
 			server.listen();
 		} catch (IOException e) {
 			e.printStackTrace();
