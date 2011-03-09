@@ -6,8 +6,10 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 import mpcs.libs.core.NIOServer;
+import mpcs.libs.core.Notifier;
 import mpcs.libs.data.ByteArrayPacket;
 import mpcs.libs.interfaces.ICommand;
+import mpcs.libs.utils.MoreUtil;
 
 /**
  * @author zhangzuoqiang
@@ -15,25 +17,28 @@ import mpcs.libs.interfaces.ICommand;
  */
 public class ConnectCmd implements ICommand {
 	
-	public int execute(NIOServer server,SocketChannel channel,ByteArrayPacket packet){
-		int playerId = packet.readInt();
+	private Notifier notifier = Notifier.getNotifier();
+	
+	public int execute(NIOServer server, SocketChannel channel, ByteArrayPacket packet){
+		int userID = packet.readInt();
 		Iterator<Integer> iters = server.ids.iterator();
 		boolean sucessed = false;
 		while(iters.hasNext()){
 			int id = iters.next();
-			if(id == playerId){
-				System.out.println("此用户已连接！！！");
+			if(id == userID){
+				MoreUtil.trace("此用户已连接！！！");
 				sucessed = true;
 				break;
 			}
 		}
 		if(!sucessed){
-			server.ids.add(playerId);
-			System.out.println("来自 "+playerId+" 连接");
+			server.ids.add(userID);
+			MoreUtil.trace("来自 " + userID + " 连接");
 			try {
 				channel.register(server.getSelector(),SelectionKey.OP_WRITE);
 			} catch (ClosedChannelException e) {
 				e.printStackTrace();
+				notifier.fireOnError("Error occured in ConnectCmd by ClosedChannel: " + e.getMessage());
 			}
 		}
 		return 2000;

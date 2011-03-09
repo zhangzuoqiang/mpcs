@@ -1,11 +1,8 @@
 package NIOServer;
 
-import java.io.IOException;
-
-import mpcs.libs.cmds.ConnectCmd;
 import mpcs.libs.configs.ServerConfig;
 import mpcs.libs.core.NIOServer;
-import mpcs.libs.utils.MoreUtil;
+import mpcs.libs.core.Notifier;
 
 /**
  * 服务 启动类
@@ -14,14 +11,16 @@ import mpcs.libs.utils.MoreUtil;
  */
 public class StartServer {
 	
+	private static Notifier notifier = Notifier.getNotifier();
+	
 	public static void main(String[] args) throws Exception{
 		try {
 			NIOServer server = new NIOServer(ServerConfig.LISTENNING_PORT);
-			server.registerCommand(1000,new ConnectCmd());
-			MoreUtil.trace("listening on " + ServerConfig.LISTENNING_PORT);
-			server.listen();
-		} catch (IOException e) {
-			// TODO: handle exception
+			Thread tServer = new Thread(server);
+	        tServer.start();
+		} catch (Exception e) {
+			notifier.fireOnError("Error occured in StartServer : " + e.getMessage());
+            System.exit(-1);
 		}
 	}
 }
