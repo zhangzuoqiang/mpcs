@@ -42,8 +42,10 @@ public class ConnectHandler implements ICmd {
 		}
 		return GlobalConst.S_REQUEST_CONNECTION;
 	}
-	
-	public void write() {
+
+	@Override
+	public void write(SelectionKey key) {
+		// TODO Auto-generated method stub
 		
 	}
 

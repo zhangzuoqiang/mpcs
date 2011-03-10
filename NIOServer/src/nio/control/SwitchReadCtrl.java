@@ -25,6 +25,8 @@ public class SwitchReadCtrl {
 	 * @param key
 	 */
 	public static void switchCmd(int command, NIOServer server, SocketChannel channel, Packet packet, SelectionKey key){
+		
+		// 检查此消息号是否已经在CmdController中注册
 		if(CmdController.getCommands().containsKey(command)){
 			ICmd comm = CmdController.getCommands().get(command);
 			switch (command) {
@@ -36,6 +38,7 @@ public class SwitchReadCtrl {
 				default:
 					break;
 			}
+			
 		}
 	}
 	
@@ -51,6 +54,7 @@ public class SwitchReadCtrl {
 	 * @param key
 	 */
 	private static void doReqConnect(ICmd cmd, NIOServer server, SocketChannel channel, Packet packet, SelectionKey key){
+		
 		int result = cmd.execute(server, channel, packet);
 		// 将返回值附加到此键
 		key.attach(result);

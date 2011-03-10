@@ -117,6 +117,7 @@ public class NIOServer implements Runnable{
 		SocketChannel channel = (SocketChannel) key.channel();
 		int count = 0;
 		try {
+			// 读取客户端消息长度
 			count = channel.read(clientBuffer);
 		} catch (IOException e) {
 			notifier.fireOnError("Error occured in read(clientBuffer): " + e.getMessage());
