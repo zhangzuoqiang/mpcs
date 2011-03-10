@@ -23,9 +23,9 @@ import nio.utils.MoreUtils;
 public class ConnectHandler implements ICmd {
 	private static Notifier notifier = Notifier.getNotifier();
 	
-	public int execute(NIOServer server, SocketChannel channel, Packet packet) {
+	public int execute(SocketChannel channel, Packet packet) {
 		int userID = packet.readInt();
-		Iterator<Integer> iters = server.ids.iterator();
+		Iterator<Integer> iters = NIOServer.getInstance().ids.iterator();
 		boolean sucessed = false;
 		while(iters.hasNext()){
 			int id = iters.next();
@@ -36,10 +36,10 @@ public class ConnectHandler implements ICmd {
 			}
 		}
 		if(!sucessed){
-			server.ids.add(userID);
+			NIOServer.getInstance().ids.add(userID);
 			MoreUtils.trace("命令 " + userID + " 请求服务器服务");
 			try {
-				channel.register(server.selector,SelectionKey.OP_WRITE);
+				channel.register(NIOServer.getInstance().selector,SelectionKey.OP_WRITE);
 			} catch (ClosedChannelException e) {
 				notifier.fireOnError("Error occured in ConnectHandler execute: " + e.getMessage());
 			}
