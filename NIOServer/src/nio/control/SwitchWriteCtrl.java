@@ -12,9 +12,10 @@ import nio.interfaces.ICmd;
  * <br/>Date: 2011-3-6
  */
 public class SwitchWriteCtrl {
-
+	
 	public static void switchCmd(Response response){
 		TempVO temp = (TempVO) response.getKey().attachment();
+		// 写回客户端的消息号标志
 		int writeCmd = temp.getReturnID();
 		ICmd cmd = temp.getICmd();
 		

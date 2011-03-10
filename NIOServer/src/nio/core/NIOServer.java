@@ -147,9 +147,6 @@ public class NIOServer implements Runnable{
 	 */
 	private void doWrite(SelectionKey key){
 		Response response = new Response(key);
-		// 写回客户端的消息号标志
-//		int writeCmd = (Integer) key.attachment();
-		
 		// 分发业务逻辑（写操作）
 		SwitchWriteCtrl.switchCmd(response);
 	}
