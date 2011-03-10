@@ -18,9 +18,10 @@ import nio.data.Packet;
 import nio.utils.MoreUtils;
 
 /**
- * 服务器核心类
+ * <p>Title: 主服务线程  服务器核心</p>
+ * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-9
+ * <br/>Date: 2011-3-6
  */
 public class NIOServer implements Runnable{
 	
@@ -28,6 +29,8 @@ public class NIOServer implements Runnable{
 	public Selector selector;
 	protected ByteBuffer clientBuffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
 	public List<Integer> ids = new ArrayList<Integer>();
+	// 事件触发器
+	private static Notifier notifier = Notifier.getNotifier();
 	
 	/**
 	 * 构造方法 
@@ -39,7 +42,7 @@ public class NIOServer implements Runnable{
 			selector = this.getSelector(port);
 		} catch (IOException e) {
 			e.printStackTrace();
-			MoreUtils.trace("Error occured in getSelector: " + e.getMessage());
+			notifier.fireOnError("Error occured in getSelector: " + e.getMessage());
 		}
 	}
 	
@@ -81,7 +84,7 @@ public class NIOServer implements Runnable{
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			notifier.fireOnError("Error occured in listen: " + e.getMessage());
 		}
 	}
 
@@ -106,7 +109,7 @@ public class NIOServer implements Runnable{
 		}
 	}
 	/**
-	 * 读取数据
+	 * 执行读操作
 	 * @param channel
 	 * @throws IOException
 	 */
@@ -116,7 +119,7 @@ public class NIOServer implements Runnable{
 		try {
 			count = channel.read(clientBuffer);
 		} catch (IOException e) {
-			MoreUtils.trace("Error occured in read(clientBuffer): " + e.getMessage());
+			notifier.fireOnError("Error occured in read(clientBuffer): " + e.getMessage());
 			key.cancel();
 		}
 		if(count > 0){
@@ -134,15 +137,16 @@ public class NIOServer implements Runnable{
 		}
 	}
 	
+	/**
+	 * 执行写操作
+	 * @param key
+	 */
 	private void doWrite(SelectionKey key){
-		
 		// 写回客户端的消息号标志
 		int writeCmd = (Integer) key.attachment();
 		// 分发业务逻辑（写操作）
 		SwitchWriteCtrl.switchCmd(writeCmd, key);
 	}
-	
-	
 	
 	public static NIOServer getInstance(){
 		return instance;

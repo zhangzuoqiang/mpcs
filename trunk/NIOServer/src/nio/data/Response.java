@@ -1,4 +1,4 @@
-package nio.utils;
+package nio.data;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -6,36 +6,42 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 import nio.core.NIOServer;
-import nio.data.Packet;
 
 /**
- * <p>Title: 写回客户端的工具类</p>
+ * <p>Title: 封装返回客户端的数据包</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-8
+ * <br/>Date: 2011-3-10
  */
-public class WriteUtil {
+public class Response {
+	// 写回客户端的key
+	private static SelectionKey key;
+	// 返回客户端的数据包
+	private static Packet packet;
 	
-	/**
-	 * 发送数据
-	 * @param channel
-	 * @param packet
-	 * @throws IOException
-	 */
-	public static int send(SelectionKey key, Packet packet) throws IOException{
-		return send(key, packet.byteBuffer());
+	public Response(SelectionKey key, Packet packet){
+		Response.key = key;
+		Response.packet = packet;
 	}
 	
 	/**
 	 * 发送数据
-	 * @param key
+	 * @return 发出Bytes的总长度
+	 * @throws IOException
+	 */
+	public static int send() throws IOException{
+		return send(packet.byteBuffer());
+	}
+	
+	/**
+	 * 发送数据
 	 * @param buffer
 	 * @return 发出Bytes的总长度
 	 * @throws IOException
 	 */
-	public static int send(SelectionKey key, ByteBuffer buffer) throws IOException{
+	public static int send(ByteBuffer buffer) throws IOException{
+		// 获取连接客户端的通道
 		SocketChannel channel = (SocketChannel) key.channel();
-		
 		//发送数据的实际长度
 		int dataLen = buffer.limit() - buffer.remaining();
 		

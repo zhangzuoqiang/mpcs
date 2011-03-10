@@ -1,10 +1,10 @@
 package nio.configs;
 
 /**
- * <p>存放所有接受/返回成功的消息号</p>
- * 命名规则:
+ * <p>Title: 存放所有接受/返回成功的消息号</p>
+ * <p>Description: 命名规则:
  * <br/>客户端发起:C_功能名
- * <br/>服务端返回:S_功能名
+ * <br/>服务端返回:S_功能名</p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */

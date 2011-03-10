@@ -12,9 +12,10 @@ import nio.interfaces.ICmd;
 import nio.utils.MoreUtils;
 
 /**
- * 用户连接服务器请求
+ * <p>Title: 用户连接服务器请求</p>
+ * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-9
+ * <br/>Date: 2011-3-10
  */
 public class ConnectHandler implements ICmd {
 	
@@ -25,7 +26,7 @@ public class ConnectHandler implements ICmd {
 		while(iters.hasNext()){
 			int id = iters.next();
 			if(id == userID){
-				MoreUtils.trace("此用户已连接！");
+				MoreUtils.trace("连接已存在！");
 				sucessed = true;
 				break;
 			}
