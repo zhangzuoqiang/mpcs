@@ -46,6 +46,8 @@ package{
 			socket = null;
 			dispatchEvent(e);
 			trace("服务器已关闭此连接");
+			var len:int = Main.getInstance().tf.text.length;
+			Main.getInstance().tf.replaceText(len,len,"服务器已关闭此连接\n");
 		}
 		private function ioErrorHandler(e:IOErrorEvent):void {
 			dispatchEvent(e);
