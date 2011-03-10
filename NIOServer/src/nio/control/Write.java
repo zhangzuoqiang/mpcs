@@ -11,7 +11,7 @@ import nio.interfaces.ICmd;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class SwitchWriteCtrl {
+public class Write {
 	
 	public static void switchCmd(Response response){
 		TempVO temp = (TempVO) response.getKey().attachment();

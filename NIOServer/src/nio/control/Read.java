@@ -16,7 +16,7 @@ import nio.interfaces.ICmd;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class SwitchReadCtrl {
+public class Read {
 	
 	/**
 	 * 根据消息号分发业务逻辑
