@@ -5,6 +5,7 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
+	import mpcs.utils.MoreUtils;
 
 	/**
 	 * Description: 客户端发送数据界面
