@@ -1,12 +1,16 @@
 package nio.control;
 
+import handler.ConnectHandler;
+
 import java.util.HashMap;
 
+import nio.configs.GlobalConst;
 import nio.interfaces.ICmd;
 import nio.utils.MoreUtils;
 
 /**
  * <p>Title: 负责注册系统所有消息号</p>
+ * <p>Description: </p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-9
  */
@@ -16,6 +20,16 @@ public class CmdController {
 	 * 哈希表结构：消息号-处理类
 	 */
 	private static HashMap<Integer,ICmd> commands = new HashMap<Integer,ICmd>();
+	
+	/**
+	 * 注册
+	 */
+	public static void register(){
+		// 客户端请求连接
+		registerCmd(GlobalConst.C_REQUEST_CONNECTION, new ConnectHandler());
+		// 
+		
+	}
 	
 	/**
 	 * 注册消息号

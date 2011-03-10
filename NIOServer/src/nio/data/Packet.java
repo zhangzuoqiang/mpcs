@@ -6,7 +6,8 @@ import java.nio.ByteBuffer;
 import nio.utils.MoreUtils;
 
 /**
- * ByteArray数据包
+ * <p>Title: ByteArray数据包</p>
+ * <p>Description: </p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
