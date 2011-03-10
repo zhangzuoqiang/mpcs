@@ -12,8 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import nio.configs.ServerConfig;
-import nio.control.SwitchReadCtrl;
-import nio.control.SwitchWriteCtrl;
+import nio.control.Read;
+import nio.control.Write;
 import nio.data.Packet;
 import nio.data.Request;
 import nio.data.Response;
@@ -135,7 +135,7 @@ public class NIOServer implements Runnable{
 			Request request = new Request(key, packet);
 			
 			// 分发业务逻辑（读操作）
-			SwitchReadCtrl.switchCmd(command, this, request);
+			Read.switchCmd(command, request);
 			
 			clientBuffer.clear();
 		}
@@ -148,7 +148,7 @@ public class NIOServer implements Runnable{
 	private void doWrite(SelectionKey key){
 		Response response = new Response(key);
 		// 分发业务逻辑（写操作）
-		SwitchWriteCtrl.switchCmd(response);
+		Write.switchCmd(response);
 	}
 	
 	public static NIOServer getInstance(){

@@ -4,7 +4,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 import nio.configs.GlobalConst;
-import nio.core.NIOServer;
 import nio.data.Packet;
 import nio.data.Request;
 import nio.data.TempVO;
@@ -26,7 +25,7 @@ public class Read {
 	 * @param command
 	 * @param key
 	 */
-	public static void switchCmd(int command, NIOServer server, Request request){
+	public static void switchCmd(int command, Request request){
 		
 		SelectionKey key = request.getKey();
 		SocketChannel channel = (SocketChannel) request.getKey().channel();
@@ -37,14 +36,13 @@ public class Read {
 			ICmd comm = CmdController.getCommands().get(command);
 			switch (command) {
 				case GlobalConst.C_REQUEST_CONNECTION:
-					doReqConnect(comm, server, channel, packet, key);
+					doReqConnect(comm, channel, packet, key);
 					break;
 				case GlobalConst.C_USER_REGISTER:
 					doRegister();
 				default:
 					break;
 			}
-			
 		}
 	}
 	
@@ -59,8 +57,8 @@ public class Read {
 	 * @param packet
 	 * @param key
 	 */
-	private static void doReqConnect(ICmd cmd, NIOServer server, SocketChannel channel, Packet packet, SelectionKey key){
-		int result = cmd.execute(server, channel, packet);
+	private static void doReqConnect(ICmd cmd, SocketChannel channel, Packet packet, SelectionKey key){
+		int result = cmd.execute(channel, packet);
 		TempVO temp = new TempVO(result, cmd);
 		// 将返回值附加到此键
 		key.attach(temp);

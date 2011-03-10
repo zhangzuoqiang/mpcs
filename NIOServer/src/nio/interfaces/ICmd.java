@@ -2,7 +2,6 @@ package nio.interfaces;
 
 import java.nio.channels.SocketChannel;
 
-import nio.core.NIOServer;
 import nio.data.Packet;
 import nio.data.Response;
 
@@ -14,15 +13,14 @@ import nio.data.Response;
  */
 public interface ICmd {
 	/**
-	 * <p>Title: 根据消息号，在此实现对应的业务逻辑</p>
-	 * @param server
+	 * 根据消息号，在此实现对应的业务逻辑
 	 * @param channel
 	 * @param packet
 	 * @return
 	 */
-	int execute(NIOServer server, SocketChannel channel, Packet packet);
+	int execute(SocketChannel channel, Packet packet);
 	/**
-	 * <p>Title: 如果需要返回消息到客户端，则实现此方法</p>
+	 * 如果需要返回消息到客户端，则实现此方法
 	 */
 	void write(Response response);
 }
