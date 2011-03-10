@@ -5,7 +5,6 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
-	import mpcs.utils.MoreUtils;
 
 	/**
 	 * Description: 客户端发送数据界面
@@ -48,9 +47,9 @@ package test
 			label4 = MoreUtils.createLabel(label4, "Body-1", 20, 120);
 			label5 = MoreUtils.createLabel(label5, "Body-2", 20, 150);
 			
-			head1 = MoreUtils.createTextField(head1, 90, 30);
-			head2 = MoreUtils.createTextField(head2, 90, 60);
-			head3 = MoreUtils.createTextField(head3, 90, 90);
+			head1 = MoreUtils.createTextField(head1, 90, 30, 120, true);
+			head2 = MoreUtils.createTextField(head2, 90, 60, 120, true);
+			head3 = MoreUtils.createTextField(head3, 90, 90, 120, true);
 			body1 = MoreUtils.createTextField(body1, 90, 120, 200);
 			body2 = MoreUtils.createTextField(body2, 90, 150, 200);
 			

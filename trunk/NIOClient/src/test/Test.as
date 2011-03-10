@@ -4,12 +4,12 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 
-	/**
-	 * Description: 用来测试与服务端的交互
-	 * <br/>Author: zhangzuoqiang
-	 * <br/>Date: 2011-3-10
-	 **/
 	[SWF(width=400,height=550)]
+	/**
+	 * <b>Description: </b>用来测试与服务端的交互
+	 * <br/><b>Author: </b>zhangzuoqiang
+	 * <br/><b>Date: </b>2011-3-10
+	 **/
 	public class Test extends Sprite {
 		
 		private static var instance:Test;

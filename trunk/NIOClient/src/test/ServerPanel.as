@@ -3,7 +3,6 @@ package test
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	import mpcs.utils.MoreUtils;
 
 	/**
 	 * Description: 
@@ -40,10 +39,10 @@ package test
 			label3 = MoreUtils.createLabel(label3, "Head-3", 20, 90);
 			label4 = MoreUtils.createLabel(label4, "Body", 20, 120);
 			
-			head1 = MoreUtils.createTextField(head1, 90, 30, 120, false);
-			head2 = MoreUtils.createTextField(head2, 90, 60, 120, false);
-			head3 = MoreUtils.createTextField(head3, 90, 90, 120, false);
-			body = MoreUtils.createTextField(body, 90, 120, 240, false);
+			head1 = MoreUtils.createTextField(head1, 90, 30, 120, false, false);
+			head2 = MoreUtils.createTextField(head2, 90, 60, 120, false, false);
+			head3 = MoreUtils.createTextField(head3, 90, 90, 120, false, false);
+			body = MoreUtils.createTextField(body, 90, 120, 240, false, false);
 			body.height = 160;
 			body.wordWrap = true;
 			
