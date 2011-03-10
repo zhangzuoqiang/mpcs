@@ -15,6 +15,8 @@ import nio.configs.ServerConfig;
 import nio.control.SwitchReadCtrl;
 import nio.control.SwitchWriteCtrl;
 import nio.data.Packet;
+import nio.data.Request;
+import nio.data.Response;
 import nio.utils.MoreUtils;
 
 /**
@@ -130,9 +132,10 @@ public class NIOServer implements Runnable{
 			packet.readInt();
 			// 读取消息号
 			int command = packet.readInt();
+			Request request = new Request(key, packet);
 			
 			// 分发业务逻辑（读操作）
-			SwitchReadCtrl.switchCmd(command, this, channel, packet, key);
+			SwitchReadCtrl.switchCmd(command, this, request);
 			
 			clientBuffer.clear();
 		}
@@ -143,10 +146,12 @@ public class NIOServer implements Runnable{
 	 * @param key
 	 */
 	private void doWrite(SelectionKey key){
+		Response response = new Response(key);
 		// 写回客户端的消息号标志
-		int writeCmd = (Integer) key.attachment();
+//		int writeCmd = (Integer) key.attachment();
+		
 		// 分发业务逻辑（写操作）
-		SwitchWriteCtrl.switchCmd(writeCmd, key);
+		SwitchWriteCtrl.switchCmd(response);
 	}
 	
 	public static NIOServer getInstance(){

@@ -1,5 +1,6 @@
 package handler;
 
+import java.io.IOException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -7,7 +8,9 @@ import java.util.Iterator;
 
 import nio.configs.GlobalConst;
 import nio.core.NIOServer;
+import nio.core.Notifier;
 import nio.data.Packet;
+import nio.data.Response;
 import nio.interfaces.ICmd;
 import nio.utils.MoreUtils;
 
@@ -18,6 +21,7 @@ import nio.utils.MoreUtils;
  * <br/>Date: 2011-3-10
  */
 public class ConnectHandler implements ICmd {
+	private static Notifier notifier = Notifier.getNotifier();
 	
 	public int execute(NIOServer server, SocketChannel channel, Packet packet) {
 		int userID = packet.readInt();
@@ -37,16 +41,21 @@ public class ConnectHandler implements ICmd {
 			try {
 				channel.register(server.selector,SelectionKey.OP_WRITE);
 			} catch (ClosedChannelException e) {
-				e.printStackTrace();
+				notifier.fireOnError("Error occured in ConnectHandler execute: " + e.getMessage());
 			}
 		}
 		return GlobalConst.S_REQUEST_CONNECTION;
 	}
 
 	@Override
-	public void write(SelectionKey key) {
-		// TODO Auto-generated method stub
-		
+	public void write(Response response) {
+		Packet p = new Packet(100);
+		p.writeInt(GlobalConst.S_REQUEST_CONNECTION);
+		try {
+			response.send(p, response.getKey());
+		} catch (IOException e) {
+			notifier.fireOnError("Error occured in ConnectHandler write: " + e.getMessage());
+		}
 	}
 
 }

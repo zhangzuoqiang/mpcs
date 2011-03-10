@@ -1,6 +1,7 @@
 package nio.data;
 
 import java.net.InetAddress;
+import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -14,14 +15,20 @@ public class Request {
 	// 客户端请求数据包
 	private Packet packet;
 	// 客户端连接通道
-	private SocketChannel channel;
+	private SelectionKey key;
 	// 附属消息attachment
 	private Object object;
+	private SocketChannel channel;
 	
-	public Request(SocketChannel channel){
-		this.channel = channel;
+	public Request(SelectionKey key, Packet packet){
+		this.key = key;
+		this.packet = packet;
+		this.channel = (SocketChannel) key.channel();
 	}
 	
+	public SelectionKey getKey() {
+		return key;
+	}
 	public Packet getPacket() {
 		return packet;
 	}

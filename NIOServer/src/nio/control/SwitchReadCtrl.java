@@ -6,6 +6,8 @@ import java.nio.channels.SocketChannel;
 import nio.configs.GlobalConst;
 import nio.core.NIOServer;
 import nio.data.Packet;
+import nio.data.Request;
+import nio.data.TempVO;
 import nio.interfaces.ICmd;
 
 /**
@@ -24,7 +26,11 @@ public class SwitchReadCtrl {
 	 * @param command
 	 * @param key
 	 */
-	public static void switchCmd(int command, NIOServer server, SocketChannel channel, Packet packet, SelectionKey key){
+	public static void switchCmd(int command, NIOServer server, Request request){
+		
+		SelectionKey key = request.getKey();
+		SocketChannel channel = (SocketChannel) request.getKey().channel();
+		Packet packet = request.getPacket();
 		
 		// 检查此消息号是否已经在CmdController中注册
 		if(CmdController.getCommands().containsKey(command)){
@@ -54,9 +60,9 @@ public class SwitchReadCtrl {
 	 * @param key
 	 */
 	private static void doReqConnect(ICmd cmd, NIOServer server, SocketChannel channel, Packet packet, SelectionKey key){
-		
 		int result = cmd.execute(server, channel, packet);
+		TempVO temp = new TempVO(result, cmd);
 		// 将返回值附加到此键
-		key.attach(result);
+		key.attach(temp);
 	}
 }

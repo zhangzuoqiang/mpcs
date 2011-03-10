@@ -15,13 +15,14 @@ import nio.core.NIOServer;
  */
 public class Response {
 	// 写回客户端的key
-	private static SelectionKey key;
-	// 返回客户端的数据包
-	private static Packet packet;
+	private SelectionKey key;
 	
-	public Response(SelectionKey key, Packet packet){
-		Response.key = key;
-		Response.packet = packet;
+	public Response(SelectionKey key){
+		this.key = key;
+	}
+	
+	public SelectionKey getKey() {
+		return key;
 	}
 	
 	/**
@@ -29,8 +30,8 @@ public class Response {
 	 * @return 发出Bytes的总长度
 	 * @throws IOException
 	 */
-	public static int send() throws IOException{
-		return send(packet.byteBuffer());
+	public int send(Packet packet, SelectionKey key) throws IOException{
+		return send(packet.byteBuffer(), key);
 	}
 	
 	/**
@@ -39,7 +40,7 @@ public class Response {
 	 * @return 发出Bytes的总长度
 	 * @throws IOException
 	 */
-	public static int send(ByteBuffer buffer) throws IOException{
+	public int send(ByteBuffer buffer, SelectionKey key) throws IOException{
 		// 获取连接客户端的通道
 		SocketChannel channel = (SocketChannel) key.channel();
 		//发送数据的实际长度
