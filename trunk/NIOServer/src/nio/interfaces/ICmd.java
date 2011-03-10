@@ -1,5 +1,6 @@
 package nio.interfaces;
 
+import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 import nio.core.NIOServer;
@@ -23,5 +24,5 @@ public interface ICmd {
 	/**
 	 * <p>Title: 如果需要返回消息到客户端，则实现此方法</p>
 	 */
-	void write();
+	void write(SelectionKey key);
 }
