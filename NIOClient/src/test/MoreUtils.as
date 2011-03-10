@@ -10,7 +10,7 @@ package test
 	 * <br/>Author: zhangzuoqiang
 	 * <br/>Date: 2011-3-10
 	 **/
-	public class Utils {
+	public class MoreUtils {
 		
 		/**
 		 * 生成带格式的TextField 
