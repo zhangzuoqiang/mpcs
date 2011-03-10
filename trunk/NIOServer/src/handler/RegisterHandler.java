@@ -1,10 +1,10 @@
 package handler;
 
-import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 import nio.core.NIOServer;
 import nio.data.Packet;
+import nio.data.Response;
 import nio.interfaces.ICmd;
 
 /**
@@ -22,7 +22,7 @@ public class RegisterHandler implements ICmd {
 	}
 
 	@Override
-	public void write(SelectionKey key) {
+	public void write(Response response) {
 		// TODO Auto-generated method stub
 		
 	}

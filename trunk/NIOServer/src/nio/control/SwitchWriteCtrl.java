@@ -1,12 +1,9 @@
 package nio.control;
 
-import java.io.IOException;
-import java.nio.channels.SelectionKey;
-
 import nio.configs.GlobalConst;
-import nio.data.Packet;
-import nio.utils.MoreUtils;
-import nio.utils.WriteUtil;
+import nio.data.Response;
+import nio.data.TempVO;
+import nio.interfaces.ICmd;
 
 /**
  * <p>Title: 消息号分发(写操作)控制类</p>
@@ -16,27 +13,17 @@ import nio.utils.WriteUtil;
  */
 public class SwitchWriteCtrl {
 
-	public static void switchCmd(int writeCmd, SelectionKey key){
+	public static void switchCmd(Response response){
+		TempVO temp = (TempVO) response.getKey().attachment();
+		int writeCmd = temp.getReturnID();
+		ICmd cmd = temp.getICmd();
+		
 		switch (writeCmd) {
 			case GlobalConst.S_REQUEST_CONNECTION:
-				retReqConnect(key);
+				cmd.write(response); // 客户端请求连接 返回
 				break;
 			default:
 				break;
-		}
-	}
-	
-	/**
-	 * 客户端请求连接 返回
-	 */
-	private static void retReqConnect(SelectionKey key){
-		Packet p = new Packet(100);
-		p.writeInt(GlobalConst.S_REQUEST_CONNECTION);
-		try {
-			WriteUtil.send(key, p);
-		} catch (IOException e) {
-			e.printStackTrace();
-			MoreUtils.trace("Error occured in retReqConnect: " + e.getMessage());
 		}
 	}
 }
