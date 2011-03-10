@@ -3,6 +3,7 @@ package test
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
+	import mpcs.utils.MoreUtils;
 
 	/**
 	 * Description: 
