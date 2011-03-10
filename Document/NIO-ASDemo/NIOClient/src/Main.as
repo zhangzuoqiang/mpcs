@@ -15,7 +15,7 @@ package
 		private static var instance:Main;
 		private var registPanel:RegistPanel;
 		private var client:NetClient;
-		private var tf:TextField;
+		public var tf:TextField;
 		private var btn:Button;
 		
 		public function Main() 
