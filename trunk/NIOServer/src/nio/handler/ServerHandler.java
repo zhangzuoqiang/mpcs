@@ -3,7 +3,7 @@ package nio.handler;
 import mpcs.utils.MoreUtils;
 import nio.core.Request;
 import nio.core.Response;
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 import nio.util.LangUtil;
 
 /**
@@ -13,7 +13,7 @@ import nio.util.LangUtil;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class ServerHandler extends EventAdapter {
+public class ServerHandler extends ListenAdapter {
 	
     public ServerHandler() {
     }

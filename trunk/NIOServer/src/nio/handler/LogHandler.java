@@ -4,7 +4,7 @@ import java.util.Date;
 
 import mpcs.utils.MoreUtils;
 import nio.core.Request;
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 
 
 /**
@@ -13,7 +13,7 @@ import nio.manager.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class LogHandler extends EventAdapter {
+public class LogHandler extends ListenAdapter {
 	
     public LogHandler() {
     }

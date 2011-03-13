@@ -8,7 +8,7 @@ import mpcs.config.GlobalConst;
 import mpcs.model.BaseCmd;
 import nio.core.Request;
 import nio.core.Response;
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 
 /**
  * <p>Title: 客户端请求服务端时间 事件处理</p>
@@ -16,7 +16,7 @@ import nio.manager.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public class TimeHandler extends EventAdapter {
+public class TimeHandler extends ListenAdapter {
 	
     public TimeHandler() {
     }

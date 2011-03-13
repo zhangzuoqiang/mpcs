@@ -1,6 +1,6 @@
 package mpcs.handler;
 
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 
 /**
  * <p>Title: 请求修改密码事件处理</p>
@@ -8,6 +8,6 @@ import nio.manager.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-13
  */
-public class ModifyPwdHandler extends EventAdapter {
+public class ModifyPwdHandler extends ListenAdapter {
 
 }
