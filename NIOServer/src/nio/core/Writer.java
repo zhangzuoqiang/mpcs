@@ -79,7 +79,7 @@ public final class Writer extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-//        MoreUtils.trace("Write poolSize: "+ getWritePoolSize());
+        MoreUtils.trace("Write poolSize: "+ getWritePoolSize());
     }
     
     /**

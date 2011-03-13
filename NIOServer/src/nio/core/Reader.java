@@ -10,6 +10,7 @@ import java.io.IOException;
 import nio.config.ServerConfig;
 
 import mpcs.model.BaseMsg;
+import mpcs.utils.MoreUtils;
 
 /**
  * <p>Title: 读线程</p>
@@ -119,7 +120,7 @@ public class Reader extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-//        MoreUtils.trace("Read poolSize: " + getReadPoolSize());
+        MoreUtils.trace("Read poolSize: " + getReadPoolSize());
     }
     
     /**

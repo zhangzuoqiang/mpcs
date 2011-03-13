@@ -69,7 +69,7 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    void fireDoRead(Request request) throws Exception {
+    public void fireDoRead(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IListener) listeners.get(i)).doRead(request);
     }
@@ -80,7 +80,7 @@ public class Notifier {
      * @param response
      * @throws Exception
      */
-    void fireDoWrite(Request request, Response response)  throws Exception  {
+    public void fireDoWrite(Request request, Response response)  throws Exception  {
         for (int i = listeners.size() - 1; i >= 0; i--)
             ( (IListener) listeners.get(i)).doWrite(request, response);
     }
