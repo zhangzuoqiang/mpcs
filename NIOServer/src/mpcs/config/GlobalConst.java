@@ -10,9 +10,10 @@ package mpcs.config;
  */
 public final class GlobalConst {
 	
-	/**空闲连接**/
-	public static final int C_IDLE_CONNECTION = 111111;
-	public static final int S_IDLE_CONNECTION = 555555;
+	/**测试（时间服务器）用**/
+	public static final int C_TEST = 100000;
+	public static final int S_TEST = 500000;
+	
 	/**
 	 * 用户注册
 	 */

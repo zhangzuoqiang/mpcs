@@ -7,6 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 import java.io.IOException;
 
+import mpcs.model.BaseMsg;
 import mpcs.utils.MoreUtils;
 
 /**
@@ -20,6 +21,7 @@ public class Reader extends Thread {
     private static List<SelectionKey> pool = new LinkedList<SelectionKey>();
     private static int BUFFER_SIZE = 1024;
     protected static ByteBuffer buffer = null;
+    private int command = 0;
     private static Notifier notifier = Notifier.getNotifier();
 
     public Reader() {
@@ -51,13 +53,20 @@ public class Reader extends Thread {
     public void read(SelectionKey key) {
         try {
             Packet clientData =  readRequest(key);
+            
             if (clientData != null) {
             	// 输出客户端所有的请求内容
                 clientData.printInfo(clientData.array());
                 
+                // 读取消息号，分发处理写逻辑
+                command = clientData.readInt();
+                BaseMsg msg = new BaseMsg(command, clientData.readInt(), clientData.readInt());
+                
                 // 设置key.attachment
                 Request request = (Request)key.attachment();
                 request.setPacket(clientData);
+                request.setCommand(command);
+                request.setMsg(msg);
                 // 触发读处理
                 notifier.fireOnRead(request);
                 

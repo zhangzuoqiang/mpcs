@@ -4,8 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import mpcs.config.GlobalConst;
 import mpcs.model.BaseCmd;
-import nio.core.Packet;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.EventAdapter;
@@ -22,22 +22,17 @@ public class TimeHandler extends EventAdapter {
     }
 
     public void onWrite(Request request, Response response) throws Exception {
-        Packet packet = request.getPacket();
-        int command = packet.readInt();
+        int command = request.getCommand();
         String time = null;
         Date date = new Date();
         
-        if (command == 100000) {
-            DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL,
-                DateFormat.FULL, Locale.CHINA);
-            time = cnDate.format(date);
-        }else {
-            DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL,
-                DateFormat.FULL, Locale.US);
-            time = enDate.format(date);
+        if (command == GlobalConst.C_TEST) {
+        	DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL,
+                    DateFormat.FULL, Locale.US);
+                time = enDate.format(date);
         }
         
-        BaseCmd cmd = new BaseCmd(500000);
+        BaseCmd cmd = new BaseCmd(GlobalConst.S_TEST);
         cmd.writeString(time);
         response.send(cmd);
     }

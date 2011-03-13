@@ -51,6 +51,7 @@ public final class Writer extends Thread {
     	SocketChannel sc = (SocketChannel) key.channel();
         try {
         	if (key.isValid()) {
+        		
                 Response response = new Response(key);
                 // 触发onWrite事件
                 notifier.fireOnWrite((Request)key.attachment(), response);
@@ -65,7 +66,7 @@ public final class Writer extends Thread {
 			}
         }
         catch (Exception e) {
-            notifier.fireOnError("Error occured in Writer: " + e.getMessage());
+//            notifier.fireOnError("Error occured in Writer: " + e.getMessage());
         }
     }
     

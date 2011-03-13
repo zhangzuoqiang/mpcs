@@ -1,8 +1,10 @@
 package nio.util;
 
+import mpcs.handler.RegisterHandler;
 import mpcs.utils.MoreUtils;
 import nio.core.Notifier;
 import nio.handler.LogHandler;
+import nio.handler.ServerHandler;
 import nio.handler.TimeHandler;
 
 /**
@@ -20,10 +22,14 @@ public final class HandlerUtil{
 		
 		//===============所有Handler写在我下面===============
 		LogHandler loger = new LogHandler();
+		ServerHandler server = new ServerHandler();
 		TimeHandler timer = new TimeHandler();
+		RegisterHandler register = new RegisterHandler();
         
         notifier.addListener(loger);
         notifier.addListener(timer);
+        notifier.addListener(server);
+        notifier.addListener(register);
         //===============所有Handler写在我上面===============
         
         MoreUtils.trace(LangUtil.get("10001"));

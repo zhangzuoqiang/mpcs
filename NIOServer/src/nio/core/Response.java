@@ -24,7 +24,7 @@ public class Response {
 	public SelectionKey getKey() {
 		return key;
 	}
-	
+
 	/**
 	 * 直接发送BaseCmd格式的数据返回客户端
 	 * @param cmd

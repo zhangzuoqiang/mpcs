@@ -1,6 +1,7 @@
 package mpcs.model;
 
 import nio.core.Packet;
+import mpcs.config.GlobalErrorConst;
 import mpcs.interfaces.ICmd;
 import mpcs.interfaces.IWrite;
 
@@ -23,13 +24,25 @@ public class BaseCmd implements ICmd , IWrite{
 	 */
 	protected int head[] = { 0, 0, 0 };
 	protected Packet packet = new Packet();
+	
 	/**
 	 * 返回客户端  基本消息类型  构造方法
 	 * @param typeID*  消息号
 	 */
 	public BaseCmd(int typeID){
 		head[0] = typeID;
-		writeHead();
+		writeHead(0,0);
+	}
+	
+	/**
+	 * 发送错误消息
+	 * @param typeID
+	 * @param head1
+	 * @param head2
+	 */
+	public BaseCmd(int typeID, int head2){
+		head[0] = typeID;
+		writeHead( GlobalErrorConst.GLOBAL_ERROR,head2);
 	}
 
 	@Override
@@ -56,7 +69,9 @@ public class BaseCmd implements ICmd , IWrite{
 	}
 
 	@Override
-	public void writeHead() {
+	public void writeHead(int head1, int head2) {
+		head[1] = head1;
+		head[2] = head2;
 		// 写入消息头
 		packet.writeInt(head[0]);
 		packet.writeInt(head[1]);

@@ -29,8 +29,10 @@ public interface ICmd extends ISerial{
 	
 	/**
 	 * 将消息头写入packet
+	 * @param head1
+	 * @param head2
 	 */
-	void writeHead();
+	void writeHead(int head1, int head2);
 	
 	/**
 	 * 重置packet
