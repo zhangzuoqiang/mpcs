@@ -20,7 +20,7 @@ import mpcs.utils.MoreUtils;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-10
  */
-public class NIOServer implements Runnable {
+public class NIOServerManager implements Runnable {
 	// 回应池
     private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
     public static Selector selector;
@@ -33,7 +33,7 @@ public class NIOServer implements Runnable {
      * @param port 服务端口
      * @throws Exception
      */
-    public NIOServer(int port) throws Exception {
+    public NIOServerManager(int port) throws Exception {
     	
     	// 注册Handler
     	HandlerUtil.AddHandlerListener();
