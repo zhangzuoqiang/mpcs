@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import mpcs.utils.MoreUtils;
+
 
 /**
  * 数据库操作工具类
@@ -18,21 +20,21 @@ public final class ExeSQL {
 	private static ResultSet rs = null;
 	
 	/**
-	 * 验证此邮箱是否已注册
+	 * 验证此邮箱是否已注册，如果注册过了则返回该邮箱对应的密码
 	 * @param email
 	 * @return
 	 */
-	public static boolean selectByEmail(String email){
-		boolean isExist = false;
+	public static String selectByEmail(String email){
+		String isExist = "";
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
 			 rs = stmt.executeQuery(SQLangs.selectUserByEmail(email));
 			 rs.next();
 			 if (rs.getRow() == 0) {
-				 isExist = false;
+				 isExist = "";
 			}else {
-				isExist = true;
+				isExist = rs.getString(2);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,6 +101,7 @@ public final class ExeSQL {
             try {
                 rs.close();
             } catch (Exception e) {
+            	MoreUtils.trace("closeAll1");
             }
         }
         
@@ -106,6 +109,7 @@ public final class ExeSQL {
             try {
                 stmt.close();
             } catch (Exception e) {
+            	MoreUtils.trace("closeAll2");
             }
         }
         
@@ -113,6 +117,7 @@ public final class ExeSQL {
             try {
                 conn.close();
             } catch (Exception e) {
+            	MoreUtils.trace("closeAll3");
             }
         }
 	}

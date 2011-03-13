@@ -13,7 +13,7 @@ public final class SQLangs {
 	 * @return
 	 */
 	public static String selectUserByEmail(String email){
-		return "select email from user where email = '" + email + "'";
+		return "select email , password from user where email = '" + email + "'";
 	}
 	
 	/**

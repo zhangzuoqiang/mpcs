@@ -52,6 +52,7 @@ public class Reader extends Thread {
      */
     public void read(SelectionKey key) {
         try {
+//        	SocketChannel channel = (SocketChannel) key.channel();
             Packet clientData =  readRequest(key);
             
             if (clientData != null) {
@@ -69,6 +70,11 @@ public class Reader extends Thread {
                 request.setMsg(msg);
                 // 触发读处理
                 notifier.fireOnRead(request);
+                
+//                //注册写事件
+//        		channel.register(NIOServer.selector, SelectionKey.OP_WRITE);
+//        		//注销读事件
+//        		key.interestOps(key.interestOps()&~SelectionKey.OP_READ);
                 
                 // 提交主控线程进行写处理
                 NIOServer.processWriteRequest(key);
@@ -95,6 +101,7 @@ public class Reader extends Thread {
 			count = sc.read(buffer);
 		} catch (IOException e) {
 			notifier.fireOnError("Error occured in readRequest: " + e.getMessage());
+			key.cancel();
 		}
 		if (count > 0) {
 			buffer.flip();
