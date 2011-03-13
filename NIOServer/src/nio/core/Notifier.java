@@ -29,8 +29,9 @@ public class Notifier {
         if (instance == null) {
             instance = new Notifier();
             return instance;
+        }else{
+        	return instance;
         }
-        else return instance;
     }
     
     /**
