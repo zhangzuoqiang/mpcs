@@ -4,6 +4,7 @@ import mpcs.utils.MoreUtils;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.EventAdapter;
+import nio.util.LangUtil;
 
 /**
  * <p>Title: 处理客户端的连接事件</p>
@@ -18,26 +19,30 @@ public class ServerHandler extends EventAdapter {
     }
 
     public void onAccept() throws Exception {
-    	MoreUtils.trace("#onAccept()");
+//    	MoreUtils.trace("#onAccept()");
     }
 
     public void onAccepted(Request request) throws Exception {
-    	MoreUtils.trace("#onAccepted()");
+//    	MoreUtils.trace("#onAccepted()");
     }
 
     public void onRead(Request request) throws Exception {
-    	MoreUtils.trace("#onRead()");
+//    	MoreUtils.trace("#onRead()");
     }
 
     public void onWrite(Request request, Response response) throws Exception {
-    	MoreUtils.trace("#onWrite()");
+    	int command = request.getCommand();
+    	if (!MoreUtils.isCommand(command)) {
+    		MoreUtils.trace(LangUtil.get("10003") + command + LangUtil.get("10004"));
+		}
+//    	MoreUtils.trace("#onWrite()");
     }
 
     public void onClosed(Request request) throws Exception {
-    	MoreUtils.trace("#onClosed()");
+//    	MoreUtils.trace("#onClosed()");
     }
 
     public void onError(String error) {
-    	MoreUtils.trace("#onAError(): " + error);
+//    	MoreUtils.trace("#onAError(): " + error);
     }
 }

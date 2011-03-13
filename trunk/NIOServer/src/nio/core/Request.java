@@ -3,6 +3,8 @@ package nio.core;
 import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 
+import mpcs.model.BaseMsg;
+
 /**
  * <p>Title: 封装客户端请求的信息</p>
  * <p>Description: </p>
@@ -15,9 +17,17 @@ public class Request {
     // 封装请求数据
     private Packet packet;
     // 保存附属信息
-    private Object obj;
+    private Object object;
+    private int command;
+    private BaseMsg msg;
     
-    public Request(SocketChannel sc) {
+    public BaseMsg getMsg() {
+		return msg;
+	}
+	public void setMsg(BaseMsg msg) {
+		this.msg = msg;
+	}
+	public Request(SocketChannel sc) {
         this.sc = sc;
     }
     public java.net.InetAddress getAddress() {
@@ -47,16 +57,22 @@ public class Request {
     public boolean isClosed() {
         return sc.socket().isClosed();
     }
-    public void attach(Object obj) {
-        this.obj = obj;
+    public void attach(Object object) {
+        this.object = object;
     }
     public Object attachment() {
-        return obj;
+        return object;
     }
 	public Packet getPacket() {
 		return packet;
 	}
 	public void setPacket(Packet packet) {
 		this.packet = packet;
+	}
+	public int getCommand() {
+		return command;
+	}
+	public void setCommand(int command) {
+		this.command = command;
 	}
 }

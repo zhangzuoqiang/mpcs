@@ -1,34 +1,27 @@
 package mpcs.model;
 
-import mpcs.interfaces.IMsg;
-
 /**
  * <p>Title: 客户端请求 基本数据类型</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-12
  */
-public class BaseMsg implements IMsg {
+public class BaseMsg extends BaseCmd{
 
 	/****/
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	public int getHeadData(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public BaseMsg(int head0, int head1, int head2){
+		super(head0);
+		head[1] = head1;
+		head[2] = head2;
 	}
-
-	@Override
-	public int getTypeID() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public BaseMsg(int typeID){
+		super(typeID);
 	}
-
-	@Override
+	
 	public Object getBodys() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

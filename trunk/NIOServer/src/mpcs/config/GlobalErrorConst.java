@@ -8,6 +8,9 @@ package mpcs.config;
  */
 public class GlobalErrorConst {
 
+	/**全局错误标志**/
+	public static final int GLOBAL_ERROR= 9;
+	
 	/**客户端发送的是空消息**/
 	public static final int E_SEND_EMPTY = -99999;	
 	/**此邮箱已注册**/

@@ -24,7 +24,7 @@ public class NIOServer implements Runnable {
     public static Selector selector;
     protected static Notifier notifier;
     private int port;
-    private static int MAX_THREADS = 4;
+    private static int MAX_THREADS = 10;
     
     /**
      * 创建主控服务线程
@@ -36,7 +36,7 @@ public class NIOServer implements Runnable {
         // 获取事件触发器
         notifier = Notifier.getNotifier();
         // 创建读/写线程池
-        for (int i = 0; i < MAX_THREADS; i++) {
+        for (int i = 1; i <= MAX_THREADS; i++) {
             Thread r = new Reader();
             Thread w = new Writer();
             r.start();
