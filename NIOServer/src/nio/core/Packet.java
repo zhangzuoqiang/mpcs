@@ -19,7 +19,7 @@ import mpcs.utils.MoreUtils;
 public class Packet implements IRead , IWrite{
 	
 	private ByteBuffer buff;
-	private int length = 128;
+	private int length = 128;//初始长度
 	
 	/**
 	 * 默认构造方法
@@ -88,7 +88,6 @@ public class Packet implements IRead , IWrite{
 			writeBytes(str_bytes);
 			length += len;
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -209,9 +208,9 @@ public class Packet implements IRead , IWrite{
 	 * @param bytes
 	 */
 	public void printInfo(byte[] bytes){
-		System.out.print("Recive: ");
+		System.out.print("Rec: ");
 		for(int i =0 ; i < bytes.length ; i++){
-			System.out.print("  " + bytes[i]);
+			System.out.print(" " + bytes[i]);
 		}
 		MoreUtils.trace("");
 	}

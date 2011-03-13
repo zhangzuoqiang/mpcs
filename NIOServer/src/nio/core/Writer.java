@@ -52,7 +52,7 @@ public final class Writer extends Thread {
         try {
         	if (key.isValid() && key.isWritable()) {
                 Response response = new Response(key);
-                // 触发onWrite事件
+                // 触发doWrite事件
                 notifier.fireDoWrite((Request)key.attachment(), response);
                 
                 notifier.fireDoClosed((Request)key.attachment());
@@ -79,7 +79,7 @@ public final class Writer extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-        MoreUtils.trace("Write poolSize: "+ getWritePoolSize());
+//        MoreUtils.trace("Write poolSize: "+ getWritePoolSize());
     }
     
     /**

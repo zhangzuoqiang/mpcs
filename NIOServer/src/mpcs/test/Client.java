@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
+import nio.config.ServerConfig;
+
 import mpcs.utils.MoreUtils;
 
 /**
@@ -21,21 +23,22 @@ public class Client {
         DataOutputStream out = null;
         DataInputStream in = null;
         try {
-            client = new Socket("localhost", 5100);
+            client = new Socket("localhost", ServerConfig.LISTENNING_PORT);
             client.setSoTimeout(10000);
             out = new DataOutputStream( (client.getOutputStream()));
-
-            String query = "GB";
-            byte[] request = query.getBytes();
-            out.writeShort(request.length);
-            out.write(request);
+            
+            // 写入3位消息头
+            out.writeInt(100000);
+            out.writeInt(0);
+            out.writeInt(0);
+            
             out.flush();
             client.shutdownOutput();
 
             in = new DataInputStream(client.getInputStream());
-            byte[] reply = new byte[60];
+            byte[] reply = new byte[56];
             in.read(reply);
-            MoreUtils.trace("Time: " + new String(reply, "UTF-8"));
+            MoreUtils.trace("Time: " + new String(reply, "GBK"));
 
             in.close();
             out.close();

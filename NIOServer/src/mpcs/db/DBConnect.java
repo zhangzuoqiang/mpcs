@@ -4,15 +4,19 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import mpcs.utils.MoreUtils;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.DataSources;
 
 /**
- * 数据库连接类,Singleton 模式
+ * <p>Title: 数据库连接类,Singleton 模式</p>
+ * <p>Description: </p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class DBConnect {	
+public class DBConnect {
+	
 	private static DBConnect instance;
 	private static ComboPooledDataSource ds = null;
 	private static Connection con = null;
@@ -21,6 +25,7 @@ public class DBConnect {
 		try {
 			ds = new ComboPooledDataSource();
 			
+			// 配置连接数据库参数
 			ds.setDriverClass("com.mysql.jdbc.Driver"); 
 			ds.setJdbcUrl("jdbc:mysql://localhost:3306/mpcs?userUnicode=true&amp;characterEncoding=gbk");
 			ds.setUser("root");
@@ -64,8 +69,8 @@ public class DBConnect {
 			try {
 				instance = new DBConnect();
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
+				MoreUtils.trace("Error occured in DBConnect.");
 			}
 		}
 		return instance;

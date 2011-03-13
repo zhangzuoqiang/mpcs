@@ -16,6 +16,7 @@ public interface IRead {
 	double readDouble();
 	int readInt();
 	short readShort();
+	
 	/**
 	 * 读字符串时，先写长度，再写值
 	 */

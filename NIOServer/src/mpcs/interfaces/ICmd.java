@@ -9,6 +9,7 @@ import nio.core.Packet;
  * <br/>Date: 2011-3-12
  */
 public interface ICmd extends ISerial{
+	
 	/**
 	 * 设置指定位的消息头，若不指定，默认为0
 	 * @param i

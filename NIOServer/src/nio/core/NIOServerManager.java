@@ -10,6 +10,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
+import nio.config.ServerConfig;
 import nio.util.HandlerUtil;
 
 import mpcs.utils.MoreUtils;
@@ -21,12 +22,12 @@ import mpcs.utils.MoreUtils;
  * <br/>Date: 2011-3-10
  */
 public class NIOServerManager implements Runnable {
-	// 回应池
+	
+	/** 回应池 **/
     private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
     public static Selector selector;
     protected static Notifier notifier;
     private int port;
-    private static int MAX_THREADS = 10;
     
     /**
      * 创建主控服务线程
@@ -42,14 +43,19 @@ public class NIOServerManager implements Runnable {
         // 获取事件触发器
         notifier = Notifier.getNotifier();
         // 创建读/写线程池
-        for (int i = 1; i <= MAX_THREADS; i++) {
+        for (int i = 1; i <= ServerConfig.MAX_THREADS; i++) {
             Thread r = new Reader();
             Thread w = new Writer();
             r.start();
             w.start();
         }
-        
         selector = this.getSelector(port);
+    }
+    
+    public void run() {
+    	MoreUtils.trace("Server started ...");
+    	MoreUtils.trace("Server listening on port: " + port);
+        listen();
     }
     
     /**
@@ -66,12 +72,6 @@ public class NIOServerManager implements Runnable {
 		server.register(selector, SelectionKey.OP_ACCEPT);
 		return selector;
 	}
-
-    public void run() {
-    	MoreUtils.trace("Server started ...");
-    	MoreUtils.trace("Server listening on port: " + port);
-        listen();
-    }
     
     /**
 	 * 监听端口
