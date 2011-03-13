@@ -10,6 +10,8 @@ import java.nio.channels.Selector;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
+import nio.util.HandlerUtil;
+
 import mpcs.utils.MoreUtils;
 
 /**
@@ -32,6 +34,10 @@ public class NIOServer implements Runnable {
      * @throws Exception
      */
     public NIOServer(int port) throws Exception {
+    	
+    	// 注册Handler
+    	HandlerUtil.AddHandlerListener();
+    	
         this.port = port;
         // 获取事件触发器
         notifier = Notifier.getNotifier();
