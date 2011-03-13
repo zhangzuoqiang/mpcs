@@ -1,6 +1,7 @@
 package test
 {
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 
@@ -23,8 +24,18 @@ package test
 		private var head3:TextField;
 		private var body:TextField;
 		
+		private var button:Button;
+		
 		public function ServerPanel(){
 			initUI();
+			setData();
+		}
+		
+		public function setData(head1:int=0, head2:int=0, head3:int=0, body:String=""):void{
+			this.head1.text = head1.toString();
+			this.head2.text = head2.toString();
+			this.head3.text = head3.toString();
+			this.body.text = body.toString();
 		}
 		
 		private function initUI():void{
@@ -46,6 +57,11 @@ package test
 			body.height = 160;
 			body.wordWrap = true;
 			
+			button = new Button("清空");
+			button.x = 300;
+			button.y = 0;
+			button.addEventListener(MouseEvent.CLICK, clickHandler);
+			
 			addChild(serverLabel);
 			
 			addChild(label1);
@@ -57,6 +73,12 @@ package test
 			addChild(head2);
 			addChild(head3);
 			addChild(body);
+			
+			addChild(button);
+		}
+		
+		private function clickHandler(evt:MouseEvent):void{
+			setData();
 		}
 	}
 }

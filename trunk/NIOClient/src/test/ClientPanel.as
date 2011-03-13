@@ -48,8 +48,11 @@ package test
 			label5 = MoreUtils.createLabel(label5, "Body-2", 20, 150);
 			
 			head1 = MoreUtils.createTextField(head1, 90, 30, 120, true);
+			head1.text = "100000";
 			head2 = MoreUtils.createTextField(head2, 90, 60, 120, true);
+			head2.text = "0";
 			head3 = MoreUtils.createTextField(head3, 90, 90, 120, true);
+			head3.text = "0";
 			body1 = MoreUtils.createTextField(body1, 90, 120, 200);
 			body2 = MoreUtils.createTextField(body2, 90, 150, 200);
 			
@@ -57,7 +60,6 @@ package test
 			button.x = 300;
 			button.y = 150;
 			button.addEventListener(MouseEvent.CLICK, clickHandler);
-			this.
 			
 			addChild(clientLabel);
 			
@@ -81,7 +83,16 @@ package test
 		 * @param evt
 		 */
 		private function clickHandler(evt:MouseEvent):void{
-			
+//			if(this.head1.text =="" && this.head2.text == "" && this.head3.text == ""){
+//				return;
+//			}
+//			Test.getInstance().server.setData();
+			var h1:int = int(this.head1.text);
+			var h2:int = int(this.head2.text);
+			var h3:int = int(this.head3.text);
+			var body1:String = this.body1.text;
+			var body2:String = this.body2.text;
+			Test.getInstance().requestConnectServer(h1, h2, h3, body1, body2);
 		}
 	}
 }

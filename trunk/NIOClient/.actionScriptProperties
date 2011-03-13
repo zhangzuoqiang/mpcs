@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="NIOClient.as" projectUUID="b5b5c7ba-9c28-4e5d-9e1d-a484b0fd25dc" version="6">
+<actionScriptProperties mainApplicationPath="test/Test.as" projectUUID="b5b5c7ba-9c28-4e5d-9e1d-a484b0fd25dc" version="6">
   <compiler additionalCompilerArguments="-locale zh_CN" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -28,6 +28,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="test/Test.as"/>
     <application path="NIOClient.as"/>
   </applications>
   <modules/>
