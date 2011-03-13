@@ -16,7 +16,7 @@ public interface IListener {
 	 * <p>Description: 通过该事件我们可以知道有什么错误发生。</p>
 	 * @param error 错误信息
 	 */
-	public void onError(String error);
+	public void doError(String error);
 	
 	/**
 	 * <p>Title: 当服务端收到客户端连接请求时，触发该事件。</p>
@@ -25,14 +25,14 @@ public interface IListener {
 	 * 可在响应该事件时直接抛出异常，以拒绝新的连接。</p>
 	 * @throws Exception
 	 */
-	public void onAccept() throws Exception;
+	public void doAccept() throws Exception;
 	
 	/**
 	 * <p>Title: 当客户端请求被服务器接受后触发该事件。该事件表明一个新的客户端与服务器正式建立连接。</p>
 	 * @param request 客户端请求
 	 * @throws Exception
 	 */
-	public void onAccepted(Request request) throws Exception;
+	public void doAccepted(Request request) throws Exception;
 	
 	/**
 	 * <p>Title: 当客户端发来数据，并已被服务器控制线程正确读取时，触发该事件。</p>
@@ -42,7 +42,7 @@ public interface IListener {
 	 * @param request  客户端请求
 	 * @throws Exception
 	 */
-	public void onRead(Request request) throws Exception;
+	public void doRead(Request request) throws Exception;
 	
 	/**
 	 * <p>Title: 当客户端可以开始接受服务端发送数据时触发该事件</p>
@@ -52,7 +52,7 @@ public interface IListener {
 	 * @param response  服务端回应
 	 * @throws Exception
 	 */
-	public void onWrite(Request request, Response response) throws Exception;
+	public void doWrite(Request request, Response response) throws Exception;
 	
 	/**
 	 * <p>Title: 当客户端与服务器断开连接时触发该事件</p>
@@ -61,5 +61,5 @@ public interface IListener {
 	 * @param request 客户端请求
 	 * @throws Exception
 	 */
-	public void onClosed(Request request) throws Exception;
+	public void doClosed(Request request) throws Exception;
 }

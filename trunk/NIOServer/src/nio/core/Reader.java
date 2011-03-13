@@ -69,7 +69,7 @@ public class Reader extends Thread {
                 request.setCommand(command);
                 request.setMsg(msg);
                 // 触发读处理
-                notifier.fireOnRead(request);
+                notifier.fireDoRead(request);
                 
 //                //注册写事件
 //        		channel.register(NIOServer.selector, SelectionKey.OP_WRITE);
@@ -81,7 +81,7 @@ public class Reader extends Thread {
 			}
         }
         catch (Exception e) {
-            notifier.fireOnError("Error occured in Reader: " + e.getMessage());
+            notifier.fireDoError("Error occured in Reader: " + e.getMessage());
         }
     }
     
@@ -100,7 +100,7 @@ public class Reader extends Thread {
 		try {
 			count = sc.read(buffer);
 		} catch (IOException e) {
-			notifier.fireOnError("Error occured in readRequest: " + e.getMessage());
+			notifier.fireDoError("Error occured in readRequest: " + e.getMessage());
 			key.cancel();
 		}
 		if (count > 0) {

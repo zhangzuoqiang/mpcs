@@ -18,19 +18,19 @@ public class ServerHandler extends ListenAdapter {
     public ServerHandler() {
     }
 
-    public void onAccept() throws Exception {
+    public void doAccept() throws Exception {
 //    	MoreUtils.trace("#onAccept()");
     }
 
-    public void onAccepted(Request request) throws Exception {
+    public void doAccepted(Request request) throws Exception {
 //    	MoreUtils.trace("#onAccepted()");
     }
 
-    public void onRead(Request request) throws Exception {
+    public void doRead(Request request) throws Exception {
 //    	MoreUtils.trace("#onRead()");
     }
 
-    public void onWrite(Request request, Response response) throws Exception {
+    public void doWrite(Request request, Response response) throws Exception {
     	int command = request.getCommand();
     	if (!MoreUtils.isCommand(command)) {
     		MoreUtils.trace(LangUtil.get("10003") + command + LangUtil.get("10004"));
@@ -38,11 +38,11 @@ public class ServerHandler extends ListenAdapter {
 //    	MoreUtils.trace("#onWrite()");
     }
 
-    public void onClosed(Request request) throws Exception {
+    public void doClosed(Request request) throws Exception {
 //    	MoreUtils.trace("#onClosed()");
     }
 
-    public void onError(String error) {
+    public void doError(String error) {
 //    	MoreUtils.trace("#onAError(): " + error);
     }
 }

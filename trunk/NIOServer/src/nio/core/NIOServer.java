@@ -24,7 +24,7 @@ public class NIOServer implements Runnable {
     public static Selector selector;
     protected static Notifier notifier;
     private int port;
-    private static int MAX_THREADS = 5;
+    private static int MAX_THREADS = 10;
     
     /**
      * 创建主控服务线程
@@ -89,7 +89,7 @@ public class NIOServer implements Runnable {
                 }
 			}
 		} catch (Exception e) {
-			notifier.fireOnError("Error occured in listen: " + e.getMessage());
+			notifier.fireDoError("Error occured in listen: " + e.getMessage());
 		}
 	}
 	
@@ -103,13 +103,13 @@ public class NIOServer implements Runnable {
 //		if(key.isAcceptable()){
 			// 接收新的连接请求
             ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-            notifier.fireOnAccept();
+            notifier.fireDoAccept();
             SocketChannel sc = ssc.accept();
             // 设置非阻塞模式
             sc.configureBlocking(false);
             // 触发接受连接事件
             Request request = new Request(sc);
-            notifier.fireOnAccepted(request);
+            notifier.fireDoAccepted(request);
             
             // 注册读操作,以进行下一步的读操作
             sc.register(selector,  SelectionKey.OP_READ, request);
@@ -145,10 +145,10 @@ public class NIOServer implements Runnable {
                         schannel.finishConnect();
                         schannel.close();
                         schannel.socket().close();
-                        notifier.fireOnClosed((Request)key.attachment());
+                        notifier.fireDoClosed((Request)key.attachment());
                     }
                     catch (Exception e1) {}
-                    notifier.fireOnError("Error occured in addRegister: " + e.getMessage());
+                    notifier.fireDoError("Error occured in addRegister: " + e.getMessage());
                 }
             }
         }

@@ -23,7 +23,7 @@ public class RegisterHandler extends ListenAdapter {
 	public RegisterHandler(){
 	}
 	
-	public void onWrite(Request request, Response response) throws Exception {
+	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
         if (command == GlobalConst.C_USER_REGISTER) {
         	vo = new UserVO();
