@@ -50,8 +50,7 @@ public final class Writer extends Thread {
     public void write(SelectionKey key) {
     	SocketChannel sc = (SocketChannel) key.channel();
         try {
-        	if (key.isValid()) {
-        		
+        	if (key.isValid() && key.isWritable()) {
                 Response response = new Response(key);
                 // 触发onWrite事件
                 notifier.fireOnWrite((Request)key.attachment(), response);
@@ -66,7 +65,8 @@ public final class Writer extends Thread {
 			}
         }
         catch (Exception e) {
-//            notifier.fireOnError("Error occured in Writer: " + e.getMessage());
+        	MoreUtils.trace(key.isValid() + "   " + key.isConnectable());
+            notifier.fireOnError("Error occured in Writer: " + e.getMessage());
         }
     }
     

@@ -18,12 +18,13 @@ import nio.util.LangUtil;
  */
 public class RegisterHandler extends EventAdapter {
 	
+	private UserVO vo = null;
+	
 	public RegisterHandler(){
 	}
 	
 	public void onWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
-        UserVO vo = null;
         if (command == GlobalConst.C_USER_REGISTER) {
         	vo = new UserVO();
         	vo.setEmail(request.getPacket().readString());
@@ -69,10 +70,11 @@ public class RegisterHandler extends EventAdapter {
      * @return
      */
     private boolean isExist(String email){
-    	if (ExeSQL.selectByEmail(email)) {
-    		return true;
+    	String pwd = ExeSQL.selectByEmail(email);
+    	if (pwd.equals("")) {
+    		return false;
 		}
-    	return false;
+    	return true;
     }
 
 }

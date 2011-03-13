@@ -19,7 +19,7 @@ import mpcs.utils.MoreUtils;
 public class Packet implements IRead , IWrite{
 	
 	private ByteBuffer buff;
-	private int length = 70;
+	private int length = 128;
 	
 	/**
 	 * 默认构造方法
