@@ -1,8 +1,8 @@
 package mpcs.config;
 
 /**
- * <p>存放所有全局错误消息号</p>
- * 命名规则: E_错误名
+ * <p>Title: <p>存放所有全局错误消息号</p>
+ * <p>Description: 命名规则: E_错误名</p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */

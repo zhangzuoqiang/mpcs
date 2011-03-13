@@ -7,8 +7,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 import java.io.IOException;
 
+import nio.config.ServerConfig;
+
 import mpcs.model.BaseMsg;
-import mpcs.utils.MoreUtils;
 
 /**
  * <p>Title: 读线程</p>
@@ -19,7 +20,6 @@ import mpcs.utils.MoreUtils;
 public class Reader extends Thread {
 	
     private static List<SelectionKey> pool = new LinkedList<SelectionKey>();
-    private static int BUFFER_SIZE = 1024;
     protected static ByteBuffer buffer = null;
     private int command = 0;
     private static Notifier notifier = Notifier.getNotifier();
@@ -94,7 +94,7 @@ public class Reader extends Thread {
     	// buffer的长度
         int count = 0;
         Packet packet = null;
-        buffer = ByteBuffer.allocate(BUFFER_SIZE);
+        buffer = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
         buffer.clear();
         // 读取客户端消息长度
 		try {
@@ -119,7 +119,7 @@ public class Reader extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-        MoreUtils.trace("Read poolSize: " + getReadPoolSize());
+//        MoreUtils.trace("Read poolSize: " + getReadPoolSize());
     }
     
     /**

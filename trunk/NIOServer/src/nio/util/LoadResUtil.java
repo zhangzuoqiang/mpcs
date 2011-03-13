@@ -23,14 +23,14 @@ public class LoadResUtil {
 		try {
 			in = new FileInputStream("resources/locale/zh_CN/lang.properties");
 		} catch (FileNotFoundException e) {
-			MoreUtils.trace("Properties file is not found.");
+			MoreUtils.trace(LangUtil.get("10005"));
 			System.exit(0);
 		}
 		
 		try {
 			res.load(in);
 		} catch (IOException e) {
-			MoreUtils.trace("Error occured in load Properties file.");
+			MoreUtils.trace(LangUtil.get("10006"));
 		}
 	}
 	

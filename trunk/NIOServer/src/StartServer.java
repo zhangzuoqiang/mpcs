@@ -1,5 +1,6 @@
 
 import mpcs.utils.MoreUtils;
+import nio.config.ServerConfig;
 import nio.core.NIOServerManager;
 
 /**
@@ -13,7 +14,7 @@ public class StartServer {
     public static void main(String[] args) {
         try {
             MoreUtils.trace("Server starting ...");
-            NIOServerManager server = new NIOServerManager(5100);
+            NIOServerManager server = new NIOServerManager(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
             tServer.start();
         } catch (Exception e) {
