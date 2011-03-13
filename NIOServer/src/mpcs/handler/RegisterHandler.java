@@ -7,7 +7,7 @@ import mpcs.model.BaseCmd;
 import mpcs.vo.UserVO;
 import nio.core.Request;
 import nio.core.Response;
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 import nio.util.LangUtil;
 
 /**
@@ -16,7 +16,7 @@ import nio.util.LangUtil;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-13
  */
-public class RegisterHandler extends EventAdapter {
+public class RegisterHandler extends ListenAdapter {
 	
 	private UserVO vo = null;
 	

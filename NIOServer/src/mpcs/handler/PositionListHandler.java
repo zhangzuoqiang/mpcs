@@ -1,6 +1,6 @@
 package mpcs.handler;
 
-import nio.manager.EventAdapter;
+import nio.manager.ListenAdapter;
 
 /**
  * <p>Title: 请求轨迹列表事件处理</p>
@@ -8,6 +8,6 @@ import nio.manager.EventAdapter;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-13
  */
-public class PositionListHandler extends EventAdapter {
+public class PositionListHandler extends ListenAdapter {
 
 }
