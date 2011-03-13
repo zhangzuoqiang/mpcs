@@ -21,12 +21,12 @@ package test
 		private var label4:TextField;
 		private var label5:TextField;
 		
-		private var head1:TextField;
-		private var head2:TextField;
-		private var head3:TextField;
+		public var head1:TextField;
+		public var head2:TextField;
+		public var head3:TextField;
 		
-		private var body1:TextField;
-		private var body2:TextField;
+		public var body1:TextField;
+		public var body2:TextField;
 		
 		private var button:Button;
 		

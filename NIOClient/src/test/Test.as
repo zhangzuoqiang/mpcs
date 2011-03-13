@@ -5,7 +5,7 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 
-	[SWF(width=400,height=550)]
+	[SWF(width=480,height=550)]
 	/**
 	 * <b>Description: </b>用来测试与服务端的交互
 	 * <br/><b>Author: </b>zhangzuoqiang
@@ -18,6 +18,7 @@ package test
 		private var line:Sprite;
 		public var server:ServerPanel;
 		public var net:NetClient;
+		private var btnGroup:TestButtonGroup;
 		
 		public function Test() {
 			instance = this;
@@ -33,15 +34,20 @@ package test
 			
 			line = new Sprite();
 			line.graphics.beginFill(0x0099FF);
-			line.graphics.drawRect(0, client.height + 20, 400, 2);
+			line.graphics.drawRect(0, client.height + 20, 480, 2);
 			
 			server = new ServerPanel();
 			server.x = 0;
 			server.y = 200;
 			
+			btnGroup = new TestButtonGroup();
+			btnGroup.x = 380;
+			btnGroup.y = 10;
+			
 			addChild(client);
 			addChild(line);
 			addChild(server);
+			addChild(btnGroup);
 		}
 		
 		/**
@@ -77,13 +83,16 @@ package test
 		}
 		
 		private function onReadedDataHandler(e:NetEvent):void {
-			var p:Packet=new Packet(e.bytesData);
+			var packet:Packet=new Packet(e.bytesData);
 			
-			var h1:int = p.readInt();
-			var h2:int = p.readInt();
-			var h3:int = p.readInt();
-			var body:String = p.readString();
-			
+			var h1:int = packet.readInt();
+			var h2:int = packet.readInt();
+			var h3:int = packet.readInt();
+			if(packet.array().bytesAvailable){
+				var body:String = packet.readString();
+			}else{
+				body = "";
+			}
 			setServerData(h1, h2, h3, body);
 		}
 		
