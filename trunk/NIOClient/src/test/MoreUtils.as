@@ -12,6 +12,20 @@ package test
 	 **/
 	public class MoreUtils {
 		
+		private static var btnNum:int = 0; // 记录测试用按钮数目
+		
+		/**
+		 * 生成测试按钮
+		 * @param btn
+		 */		
+		public static function createBtn(btn:Button, label:String, x:int = 5, y:int = 30):Button{
+			btn = new Button(label, 80);
+			btn.x = x ;
+			btn.y = y * btnNum;
+			btnNum++;
+			return btn;
+		}
+		
 		/**
 		 * 生成带格式的TextField  
 		 * @param text
@@ -22,7 +36,8 @@ package test
 		 * @param numRestrict
 		 * @return 
 		 */			
-		public static function createTextField(text:TextField, x:int, y:int, width:int=120, numRestrict:Boolean = false, inputAble:Boolean = true):TextField{
+		public static function createTextField(text:TextField, x:int, y:int, width:int=120, 
+											   numRestrict:Boolean = false, inputAble:Boolean = true):TextField{
 			text = new TextField();
 			text.x = x;
 			text.y = y;
@@ -70,7 +85,7 @@ package test
 			label = new TextField();
 			label.x = x;
 			label.y = y;
-			label.text = text;
+			label.htmlText = "<b>" + text + "</b>";
 			label.width = 60;
 			label.height = 100;
 			label.selectable = false;

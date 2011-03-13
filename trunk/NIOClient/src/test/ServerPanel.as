@@ -35,7 +35,9 @@ package test
 			this.head1.text = head1.toString();
 			this.head2.text = head2.toString();
 			this.head3.text = head3.toString();
-			this.body.text = body.toString();
+			if(body != "" || body != null){
+				this.body.text = body.toString();
+			}
 		}
 		
 		private function initUI():void{
