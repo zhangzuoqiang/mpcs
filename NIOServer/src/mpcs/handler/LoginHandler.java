@@ -24,7 +24,7 @@ public class LoginHandler extends ListenAdapter {
 		
 	}
 	
-	public void onWrite(Request request, Response response) throws Exception {
+	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
         if (command == GlobalConst.C_USER_LOGIN) {
         	vo = new UserVO();

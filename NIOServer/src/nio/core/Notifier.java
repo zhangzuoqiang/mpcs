@@ -48,9 +48,9 @@ public class Notifier {
      * 触发Accept事件
      * @throws Exception
      */
-    public void fireOnAccept() throws Exception {
+    public void fireDoAccept() throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onAccept();
+            ( (IListener) listeners.get(i)).doAccept();
     }
 
     /**
@@ -58,9 +58,9 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    public void fireOnAccepted(Request request) throws Exception {
+    public void fireDoAccepted(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onAccepted(request);
+            ( (IListener) listeners.get(i)).doAccepted(request);
     }
 
     /**
@@ -68,9 +68,9 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    void fireOnRead(Request request) throws Exception {
+    void fireDoRead(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onRead(request);
+            ( (IListener) listeners.get(i)).doRead(request);
     }
     
     /**
@@ -79,9 +79,9 @@ public class Notifier {
      * @param response
      * @throws Exception
      */
-    void fireOnWrite(Request request, Response response)  throws Exception  {
+    void fireDoWrite(Request request, Response response)  throws Exception  {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onWrite(request, response);
+            ( (IListener) listeners.get(i)).doWrite(request, response);
     }
 
     /**
@@ -89,17 +89,17 @@ public class Notifier {
      * @param request
      * @throws Exception
      */
-    public void fireOnClosed(Request request) throws Exception {
+    public void fireDoClosed(Request request) throws Exception {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onClosed(request);
+            ( (IListener) listeners.get(i)).doClosed(request);
     }
 
     /**
      * 触发Error事件
      * @param error
      */
-    public void fireOnError(String error) {
+    public void fireDoError(String error) {
         for (int i = listeners.size() - 1; i >= 0; i--)
-            ( (IListener) listeners.get(i)).onError(error);
+            ( (IListener) listeners.get(i)).doError(error);
     }
 }

@@ -53,9 +53,9 @@ public final class Writer extends Thread {
         	if (key.isValid() && key.isWritable()) {
                 Response response = new Response(key);
                 // 触发onWrite事件
-                notifier.fireOnWrite((Request)key.attachment(), response);
+                notifier.fireDoWrite((Request)key.attachment(), response);
                 
-                notifier.fireOnClosed((Request)key.attachment());
+                notifier.fireDoClosed((Request)key.attachment());
                 MoreUtils.trace(key.attachment());
                 
                 // 一次请求处理完毕，关闭连接（短连接）
@@ -66,7 +66,7 @@ public final class Writer extends Thread {
         }
         catch (Exception e) {
         	MoreUtils.trace(key.isValid() + "   " + key.isConnectable());
-            notifier.fireOnError("Error occured in Writer: " + e.getMessage());
+            notifier.fireDoError("Error occured in Writer: " + e.getMessage());
         }
     }
     

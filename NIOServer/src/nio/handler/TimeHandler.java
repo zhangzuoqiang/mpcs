@@ -21,7 +21,7 @@ public class TimeHandler extends ListenAdapter {
     public TimeHandler() {
     }
 
-    public void onWrite(Request request, Response response) throws Exception {
+    public void doWrite(Request request, Response response) throws Exception {
         int command = request.getCommand();
         String time = null;
         Date date = new Date();

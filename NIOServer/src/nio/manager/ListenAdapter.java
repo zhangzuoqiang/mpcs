@@ -16,21 +16,21 @@ public abstract class ListenAdapter implements IListener {
     public ListenAdapter() {
     }
     
-    public void onError(String error) {
+    public void doError(String error) {
     }
     
-    public void onAccept() throws Exception {
+    public void doAccept() throws Exception {
     }
     
-    public void onAccepted(Request request)  throws Exception {
+    public void doAccepted(Request request)  throws Exception {
     }
     
-    public void onRead(Request request)  throws Exception {
+    public void doRead(Request request)  throws Exception {
     }
     
-    public void onWrite(Request request, Response response)  throws Exception {
+    public void doWrite(Request request, Response response)  throws Exception {
     }
     
-    public void onClosed(Request request)  throws Exception{
+    public void doClosed(Request request)  throws Exception{
     }
 }

@@ -18,12 +18,12 @@ public class LogHandler extends ListenAdapter {
     public LogHandler() {
     }
 
-    public void onClosed(Request request) throws Exception {
+    public void doClosed(Request request) throws Exception {
         String log = new Date().toString() + " from " + request.getAddress().toString();
         MoreUtils.trace("onClosed: " + log);
     }
 
-    public void onError(String error) {
+    public void doError(String error) {
     	MoreUtils.trace("Error: " + error);
     }
 }
