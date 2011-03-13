@@ -1,6 +1,17 @@
 package nio.util;
 
+import mpcs.handler.BaseInfoHandler;
+import mpcs.handler.BindMobileHandler;
+import mpcs.handler.ContactInfoHandler;
+import mpcs.handler.EmailHandler;
+import mpcs.handler.HelpHandler;
+import mpcs.handler.LoginHandler;
+import mpcs.handler.MobileTipsHandler;
+import mpcs.handler.ModifyPwdHandler;
+import mpcs.handler.PositionListHandler;
 import mpcs.handler.RegisterHandler;
+import mpcs.handler.SetPositionHandler;
+import mpcs.handler.SuggestionHandler;
 import mpcs.utils.MoreUtils;
 import nio.core.Notifier;
 import nio.handler.LogHandler;
@@ -20,17 +31,41 @@ public final class HandlerUtil{
 		
 		Notifier notifier = Notifier.getNotifier();
 		
-		//===============所有Handler写在我下面===============
+		//=============== 所有Handler写在我下面，否则跪板凳 ===============
+		
 		LogHandler loger = new LogHandler();
 		ServerHandler server = new ServerHandler();
 		TimeHandler timer = new TimeHandler();
 		RegisterHandler register = new RegisterHandler();
+		LoginHandler login = new LoginHandler();
+		BaseInfoHandler basicInfo = new BaseInfoHandler();
+		ContactInfoHandler contactInfo = new ContactInfoHandler();
+		ModifyPwdHandler modify = new ModifyPwdHandler();
+		BindMobileHandler bindMobile = new BindMobileHandler();
+		SetPositionHandler setPosition = new SetPositionHandler();
+		MobileTipsHandler tips = new MobileTipsHandler();
+		PositionListHandler positionList = new PositionListHandler();
+		EmailHandler email = new EmailHandler();
+		HelpHandler help = new HelpHandler();
+		SuggestionHandler suggestion = new SuggestionHandler();
         
         notifier.addListener(loger);
         notifier.addListener(timer);
         notifier.addListener(server);
         notifier.addListener(register);
-        //===============所有Handler写在我上面===============
+        notifier.addListener(login);
+        notifier.addListener(basicInfo);
+        notifier.addListener(contactInfo);
+        notifier.addListener(modify);
+        notifier.addListener(bindMobile);
+        notifier.addListener(setPosition);
+        notifier.addListener(tips);
+        notifier.addListener(positionList);
+        notifier.addListener(email);
+        notifier.addListener(help);
+        notifier.addListener(suggestion);
+        
+        //=============== 所有Handler写在我上面，否则跪板凳 ===============
         
         MoreUtils.trace(LangUtil.get("10001"));
 	}
