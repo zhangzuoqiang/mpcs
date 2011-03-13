@@ -21,7 +21,6 @@ public class LoginHandler extends ListenAdapter {
 	private UserVO vo = null;
 	
 	public LoginHandler(){
-		
 	}
 	
 	public void doWrite(Request request, Response response) throws Exception {

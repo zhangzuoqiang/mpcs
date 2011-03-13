@@ -1,5 +1,8 @@
 package mpcs.handler;
 
+import mpcs.config.GlobalConst;
+import nio.core.Request;
+import nio.core.Response;
 import nio.manager.ListenAdapter;
 
 /**
@@ -9,5 +12,17 @@ import nio.manager.ListenAdapter;
  * <br/>Date: 2011-3-13
  */
 public class BaseInfoHandler extends ListenAdapter {
-
+	
+//	private UserVO vo = null;
+	
+	public BaseInfoHandler(){
+	}
+	
+	public void doWrite(Request request, Response response) throws Exception {
+		int command = request.getCommand();
+        if (command == GlobalConst.C_USER_BASIC_INFO) {
+        	
+        }
+	}
+	
 }
