@@ -67,7 +67,7 @@ package test
 				packet.writeString(body1);
 			}
 			if(body2 !=""){
-				packet.writeString(body1);
+				packet.writeString(body2);
 			}
 			
 			net = NetPool.getInstance().getNetClient();
