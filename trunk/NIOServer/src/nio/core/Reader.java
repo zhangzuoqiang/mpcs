@@ -77,7 +77,7 @@ public class Reader extends Thread {
 //        		key.interestOps(key.interestOps()&~SelectionKey.OP_READ);
                 
                 // 提交主控线程进行写处理
-                NIOServer.processWriteRequest(key);
+                NIOServerManager.processWriteRequest(key);
 			}
         }
         catch (Exception e) {

@@ -1,6 +1,6 @@
 
 import mpcs.utils.MoreUtils;
-import nio.core.NIOServer;
+import nio.core.NIOServerManager;
 
 /**
  * <p>Title: 服务器 启动类</p>
@@ -13,7 +13,7 @@ public class StartServer {
     public static void main(String[] args) {
         try {
             MoreUtils.trace("Server starting ...");
-            NIOServer server = new NIOServer(5100);
+            NIOServerManager server = new NIOServerManager(5100);
             Thread tServer = new Thread(server);
             tServer.start();
         } catch (Exception e) {
