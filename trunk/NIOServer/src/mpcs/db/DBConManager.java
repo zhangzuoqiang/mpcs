@@ -18,13 +18,13 @@ import com.mchange.v2.c3p0.DataSources;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-7
  */
-public class DBConnect {
+public class DBConManager {
 	
-	private static DBConnect instance;
+	private static DBConManager instance;
 	private static ComboPooledDataSource ds = null;
 	private static Connection con = null;
 	
-	private DBConnect(){
+	private DBConManager(){
 		try {
 			ds = new ComboPooledDataSource();
 			
@@ -69,10 +69,10 @@ public class DBConnect {
 	 * 获取连接管理类 实例
 	 * @return
 	 */
-	public static final DBConnect getInstance(){
+	public static final DBConManager getInstance(){
 		if (instance == null) {
 			try {
-				instance = new DBConnect();
+				instance = new DBConManager();
 			} catch (Exception e) {
 				if (Debug.printException) {
 					e.printStackTrace();

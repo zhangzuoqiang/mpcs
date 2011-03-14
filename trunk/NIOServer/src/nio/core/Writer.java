@@ -2,7 +2,6 @@ package nio.core;
 
 import java.util.List;
 import java.util.LinkedList;
-import java.nio.channels.CancelledKeyException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
@@ -55,26 +54,23 @@ public final class Writer extends Thread {
      * @param key
      * @throws Exception 
      */
-    public void write(SelectionKey key) throws Exception {
+    public void write(SelectionKey key) {
     	SocketChannel sc = (SocketChannel) key.channel();
         try {
-        	if (key != null && key.isValid() && key.isWritable()) {
-        		
-                Response response = new Response(key);
-                
-                // 触发doWrite事件
-                notifier.fireDoWrite((Request)key.attachment(), response);
-                
-                notifier.fireDoClosed((Request)key.attachment());
-                MoreUtils.trace(key.attachment(), Debug.printTestInfo);
-                
-                // 一次请求处理完毕，关闭连接（短连接）
-                sc.finishConnect();
-                sc.socket().close();
-                sc.close();
-			}
+        	Response response = new Response(key);
+            
+            // 触发doWrite事件
+            notifier.fireDoWrite((Request)key.attachment(), response);
+            
+            notifier.fireDoClosed((Request)key.attachment());
+            MoreUtils.trace(key.attachment(), Debug.printTestInfo);
+            
+            // 一次请求处理完毕，关闭连接（短连接）
+            sc.finishConnect();
+            sc.socket().close();
+            sc.close();
         }
-        catch (CancelledKeyException e) {
+        catch (Exception e) {
         	if (Debug.printException) {
 				e.printStackTrace();
 			}
