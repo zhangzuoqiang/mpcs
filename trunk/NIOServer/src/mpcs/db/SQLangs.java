@@ -8,6 +8,16 @@ package mpcs.db;
  */
 public final class SQLangs {
 	
+	
+	/**
+	 * 通过email，修改密码
+	 * @param email
+	 * @param newpwd
+	 * @return
+	 */
+	public static String updatePwd(String email, String newpwd){
+		return "update user set password = '" + newpwd + "' where email = '" + email + "'";
+	}
 	/**
 	 * 查询email，是否存在此用户
 	 * @param email
