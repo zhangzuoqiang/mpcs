@@ -46,7 +46,7 @@ public class Notifier {
     }
 
     /**
-     * 触发Accept事件
+     * 触发Accept事件，并广播事件
      * @throws Exception
      */
     public void fireDoAccept() throws Exception {
@@ -55,7 +55,7 @@ public class Notifier {
     }
 
     /**
-     * 触发Accepted事件
+     * 触发Accepted事件，并广播事件
      * @param request
      * @throws Exception
      */
@@ -65,7 +65,7 @@ public class Notifier {
     }
 
     /**
-     * 触发Read事件
+     * 触发Read事件，并广播事件
      * @param request
      * @throws Exception
      */
@@ -75,7 +75,7 @@ public class Notifier {
     }
     
     /**
-     * 触发Write事件
+     * 触发Write事件，并广播事件
      * @param request
      * @param response
      * @throws Exception
@@ -86,7 +86,7 @@ public class Notifier {
     }
 
     /**
-     * 触发Closed事件
+     * 触发Closed事件，并广播事件
      * @param request
      * @throws Exception
      */
@@ -96,7 +96,7 @@ public class Notifier {
     }
 
     /**
-     * 触发Error事件
+     * 触发Error事件，并广播事件
      * @param error
      */
     public void fireDoError(String error) {

@@ -30,10 +30,9 @@ public class TimeHandler extends ListenAdapter {
         	DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL,
                     DateFormat.FULL, Locale.US);
                 time = enDate.format(date);
+                BaseCmd cmd = new BaseCmd(GlobalConst.S_TEST);
+                cmd.writeString(time);
+                response.send(cmd);
         }
-        
-        BaseCmd cmd = new BaseCmd(GlobalConst.S_TEST);
-        cmd.writeString(time);
-        response.send(cmd);
     }
 }
