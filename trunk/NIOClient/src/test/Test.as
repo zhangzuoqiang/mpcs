@@ -24,7 +24,7 @@ package test
 			instance = this;
 			stage.scaleMode = "noScale";
 			// 初始化界面组件
-			initUI();			
+			initUI();
 		}
 		
 		private function initUI():void{
