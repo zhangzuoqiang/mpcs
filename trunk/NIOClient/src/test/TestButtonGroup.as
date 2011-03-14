@@ -166,8 +166,8 @@ package test
 			Test.getInstance().client.head1.text = "100205";
 			Test.getInstance().client.head2.text = "0";
 			Test.getInstance().client.head3.text = "0";
-			Test.getInstance().client.body1.text = "";
-			Test.getInstance().client.body2.text = "";
+			Test.getInstance().client.body1.text = "csdn.eric@gmail.com";
+			Test.getInstance().client.body2.text = "12345";
 		}
 		
 		/**
