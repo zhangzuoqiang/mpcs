@@ -44,6 +44,7 @@ public class LoginHandler extends ListenAdapter {
 				return;
 			}else {
 				// 用户登录验证成功
+				
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_LOGIN);
 				cmd.writeString(LangUtil.get("20004") + vo.getEmail());
 				response.send(cmd);
