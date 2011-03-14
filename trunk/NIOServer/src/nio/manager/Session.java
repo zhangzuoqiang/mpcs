@@ -25,6 +25,12 @@ public class Session implements ISession {
 		this.connTime = time;
 	}
 	
+	public void updateAll(SessionStatus status, SocketChannel socket, long time){
+		this.status = status;
+		this.socket = socket;
+		this.connTime = time;
+	}
+	
 	@Override
 	public SessionStatus getStatus() {
 		return this.status;

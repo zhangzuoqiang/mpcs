@@ -1,8 +1,12 @@
 package nio.manager;
 
+import java.nio.channels.SocketChannel;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+
+import nio.interfaces.ISession.SessionStatus;
 
 /**
  * <p>Title: Session 管理类</p>
@@ -36,14 +40,16 @@ public class SessionManager {
 	 * @param email
 	 * @return
 	 */
-	public boolean isOnLine(String email){
+	public boolean isOnLine(String email, SocketChannel socket){
 		if (sessionMap.containsKey(email)) {
 			// 更新session数据
-			
+			Session session = sessionMap.get(email);
+			session.updateAll(SessionStatus.ONLINE, socket, new Date().getTime());
 			return true;
 		}
 		// 添加该用户的session数据
-		
+		Session session = new Session(SessionStatus.ONLINE, socket, new Date().getTime());
+		sessionMap.put(email, session);
 		return false;
 	}
 	

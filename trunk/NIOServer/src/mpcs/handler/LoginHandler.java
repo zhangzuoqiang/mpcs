@@ -1,13 +1,19 @@
 package mpcs.handler;
 
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.db.ExeSQL;
 import mpcs.model.BaseCmd;
+import mpcs.utils.MoreUtils;
 import mpcs.vo.UserVO;
+import nio.config.Debug;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.ListenAdapter;
+import nio.manager.SessionManager;
 import nio.util.LangUtil;
 
 /**
@@ -44,7 +50,12 @@ public class LoginHandler extends ListenAdapter {
 				return;
 			}else {
 				// 用户登录验证成功
-				
+				SelectionKey key = response.getKey();
+				SocketChannel sc = (SocketChannel) key.channel();
+				boolean online = SessionManager.getInstance().isOnLine(vo.getEmail(), sc);
+				if (online) {
+					MoreUtils.trace(LangUtil.get("20007"), Debug.printSystem);
+				}
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_LOGIN);
 				cmd.writeString(LangUtil.get("20004") + vo.getEmail());
 				response.send(cmd);

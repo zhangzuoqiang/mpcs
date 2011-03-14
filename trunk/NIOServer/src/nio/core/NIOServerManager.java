@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import nio.config.Debug;
 import nio.config.ServerConfig;
+import nio.util.HandlerUtil;
 import nio.util.LangUtil;
 
 import mpcs.utils.MoreUtils;
@@ -36,6 +37,10 @@ public class NIOServerManager implements Runnable {
      * @throws Exception
      */
     public NIOServerManager(int port) throws Exception {
+    	
+    	// 注册Handler
+    	HandlerUtil.AddHandlerListener();
+    	
         this.port = port;
         // 获取事件触发器
         notifier = Notifier.getNotifier();
