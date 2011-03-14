@@ -51,7 +51,7 @@ public class DBConnManager {
 			// 在取得连接的同时将校验连接的有效性
 			ds.setTestConnectionOnCheckin(true);
 			// 定义在从数据库获取新连接失败后重复尝试的次数
-			ds.setAcquireRetryAttempts(30);
+			ds.setAcquireRetryAttempts(100);
 			// 两次连接中间隔时间，单位毫秒
 			ds.setAcquireRetryDelay(1000);
 			// c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能
