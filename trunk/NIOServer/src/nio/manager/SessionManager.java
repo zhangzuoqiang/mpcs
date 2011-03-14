@@ -32,6 +32,22 @@ public class SessionManager {
 	}
 	
 	/**
+	 * 检查当前是否已经登录，如果已经登录，则更新为当前登录
+	 * @param email
+	 * @return
+	 */
+	public boolean isOnLine(String email){
+		if (sessionMap.containsKey(email)) {
+			// 更新session数据
+			
+			return true;
+		}
+		// 添加该用户的session数据
+		
+		return false;
+	}
+	
+	/**
 	 * 清除过期的session
 	 */
 	public void checkValidity(){
@@ -42,6 +58,14 @@ public class SessionManager {
 				sessionMap.remove(entry.getKey());
 			}
 		}
+	}
+	
+	/**
+	 * 系统共用一个HashMap<String, Session>
+	 * @return
+	 */
+	public HashMap<String, Session> map(){
+		return this.sessionMap;
 	}
 	
 	/**
