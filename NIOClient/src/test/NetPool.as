@@ -10,12 +10,15 @@ package test
 		private static var instance:NetPool;
 		private var netPools:Array;
 		private var length:int = 0;
+		private var num:int = 0;// 新建NetClient的个数
 		
 		public function getNetClient():NetClient{
+			trace("NetPool中NetClient的个数Num = " + num);
 			if(length>0){
 				length --;
 				return netPools.pop();
 			}
+			num++;
 			return new NetClient();
 		}
 		
