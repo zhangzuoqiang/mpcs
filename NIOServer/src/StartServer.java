@@ -22,6 +22,8 @@ public class StartServer {
         	
             NIOServerManager server = new NIOServerManager(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
+            // 将该线程标记为守护线程
+//            tServer.setDaemon(true);
             tServer.start();
         } catch (Exception e) {
         	MoreUtils.trace("StartServer error: " + e.getMessage(), Debug.printException);
