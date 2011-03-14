@@ -28,8 +28,10 @@ public class BaseInfoHandler extends ListenAdapter {
         	String email = request.getPacket().readString();
         	// 根据email查询数据库，然后构建BasicInfoVO
         	vo = ExeSQL.selectBasicInfoByEmail(email);
-        	BasicInfoCmd cmd = new BasicInfoCmd(GlobalConst.S_USER_BASIC_INFO, vo);
-        	response.send(cmd);
+        	if (vo != null) {
+        		BasicInfoCmd cmd = new BasicInfoCmd(GlobalConst.S_USER_BASIC_INFO, vo);
+            	response.send(cmd);
+			}
         }
 	}
 	

@@ -33,34 +33,46 @@ public final class GlobalConst {
 	public static final int S_USER_BASIC_INFO = 500201;
 	
 	/**
+	 * 保存用户基本信息
+	 */
+	public static final int C_USER_SAVE_BASIC_INFO = 100202;
+	public static final int S_USER_SAVE_BASIC_INFO = 500202;
+	
+	/**
 	 * 用户联系信息
 	 */
-	public static final int C_USER_CONTACT_INFO = 100202;
-	public static final int S_USER_CONTACT_INFO = 500202;
+	public static final int C_USER_CONTACT_INFO = 100203;
+	public static final int S_USER_CONTACT_INFO = 500203;
+	
+	/**
+	 * 保存用户联系信息
+	 */
+	public static final int C_USER_SAVE_CONTACT_INFO = 100204;
+	public static final int S_USER_SAVE_CONTACT_INFO = 500204;
 	
 	/**
 	 * 修改密码
 	 */
-	public static final int C_USER_MODIFY_PWD = 100203;
-	public static final int S_USER_MODIFY_PWD = 500203;
+	public static final int C_USER_MODIFY_PWD = 100205;
+	public static final int S_USER_MODIFY_PWD = 500205;
 	
 	/**
 	 * 添加绑定手机
 	 */
-	public static final int C_ADD_BIND_MOBILE = 100204;
-	public static final int S_ADD_BIND_MOBILE = 500204;
+	public static final int C_ADD_BIND_MOBILE = 100206;
+	public static final int S_ADD_BIND_MOBILE = 500206;
 	
 	/**
 	 * 设定位置
 	 */
-	public static final int C_SET_POSITION = 100205;
-	public static final int S_SET_POSITION = 500205;
+	public static final int C_SET_POSITION = 100207;
+	public static final int S_SET_POSITION = 500207;
 	
 	/**
 	 * 开启手机提醒服务
 	 */
-	public static final int C_OPEN_MOBILE_TIP = 100206;
-	public static final int S_OPEN_MOBILE_TIP = 500206;
+	public static final int C_OPEN_MOBILE_TIP = 100208;
+	public static final int S_OPEN_MOBILE_TIP = 500208;
 	
 	/**
 	 * 轨迹

@@ -24,6 +24,26 @@ public final class ExeSQL {
 	private static ResultSet rs = null;
 	
 	
+	public static boolean updatePwd(String email, String newpwd){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.updatePwd(email, newpwd));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	/**
+	 * 通过email查询基本信息
+	 * @param email
+	 * @return
+	 */
 	public static BasicInfoVO selectBasicInfoByEmail(String email){
 		BasicInfoVO vo = new BasicInfoVO();
 		try {

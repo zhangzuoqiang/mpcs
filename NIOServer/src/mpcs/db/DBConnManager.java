@@ -35,11 +35,11 @@ public class DBConnManager {
 			ds.setPassword("zzq");
 			
 			// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间
-			ds.setInitialPoolSize(100);
+			ds.setInitialPoolSize(30);
 			// 连接池中保留的最大连接数
-			ds.setMaxPoolSize(200);
+			ds.setMaxPoolSize(60);
 			// 
-			ds.setMinPoolSize(50);
+			ds.setMinPoolSize(20);
 			// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数
 			ds.setAcquireIncrement(3);
 			// 每60秒检查所有连接池中的空闲连接
@@ -51,7 +51,7 @@ public class DBConnManager {
 			// 在取得连接的同时将校验连接的有效性
 			ds.setTestConnectionOnCheckin(true);
 			// 定义在从数据库获取新连接失败后重复尝试的次数
-			ds.setAcquireRetryAttempts(100);
+			ds.setAcquireRetryAttempts(30);
 			// 两次连接中间隔时间，单位毫秒
 			ds.setAcquireRetryDelay(1000);
 			// c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能
