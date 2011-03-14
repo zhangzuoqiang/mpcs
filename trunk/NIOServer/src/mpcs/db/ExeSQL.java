@@ -25,7 +25,7 @@ public final class ExeSQL {
 	
 	
 	public static BasicInfoVO selectBasicInfoByEmail(String email){
-		BasicInfoVO vo = null;
+		BasicInfoVO vo = new BasicInfoVO();
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
@@ -34,7 +34,6 @@ public final class ExeSQL {
 			 if (rs.getRow() == 0) {
 				 vo = null;
 			}else {
-				vo = new BasicInfoVO();
 				vo.setEmail(rs.getString(1));
 				vo.setUserName(rs.getString(2));
 				vo.setGender(rs.getString(3));

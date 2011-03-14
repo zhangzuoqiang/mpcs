@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
 import nio.config.Debug;
+import nio.config.ServerConfig;
 import nio.util.LangUtil;
 
 import mpcs.interfaces.IRead;
@@ -20,14 +21,14 @@ import mpcs.utils.MoreUtils;
 public class Packet implements IRead , IWrite{
 	
 	private ByteBuffer buff;
-	private int length = 128;//初始长度
+	private int length = 0;//初始长度
 	
 	/**
 	 * 默认构造方法
 	 * 开辟缓存区1024=1M
 	 */
 	public Packet(){
-		buff = ByteBuffer.allocate(length);
+		buff = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
 	}
 	/**
 	 * 构造方法  指定缓存区大小
@@ -49,35 +50,27 @@ public class Packet implements IRead , IWrite{
 	//写入数据
 	public void writeChar(char value){
 		buff.putChar(value);
-		length += 2;
 	}
 	public void writeByte(byte value){
 		buff.put(value);
-		length += 1;
 	}
 	public void writeFloat(float value){
 		buff.putFloat(value);
-		length += 4;
 	}
 	public void writeLong(long value){
 		buff.putLong(value);
-		length += 8;
 	}
 	public void writeDouble(double value){
 		buff.putDouble(value);
-		length += 8;
 	}
 	public void writeInt(int value){
 		buff.putInt(value);
-		length += 4;
 	}
 	public void writeShort(short value){
 		buff.putShort(value);
-		length += 2;
 	}
 	public void writeBytes(byte[] bytes){
 		buff.put(bytes);
-		length += bytes.length;
 	}
 	
 	public void writeUTF(String str){
@@ -87,7 +80,6 @@ public class Packet implements IRead , IWrite{
 			short len = (short)(str_bytes.length);
 			writeShort(len);
 			writeBytes(str_bytes);
-			length += len;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +93,6 @@ public class Packet implements IRead , IWrite{
 		short len = (short)(str_bytes.length);
 		writeShort(len);
 		writeBytes(str_bytes);
-		length += len;
 	}
 	public void writeString(String str,String charset){
 		try {
@@ -109,7 +100,6 @@ public class Packet implements IRead , IWrite{
 			short len = (short)(str_bytes.length);
 			writeShort(len);
 			writeBytes(str_bytes);
-			length += len;
 		} catch (UnsupportedEncodingException e) {
 			if (Debug.printException) {
 				e.printStackTrace();
