@@ -13,8 +13,16 @@ public interface ISession {
 	
 	/**Session状态**/
 	public static enum SessionStatus {
-		NULL, READING, WRITING, IDLE, CLOSED
+		NULL, ONLINE, IDLE, CLOSED
 		}
+	
+	/**
+	 * 强制更新一下
+	 * @param status
+	 * @param socket
+	 * @param time
+	 */
+	public void updateAll(SessionStatus status, SocketChannel socket, long time);
 	
 	/**
 	 * 获取状态
