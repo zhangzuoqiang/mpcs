@@ -16,6 +16,8 @@ public class ServerConfig {
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/
 	public static final int CONNECT_TIMEOUT = 3000;
+	/**Session超时时间,单位毫秒, 900 000 毫秒=15分钟**/
+	public static final int SESSION_TIMEOUT = 900000;	
 	/**连接允许的最大读/写线程数**/
 	public static final int MAX_THREADS = 4;
 	/**请求策略文件**/
