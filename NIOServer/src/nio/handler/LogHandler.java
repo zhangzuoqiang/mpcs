@@ -3,8 +3,10 @@ package nio.handler;
 import java.util.Date;
 
 import mpcs.utils.MoreUtils;
+import nio.config.Debug;
 import nio.core.Request;
 import nio.manager.ListenAdapter;
+import nio.util.LangUtil;
 
 
 /**
@@ -20,10 +22,10 @@ public class LogHandler extends ListenAdapter {
 
     public void doClosed(Request request) throws Exception {
         String log = new Date().toString() + " from " + request.getAddress().toString();
-        MoreUtils.trace("onClosed: " + log);
+        MoreUtils.trace(LangUtil.get("10019") + log, Debug.printSystem);
     }
 
     public void doError(String error) {
-    	MoreUtils.trace("Error: " + error);
+    	MoreUtils.trace(LangUtil.get("10020") + error, Debug.printSystem);
     }
 }

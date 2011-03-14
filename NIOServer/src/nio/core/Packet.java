@@ -3,6 +3,7 @@ package nio.core;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
+import nio.config.Debug;
 import nio.util.LangUtil;
 
 import mpcs.interfaces.IRead;
@@ -110,8 +111,10 @@ public class Packet implements IRead , IWrite{
 			writeBytes(str_bytes);
 			length += len;
 		} catch (UnsupportedEncodingException e) {
-			MoreUtils.trace(LangUtil.get("10002"));
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			MoreUtils.trace(LangUtil.get("10002"), Debug.printTestInfo);
 			System.exit(0);
 		}
 	}
@@ -154,8 +157,10 @@ public class Packet implements IRead , IWrite{
 		try {
 			return new String(_bytes, charset);
 		} catch (UnsupportedEncodingException e) {
-			MoreUtils.trace(LangUtil.get("10002"));
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			MoreUtils.trace(LangUtil.get("10002"), Debug.printTestInfo);
 			System.exit(0);
 		}
 		return new String(_bytes);
@@ -212,6 +217,6 @@ public class Packet implements IRead , IWrite{
 		for(int i =0 ; i < bytes.length ; i++){
 			System.out.print(" " + bytes[i]);
 		}
-		MoreUtils.trace("");
+		MoreUtils.trace("", Debug.printSystem);
 	}
 }

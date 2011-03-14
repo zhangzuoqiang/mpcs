@@ -7,7 +7,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
 import java.io.IOException;
 
+import nio.config.Debug;
 import nio.config.ServerConfig;
+import nio.util.LangUtil;
 
 import mpcs.model.BaseMsg;
 import mpcs.utils.MoreUtils;
@@ -42,6 +44,9 @@ public class Reader extends Thread {
                 read(key);
             }
             catch (Exception e) {
+            	if (Debug.printException) {
+    				e.printStackTrace();
+    			}
                 continue;
             }
         }
@@ -82,7 +87,10 @@ public class Reader extends Thread {
 			}
         }
         catch (Exception e) {
-            notifier.fireDoError("Error occured in Reader: " + e.getMessage());
+        	if (Debug.printException) {
+				e.printStackTrace();
+			}
+            notifier.fireDoError(LangUtil.get("10021") + e.getMessage());
         }
     }
     
@@ -101,7 +109,10 @@ public class Reader extends Thread {
 		try {
 			count = sc.read(buffer);
 		} catch (IOException e) {
-			notifier.fireDoError("Error occured in readRequest: " + e.getMessage());
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			notifier.fireDoError(LangUtil.get("10016") + e.getMessage());
 			key.cancel();
 		}
 		if (count > 0) {
@@ -120,7 +131,7 @@ public class Reader extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-        MoreUtils.trace("Read poolSize: " + getReadPoolSize());
+        MoreUtils.trace(LangUtil.get("10015") + getReadPoolSize(), Debug.printSystem);
     }
     
     /**

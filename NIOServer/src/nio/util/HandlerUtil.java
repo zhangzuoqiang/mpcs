@@ -13,6 +13,7 @@ import mpcs.handler.RegisterHandler;
 import mpcs.handler.SetPositionHandler;
 import mpcs.handler.SuggestionHandler;
 import mpcs.utils.MoreUtils;
+import nio.config.Debug;
 import nio.core.Notifier;
 import nio.handler.LogHandler;
 import nio.handler.ServerHandler;
@@ -67,6 +68,6 @@ public final class HandlerUtil{
         
         //=============== 所有Handler写在我上面，否则跪板凳 ===============
         
-        MoreUtils.trace(LangUtil.get("10001"));
+        MoreUtils.trace(LangUtil.get("10001"), Debug.printSystem);
 	}
 }

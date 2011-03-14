@@ -14,8 +14,12 @@ public final class MoreUtils {
 	 * 打印消息
 	 * @param msg
 	 */
-	public static void trace(Object msg){
-		System.out.println(msg);
+	public static void trace(Object msg, boolean debug){
+		if (debug) {
+			System.out.println(msg);
+		}else {
+			return;
+		}
 	}
 	
 	/**客户端发送命令的合法格式**/

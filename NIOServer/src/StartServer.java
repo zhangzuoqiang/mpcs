@@ -1,5 +1,6 @@
 
 import mpcs.utils.MoreUtils;
+import nio.config.Debug;
 import nio.config.ServerConfig;
 import nio.core.NIOServerManager;
 import nio.util.HandlerUtil;
@@ -14,7 +15,7 @@ public class StartServer {
 
     public static void main(String[] args) {
         try {
-            MoreUtils.trace("Server starting ...");
+            MoreUtils.trace("Server starting ...", Debug.printSystem);
             
         	// 注册Handler
         	HandlerUtil.AddHandlerListener();
@@ -23,7 +24,7 @@ public class StartServer {
             Thread tServer = new Thread(server);
             tServer.start();
         } catch (Exception e) {
-        	MoreUtils.trace("StartServer error: " + e.getMessage());
+        	MoreUtils.trace("StartServer error: " + e.getMessage(), Debug.printException);
             System.exit(-1);
         }
     }
