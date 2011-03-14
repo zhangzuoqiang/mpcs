@@ -1,6 +1,9 @@
 package mpcs.handler;
 
 import mpcs.config.GlobalConst;
+import mpcs.db.ExeSQL;
+import mpcs.model.BasicInfoCmd;
+import mpcs.vo.BasicInfoVO;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.ListenAdapter;
@@ -13,7 +16,7 @@ import nio.manager.ListenAdapter;
  */
 public class BaseInfoHandler extends ListenAdapter {
 	
-//	private UserVO vo = null;
+	private BasicInfoVO vo = null;
 	
 	public BaseInfoHandler(){
 	}
@@ -21,8 +24,15 @@ public class BaseInfoHandler extends ListenAdapter {
 	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
         if (command == GlobalConst.C_USER_BASIC_INFO) {
-        	
+        	// 读取email
+        	String email = request.getPacket().readString();
+        	// 根据email查询数据库，然后构建BasicInfoVO
+        	vo = ExeSQL.selectBasicInfoByEmail(email);
+        	BasicInfoCmd cmd = new BasicInfoCmd(GlobalConst.S_USER_BASIC_INFO, vo);
+        	response.send(cmd);
         }
 	}
+	
+	
 	
 }

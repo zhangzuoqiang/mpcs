@@ -7,7 +7,17 @@ package mpcs.db;
  * <br/>Date: 2011-3-7
  */
 public final class SQLangs {
-
+	
+	/**
+	 * 查询email，是否存在此用户
+	 * @param email
+	 * @return
+	 */
+	public static String selectBasicInfoByEmail(String email){
+		return "select email, realname, gender, birthday, bloodtype, marstatus, job, education," +
+				"residence, hometown, idcard from user where email = '" + email + "'";
+	}
+	
 	/**
 	 * 查询email，是否存在此用户
 	 * @param email

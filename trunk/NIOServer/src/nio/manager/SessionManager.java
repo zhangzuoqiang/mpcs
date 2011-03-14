@@ -36,6 +36,17 @@ public class SessionManager {
 	}
 	
 	/**
+	 * 移除指定email的Session
+	 * @param email
+	 */
+	public void removeSession(String email){
+		synchronized (sessionMap) {
+            if (sessionMap.containsKey(email))
+            	sessionMap.remove(email);
+        }
+	}
+	
+	/**
 	 * 检查当前是否已经登录，如果已经登录，则更新为当前登录
 	 * @param email
 	 * @return
