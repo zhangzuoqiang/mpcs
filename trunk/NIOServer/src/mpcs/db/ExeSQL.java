@@ -17,7 +17,7 @@ import mpcs.utils.MoreUtils;
  */
 public final class ExeSQL {
 
-	protected static DBConManager cm = DBConManager.getInstance();
+	protected static DBConnManager cm = DBConnManager.getInstance();
 	private static Connection conn = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;

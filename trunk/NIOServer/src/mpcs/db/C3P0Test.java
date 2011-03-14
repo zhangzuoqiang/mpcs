@@ -18,7 +18,7 @@ public class C3P0Test {
 	
 	public static void main(String[] args) {
 		
-        DBConManager cm = DBConManager.getInstance();
+        DBConnManager cm = DBConnManager.getInstance();
         
         Connection conn = null;
         Statement stmt = null;
