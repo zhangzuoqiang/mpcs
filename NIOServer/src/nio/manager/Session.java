@@ -1,6 +1,7 @@
 package nio.manager;
 
 import java.net.InetAddress;
+import java.nio.channels.SocketChannel;
 import java.util.Date;
 
 import nio.config.ServerConfig;
@@ -15,12 +16,12 @@ import nio.interfaces.ISession;
 public class Session implements ISession {
 	
 	private SessionStatus status;
-	private InetAddress addr;
+	private SocketChannel socket;// 保存连接
 	private long connTime;
 	
-	public Session(SessionStatus status, InetAddress addr, long time){
+	public Session(SessionStatus status, SocketChannel socket, long time){
 		this.status = status;
-		this.addr = addr;
+		this.socket = socket;
 		this.connTime = time;
 	}
 	
@@ -44,7 +45,7 @@ public class Session implements ISession {
 
 	@Override
 	public InetAddress getClientAddr() {
-		return this.addr;
+		return this.socket.socket().getInetAddress();
 	}
 
 	@Override
@@ -72,5 +73,10 @@ public class Session implements ISession {
 	@Override
 	public void updateTime() {
 		this.connTime = new Date().getTime();
+	}
+
+	@Override
+	public void updateSocket(SocketChannel socket) {
+		this.socket = socket;
 	}
 }

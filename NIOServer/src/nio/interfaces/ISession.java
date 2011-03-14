@@ -1,6 +1,7 @@
 package nio.interfaces;
 
 import java.net.InetAddress;
+import java.nio.channels.SocketChannel;
 
 /**
  * <p>Title: </p>
@@ -59,5 +60,11 @@ public interface ISession {
 	 * 更新连接时间
 	 */
 	public void updateTime();
+	
+	/**
+	 * 更新为最新一次连接通道SocketChannel
+	 * @param socket
+	 */
+	public void updateSocket(SocketChannel socket);
 
 }

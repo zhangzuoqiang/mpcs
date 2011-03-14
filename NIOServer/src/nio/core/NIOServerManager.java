@@ -35,7 +35,7 @@ public class NIOServerManager implements Runnable {
      * @param port 服务端口
      * @throws Exception
      */
-    public NIOServerManager(int port) throws Exception {    	
+    public NIOServerManager(int port) throws Exception {
         this.port = port;
         // 获取事件触发器
         notifier = Notifier.getNotifier();
