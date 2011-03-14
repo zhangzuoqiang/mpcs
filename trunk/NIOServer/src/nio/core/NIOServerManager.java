@@ -10,7 +10,9 @@ import java.nio.channels.Selector;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 
+import nio.config.Debug;
 import nio.config.ServerConfig;
+import nio.util.LangUtil;
 
 import mpcs.utils.MoreUtils;
 
@@ -48,8 +50,8 @@ public class NIOServerManager implements Runnable {
     }
     
     public void run() {
-    	MoreUtils.trace("Server started ...");
-    	MoreUtils.trace("Server listening on port: " + port);
+    	MoreUtils.trace(LangUtil.get("10008"), Debug.printSystem);
+    	MoreUtils.trace(LangUtil.get("10009") + port, Debug.printSystem);
         listen();
     }
     
@@ -90,7 +92,12 @@ public class NIOServerManager implements Runnable {
                 }
 			}
 		} catch (Exception e) {
-			notifier.fireDoError("Error occured in listen: " + e.getMessage());
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			if (Debug.printFireEvent) {
+				notifier.fireDoError(LangUtil.get("10010") + e.getMessage());
+			}
 		}
 	}
 	
@@ -149,7 +156,10 @@ public class NIOServerManager implements Runnable {
                         notifier.fireDoClosed((Request)key.attachment());
                     }
                     catch (Exception e1) {}
-                    notifier.fireDoError("Error occured in addRegister: " + e.getMessage());
+                    if (Debug.printException) {
+                    	e.printStackTrace();
+					}
+                    notifier.fireDoError(LangUtil.get("10013") + e.getMessage());
                 }
             }
         }

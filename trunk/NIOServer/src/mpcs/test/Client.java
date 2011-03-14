@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
+import nio.config.Debug;
 import nio.config.ServerConfig;
 
 import mpcs.utils.MoreUtils;
@@ -23,7 +24,7 @@ public class Client {
         DataOutputStream out = null;
         DataInputStream in = null;
         try {
-            client = new Socket("localhost", ServerConfig.LISTENNING_PORT);
+            client = new Socket(ServerConfig.SERVER_ADDR, ServerConfig.LISTENNING_PORT);
             client.setSoTimeout(10000);
             out = new DataOutputStream( (client.getOutputStream()));
             
@@ -38,14 +39,17 @@ public class Client {
             in = new DataInputStream(client.getInputStream());
             byte[] reply = new byte[56];
             in.read(reply);
-            MoreUtils.trace("Time: " + new String(reply, "GBK"));
+            MoreUtils.trace("Time: " + new String(reply, "GBK"), Debug.printTestInfo);
 
             in.close();
             out.close();
             client.close();
         }
         catch (Exception e) {
-        	MoreUtils.trace("Client Error: " + e.getMessage());
+        	if (Debug.printException) {
+				e.printStackTrace();
+			}
+        	MoreUtils.trace("Client Error: " + e.getMessage(), Debug.printException);
         }
 
     }

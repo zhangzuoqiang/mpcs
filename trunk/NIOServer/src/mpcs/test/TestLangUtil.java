@@ -1,5 +1,6 @@
 package mpcs.test;
 
+import nio.config.Debug;
 import nio.util.LangUtil;
 import mpcs.utils.MoreUtils;
 
@@ -15,7 +16,7 @@ public class TestLangUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MoreUtils.trace(LangUtil.get("10001"));
+		MoreUtils.trace(LangUtil.get("10001"), Debug.printTestInfo);
 	}
 
 }

@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
+import nio.config.Debug;
+import nio.util.LangUtil;
+
 import mpcs.utils.MoreUtils;
 
 /**
@@ -38,6 +41,9 @@ public final class Writer extends Thread {
                 write(key);
             }
             catch (Exception e) {
+            	if (Debug.printException) {
+					e.printStackTrace();
+				}
                 continue;
             }
         }
@@ -56,7 +62,7 @@ public final class Writer extends Thread {
                 notifier.fireDoWrite((Request)key.attachment(), response);
                 
                 notifier.fireDoClosed((Request)key.attachment());
-                MoreUtils.trace(key.attachment());
+                MoreUtils.trace(key.attachment(), Debug.printTestInfo);
                 
                 // 一次请求处理完毕，关闭连接（短连接）
                 sc.finishConnect();
@@ -65,8 +71,11 @@ public final class Writer extends Thread {
 			}
         }
         catch (Exception e) {
-        	MoreUtils.trace(key.isValid() + "   " + key.isConnectable());
-            notifier.fireDoError("Error occured in Writer: " + e.getMessage());
+        	if (Debug.printException) {
+				e.printStackTrace();
+			}
+        	MoreUtils.trace(key.isValid() + "   " + key.isConnectable(), Debug.printTestInfo);
+            notifier.fireDoError(LangUtil.get("10017") + e.getMessage());
         }
     }
     
@@ -79,7 +88,7 @@ public final class Writer extends Thread {
             pool.add(pool.size(), key);
             pool.notifyAll();
         }
-        MoreUtils.trace("Write poolSize: "+ getWritePoolSize());
+        MoreUtils.trace(LangUtil.get("10018")+ getWritePoolSize(), Debug.printSystem);
     }
     
     /**

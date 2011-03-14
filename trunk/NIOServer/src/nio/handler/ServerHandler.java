@@ -1,6 +1,7 @@
 package nio.handler;
 
 import mpcs.utils.MoreUtils;
+import nio.config.Debug;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.ListenAdapter;
@@ -34,7 +35,7 @@ public class ServerHandler extends ListenAdapter {
     	int command = request.getCommand();
     	// 无效的请求（应该在客户端屏蔽掉，提示操作无效）
     	if (!MoreUtils.isCommand(command)) {
-    		MoreUtils.trace(LangUtil.get("10003") + command + LangUtil.get("10004"));
+    		MoreUtils.trace(LangUtil.get("10003") + command + LangUtil.get("10004"), Debug.printSystem);
 		}
 //    	MoreUtils.trace("#onWrite()");
     }

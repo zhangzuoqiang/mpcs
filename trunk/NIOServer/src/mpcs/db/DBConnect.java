@@ -4,6 +4,9 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import nio.config.Debug;
+import nio.util.LangUtil;
+
 import mpcs.utils.MoreUtils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -32,11 +35,11 @@ public class DBConnect {
 			ds.setPassword("zzq");
 			
 			// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间
-			ds.setInitialPoolSize(30);
+			ds.setInitialPoolSize(100);
 			// 连接池中保留的最大连接数
-			ds.setMaxPoolSize(15);
+			ds.setMaxPoolSize(200);
 			// 
-			ds.setMinPoolSize(20);
+			ds.setMinPoolSize(50);
 			// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数
 			ds.setAcquireIncrement(3);
 			// 每60秒检查所有连接池中的空闲连接
@@ -56,7 +59,9 @@ public class DBConnect {
 			ds.setNumHelperThreads(3);
 			
 		} catch (PropertyVetoException e) {
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
 		}
     }
 	
@@ -69,8 +74,10 @@ public class DBConnect {
 			try {
 				instance = new DBConnect();
 			} catch (Exception e) {
-				e.printStackTrace();
-				MoreUtils.trace("Error occured in DBConnect.");
+				if (Debug.printException) {
+					e.printStackTrace();
+				}
+				MoreUtils.trace(LangUtil.get("10007"), Debug.printException);
 			}
 		}
 		return instance;
@@ -84,7 +91,9 @@ public class DBConnect {
         try {
             con = ds.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	if (Debug.printException) {
+				e.printStackTrace();
+			}
         }
         return con;
     }

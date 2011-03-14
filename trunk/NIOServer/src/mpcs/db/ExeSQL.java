@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import nio.config.Debug;
+
 import mpcs.utils.MoreUtils;
 
 
@@ -38,7 +40,9 @@ public final class ExeSQL {
 				isExist = rs.getString(2);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
 		}finally{
 			closeAll();
 		}
@@ -59,7 +63,9 @@ public final class ExeSQL {
 			 stmt = conn.createStatement();
 			 succ = stmt.execute(SQLangs.addUser(email, pwd));
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
 		}finally{
 			closeAll();
 		}
@@ -87,7 +93,9 @@ public final class ExeSQL {
 				 pwdStr = rs.getString(1);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
 		}finally{
 			closeAll();
 		}
@@ -102,7 +110,10 @@ public final class ExeSQL {
             try {
                 rs.close();
             } catch (Exception e) {
-            	MoreUtils.trace("closeAll1");
+            	if (Debug.printException) {
+    				e.printStackTrace();
+    			}
+            	MoreUtils.trace("closeAll1", Debug.printException);
             }
         }
         
@@ -110,7 +121,10 @@ public final class ExeSQL {
             try {
                 stmt.close();
             } catch (Exception e) {
-            	MoreUtils.trace("closeAll2");
+            	if (Debug.printException) {
+    				e.printStackTrace();
+    			}
+            	MoreUtils.trace("closeAll2", Debug.printException);
             }
         }
         
@@ -118,7 +132,10 @@ public final class ExeSQL {
             try {
                 conn.close();
             } catch (Exception e) {
-            	MoreUtils.trace("closeAll3");
+            	if (Debug.printException) {
+    				e.printStackTrace();
+    			}
+            	MoreUtils.trace("closeAll3", Debug.printException);
             }
         }
 	}

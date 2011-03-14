@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import nio.config.Debug;
+
 import mpcs.utils.MoreUtils;
 
 /**
@@ -23,14 +25,20 @@ public class LoadResUtil {
 		try {
 			in = new FileInputStream("resources/locale/zh_CN/lang.properties");
 		} catch (FileNotFoundException e) {
-			MoreUtils.trace(LangUtil.get("10005"));
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			MoreUtils.trace(LangUtil.get("10005"), Debug.printTestInfo);
 			System.exit(0);
 		}
 		
 		try {
 			res.load(in);
 		} catch (IOException e) {
-			MoreUtils.trace(LangUtil.get("10006"));
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+			MoreUtils.trace(LangUtil.get("10006"), Debug.printTestInfo);
 		}
 	}
 	

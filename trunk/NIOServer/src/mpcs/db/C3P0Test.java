@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import nio.config.Debug;
+
 import mpcs.utils.MoreUtils;
 
 /**
@@ -30,7 +32,7 @@ public class C3P0Test {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
-            MoreUtils.trace(rs.getString(1));
+            MoreUtils.trace(rs.getString(1), Debug.printTestInfo);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
