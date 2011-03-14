@@ -1,7 +1,6 @@
 package nio.interfaces;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 
 /**
  * <p>Title: </p>
@@ -11,55 +10,54 @@ import java.net.InetSocketAddress;
  */
 public interface ISession {
 	
-	public enum SessionStatus {
-		NULL, READING, WRITING, IDLE, INITIALIZE, CLOSING, CLOSED
+	/**Session状态**/
+	public static enum SessionStatus {
+		NULL, READING, WRITING, IDLE, CLOSED
 		}
 	
 	/**
-	 * 启动session
+	 * 获取状态
 	 */
-	public void start();
+	public SessionStatus getStatus();
+	
+	/**
+	 * 设置状态
+	 * @param status
+	 */
+	public void setStatus(SessionStatus status);
 
 	/**
-	 * Check if session is closed
+	 * 检查session是否关闭
 	 * @return
 	 */
 	public boolean isClosed();
 
 	/**
-	 * Close session
+	 * 关闭session
 	 */
 	public void close();
-
-	/**
-	 * Return the remote end's InetSocketAddress
-	 * @return
-	 */
-	public InetSocketAddress getRemoteSocketAddress();
-
-	public InetAddress getLocalAddress();
 	
 	/**
-	 * Return true if session is expired,session is expired beacause you set the
-	 * sessionTimeout,if since session's last operation form now is over this
-	 * vlaue,isExpired return true,and Handler.onExpired() will be invoked.
+	 * 获取客户端地址
+	 * @return
+	 */
+	public InetAddress getClientAddr();
+	
+	/**
+	 * 是否过期
 	 * @return
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Check if session is idle
+	 * 是否空闲
 	 * @return
 	 */
 	public boolean isIdle();
+	
+	/**
+	 * 更新连接时间
+	 */
+	public void updateTime();
 
-	public long getSessionIdleTimeout();
-
-	public void setSessionIdleTimeout(long sessionIdleTimeout);
-
-	public long getSessionTimeout();
-
-	public void setSessionTimeout(long sessionTimeout);
-
-	public Object setAttributeIfAbsent(String key, Object value);
 }
