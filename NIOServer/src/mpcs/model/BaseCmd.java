@@ -37,7 +37,6 @@ public class BaseCmd implements ICmd , IWrite{
 	/**
 	 * 发送错误消息
 	 * @param typeID
-	 * @param head1
 	 * @param head2
 	 */
 	public BaseCmd(int typeID, int head2){

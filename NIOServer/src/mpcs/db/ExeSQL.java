@@ -7,6 +7,7 @@ import java.sql.Statement;
 import nio.config.Debug;
 
 import mpcs.utils.MoreUtils;
+import mpcs.vo.BasicInfoVO;
 
 
 /**
@@ -21,6 +22,40 @@ public final class ExeSQL {
 	private static Connection conn = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
+	
+	
+	public static BasicInfoVO selectBasicInfoByEmail(String email){
+		BasicInfoVO vo = null;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLangs.selectBasicInfoByEmail(email));
+			 rs.next();
+			 if (rs.getRow() == 0) {
+				 vo = null;
+			}else {
+				vo = new BasicInfoVO();
+				vo.setEmail(rs.getString(1));
+				vo.setUserName(rs.getString(2));
+				vo.setGender(rs.getString(3));
+				vo.setBirthday(rs.getString(4));
+				vo.setBloodType(rs.getString(5));
+				vo.setMarriage(rs.getString(6));
+				vo.setCareer(rs.getString(7));
+				vo.setEducation(rs.getString(8));
+				vo.setResidence(rs.getString(9));
+				vo.setHome(rs.getString(10));
+				vo.setIdCard(rs.getString(11));
+			}
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return vo;
+	}
 	
 	/**
 	 * 验证此邮箱是否已注册，如果注册过了则返回该邮箱对应的密码
