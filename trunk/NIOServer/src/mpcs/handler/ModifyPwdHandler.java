@@ -23,7 +23,7 @@ public class ModifyPwdHandler extends ListenAdapter {
 			// 读取email以及newpwd
 			String email = request.getPacket().readString();
 			String newpwd = request.getPacket().readString();
-			if (isModPwdRight(email, newpwd)) {
+			if (updatePwd(email, newpwd)) {
 				// 修改密码成功
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_MODIFY_PWD);
 				cmd.writeString(LangUtil.get("20008"));
@@ -43,7 +43,7 @@ public class ModifyPwdHandler extends ListenAdapter {
 	 * @param pwd
 	 * @return
 	 */
-	private boolean isModPwdRight(String email, String pwd){
+	private boolean updatePwd(String email, String pwd){
 		if (!ExeSQL.updatePwd(email, pwd)) {
 			return true;
 		}

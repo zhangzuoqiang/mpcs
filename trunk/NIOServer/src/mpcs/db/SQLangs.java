@@ -1,5 +1,7 @@
 package mpcs.db;
 
+import mpcs.vo.BasicInfoVO;
+
 /**
  * <p>Title: 存放所有SQL语句</p>
  * <p>Description: </p>
@@ -8,7 +10,17 @@ package mpcs.db;
  */
 public final class SQLangs {
 	
-	
+	/**
+	 * 通过email，保存用户基本信息
+	 * @param vo
+	 * @return
+	 */
+	public static String saveBasicInfo(BasicInfoVO vo){
+		return "update user set realname = '" + vo.getUserName() + "', gender = '" + vo.getGender() + 
+		"', birthday = '" + vo.getBirthday() + "', bloodtype = '" + vo.getBloodType() + "', marstatus = '" + vo.getMarriage()
+		+ "', job = '" +vo.getCareer() + "', education = '" +vo.getEducation() + "', residence = '" +vo.getResidence() 
+		+ "', hometown = '" + vo.getHome() + "', idcard = '" + vo.getIdCard() + "' where email = '" + vo.getEmail() + "'";
+	}
 	/**
 	 * 通过email，修改密码
 	 * @param email
