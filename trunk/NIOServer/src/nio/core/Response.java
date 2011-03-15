@@ -11,7 +11,7 @@ import mpcs.model.BaseCmd;
  * <p>Title: 回应器</p>
  * <p>Description: 封装向客户端发送的数据</p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-12
+ * <br/>Date: 2011-3-6
  */
 public class Response {
 	// 写回客户端的key

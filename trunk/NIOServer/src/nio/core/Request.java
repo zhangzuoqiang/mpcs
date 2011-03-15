@@ -9,7 +9,7 @@ import mpcs.model.BaseMsg;
  * <p>Title: 封装客户端请求的信息</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-12
+ * <br/>Date: 2011-3-6
  */
 public class Request {
 	// 请求通道

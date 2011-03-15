@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import nio.config.Debug;
 import nio.config.ServerConfig;
-import nio.util.HandlerUtil;
+import nio.manager.HandlerManager;
 import nio.util.LangUtil;
 
 import mpcs.utils.MoreUtils;
@@ -21,7 +21,7 @@ import mpcs.utils.MoreUtils;
  * <p>Title: 主控服务线程</p>
  * <p>Description: 基于事件回调的 NIO 多线程服务器模型</p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-10
+ * <br/>Date: 2011-3-6
  */
 public class NIOServerManager implements Runnable {
 	
@@ -39,7 +39,7 @@ public class NIOServerManager implements Runnable {
     public NIOServerManager(int port) throws Exception {
     	
     	// 注册Handler
-    	HandlerUtil.AddHandlerListener();
+    	HandlerManager.AddHandlerListener();
     	
         this.port = port;
         // 获取事件触发器
