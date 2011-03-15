@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * 工具类
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-8
+ * <br/>Date: 2011-3-6
  */
 public final class MoreUtils {
 	

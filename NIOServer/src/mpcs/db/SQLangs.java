@@ -4,7 +4,7 @@ package mpcs.db;
  * <p>Title: 存放所有SQL语句</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-7
+ * <br/>Date: 2011-3-8
  */
 public final class SQLangs {
 	

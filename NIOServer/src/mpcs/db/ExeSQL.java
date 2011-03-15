@@ -11,10 +11,10 @@ import mpcs.vo.BasicInfoVO;
 
 
 /**
- * <p>Title: 数据库操作工具类</p>
+ * <p>Title: 执行数据库操作的类</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-7
+ * <br/>Date: 2011-3-8
  */
 public final class ExeSQL {
 

@@ -24,13 +24,10 @@ public final class Writer extends Thread {
     public Writer() {
     }
     
-    /**
-     * SMS发送线程主控服务方法,负责调度整个处理过程
-     */
     public void run() {
         while (true) {
             try {
-                SelectionKey key;
+                SelectionKey key = null;
                 synchronized (pool) {
                     while (pool.isEmpty()) {
                         pool.wait();

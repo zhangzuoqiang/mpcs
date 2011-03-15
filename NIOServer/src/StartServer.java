@@ -8,7 +8,7 @@ import nio.core.NIOServerManager;
  * <p>Title: 服务器 启动类</p>
  * <p>Description: 用来启动主服务线程，以及注册业务处理器</p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-8
+ * <br/>Date: 2011-3-7
  */
 public class StartServer {
 
