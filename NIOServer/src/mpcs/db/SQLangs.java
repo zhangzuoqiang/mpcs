@@ -1,6 +1,6 @@
 package mpcs.db;
 
-import mpcs.vo.BasicInfoVO;
+import mpcs.vo.UserVO;
 
 /**
  * <p>Title: 存放所有SQL语句</p>
@@ -15,11 +15,11 @@ public final class SQLangs {
 	 * @param vo
 	 * @return
 	 */
-	public static String saveBasicInfo(BasicInfoVO vo){
-		return "update user set realname = '" + vo.getUserName() + "', gender = '" + vo.getGender() + 
-		"', birthday = '" + vo.getBirthday() + "', bloodtype = '" + vo.getBloodType() + "', marstatus = '" + vo.getMarriage()
-		+ "', job = '" +vo.getCareer() + "', education = '" +vo.getEducation() + "', residence = '" +vo.getResidence() 
-		+ "', hometown = '" + vo.getHome() + "', idcard = '" + vo.getIdCard() + "' where email = '" + vo.getEmail() + "'";
+	public static String saveBasicInfo(UserVO vo){
+		return "update user set realname = '" + vo.getBasicInfo().getUserName() + "', gender = '" + vo.getBasicInfo().getGender() + 
+		"', birthday = '" + vo.getBasicInfo().getBirthday() + "', bloodtype = '" + vo.getBasicInfo().getBloodType() + "', marstatus = '" + vo.getBasicInfo().getMarriage()
+		+ "', job = '" +vo.getBasicInfo().getCareer() + "', education = '" +vo.getBasicInfo().getEducation() + "', residence = '" +vo.getBasicInfo().getResidence() 
+		+ "', hometown = '" + vo.getBasicInfo().getHome() + "', idcard = '" + vo.getBasicInfo().getIdCard() + "' where email = '" + vo.getEmail() + "'";
 	}
 	/**
 	 * 通过email，修改密码

@@ -1,6 +1,6 @@
 package mpcs.model;
 
-import mpcs.vo.BasicInfoVO;
+import mpcs.vo.UserVO;
 
 /**
  * <p>Title: 返回客户端 用户基本信息</p>
@@ -17,7 +17,7 @@ public class BasicInfoCmd extends BaseCmd {
 	 * 返回客户端  用户联系信息 类型  构造方法
 	 * @param typeID*  消息号
 	 */
-	public BasicInfoCmd(int typeID, BasicInfoVO vo) {
+	public BasicInfoCmd(int typeID, UserVO vo) {
 		super(typeID);
 		writeBody(vo);
 	}
@@ -35,18 +35,18 @@ public class BasicInfoCmd extends BaseCmd {
 	 * 写入BasicInfoVO消息体
 	 * @param vo
 	 */
-	private void writeBody(BasicInfoVO vo){
+	private void writeBody(UserVO vo){
 		packet.writeString(vo.getEmail());
-		packet.writeString(vo.getUserName());
-		packet.writeString(vo.getGender());
-		packet.writeString(vo.getBirthday());
-		packet.writeString(vo.getBloodType());
-		packet.writeString(vo.getMarriage());
-		packet.writeString(vo.getCareer());
-		packet.writeString(vo.getEducation());
-		packet.writeString(vo.getResidence());
-		packet.writeString(vo.getHome());
-		packet.writeString(vo.getIdCard());
+		packet.writeString(vo.getBasicInfo().getUserName());
+		packet.writeString(vo.getBasicInfo().getGender());
+		packet.writeString(vo.getBasicInfo().getBirthday());
+		packet.writeString(vo.getBasicInfo().getBloodType());
+		packet.writeString(vo.getBasicInfo().getMarriage());
+		packet.writeString(vo.getBasicInfo().getCareer());
+		packet.writeString(vo.getBasicInfo().getEducation());
+		packet.writeString(vo.getBasicInfo().getResidence());
+		packet.writeString(vo.getBasicInfo().getHome());
+		packet.writeString(vo.getBasicInfo().getIdCard());
 	}
 
 }

@@ -6,7 +6,7 @@ package mpcs.vo;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-14
  */
-public class BasicInfoVO extends UserVO {
+public class BasicInfoVO {
 	
 	private String userName;
 	private String gender;
