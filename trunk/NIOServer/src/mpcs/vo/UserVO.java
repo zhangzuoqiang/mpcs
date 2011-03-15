@@ -10,7 +10,26 @@ public class UserVO {
 	
 	private String email;
 	private String password;
+	private BasicInfoVO basicInfo;
+	private ContactInfoVO contactInfo;
 	
+	public UserVO(){
+		basicInfo = new BasicInfoVO();
+		contactInfo = new ContactInfoVO();
+	}
+	
+	public BasicInfoVO getBasicInfo() {
+		return basicInfo;
+	}
+	public void setBasicInfo(BasicInfoVO basicInfo) {
+		this.basicInfo = basicInfo;
+	}
+	public ContactInfoVO getContactInfo() {
+		return contactInfo;
+	}
+	public void setContactInfo(ContactInfoVO contactInfo) {
+		this.contactInfo = contactInfo;
+	}
 	public String getEmail() {
 		return email;
 	}

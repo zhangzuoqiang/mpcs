@@ -5,7 +5,7 @@ import mpcs.config.GlobalErrorConst;
 import mpcs.db.ExeSQL;
 import mpcs.model.BaseCmd;
 import mpcs.model.BasicInfoCmd;
-import mpcs.vo.BasicInfoVO;
+import mpcs.vo.UserVO;
 import nio.core.Request;
 import nio.core.Response;
 import nio.manager.ListenAdapter;
@@ -19,7 +19,7 @@ import nio.util.LangUtil;
  */
 public class BaseInfoHandler extends ListenAdapter {
 	
-	private BasicInfoVO vo = null;
+	private UserVO vo = null;
 	
 	public BaseInfoHandler(){
 	}
@@ -37,18 +37,18 @@ public class BaseInfoHandler extends ListenAdapter {
 			}
         	return;
         }else if(command == GlobalConst.C_USER_SAVE_BASIC_INFO){// 保存用户基本信息
-        	vo = new BasicInfoVO();
+        	vo = new UserVO();
         	vo.setEmail(request.getPacket().readString());
-			vo.setUserName(request.getPacket().readString());
-			vo.setGender(request.getPacket().readString());
-			vo.setBirthday(request.getPacket().readString());
-			vo.setBloodType(request.getPacket().readString());
-			vo.setMarriage(request.getPacket().readString());
-			vo.setCareer(request.getPacket().readString());
-			vo.setEducation(request.getPacket().readString());
-			vo.setResidence(request.getPacket().readString());
-			vo.setHome(request.getPacket().readString());
-			vo.setIdCard(request.getPacket().readString());
+			vo.getBasicInfo().setUserName(request.getPacket().readString());
+			vo.getBasicInfo().setGender(request.getPacket().readString());
+			vo.getBasicInfo().setBirthday(request.getPacket().readString());
+			vo.getBasicInfo().setBloodType(request.getPacket().readString());
+			vo.getBasicInfo().setMarriage(request.getPacket().readString());
+			vo.getBasicInfo().setCareer(request.getPacket().readString());
+			vo.getBasicInfo().setEducation(request.getPacket().readString());
+			vo.getBasicInfo().setResidence(request.getPacket().readString());
+			vo.getBasicInfo().setHome(request.getPacket().readString());
+			vo.getBasicInfo().setIdCard(request.getPacket().readString());
 			if (saveBasicInfo(vo)) {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_SAVE_BASIC_INFO);
 				cmd.writeString(LangUtil.get("20010"));
@@ -66,7 +66,7 @@ public class BaseInfoHandler extends ListenAdapter {
 	 * @param vo
 	 * @return
 	 */
-	private boolean saveBasicInfo(BasicInfoVO vo){
+	private boolean saveBasicInfo(UserVO vo){
 		if (!ExeSQL.saveBasicInfo(vo)) {
 			return true;
 		}

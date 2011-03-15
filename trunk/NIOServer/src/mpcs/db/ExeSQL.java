@@ -7,7 +7,7 @@ import java.sql.Statement;
 import nio.config.Debug;
 
 import mpcs.utils.MoreUtils;
-import mpcs.vo.BasicInfoVO;
+import mpcs.vo.UserVO;
 
 
 /**
@@ -29,7 +29,7 @@ public final class ExeSQL {
 	 * @param vo
 	 * @return
 	 */
-	public static boolean saveBasicInfo(BasicInfoVO vo){
+	public static boolean saveBasicInfo(UserVO vo){
 		boolean flag = false;
 		try {
 			 conn = cm.getConnection();
@@ -70,8 +70,8 @@ public final class ExeSQL {
 	 * @param email
 	 * @return
 	 */
-	public static BasicInfoVO selectBasicInfoByEmail(String email){
-		BasicInfoVO vo = new BasicInfoVO();
+	public static UserVO selectBasicInfoByEmail(String email){
+		UserVO vo = new UserVO();
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
@@ -81,16 +81,16 @@ public final class ExeSQL {
 				 vo = null;
 			}else {
 				vo.setEmail(rs.getString(1));
-				vo.setUserName(rs.getString(2));
-				vo.setGender(rs.getString(3));
-				vo.setBirthday(rs.getString(4));
-				vo.setBloodType(rs.getString(5));
-				vo.setMarriage(rs.getString(6));
-				vo.setCareer(rs.getString(7));
-				vo.setEducation(rs.getString(8));
-				vo.setResidence(rs.getString(9));
-				vo.setHome(rs.getString(10));
-				vo.setIdCard(rs.getString(11));
+				vo.getBasicInfo().setUserName(rs.getString(2));
+				vo.getBasicInfo().setGender(rs.getString(3));
+				vo.getBasicInfo().setBirthday(rs.getString(4));
+				vo.getBasicInfo().setBloodType(rs.getString(5));
+				vo.getBasicInfo().setMarriage(rs.getString(6));
+				vo.getBasicInfo().setCareer(rs.getString(7));
+				vo.getBasicInfo().setEducation(rs.getString(8));
+				vo.getBasicInfo().setResidence(rs.getString(9));
+				vo.getBasicInfo().setHome(rs.getString(10));
+				vo.getBasicInfo().setIdCard(rs.getString(11));
 			}
 		} catch (Exception e) {
 			if (Debug.printException) {
