@@ -4,7 +4,7 @@ import java.net.InetAddress;
 import java.nio.channels.SocketChannel;
 
 /**
- * <p>Title: </p>
+ * <p>Title: Session接口</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-14
