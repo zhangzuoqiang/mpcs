@@ -25,6 +25,27 @@ public final class ExeSQL {
 	
 	
 	/**
+	 * 保存用户联系信息
+	 * @param vo
+	 * @return
+	 */
+	public static boolean saveContactInfo(UserVO vo){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.saveContactInfo(vo));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	
+	/**
 	 * 保存用户基本信息
 	 * @param vo
 	 * @return
@@ -44,6 +65,7 @@ public final class ExeSQL {
 		}
 		return flag;
 	}
+	
 	/**
 	 * 修改用户密码
 	 * @param email
@@ -65,6 +87,38 @@ public final class ExeSQL {
 		}
 		return flag;
 	}
+	
+	/**
+	 * 通过email查询联系信息
+	 * @param email
+	 * @return
+	 */
+	public static UserVO selectContactInfoByEmail(String email){
+		UserVO vo = new UserVO();
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLangs.selectContactInfoByEmail(email));
+			 rs.next();
+			 if (rs.getRow() == 0) {
+				 vo = null;
+			}else {
+				vo.getContactInfo().setQQ(rs.getString(1));
+				vo.getContactInfo().setMsn(rs.getString(2));
+				vo.getContactInfo().setMobile(rs.getString(3));
+				vo.getContactInfo().setTel(rs.getString(4));
+				vo.getContactInfo().setZip(rs.getString(5));
+			}
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return vo;
+	}
+	
 	/**
 	 * 通过email查询基本信息
 	 * @param email

@@ -11,6 +11,16 @@ import mpcs.vo.UserVO;
 public final class SQLangs {
 	
 	/**
+	 * 通过email，保存用户联系信息
+	 * @param vo
+	 * @return
+	 */
+	public static String saveContactInfo(UserVO vo){
+		return "update user set qq = '" + vo.getContactInfo().getQQ() + "', msn = '" + vo.getContactInfo().getMsn() 
+		+ "', mobile = '"+ vo.getContactInfo().getMobile() + "', tel = '" + vo.getContactInfo().getTel() + "', zip = '" +
+		vo.getContactInfo().getZip() + "' where email = '" + vo.getEmail() + "'";
+	}
+	/**
 	 * 通过email，保存用户基本信息
 	 * @param vo
 	 * @return
@@ -21,6 +31,7 @@ public final class SQLangs {
 		+ "', job = '" +vo.getBasicInfo().getCareer() + "', education = '" +vo.getBasicInfo().getEducation() + "', residence = '" +vo.getBasicInfo().getResidence() 
 		+ "', hometown = '" + vo.getBasicInfo().getHome() + "', idcard = '" + vo.getBasicInfo().getIdCard() + "' where email = '" + vo.getEmail() + "'";
 	}
+	
 	/**
 	 * 通过email，修改密码
 	 * @param email
@@ -30,8 +41,18 @@ public final class SQLangs {
 	public static String updatePwd(String email, String newpwd){
 		return "update user set password = '" + newpwd + "' where email = '" + email + "'";
 	}
+	
 	/**
-	 * 查询email，是否存在此用户
+	 * 根据email，查询用户联系信息
+	 * @param email
+	 * @return
+	 */
+	public static String selectContactInfoByEmail(String email){
+		return "select qq, msn, mobile, tel, zip from user where email = '" + email + "'";
+	}
+	
+	/**
+	 * 根据email，查询用户基本信息
 	 * @param email
 	 * @return
 	 */

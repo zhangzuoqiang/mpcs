@@ -34,18 +34,12 @@ public class UserVO {
 		return email;
 	}
 	public void setEmail(String email) {
-		if (email == null) {
-			email = "";
-		}
 		this.email = email;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
-		if (password == null) {
-			password = "";
-		}
 		this.password = password;
 	}
 }
