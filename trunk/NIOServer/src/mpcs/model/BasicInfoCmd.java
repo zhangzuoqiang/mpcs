@@ -2,6 +2,12 @@ package mpcs.model;
 
 import mpcs.vo.BasicInfoVO;
 
+/**
+ * <p>Title: 返回客户端 用户基本信息</p>
+ * <p>Description: </p>
+ * @author zhangzuoqiang
+ * <br/>Date: 2011-3-14
+ */
 public class BasicInfoCmd extends BaseCmd {
 
 	/****/

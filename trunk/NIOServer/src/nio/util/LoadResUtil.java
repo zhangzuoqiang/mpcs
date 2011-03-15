@@ -13,7 +13,7 @@ import mpcs.utils.MoreUtils;
  * <p>Title: 加载服务器资源文件，单例模式</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-13
+ * <br/>Date: 2011-3-12
  */
 public class LoadResUtil {
 	

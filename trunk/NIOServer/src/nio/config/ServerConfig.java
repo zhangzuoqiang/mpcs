@@ -3,7 +3,7 @@ package nio.config;
 /**
  * 服务器配置类
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-6
+ * <br/>Date: 2011-3-7
  */
 public class ServerConfig {
 	/**本地字符集**/
