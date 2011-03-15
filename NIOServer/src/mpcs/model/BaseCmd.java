@@ -9,7 +9,7 @@ import mpcs.interfaces.IWrite;
  * <p>Title: 返回客户端 基本消息类型</p>
  * <p>Description: 包含了一条消息的基本内容</p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-12
+ * <br/>Date: 2011-3-13
  */
 public class BaseCmd implements ICmd , IWrite{
 

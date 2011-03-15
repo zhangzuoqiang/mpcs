@@ -4,7 +4,7 @@ package mpcs.interfaces;
  * <p>Title: 写数据返回客户端 接口</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-12
+ * <br/>Date: 2011-3-13
  */
 public interface IWrite {
 	
