@@ -1,4 +1,4 @@
-package nio.util;
+package nio.manager;
 
 import mpcs.handler.BaseInfoHandler;
 import mpcs.handler.BindMobileHandler;
@@ -18,6 +18,7 @@ import nio.core.Notifier;
 import nio.handler.LogHandler;
 import nio.handler.ServerHandler;
 import nio.handler.TimeHandler;
+import nio.util.LangUtil;
 
 /**
  * <p>Title: Handler工具类</p>
@@ -25,7 +26,7 @@ import nio.handler.TimeHandler;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-6
  */
-public final class HandlerUtil{
+public final class HandlerManager{
 	
 	
 	public static void AddHandlerListener(){

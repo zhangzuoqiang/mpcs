@@ -14,7 +14,7 @@ import nio.manager.ListenAdapter;
  * <p>Title: 客户端请求服务端时间 事件处理</p>
  * <p>Description: </p>
  * @author zhangzuoqiang
- * <br/>Date: 2011-3-6
+ * <br/>Date: 2011-3-7
  */
 public class TimeHandler extends ListenAdapter {
 	
