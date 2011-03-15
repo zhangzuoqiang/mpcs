@@ -13,7 +13,7 @@ import mpcs.interfaces.IWrite;
  */
 public class BaseCmd implements ICmd , IWrite{
 
-	/****/
+	/**序列化成字符串，隐藏类的字段，实现加密功能**/
 	private static final long serialVersionUID = 1L;
 	
 	/**
