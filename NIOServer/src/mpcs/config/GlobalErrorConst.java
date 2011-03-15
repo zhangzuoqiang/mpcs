@@ -23,4 +23,6 @@ public class GlobalErrorConst {
 	public static final int E_PASSWORD_WRONG = -10202;
 	/**执行修改密码错误**/
 	public static final int E_MODIFY_PASSWORD_WRONG = -20501;
+	/**保存用户基本信息错误**/
+	public static final int E_SAVE_USER_BASIC_INFO = -20201;
 }

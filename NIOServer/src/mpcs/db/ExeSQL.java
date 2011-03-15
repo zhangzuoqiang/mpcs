@@ -24,6 +24,32 @@ public final class ExeSQL {
 	private static ResultSet rs = null;
 	
 	
+	/**
+	 * 保存用户基本信息
+	 * @param vo
+	 * @return
+	 */
+	public static boolean saveBasicInfo(BasicInfoVO vo){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.saveBasicInfo(vo));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	/**
+	 * 修改用户密码
+	 * @param email
+	 * @param newpwd
+	 * @return
+	 */
 	public static boolean updatePwd(String email, String newpwd){
 		boolean flag = false;
 		try {
