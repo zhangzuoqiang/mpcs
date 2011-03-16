@@ -63,6 +63,12 @@ public final class GlobalConst {
 	public static final int S_ADD_BIND_MOBILE = 500206;
 	
 	/**
+	 * 请求绑定手机列表
+	 */
+	public static final int C_BIND_MOBILE_LIST = 100209;
+	public static final int S_BIND_MOBILE_LIST = 500209;
+	
+	/**
 	 * 设定位置
 	 */
 	public static final int C_SET_POSITION = 100207;
@@ -85,6 +91,8 @@ public final class GlobalConst {
 	 */
 	public static final int C_RECEIVE_BOX = 100401;
 	public static final int S_RECEIVE_BOX = 500401;
+	
+	
 	
 	
 }

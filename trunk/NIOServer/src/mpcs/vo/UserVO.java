@@ -1,5 +1,7 @@
 package mpcs.vo;
 
+import java.util.ArrayList;
+
 /**
  * <p>Title: 用户实体类</p>
  * <p>Description: </p>
@@ -12,12 +14,20 @@ public class UserVO {
 	private String password;
 	private BasicInfoVO basicInfo;
 	private ContactInfoVO contactInfo;
+	private ArrayList<PhoneVO> phones;
 	
 	public UserVO(){
 		basicInfo = new BasicInfoVO();
 		contactInfo = new ContactInfoVO();
+		phones = new ArrayList<PhoneVO>();
 	}
 	
+	public ArrayList<PhoneVO> getPhones() {
+		return phones;
+	}
+	public void setPhones(ArrayList<PhoneVO> phones) {
+		this.phones = phones;
+	}
 	public BasicInfoVO getBasicInfo() {
 		return basicInfo;
 	}

@@ -9,22 +9,26 @@ package mpcs.config;
 public class GlobalErrorConst {
 
 	/**全局错误标志**/
-	public static final int GLOBAL_ERROR= 9;
+	public static final int GLOBAL_ERROR = 9;
 	
-	/**客户端发送的是空消息**/
-	public static final int E_SEND_EMPTY = -99999;	
-	/**此邮箱已注册**/
-	public static final int E_USER_REGISTER = -10101;	
-	/**注册用户失败，操作数据库添加用户时发生**/
-	public static final int E_ADD_USER_FAILED = -10102;	
-	/**不存在此用户**/
-	public static final int E_NO_THIS_USER = -10201;	
-	/**密码错误**/
-	public static final int E_PASSWORD_WRONG = -10202;
-	/**保存用户基本信息错误**/
-	public static final int E_SAVE_USER_BASIC_INFO = -20201;
-	/**保存用户联系信息错误**/
-	public static final int E_SAVE_USER_CONTACT_INFO = -20401;
+	
+	
+	/**请求绑定手机列表错误**/
+	public static final int E_NULL_BIND_MOBILE_LIST = -20901;
 	/**执行修改密码错误**/
 	public static final int E_MODIFY_PASSWORD_WRONG = -20501;
+	/**保存用户联系信息错误**/
+	public static final int E_SAVE_USER_CONTACT_INFO = -20401;
+	/**保存用户基本信息错误**/
+	public static final int E_SAVE_USER_BASIC_INFO = -20201;
+	/**密码错误**/
+	public static final int E_PASSWORD_WRONG = -10202;
+	/**不存在此用户**/
+	public static final int E_NO_THIS_USER = -10201;		
+	/**注册用户失败，操作数据库添加用户时发生**/
+	public static final int E_ADD_USER_FAILED = -10102;	
+	/**此邮箱已注册**/
+	public static final int E_USER_REGISTER = -10101;	
+	/**客户端发送的是空消息**/
+	public static final int E_SEND_EMPTY = -99999;	
 }

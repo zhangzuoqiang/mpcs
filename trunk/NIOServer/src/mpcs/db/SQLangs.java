@@ -11,6 +11,16 @@ import mpcs.vo.UserVO;
 public final class SQLangs {
 	
 	/**
+	 * 根据email，查询用户联系信息
+	 * @param email
+	 * @return
+	 */
+	public static String selectPhoneVOsByEmail(String email){
+		return "select phoneID, relationship, status, belongto, begintime, type, longitude, " +
+				"latitude, radius from phone where email = '" + email + "'";
+	}
+	
+	/**
 	 * 通过email，保存用户联系信息
 	 * @param vo
 	 * @return
