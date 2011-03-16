@@ -3,10 +3,12 @@ package mpcs.db;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import nio.config.Debug;
 
 import mpcs.utils.MoreUtils;
+import mpcs.vo.PhoneVO;
 import mpcs.vo.UserVO;
 
 
@@ -23,6 +25,40 @@ public final class ExeSQL {
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
 	
+	
+	/**
+	 * 根据email，查询绑定手机列表
+	 * @param email
+	 * @return
+	 */
+	public static ArrayList<PhoneVO> selectPhoneVOs(String email){
+		ArrayList<PhoneVO> list = new ArrayList<PhoneVO>();
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLangs.selectPhoneVOsByEmail(email));
+			 while (rs.next()) {
+				 PhoneVO phone = new PhoneVO();
+				 phone.setPhoneID(rs.getString(1));
+				 phone.setRelationship(rs.getString(2));
+				 phone.setStatus(rs.getString(3));
+				 phone.setBelongto(rs.getString(4));
+				 phone.setBegintime(rs.getString(5));
+				 phone.setType(rs.getString(6));
+				 phone.setLongitude(rs.getString(7));
+				 phone.setLatitude(rs.getString(8));
+				 phone.setRadius(rs.getString(9));
+				 list.add(phone);
+			}
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return list;
+	}
 	
 	/**
 	 * 保存用户联系信息
