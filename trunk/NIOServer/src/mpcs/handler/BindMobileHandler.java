@@ -111,13 +111,12 @@ public class BindMobileHandler extends ListenAdapter {
 			return 2;
 		}else if(isEnoughMoney(vo)) {// 账户余额不足
 			return 3;
-		}else {
-			if (ExeSQL.addPhoneVO(vo)) {
-				return 0;
-			}else {
-				return 4;
-			}
+		}else if (!ExeSQL.addPhoneVO(vo)) {
+			// 执行账户更改
+			ExeSQL.updateAccountByEmail(vo.getEmail(), curAccount + "");
+			return 0;
 		}
+		return 4;
 	}
 	
 	/**
@@ -129,15 +128,20 @@ public class BindMobileHandler extends ListenAdapter {
 	private boolean isExistPhone(UserVO vo, String phoneID){
 		ArrayList<PhoneVO> phoneVOs = ExeSQL.selectPhoneVOs(vo.getEmail());
 		boolean flag = false;
+		
+		//???????????????????????????????????????????????此处存在bug
 		for (PhoneVO phoneVO : phoneVOs) {
 			if (phoneVO.getPhoneID() == phoneID) {
 				flag = true;
 				break;
 			}
 		}
+		//???????????????????????????????????????????????此处存在bug
+		
 		return flag;
 	}
 	
+	private int curAccount = 0;
 	/**
 	 * 检查账户余额是否不足
 	 * @param vo
@@ -147,10 +151,11 @@ public class BindMobileHandler extends ListenAdapter {
 		// 查询账户可用余额
 		int account = ExeSQL.selectAccountByEmail(vo.getEmail());
 		int cost = JSONUtil.getVipItem(vo.getPhones().get(0).getType(), "cost");
-		if (account - cost >= 0) {
-			return true;
+		curAccount = account - cost;
+		if (curAccount >= 0) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 }

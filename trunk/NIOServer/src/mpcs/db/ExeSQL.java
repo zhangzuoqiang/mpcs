@@ -27,6 +27,28 @@ public final class ExeSQL {
 	
 	
 	/**
+	 * 添加绑定手机后的账户余额更改
+	 * @param email
+	 * @param account
+	 * @return
+	 */
+	public static boolean updateAccountByEmail(String email, String account){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.updateAccountByEmail(email, account));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	
+	/**
 	 * 根据email查询账户的可用余额
 	 * @param email
 	 * @return
