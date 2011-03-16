@@ -58,17 +58,24 @@ package test
 		 * @param body1
 		 * @param body2
 		 */
-		public function requestConnectServer(head1:int, head2:int=0, head3:int=0, body1:String="", body2:String=""):void {
+		public function requestConnectServer(head1:int, head2:int=0, head3:int=0, body1:String="", body2:String="", 
+											 body3:String="", body4:String="", body5:String="", body6:String="", body7:String="", 
+											 body8:String="", body9:String="", body10:String="", body11:String=""):void {
 			var packet:Packet = new Packet();
 			packet.writeInt(head1);// 写消息
 			packet.writeInt(head2);
 			packet.writeInt(head3);
-			if(body1 !=""){
-				packet.writeString(body1);
-			}
-			if(body2 !=""){
-				packet.writeString(body2);
-			}
+			packet.writeString(body1);
+			packet.writeString(body2);
+			packet.writeString(body3);
+			packet.writeString(body4);
+			packet.writeString(body5);
+			packet.writeString(body6);
+			packet.writeString(body7);
+			packet.writeString(body8);
+			packet.writeString(body9);
+			packet.writeString(body10);
+			packet.writeString(body11);
 			
 			net = NetPool.getInstance().getNetClient();
 			net.buildConnection();
@@ -88,6 +95,9 @@ package test
 			var h1:int = packet.readInt();
 			var h2:int = packet.readInt();
 			var h3:int = packet.readInt();
+			
+//			var len:int = packet.readInt();// 获取绑定手机的数目
+			
 			if(packet.array().bytesAvailable){
 				var body:String = packet.readString();
 			}else{
