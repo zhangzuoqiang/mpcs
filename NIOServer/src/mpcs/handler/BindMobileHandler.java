@@ -1,5 +1,7 @@
 package mpcs.handler;
 
+import java.util.ArrayList;
+
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
 import mpcs.db.ExeSQL;
@@ -49,7 +51,11 @@ public class BindMobileHandler extends ListenAdapter {
         		response.send(cmd);
 			}
         	return;
-        }else if (command == GlobalConst.C_ADD_BIND_MOBILE) {// 添加绑定手机
+        }else if (command == GlobalConst.C_ADD_BIND_MOBILE) {
+        	// 添加绑定手机
+        	UserVO vo = new UserVO();
+        	vo.setEmail(request.getPacket().readString());
+        	ArrayList<PhoneVO> phones = new ArrayList<PhoneVO>();
 			PhoneVO phone = new PhoneVO();
 			phone.setPhoneID(request.getPacket().readString());
 			phone.setRelationship(request.getPacket().readString());
@@ -60,20 +66,22 @@ public class BindMobileHandler extends ListenAdapter {
 			phone.setLongitude(request.getPacket().readString());
 			phone.setLatitude(request.getPacket().readString());
 			phone.setRadius(request.getPacket().readString());
+			phones.add(phone);
+			vo.setPhones(phones);
 			
-			if (addBindPhone(phone) == 0) {
+			if (addBindPhone(vo) == 0) {
 				// 添加绑定成功
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_ADD_BIND_MOBILE);
 				
 				response.send(cmd);
 				return;
-			}else if (addBindPhone(phone) == 1){ 
-				// 添加绑定失败,执行数据库操作错误
+			}else if (addBindPhone(vo) == 1){ 
+				// 添加绑定失败,超出所能绑定的手机号码数目
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_ADD_BIND_MOBILE, GlobalErrorConst.E_BIND_MOBILE_OVER_FLOW);
 				
 				response.send(cmd);
 				return;
-			}else if (addBindPhone(phone) == 2) {
+			}else if (addBindPhone(vo) == 2) {
 				// 添加绑定失败,该手机已存在
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_ADD_BIND_MOBILE, GlobalErrorConst.E_BIND_MOBILE_EXIST);
 				
@@ -82,8 +90,10 @@ public class BindMobileHandler extends ListenAdapter {
 		}
 	}
 	
-	private int addBindPhone(PhoneVO phone){
-		
+	private int addBindPhone(UserVO vo){
+		if (ExeSQL.selectPhoneVOs(vo.getEmail()).size() > 1) {
+			
+		}
 		return 0;
 	}
 	

@@ -27,6 +27,27 @@ public final class ExeSQL {
 	
 	
 	/**
+	 * 执行添加绑定手机
+	 * @param vo
+	 * @return
+	 */
+	public static boolean addPhoneVO(PhoneVO vo){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+//			 flag = stmt.execute(SQLangs.saveContactInfo(vo));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	
+	/**
 	 * 根据email，查询绑定手机列表
 	 * @param email
 	 * @return

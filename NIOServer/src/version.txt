@@ -6,9 +6,9 @@
 版本:110316
 *.[张作强]
 *.[张作强]
-*.[张作强]
-*.[张作强]
-*.[张作强]
+*.[张作强]添加与配置文件相关的配置相关类Configs
+*.[张作强]实现操作json配置文件的工具类JSONUtil
+*.[张作强]添加会员配置文件vip.json
 *.[张作强]测试BindMobileHandler，接受请求/发送数据正常
 *.[张作强]实现请求绑定手机列表，添加绑定手机事件处理BindMobileHandler
 *.[张作强]实现绑定手机实体类PhoneVO，并在UserVO中添加ArrayList<PhoneVO>
