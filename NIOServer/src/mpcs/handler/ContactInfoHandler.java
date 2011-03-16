@@ -19,10 +19,9 @@ import nio.util.LangUtil;
  */
 public class ContactInfoHandler extends ListenAdapter {
 	
-	private UserVO vo = new UserVO();
-	
 	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
+		UserVO vo = new UserVO();
         if (command == GlobalConst.C_USER_CONTACT_INFO) {// 请求用户联系信息
         	// 读取email
         	vo.setEmail(request.getPacket().readString());
@@ -31,6 +30,7 @@ public class ContactInfoHandler extends ListenAdapter {
         	if (vo != null) {
         		ContactInfoCmd cmd = new ContactInfoCmd(GlobalConst.S_USER_CONTACT_INFO, vo);
             	response.send(cmd);
+            	return;
 			}
         	return;
         }else if(command == GlobalConst.C_USER_SAVE_CONTACT_INFO){// 保存用户联系信息
@@ -44,6 +44,7 @@ public class ContactInfoHandler extends ListenAdapter {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_SAVE_CONTACT_INFO);
 				cmd.writeString(LangUtil.get("20012"));
 				response.send(cmd);
+				return;
 			}else {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_SAVE_CONTACT_INFO, GlobalErrorConst.E_SAVE_USER_CONTACT_INFO);
 				cmd.writeString(LangUtil.get("20013"));

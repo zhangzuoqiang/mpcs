@@ -18,13 +18,9 @@ import nio.util.LangUtil;
  */
 public class RegisterHandler extends ListenAdapter {
 	
-	private UserVO vo = null;
-	
-	public RegisterHandler(){
-	}
-	
 	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
+		UserVO vo = null;
         if (command == GlobalConst.C_USER_REGISTER) {
         	vo = new UserVO();
         	vo.setEmail(request.getPacket().readString());

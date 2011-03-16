@@ -12,9 +12,10 @@ public class GlobalErrorConst {
 	public static final int GLOBAL_ERROR = 9;
 	
 	
-	
-	/**请求绑定手机列表错误**/
-	public static final int E_NULL_BIND_MOBILE_LIST = -20901;
+	/**绑定手机错误-该手机已存在**/
+	public static final int E_BIND_MOBILE_EXIST = -20402;
+	/**绑定手机错误**/
+	public static final int E_BIND_MOBILE_OVER_FLOW = -20401;
 	/**执行修改密码错误**/
 	public static final int E_MODIFY_PASSWORD_WRONG = -20501;
 	/**保存用户联系信息错误**/
