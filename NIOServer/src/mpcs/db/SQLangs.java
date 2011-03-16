@@ -13,6 +13,16 @@ public final class SQLangs {
 	
 	
 	/**
+	 * 通过email，更改账户余额
+	 * @param email
+	 * @param account
+	 * @return
+	 */
+	public static String updateAccountByEmail(String email, String account){
+		return "update user set account = '" + account + "' where email = '" + email + "';";
+	}
+	
+	/**
 	 * 根据email查询账户余额
 	 * @param email
 	 * @return
