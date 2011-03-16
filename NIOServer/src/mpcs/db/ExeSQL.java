@@ -27,16 +27,43 @@ public final class ExeSQL {
 	
 	
 	/**
+	 * 根据email查询账户的可用余额
+	 * @param email
+	 * @return
+	 */
+	public static int selectAccountByEmail(String email){
+		int money = 0;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLangs.selectAccountByEmail(email));
+			 rs.next();
+			 if (rs.getRow() == 0) {
+				 money = 0;
+			}else {
+				money = Integer.parseInt(rs.getString(1));
+			}
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return money;
+	}
+	
+	/**
 	 * 执行添加绑定手机
 	 * @param vo
 	 * @return
 	 */
-	public static boolean addPhoneVO(PhoneVO vo){
+	public static boolean addPhoneVO(UserVO vo){
 		boolean flag = false;
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
-//			 flag = stmt.execute(SQLangs.saveContactInfo(vo));
+			 flag = stmt.execute(SQLangs.addBindMobile(vo));
 		} catch (Exception e) {
 			if (Debug.printException) {
 				e.printStackTrace();
