@@ -28,6 +28,7 @@ public class ModifyPwdHandler extends ListenAdapter {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_MODIFY_PWD);
 				cmd.writeString(LangUtil.get("20008"));
 				response.send(cmd);
+				return;
 			}else {
 				// 修改密码失败
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_MODIFY_PWD, GlobalErrorConst.E_MODIFY_PASSWORD_WRONG);

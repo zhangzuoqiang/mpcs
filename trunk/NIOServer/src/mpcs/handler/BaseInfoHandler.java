@@ -19,13 +19,9 @@ import nio.util.LangUtil;
  */
 public class BaseInfoHandler extends ListenAdapter {
 	
-	private UserVO vo = null;
-	
-	public BaseInfoHandler(){
-	}
-	
 	public void doWrite(Request request, Response response) throws Exception {
 		int command = request.getCommand();
+		UserVO vo = null;
         if (command == GlobalConst.C_USER_BASIC_INFO) {// 请求用户基本信息
         	// 读取email
         	String email = request.getPacket().readString();
@@ -34,6 +30,7 @@ public class BaseInfoHandler extends ListenAdapter {
         	if (vo != null) {
         		BasicInfoCmd cmd = new BasicInfoCmd(GlobalConst.S_USER_BASIC_INFO, vo);
             	response.send(cmd);
+            	return;
 			}
         	return;
         }else if(command == GlobalConst.C_USER_SAVE_BASIC_INFO){// 保存用户基本信息
@@ -53,6 +50,7 @@ public class BaseInfoHandler extends ListenAdapter {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_SAVE_BASIC_INFO);
 				cmd.writeString(LangUtil.get("20010"));
 				response.send(cmd);
+				return;
 			}else {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_USER_SAVE_BASIC_INFO, GlobalErrorConst.E_SAVE_USER_BASIC_INFO);
 				cmd.writeString(LangUtil.get("20011"));
