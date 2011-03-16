@@ -27,6 +27,15 @@ package test
 		
 		public var body1:TextField;
 		public var body2:TextField;
+		public var body3:TextField;
+		public var body4:TextField;
+		public var body5:TextField;
+		public var body6:TextField;
+		public var body7:TextField;
+		public var body8:TextField;
+		public var body9:TextField;
+		public var body10:TextField;
+		public var body11:TextField;
 		
 		private var button:Button;
 		
@@ -55,6 +64,15 @@ package test
 			head3.text = "0";
 			body1 = MoreUtils.createTextField(body1, 90, 120, 200);
 			body2 = MoreUtils.createTextField(body2, 90, 150, 200);
+			body3 = MoreUtils.createTextField(body3, 90, 120, 200);
+			body4 = MoreUtils.createTextField(body4, 90, 150, 200);
+			body5 = MoreUtils.createTextField(body5, 90, 120, 200);
+			body6 = MoreUtils.createTextField(body6, 90, 150, 200);
+			body7 = MoreUtils.createTextField(body7, 90, 120, 200);
+			body8 = MoreUtils.createTextField(body8, 90, 150, 200);
+			body9 = MoreUtils.createTextField(body9, 90, 150, 200);
+			body10 = MoreUtils.createTextField(body10, 90, 120, 200);
+			body11 = MoreUtils.createTextField(body11, 90, 150, 200);
 			
 			button = new Button("发送");
 			button.x = 300;
@@ -90,9 +108,52 @@ package test
 			var h1:int = int(this.head1.text);
 			var h2:int = int(this.head2.text);
 			var h3:int = int(this.head3.text);
+			if(this.body1.text == null){
+				this.body1.text = "";
+			}
+			if(this.body2.text == null){
+				this.body2.text = "";
+			}
+			if(this.body3.text == null){
+				this.body3.text = "";
+			}
+			if(this.body4.text == null){
+				this.body4.text = "";
+			}
+			if(this.body5.text == null){
+				this.body5.text = "";
+			}
+			if(this.body6.text == null){
+				this.body6.text = "";
+			}
+			if(this.body7.text == null){
+				this.body7.text = "";
+			}
+			if(this.body8.text == null){
+				this.body8.text = "";
+			}
+			if(this.body9.text == null){
+				this.body9.text = "";
+			}
+			if(this.body10.text == null){
+				this.body10.text = "";
+			}
+			if(this.body11.text == null){
+				this.body11.text = "";
+			}
 			var body1:String = this.body1.text;
 			var body2:String = this.body2.text;
-			Test.getInstance().requestConnectServer(h1, h2, h3, body1, body2);
+			var body3:String = this.body3.text;
+			var body4:String = this.body4.text;
+			var body5:String = this.body5.text;
+			var body6:String = this.body6.text;
+			var body7:String = this.body7.text;
+			var body8:String = this.body8.text;
+			var body9:String = this.body9.text;
+			var body10:String = this.body10.text;
+			var body11:String = this.body11.text;
+			
+			Test.getInstance().requestConnectServer(h1, h2, h3, body1, body2, body3, body4, body5, body6, body7, body8, body9, body10, body11);
 		}
 	}
 }

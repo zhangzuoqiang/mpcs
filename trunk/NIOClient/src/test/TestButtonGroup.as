@@ -19,6 +19,7 @@ package test
 		private var saveContactInfo:Button;    // 测试保存用户联系信息
 		private var modPwd:Button;                // 测试修改密码
 		private var bindMobile:Button;            // 测试绑定手机
+		private var bindMobileList:Button;       // 测试绑定手机
 		private var setLocation:Button;           // 测试设定位置
 		private var tips:Button;		                // 测试开启手机提醒
 		
@@ -54,6 +55,9 @@ package test
 			bindMobile = MoreUtils.createBtn(bindMobile, "绑定手机");
 			bindMobile.addEventListener(MouseEvent.CLICK, bindMobileHandler);
 			
+			bindMobileList = MoreUtils.createBtn(bindMobileList, "绑定手机列表");
+			bindMobileList.addEventListener(MouseEvent.CLICK, bindMobileListHandler);
+			
 			setLocation = MoreUtils.createBtn(setLocation, "设定位置");
 			setLocation.addEventListener(MouseEvent.CLICK, setLocationHandler);
 			
@@ -70,6 +74,7 @@ package test
 			addChild(saveContactInfo);
 			addChild(modPwd);
 			addChild(bindMobile);
+			addChild(bindMobileList);
 			addChild(setLocation);
 			addChild(tips);
 		}
@@ -130,8 +135,17 @@ package test
 			Test.getInstance().client.head1.text = "100202";
 			Test.getInstance().client.head2.text = "0";
 			Test.getInstance().client.head3.text = "0";
-			Test.getInstance().client.body1.text = "";
-			Test.getInstance().client.body2.text = "";
+			Test.getInstance().client.body1.text = "csdn_eric@hotmail.com";
+			Test.getInstance().client.body2.text = "作强";
+			Test.getInstance().client.body3.text = "男";
+			Test.getInstance().client.body4.text = "19880314";
+			Test.getInstance().client.body5.text = "O";
+			Test.getInstance().client.body6.text = "未婚";
+			Test.getInstance().client.body7.text = "学生";
+			Test.getInstance().client.body8.text = "大学本科";
+			Test.getInstance().client.body9.text = "东莞松山湖";
+			Test.getInstance().client.body10.text = "山东";
+			Test.getInstance().client.body11.text = "370782198803142495";
 		}
 		
 		/**
@@ -142,7 +156,7 @@ package test
 			Test.getInstance().client.head1.text = "100203";
 			Test.getInstance().client.head2.text = "0";
 			Test.getInstance().client.head3.text = "0";
-			Test.getInstance().client.body1.text = "";
+			Test.getInstance().client.body1.text = "csdn.eric@gmail.com";
 			Test.getInstance().client.body2.text = "";
 		}
 		
@@ -154,8 +168,12 @@ package test
 			Test.getInstance().client.head1.text = "100204";
 			Test.getInstance().client.head2.text = "0";
 			Test.getInstance().client.head3.text = "0";
-			Test.getInstance().client.body1.text = "";
-			Test.getInstance().client.body2.text = "";
+			Test.getInstance().client.body1.text = "csdn.eric@ymail.com";
+			Test.getInstance().client.body2.text = "200844306";
+			Test.getInstance().client.body3.text = "csdn_eric@hotmail.com";
+			Test.getInstance().client.body4.text = "13609698135";
+			Test.getInstance().client.body5.text = "0";
+			Test.getInstance().client.body6.text = "523808";
 		}
 		
 		/**
@@ -178,7 +196,27 @@ package test
 			Test.getInstance().client.head1.text = "100206";
 			Test.getInstance().client.head2.text = "0";
 			Test.getInstance().client.head3.text = "0";
-			Test.getInstance().client.body1.text = "";
+			Test.getInstance().client.body1.text = "csdn.eric@gmail.com";
+			Test.getInstance().client.body2.text = "15876995100";
+			Test.getInstance().client.body3.text = "父母";
+			Test.getInstance().client.body4.text = "服务中";
+			Test.getInstance().client.body5.text = "山东";
+			Test.getInstance().client.body6.text = "20110317";
+			Test.getInstance().client.body7.text = "200001";
+			Test.getInstance().client.body8.text = "23";
+			Test.getInstance().client.body9.text = "112";
+			Test.getInstance().client.body10.text = "500";
+		}
+		
+		/**
+		 * 请求绑定手机列表
+		 * @param evt
+		 */	
+		private function bindMobileListHandler(evt:MouseEvent):void{
+			Test.getInstance().client.head1.text = "100209";
+			Test.getInstance().client.head2.text = "0";
+			Test.getInstance().client.head3.text = "0";
+			Test.getInstance().client.body1.text = "csdn.eric@gmail.com";
 			Test.getInstance().client.body2.text = "";
 		}
 		
