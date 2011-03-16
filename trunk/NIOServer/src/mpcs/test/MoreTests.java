@@ -2,10 +2,12 @@ package mpcs.test;
 
 import java.util.Date;
 
-import nio.config.Debug;
-import nio.util.LangUtil;
+import mpcs.utils.JSONUtil;
 import mpcs.utils.MoreUtils;
 import mpcs.utils.StringUtil;
+import net.sf.json.JSONObject;
+import nio.config.Debug;
+import nio.util.LangUtil;
 
 /**
  * <p>Title:  测试工具类</p>
@@ -23,8 +25,13 @@ public class MoreTests {
 		test_LangUtil(); // 测试语言工具
 		test_Encoder(); // 测试加密解密
 		test_Date(); // 测试long类型time
+		test_JsonUtil(); // 测试JsonUtil工具类
 		
-		
+	}
+	
+	private static void test_JsonUtil(){
+		JSONObject object = JSONUtil.file2JsonObject("resources/json/vip.json");
+		MoreUtils.trace(object.getJSONObject("200001").getString("name"), true);
 	}
 	
 	private static void test_Date(){
