@@ -1,28 +1,47 @@
 package mylibs.interfaces
 {
 	import flash.utils.ByteArray;
-	
-	import mylibs.data.Packet;
 
 	/**
-	 * <b>Interface</b>: 服务器返回消息 接口
+	 * <b>Interface</b>: 接受服务端返回的数据接口
 	 * <br/><b>Author: </b>zhangzuoqiang
-	 * <br/><b>Date: </b>2011-3-17
+	 * <br/><b>Date: </b>2011-3-18
 	 **/
-	public interface IMsg extends ICmd {
+	public interface IMsg {
 		
 		/**
-		 *  解析获得的服务器消息
-		 * <br/>将消息头和消息体分离
-		 * @param Packet
+		 *  填充消息头
+		 */		
+		function parseHeadData(byte:ByteArray):void;
+		/**
+		 *  获取消息号
 		 * @return 
 		 */		
-		function parsePacket(packet:Packet):Boolean;
+		function getTypeID():int;
 		
 		/**
-		 *  获取服务器返回的错误消息号
+		 *  获取指定位的消息头
+		 * @param i
 		 * @return 
 		 */		
-		function get errorID():int;
+		function getHeadData(i:int):int;
+		
+		/**
+		 *  是否包含消息体
+		 * @return 
+		 */		
+		function hasBody():Boolean;
+		
+		/**
+		 *  返回是否包含错误信息
+		 * @return 
+		 */		
+		function hasError():Boolean;
+		
+		/**
+		 *  获取错误号
+		 * @return 
+		 */		
+		function getErrorID():int;
 	}
 }

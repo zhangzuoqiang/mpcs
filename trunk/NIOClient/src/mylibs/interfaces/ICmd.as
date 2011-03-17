@@ -1,29 +1,29 @@
 package mylibs.interfaces
 {
 	/**
-	 * <b>Interface</b>: 发送给服务端 消息基接口
+	 * <b>Interface</b>: 发送请求到服务端的接口
 	 * <br/><b>Author: </b>zhangzuoqiang
-	 * <br/><b>Date: </b>2011-3-17
+	 * <br/><b>Date: </b>2011-3-18
 	 **/
-	public interface ICmd extends ISerial {
+	public interface ICmd {
 		
 		/**
-		 * 获取消息号
-		 * @return 
+		 *  设置消息号，即第1位消息头
+		 * @param typeID
 		 */		
-		function get TypeId():int;
+		function setTypeID(typeID:int):void;
 		
 		/**
-		 *  设置消息号
-		 * @param id
-		 */		
-		function set TypeId(id:int):void
-			
-		/**
-		 *  得到指定位的消息头
+		 *  设置消息头（2,3位如果不设置默认为0）
 		 * @param i
+		 * @param value
+		 */		
+		function setHeadData(i:int, value:int):void;
+		
+		/**
+		 *  是否包含消息体
 		 * @return 
-		 */			
-		function getHeadData(i:int):int;
+		 */		
+		function hasBody():Boolean;
 	}
 }
