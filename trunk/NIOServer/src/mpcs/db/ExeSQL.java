@@ -27,6 +27,28 @@ public final class ExeSQL {
 	
 	
 	/**
+	 * 更改手机提示的状态
+	 * @param email
+	 * @param command
+	 * @return
+	 */
+	public static boolean updateTipByEmail(String email, String command){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.updateTipByEmail(email, command));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+	
+	/**
 	 * 添加绑定手机后的账户余额更改
 	 * @param email
 	 * @param account

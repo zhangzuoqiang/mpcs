@@ -13,6 +13,21 @@ public final class SQLangs {
 	
 	
 	/**
+	 * 根据email修改istip（是否开启手机提示）的状态
+	 * @param email
+	 * @return
+	 */
+	public static String updateTipByEmail(String email, String command){
+		int flag = 0;
+		if (command.equals("0")) {
+			flag = 0;
+		}else if (command.equals("1")) {
+			flag = 1;
+		}
+		return "update user set istip = '" + flag + "' where email = '" + email + "';";
+	}
+	
+	/**
 	 * 通过email，更改账户余额
 	 * @param email
 	 * @param account

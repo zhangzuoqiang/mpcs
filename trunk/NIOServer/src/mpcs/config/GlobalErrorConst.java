@@ -9,7 +9,10 @@ package mpcs.config;
 public class GlobalErrorConst {
 	//================== 在我下方添加 =====================
 	
-	
+	/**修改手机提示状态位无效**/
+	public static final int E_INVALIDE_MOBILE_TIP = -20802;
+	/**执行修改手机提示时出错**/
+	public static final int E_OPEN_MOBILE_TIP = -20801;
 	/**执行绑定手机时出错**/
 	public static final int E_BIND_MOBILE = -20404;
 	/**账户余额不足**/

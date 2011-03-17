@@ -12,6 +12,7 @@ public class UserVO {
 	
 	private String email;
 	private String password;
+	private String isTip; // 是否开启手机提醒服务
 	private BasicInfoVO basicInfo;
 	private ContactInfoVO contactInfo;
 	private ArrayList<PhoneVO> phones;
@@ -22,6 +23,12 @@ public class UserVO {
 		phones = new ArrayList<PhoneVO>();
 	}
 	
+	public String getIsTip() {
+		return isTip;
+	}
+	public void setIsTip(String isTip) {
+		this.isTip = isTip;
+	}
 	public ArrayList<PhoneVO> getPhones() {
 		return phones;
 	}
