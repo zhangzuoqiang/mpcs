@@ -1,5 +1,7 @@
 package mpcs.vo;
 
+import java.util.ArrayList;
+
 /**
  * <p>Title: 绑定手机 相关信息实体</p>
  * <p>Description: </p>
@@ -15,8 +17,19 @@ public class PhoneVO {
 	private String type; // 类型
 	private String longitude; // 原点经度
 	private String latitude; // 原点纬度
-	private String radius; // 最大偏移距离
+	private String radius; // 最大偏移距离	
+	private ArrayList<PositionVO> positions; // 位置列表
 	
+	public PhoneVO(){
+		positions = new ArrayList<PositionVO>();
+	}
+	
+	public ArrayList<PositionVO> getPositions() {
+		return positions;
+	}
+	public void setPositions(ArrayList<PositionVO> positions) {
+		this.positions = positions;
+	}
 	public String getPhoneID() {
 		return phoneID;
 	}

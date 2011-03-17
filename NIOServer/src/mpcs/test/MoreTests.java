@@ -2,6 +2,7 @@ package mpcs.test;
 
 import java.util.Date;
 
+import mpcs.utils.DateUtil;
 import mpcs.utils.JSONUtil;
 import mpcs.utils.MoreUtils;
 import mpcs.utils.StringUtil;
@@ -26,7 +27,14 @@ public class MoreTests {
 		test_Encoder(); // 测试加密解密
 		test_Date(); // 测试long类型time
 		test_JsonUtil(); // 测试JsonUtil工具类
-		
+		test_DateUtil();// 测试时间帮助类
+	}
+	
+	private static void test_DateUtil(){
+		MoreUtils.trace(DateUtil.getCurrentDate(), true);
+		MoreUtils.trace(DateUtil.getCurrentDate("yyyy-MM-dd-HH:mm:ss"), true);
+		MoreUtils.trace(DateUtil.getNowTimestamp(), true);
+		MoreUtils.trace(DateUtil.getDate4String("20110317124440"), true);
 	}
 	
 	private static void test_JsonUtil(){
