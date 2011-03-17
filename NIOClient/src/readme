@@ -1,0 +1,18 @@
+aswing
+1.修改FocusManager.as-init()方法:
+	public function init(theStage:Stage):void{
+		return;	//不监听焦点键盘事件
+		....
+	}
+2.修改BasicProgressBarUI,添加文字滤镜
+	protected function installComponents():void{
+		stringText = new TextField();
+		stringText.autoSize = TextFieldAutoSize.CENTER;
+		stringText.mouseEnabled = false;
+		stringText.tabEnabled = false;
+		stringText.selectable = false;
+		stringText.filters = [new GlowFilter(0x1c1c1c, 1, 2, 2, 5)];	//添加滤镜
+		progressBar.addChild(stringText);
+	}
+3.修改JToolTip,从原先的600改为300,让移上去快点显示信息
+private static const WAIT_TIME:int = 300;
