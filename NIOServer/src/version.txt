@@ -7,8 +7,8 @@
 版本:110317
 *.[张作强]
 *.[张作强]
-*.[张作强]
-*.[张作强]
+*.[张作强]测试MobileTipsHandler，接受请求/发送数据正常
+*.[张作强]实现手机提醒开启/关闭事件处理MobileTipsHandler
 *.[张作强]添加时间帮助类DateUtil
 *.[张作强]添加手机对应经纬度 实体类PositionVO
 *.[张作强]解决BindMobileHandler line132出现的bug，原因是在比较string时使用了“==”，改为equals，正常
