@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="test/Test.as" projectUUID="b5b5c7ba-9c28-4e5d-9e1d-a484b0fd25dc" version="6">
+<actionScriptProperties mainApplicationPath="NIOClient.as" projectUUID="b5b5c7ba-9c28-4e5d-9e1d-a484b0fd25dc" version="6">
   <compiler additionalCompilerArguments="-locale zh_CN" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -24,11 +24,8 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="1" linkType="1" path="libs"/>
     </libraryPath>
-    <sourceAttachmentPath>
-      <sourceAttachmentPathEntry kind="3" linkType="1" path="D:/workspaces/space_1/NIOClient/libs/AsWing.swc" sourcepath="D:/SVN-AS/aswing/AsWing_2.0beta/AsWing" useDefaultLinkType="false"/>
-    </sourceAttachmentPath>
+    <sourceAttachmentPath/>
   </compiler>
   <applications>
     <application path="test/Test.as"/>
