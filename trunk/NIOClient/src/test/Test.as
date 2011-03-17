@@ -4,7 +4,7 @@ package test
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-
+	
 	[SWF(width=480,height=550)]
 	/**
 	 * <b>Description: </b>用来测试与服务端的交互
