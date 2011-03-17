@@ -7,7 +7,10 @@ package test
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
+	
 	import mylibs.data.Packet;
+	import mylibs.data.SimpleMsg;
+	import mylibs.events.GenericEvent;
 	
 	/**
 	 * socket客户端
@@ -91,9 +94,16 @@ package test
 					socket.readBytes(byteBuffer, 0, dataLength);
 					
 					//读取完一条消息后发送消息内容
-					var event:NetEvent=new NetEvent(NetEvent.READED_DATA);
-					event.bytesData = byteBuffer;
-					dispatchEvent(event);
+					var msg:SimpleMsg = new SimpleMsg();
+					msg.parseHeadData(byteBuffer);
+					var tid:int = msg.getHeadData(0);
+					this.dispatchEvent(new GenericEvent(tid.toString(),msg));
+					
+					
+					
+//					var event:NetEvent=new NetEvent(NetEvent.READED_DATA);
+//					event.bytesData = byteBuffer;
+//					dispatchEvent(event);
 					
 					dataLength = 0;
 					readFlag = false;

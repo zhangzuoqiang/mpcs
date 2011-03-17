@@ -5,42 +5,58 @@ package mylibs.data
 	/**
 	 * <b>Description: </b>
 	 * <br/><b>Author: </b>zhangzuoqiang
-	 * <br/><b>Date: </b>2011-3-17
+	 * <br/><b>Date: </b>2011-3-18
 	 **/
 	public class SimpleMsg extends BaseMsg {
 		
-		private var body:Packet;
+		// 消息体
+		private var bytes:ByteArray;
 		
 		public function SimpleMsg() {
-			super();
 		}
 		
-		public function readShort():int{
-			return body.readShort();
+		override public function parseHeadData(byte:ByteArray):void {
+			this.head[0] = byte.readInt();
+			this.head[1] = byte.readInt();
+			this.head[2] = byte.readInt();
+			if(byte.bytesAvailable > 0){
+				bytes = byte;
+			}
 		}
-		public function readUShort():int{
-			return body.readUShort();
+		
+		override public function hasBody():Boolean {
+			return true;
 		}
-		public function readInt():int{
-			return  body.readInt();
+		
+		override public function readShort():int{
+			return bytes.readShort();
 		}
-		public function readUint():uint{
-			return body.readUint();
+		override public function readUShort():int{
+			return bytes.readUnsignedShort();
 		}
-		public function readFloat():Number{
-			return body.readFloat();
+		override public function readInt():int{
+			return  bytes.readInt();
 		}
-		public function readDouble():Number{
-			return body.readDouble();
+		override public function readUint():uint{
+			return bytes.readUnsignedInt();
 		}
-		public function readByte():int{
-			return body.readByte();
+		override public function readFloat():Number{
+			return bytes.readFloat();
 		}
-		public function readBytes(offset:int=0, length:int=0):ByteArray {
-			return body.readBytes(offset, length);
+		override public function readDouble():Number{
+			return bytes.readDouble();
 		}
-		public function readString(charset:String="UTF-8"):String{
-			return body.readString(charset);
+		override public function readByte():int{
+			return bytes.readByte();
+		}
+		override public function readBytes(offset:int=0,length:int=0):ByteArray{
+			var _bytes:ByteArray=new ByteArray();
+			bytes.readBytes(_bytes, offset, length);
+			return _bytes;
+		}
+		override public function readString(charset:String="UTF-8"):String{
+			var str_len:int=readShort();
+			return bytes.readMultiByte(str_len, charset);
 		}
 	}
 }

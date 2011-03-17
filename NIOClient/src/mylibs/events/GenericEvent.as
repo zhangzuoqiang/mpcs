@@ -2,31 +2,29 @@ package mylibs.events
 {
 	import flash.events.Event;
 	
+	import mylibs.data.BaseMsg;
 	import mylibs.data.SimpleMsg;
-	import mylibs.utils.MsgFactory;
-	
-	import mylibs.data.Packet;
+	import mylibs.interfaces.IMsg;
 	
 	/**
-	 * <b>Description: </b>由消息号触发的事件
+	 * <b>Description: </b>
 	 * <br/><b>Author: </b>zhangzuoqiang
-	 * <br/><b>Date: </b>2011-3-17
+	 * <br/><b>Date: </b>2011-3-18
 	 **/
 	public class GenericEvent extends Event {
 		
-		private var packet:Packet; 
-		/**
-		 *  服务端有数据返回时触发该事件
-		 * @param type 消息号
-		 * @param packet 返回的数据包
-		 */		
-		public function GenericEvent(type:String, packet:Packet) {
-			super(type);
-			this.packet = packet;
+		private var msg:IMsg;
+		
+		public function GenericEvent(typeID:String, _msg:IMsg) {
+			super(typeID);
+			this.msg = _msg;
 		}
 		
-		public function getSimpleMsg():SimpleMsg {
-			return MsgFactory.getMsg(SimpleMsg, packet) as SimpleMsg;
+		public function getMsg():IMsg {
+			if(this.msg.hasBody())
+				return msg as SimpleMsg;
+			else
+				return msg as BaseMsg;
 		}
 	}
 }

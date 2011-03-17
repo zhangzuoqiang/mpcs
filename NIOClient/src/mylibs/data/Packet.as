@@ -6,7 +6,16 @@ package mylibs.data
 	 * 数据包
 	 */
 	public class Packet {
+		
+		/**
+		 * 消息头数组 int
+		 * <br/> head[0] 消息号
+		 * <br/> head[1] 消息头扩展位
+		 * <br/> head[2] 消息头扩展位
+		 */
+		public var head:Array = [0,0,0];
 		private var bytes:ByteArray;
+		
 		
 		public function Packet(bytes:ByteArray=null){
 			if(bytes!=null){
@@ -14,6 +23,29 @@ package mylibs.data
 			}else{
 				this.bytes = new ByteArray();
 			}
+		}
+		
+		/**
+		 * 保存消息头
+		 * @param packet
+		 */
+		public function setHeadData(packet:Packet):void{
+			if(packet == null)
+				return;
+			head[0] = packet.readInt();
+			head[1] = packet.readInt();
+			head[2] = packet.readInt();
+		}
+		
+		/**
+		 *  获取指定位消息头
+		 * @param i
+		 * @return 
+		 */		
+		public function getHeadData(i:int):int{
+			if(i < 0 || i > 2)
+				return -1;
+			return head[i];
 		}
 		
 		/**

@@ -6,6 +6,10 @@ package test
 	import flash.text.TextFieldAutoSize;
 	
 	import mylibs.data.Packet;
+	import mylibs.data.SimpleCmd;
+	import mylibs.data.SimpleMsg;
+	import mylibs.events.GenericEvent;
+	
 	
 	[SWF(width=480,height=550)]
 	/**
@@ -81,10 +85,19 @@ package test
 			
 			net = NetPool.getInstance().getNetClient();
 			net.buildConnection();
-			net.addEventListener(NetEvent.READED_DATA, onReadedDataHandler);
 			net.addEventListener(Event.CONNECT, onConnectServerHandler);
+			net.addEventListener("500000", timeHandler);
 			
 			net.sendPacket(packet);
+		}
+		
+		private function timeHandler(evt:GenericEvent):void {
+			var msg:SimpleMsg = evt.getMsg() as SimpleMsg;
+			var str:String = msg.readString();
+			if (msg.getHeadData(1) == 0){
+				trace(str);
+			}
+			setServerData(msg.getHeadData(0), msg.getHeadData(1), msg.getHeadData(2), str);
 		}
 		
 		private function onConnectServerHandler(e:Event):void {
