@@ -12,24 +12,16 @@ package test
 		public static const READED_DATA:String = "readed_data";
 		public static const NULL_STREAM:String = "null_stream";
 		
-		private var playerId:int;
 		private var _data:ByteArray;
 		
 		public function NetEvent(type : String, bubbles : Boolean = false, cancelable : Boolean = false) {
 			super(type, bubbles, cancelable);
 		}
 		public function set bytesData(data:ByteArray):void{
-			_data=data;
+			_data = data;
 		}
 		public function get bytesData():ByteArray{
 			return _data;
-		}
-
-		public function set playerID(id:int):void {
-			playerId = id;
-		}
-		public function get playerID():int {
-			return playerId;
 		}
 	}
 }

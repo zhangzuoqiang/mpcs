@@ -7,6 +7,7 @@ package test
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
+	import mylibs.data.Packet;
 	
 	/**
 	 * socket客户端
@@ -74,7 +75,7 @@ package test
 			while (socket.bytesAvailable) {
 				if (!readFlag && socket.bytesAvailable >= headLen) {
 					//读取数据长度
-					dataLength = socket.readInt();
+					dataLength = socket.readInt();					
 					readFlag = true;
 				}
 				//如果为0,表示收到异常消息，避免无限循环地等待
@@ -91,7 +92,7 @@ package test
 					
 					//读取完一条消息后发送消息内容
 					var event:NetEvent=new NetEvent(NetEvent.READED_DATA);
-					event.bytesData=byteBuffer;
+					event.bytesData = byteBuffer;
 					dispatchEvent(event);
 					
 					dataLength = 0;
@@ -99,6 +100,7 @@ package test
 				}
 			}
 		}
+		
 		/**
 		 * 发送数据
 		 * @param	bytes
@@ -110,6 +112,7 @@ package test
 			trace("发送成功");
 			trace(socket.connected);
 		}
+		
 		/**
 		 * 发送自定义数据包
 		 * @param	packet

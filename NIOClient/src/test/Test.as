@@ -5,6 +5,8 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
+	import mylibs.data.Packet;
+	
 	[SWF(width=480,height=550)]
 	/**
 	 * <b>Description: </b>用来测试与服务端的交互
@@ -98,12 +100,16 @@ package test
 			
 //			var len:int = packet.readInt();// 获取绑定手机的数目
 			
+			setServerData(h1, h2, h3, testPacket(packet));
+		}
+		
+		private function testPacket(packet:Packet):String{
 			if(packet.array().bytesAvailable){
 				var body:String = packet.readString();
 			}else{
 				body = "";
 			}
-			setServerData(h1, h2, h3, body);
+			return body;
 		}
 		
 		/**
