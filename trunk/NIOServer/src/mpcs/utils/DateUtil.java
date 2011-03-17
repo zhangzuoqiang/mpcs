@@ -58,13 +58,14 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getCurrentDate(){
+//		DateFormat cnDate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.CHINA);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		return sdf.format(new Date());
 	}
 	
 	/**
 	 * 得到当前的时间,自定义时间格式
-	 * 如：yyyy-MM-dd-HH:mm:ss
+	 * 如：yyyy-MM-dd HH:mm:ss
 	 * @param dateFormat 输出显示的时间格式
 	 * @return
 	 */

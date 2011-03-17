@@ -32,7 +32,7 @@ public class MoreTests {
 	
 	private static void test_DateUtil(){
 		MoreUtils.trace(DateUtil.getCurrentDate(), true);
-		MoreUtils.trace(DateUtil.getCurrentDate("yyyy-MM-dd-HH:mm:ss"), true);
+		MoreUtils.trace(DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"), true);
 		MoreUtils.trace(DateUtil.getNowTimestamp(), true);
 		MoreUtils.trace(DateUtil.getDate4String("20110317124440"), true);
 	}
