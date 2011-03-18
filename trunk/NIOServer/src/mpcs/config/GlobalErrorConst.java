@@ -30,7 +30,7 @@ public class GlobalErrorConst {
 	/**密码错误**/
 	public static final int E_PASSWORD_WRONG = -10202;
 	/**不存在此用户**/
-	public static final int E_NO_THIS_USER = -10201;		
+	public static final int E_NO_THIS_USER = -10201;
 	/**注册用户失败，操作数据库添加用户时发生**/
 	public static final int E_ADD_USER_FAILED = -10102;	
 	/**此邮箱已注册**/
