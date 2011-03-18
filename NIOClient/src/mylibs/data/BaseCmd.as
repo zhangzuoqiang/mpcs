@@ -26,7 +26,7 @@ package mylibs.data
 		
 		public function head2ByteArray():ByteArray{
 			var ba:ByteArray = new ByteArray();
-			for(var i:int = 0; i < 2; i++)
+			for(var i:int = 0; i <= 2; i++)
 				ba.writeInt(this.head[i]);
 //			trace("Send Head: " + ba.toString() );
 			return ba;

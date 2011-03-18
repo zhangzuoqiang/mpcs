@@ -87,9 +87,9 @@ package mylibs.core
 			var des:ByteArray = new ByteArray();
 			var tmp:ByteArray  = cmd.head2ByteArray();
 			des.writeBytes(tmp, 0, tmp.length);	// 写入消息头
-			tmp.clear();
+//			tmp.clear();
 			// 如果包含消息体
-			if(cmd.hasBody()){
+			if(cmd.hasBody() && cmd.getBodyBytes() != null){
 				tmp = cmd.getBodyBytes();
 				des.writeBytes(tmp,0,tmp.length); // 写入消息体
 			}
