@@ -1,5 +1,7 @@
 package mylibs.interfaces
 {
+	import flash.utils.ByteArray;
+
 	/**
 	 * <b>Interface</b>: 发送请求到服务端的接口
 	 * <br/><b>Author: </b>zhangzuoqiang
@@ -25,5 +27,17 @@ package mylibs.interfaces
 		 * @return 
 		 */		
 		function hasBody():Boolean;
+		
+		/**
+		 *  将消息头写入ByteArray
+		 * @return 
+		 */
+		function head2ByteArray():ByteArray;
+		
+		/**
+		 *  获取消息体ByteArray
+		 * @return 
+		 */		
+		function getBodyBytes():ByteArray;
 	}
 }

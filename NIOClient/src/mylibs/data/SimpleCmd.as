@@ -17,6 +17,10 @@ package mylibs.data
 			this.bytes = new ByteArray();
 		}
 		
+		override public function getBodyBytes():ByteArray{
+			return this.bytes;
+		}
+		
 		override public function hasBody():Boolean {
 			return true;
 		}
