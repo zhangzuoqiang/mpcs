@@ -23,8 +23,8 @@ public class RegisterHandler extends ListenAdapter {
 		UserVO vo = null;
         if (command == GlobalConst.C_USER_REGISTER) {
         	vo = new UserVO();
-        	vo.setEmail(request.getPacket().readString());
-        	vo.setPassword(request.getPacket().readString());
+        	vo.setEmail((request.getPacket().readString()).trim());// 消除空格
+        	vo.setPassword((request.getPacket().readString()).trim());
         	//执行数据库操作 查询用户
         	if (isExist(vo.getEmail())) {
         		//该邮箱已被注册

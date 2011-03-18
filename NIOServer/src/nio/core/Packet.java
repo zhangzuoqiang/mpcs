@@ -28,7 +28,7 @@ public class Packet implements IRead , IWrite{
 	 * 开辟缓存区1024=1M
 	 */
 	public Packet(){
-		buff = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE);
+		buff = ByteBuffer.allocate(ServerConfig.BUFFER_SIZE );
 	}
 	/**
 	 * 构造方法  指定缓存区大小
