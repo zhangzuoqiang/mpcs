@@ -28,7 +28,7 @@ package mylibs.data
 			var ba:ByteArray = new ByteArray();
 			for(var i:int = 0; i < 2; i++)
 				ba.writeInt(this.head[i]);
-			trace("Send Head: " + ba.toString() );
+//			trace("Send Head: " + ba.toString() );
 			return ba;
 		}
 		

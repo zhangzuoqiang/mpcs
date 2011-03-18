@@ -113,9 +113,7 @@ package test2
 		}
 		
 		private function clickHandler(evt:MouseEvent):void{
-			
-			/*var command:int = int(clientLabel.getText());
-			trace("----------------------" + clientLabel.getText());
+			var command:int = int(clientLabel.getText());
 			switch(command){
 				case 1:
 					var time:TimeProxy = new TimeProxy();
@@ -141,7 +139,7 @@ package test2
 					break;
 				case 11:
 					break;
-			}*/
+			}
 		}
 		
 	}

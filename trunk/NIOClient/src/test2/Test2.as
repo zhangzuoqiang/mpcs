@@ -2,6 +2,9 @@ package test2
 {
 	import flash.display.Sprite;
 	
+	import mylibs.core.Connection;
+	import mylibs.core.ConnectionPool;
+	
 	import org.aswing.AsWingManager;
 	import org.aswing.EmptyLayout;
 	import org.aswing.JFrame;
@@ -20,11 +23,18 @@ package test2
 		public var client:ClientContainer;
 		private var server:ServerContainer;
 		private var btnGroup:ButtonGroupContainer;
+		public var conn:Connection;
 		
 		public function Test2() {
 			super();
 			instance = this;	
+			initSocket();
 			initUI();
+		}
+		
+		public function initSocket():void{
+			conn = ConnectionPool.getInstance().getConnection();
+			conn.buildConnection();
 		}
 		
 		private function initUI():void{
@@ -48,6 +58,7 @@ package test2
 			
 			frame.setSizeWH(750, 500);
 			frame.setResizable(false);
+			frame.setDragable(false);
 			frame.show();
 		}
 		

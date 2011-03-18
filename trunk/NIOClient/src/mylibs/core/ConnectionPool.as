@@ -1,7 +1,5 @@
 package mylibs.core
 {
-	import flash.utils.Dictionary;
-
 	/**
 	 * <b>Description: </b>Socket 连接对象池
 	 * <br/><b>Author: </b>zhangzuoqiang
@@ -10,19 +8,19 @@ package mylibs.core
 	public class ConnectionPool {
 		
 		private static var instance:ConnectionPool;
-		private var connPools:Dictionary;
+		private var connPools:Array;
 		private var length:int = 0;
 		private var num:int = 0;// 新建NetClient的个数
 		
 		public function ConnectionPool() {
-			connPools = new Dictionary();
+			connPools = [];
 		}
 		
 		public function getConnection():Connection{
 			trace("connPools中Connection的个数Num = " + num);
 			if(length > 0){
 				length --;
-				return connPools[length];
+				return connPools.pop();
 			}
 			num++;
 			return new Connection();
@@ -30,7 +28,7 @@ package mylibs.core
 		
 		public function return2Pools(conn:Connection):void{
 			length ++;
-			connPools[length] = conn;
+			connPools.push(conn);
 		}
 		
 		public static function getInstance():ConnectionPool{

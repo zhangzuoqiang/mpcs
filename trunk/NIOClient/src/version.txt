@@ -8,8 +8,8 @@
 *.[张作强]
 *.[张作强]
 *.[张作强]
-*.[张作强]
-*.[张作强]添加Connection管理类ConnectionManager
+*.[张作强]添加测试请求服务端时间的类TimeProxy
+*.[张作强]添加Connection对象池类ConnectionPool
 *.[张作强]添加连接socket服务器类Connection
 *.[张作强]添加连接socket服务器接口IConnection
 *.[张作强]添加连接socket的自定义事件ConnectEvent类
