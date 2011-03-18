@@ -15,6 +15,7 @@ package test2
 	import org.aswing.JPanel;
 	import org.aswing.JTextField;
 	
+	import test2.proxy.RegisterProxy;
 	import test2.proxy.TimeProxy;
 	
 	/**
@@ -120,6 +121,9 @@ package test2
 					time.sServerTime();
 					break;
 				case 2:
+					trace("---------------------");
+					var register:RegisterProxy = new RegisterProxy();
+					register.sRegister();
 					break;
 				case 3:
 					break;
