@@ -14,7 +14,7 @@ package test
 		
 		public function getNetClient():NetClient{
 			trace("NetPool中NetClient的个数Num = " + num);
-			if(length>0){
+			if(length > 0){
 				length --;
 				return netPools.pop();
 			}
