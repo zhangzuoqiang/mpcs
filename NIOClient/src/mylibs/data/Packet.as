@@ -1,58 +1,21 @@
 package mylibs.data
 {
 	import flash.utils.ByteArray;
-
+	
 	/**
 	 * 数据包
 	 */
 	public class Packet {
-		
-		/**
-		 * 消息头数组 int
-		 * <br/> head[0] 消息号
-		 * <br/> head[1] 消息头扩展位
-		 * <br/> head[2] 消息头扩展位
-		 */
-		public var head:Array = [0,0,0];
 		private var bytes:ByteArray;
-		
 		
 		public function Packet(bytes:ByteArray=null){
 			if(bytes!=null){
 				this.bytes=bytes;
 			}else{
-				this.bytes = new ByteArray();
+				this.bytes=new ByteArray();
 			}
 		}
 		
-		/**
-		 * 保存消息头
-		 * @param packet
-		 */
-		public function setHeadData(packet:Packet):void{
-			if(packet == null)
-				return;
-			head[0] = packet.readInt();
-			head[1] = packet.readInt();
-			head[2] = packet.readInt();
-		}
-		
-		/**
-		 *  获取指定位消息头
-		 * @param i
-		 * @return 
-		 */		
-		public function getHeadData(i:int):int{
-			if(i < 0 || i > 2)
-				return -1;
-			return head[i];
-		}
-		
-		/**
-		 *  将一个ByteArray包装为Packet
-		 * @param bytes
-		 * @return 
-		 */		
 		public static function wrap(bytes:ByteArray):Packet{
 			return new Packet(bytes);
 		}
@@ -148,7 +111,7 @@ package mylibs.data
 		public static function getBit(i : uint,bitNum : uint) : Boolean {
 			return (i & (1 << bitNum)) != 0;
 		}
-
+		
 		/**
 		 * 把数字某位改写为1或0
 		 *@param i 原数字
@@ -158,9 +121,9 @@ package mylibs.data
 		public static function setBit(i : uint,bitNum : uint,have : Boolean = true) : uint {
 			var t : uint = i;
 			if(have)
-			t |= (1 << bitNum);
+				t |= (1 << bitNum);
 			else
-			t ^= t & (1 << bitNum);
+				t ^= t & (1 << bitNum);
 			/*if(getBit(i, bitNum) == have)return;
 			else*/ 
 			return t;
