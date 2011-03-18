@@ -99,6 +99,7 @@ package mylibs.core
 				socket.removeEventListener(Event.CONNECT, connectHandler);
 				socket.removeEventListener(ProgressEvent.SOCKET_DATA, receivedHandler);
 				socket.close();
+//				ConnectionPool.getInstance().return2Pools(); // 回收连接进对象池
 			}
 		}
 		
@@ -152,6 +153,7 @@ package mylibs.core
 				//如果为0,表示收到异常消息，避免无限循环地等待
 				if(dataLength==0){
 					dispatchEvent(new ConnectEvent(ConnectEvent.NULL_STREAM));
+					trace("ConnectEvent.NULL_STREAM");
 					return;
 				}
 				//数据流里的数据满足条件，开始读数据
@@ -169,6 +171,7 @@ package mylibs.core
 					
 					dataLength = 0;
 					readFlag = false;
+//					ConnectionPool.getInstance().return2Pools(); // 回收连接进对象池
 				}
 			}
 		}

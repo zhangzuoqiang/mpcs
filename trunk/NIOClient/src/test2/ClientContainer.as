@@ -2,7 +2,6 @@ package test2
 {
 	import flash.events.MouseEvent;
 	
-	import mylibs.core.ConnectionManager;
 	import mylibs.data.BaseCmd;
 	import mylibs.data.SimpleCmd;
 	import mylibs.data.SimpleMsg;
@@ -59,13 +58,8 @@ package test2
 		
 		private var sendBtn:JButton;
 		
-		private var conn:IConnection;
-		
 		public function ClientContainer() {
 			super(new EmptyLayout());
-			
-			conn = ConnectionManager.getConnection();
-			conn.addEventListener("500000", rTimeHandler);
 			
 			initUI();
 		}
@@ -120,12 +114,6 @@ package test2
 		
 		private function clickHandler(evt:MouseEvent):void{
 			
-			trace(conn.isConnected());
-			
-			var cmd:SimpleCmd = new SimpleCmd(100201);
-			cmd.writeString("csdn.eric@gmail.com");
-			conn.send(cmd);
-			
 			/*var command:int = int(clientLabel.getText());
 			trace("----------------------" + clientLabel.getText());
 			switch(command){
@@ -154,11 +142,6 @@ package test2
 				case 11:
 					break;
 			}*/
-		}
-		
-		private function rTimeHandler(evt:GenericEvent):void{
-			var msg:SimpleMsg = evt.getMsg() as SimpleMsg;
-			trace(msg.readString());
 		}
 		
 	}

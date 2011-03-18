@@ -10,7 +10,7 @@ package mylibs.data
 	public class SimpleMsg extends BaseMsg {
 		
 		// 消息体
-		private var bytes:ByteArray;
+		private var body:Packet;
 		
 		public function SimpleMsg() {
 		}
@@ -20,7 +20,7 @@ package mylibs.data
 			this.head[1] = byte.readInt();
 			this.head[2] = byte.readInt();
 			if(byte.bytesAvailable > 0){
-				bytes = byte;
+				body = new Packet(byte);
 			}
 		}
 		
@@ -29,34 +29,31 @@ package mylibs.data
 		}
 		
 		override public function readShort():int{
-			return bytes.readShort();
+			return body.readShort();
 		}
 		override public function readUShort():int{
-			return bytes.readUnsignedShort();
+			return body.readUShort();
 		}
 		override public function readInt():int{
-			return  bytes.readInt();
+			return  body.readInt();
 		}
 		override public function readUint():uint{
-			return bytes.readUnsignedInt();
+			return body.readUint();
 		}
 		override public function readFloat():Number{
-			return bytes.readFloat();
+			return body.readFloat();
 		}
 		override public function readDouble():Number{
-			return bytes.readDouble();
+			return body.readDouble();
 		}
 		override public function readByte():int{
-			return bytes.readByte();
+			return body.readByte();
 		}
 		override public function readBytes(offset:int=0,length:int=0):ByteArray{
-			var _bytes:ByteArray=new ByteArray();
-			bytes.readBytes(_bytes, offset, length);
-			return _bytes;
+			return body.readBytes(offset, length);
 		}
 		override public function readString(charset:String="UTF-8"):String{
-			var str_len:int=readShort();
-			return bytes.readMultiByte(str_len, charset);
+			return body.readString(charset);
 		}
 	}
 }
