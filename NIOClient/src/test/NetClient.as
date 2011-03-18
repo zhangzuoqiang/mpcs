@@ -8,6 +8,8 @@ package test
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
 	
+	import mylibs.data.Packet;
+	
 	/**
 	 * socket客户端
 	 */

@@ -4,6 +4,8 @@ package test
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
+	
+	import mylibs.data.Packet;
 
 	[SWF(width=480,height=550)]
 	/**
