@@ -96,6 +96,7 @@ package test
 					
 					dataLength = 0;
 					readFlag = false;
+					NetPool.getInstance().returnNetClient(Test.getInstance().net);
 				}
 			}
 		}
