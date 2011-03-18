@@ -14,6 +14,8 @@ package mylibs.core
 	import mylibs.interfaces.ICmd;
 	import mylibs.interfaces.IConnection;
 	
+	import test2.Test2;
+	
 	/**
 	 * <b>Description: </b>连接socket服务器类
 	 * <br/><b>Author: </b>zhangzuoqiang
@@ -59,13 +61,16 @@ package mylibs.core
 				return;
 			socket.connect(this.server, this.port);
 			trace("socket reconnect.......................");
+			/*if(!this.isConnected()) {
+				this.dispatchEvent(new Event(ConnectEvent.CONNECT_ERROR));
+				trace("Send Error");
+				return;
+			}*/
 		}
 		
 		public function send(cmd:ICmd):void {
 			if(!this.isConnected()) {
-				this.dispatchEvent(new Event(ConnectEvent.CONNECT_ERROR));
-				trace("Send Error");
-				return;
+				this.reconnect();
 			}
 			var ba:ByteArray = toEncodeSocketByteArray(cmd);
 			ba.position = 0;
@@ -99,7 +104,7 @@ package mylibs.core
 				socket.removeEventListener(Event.CONNECT, connectHandler);
 				socket.removeEventListener(ProgressEvent.SOCKET_DATA, receivedHandler);
 				socket.close();
-//				ConnectionPool.getInstance().return2Pools(); // 回收连接进对象池
+				ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
 			}
 		}
 		
@@ -144,6 +149,7 @@ package mylibs.core
 			//开始读取数据的标记
 			var readFlag:Boolean = false;
 			//每读取一条数据bytesAvailable值将随之减少
+//			while (socket.bytesAvailable>=headLen) {
 			while (socket.bytesAvailable) {
 				if (!readFlag && socket.bytesAvailable >= headLen) {
 					//读取数据长度
@@ -171,7 +177,7 @@ package mylibs.core
 					
 					dataLength = 0;
 					readFlag = false;
-//					ConnectionPool.getInstance().return2Pools(); // 回收连接进对象池
+					ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
 				}
 			}
 		}
