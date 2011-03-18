@@ -10,15 +10,15 @@ package mylibs.data
 	public class SimpleCmd extends BaseCmd {
 		
 		// 消息体
-		private var bytes:ByteArray;
+		private var body:Packet;
 		
 		public function SimpleCmd(TYPEID:int) {
 			super(TYPEID);
-			this.bytes = new ByteArray();
+			this.body = new Packet();
 		}
 		
 		override public function getBodyBytes():ByteArray{
-			return this.bytes;
+			return this.body.array();
 		}
 		
 		override public function hasBody():Boolean {
@@ -26,35 +26,31 @@ package mylibs.data
 		}
 		
 		override public function writeShort(value:int):void{
-			bytes.writeShort(value);
+			body.writeShort(value);
 		}
 		override public function writeUShort(value:uint):void{
-			bytes.writeShort(value);
+			body.writeShort(value);
 		}
 		override public function writeInt(value:int):void{
-			bytes.writeInt(value);
+			body.writeInt(value);
 		}
 		override public function writeUint(value:uint):void{
-			bytes.writeUnsignedInt(value);
+			body.writeUint(value);
 		}
 		override public function writeFloat(value:Number):void{
-			bytes.writeFloat(value);
+			body.writeFloat(value);
 		}
 		override public function writeDouble(value:Number):void{
-			bytes.writeDouble(value);
+			body.writeDouble(value);
 		}
 		override public function writeByte(value:int):void{
-			bytes.writeByte(value);
+			body.writeByte(value);
 		}
 		override public function writeBytes(bytes:ByteArray, offset:int = 0, length:int = 0):void{
-			bytes.writeBytes(bytes, offset, length);
+			body.writeBytes(bytes, offset, length);
 		}
 		override public function writeString(value:String,charset:String = "UTF-8"):void{
-			var ba:ByteArray = new ByteArray();
-			ba.writeMultiByte(value, charset);
-			var len:int = ba.length;
-			writeShort(len);
-			bytes.writeBytes(ba);
+			body.writeString(value, charset);
 		}
 	}
 }
