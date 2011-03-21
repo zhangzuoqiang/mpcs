@@ -14,12 +14,21 @@ import java.util.Date;
 public class DateUtil {
 	
 	/**
+	 * 转换long时间类型为时间戳
+	 * @param time
+	 * @return
+	 */
+	public static Timestamp getTimestamp(Long time){
+		return new Timestamp(time);
+	}
+	
+	/**
 	 * 得到当前时间的时间戳
 	 * @return
 	 */
 	public static Timestamp getNowTimestamp() {
 		long curTime = System.currentTimeMillis();
-		return new Timestamp(curTime);
+		return getTimestamp(curTime);
 	}
 	
 	/**
