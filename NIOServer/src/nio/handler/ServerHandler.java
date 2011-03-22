@@ -33,7 +33,7 @@ public class ServerHandler extends ListenAdapter {
 
     public void doWrite(Request request, Response response) throws Exception {
     	int command = request.getCommand();
-    	// 无效的请求（应该在客户端屏蔽掉，提示操作无效）
+    	// 无效的请求，屏蔽恶意连接
     	if (!MoreUtils.isCommand(command)) {
     		MoreUtils.trace(LangUtil.get("10003") + command + LangUtil.get("10004"), Debug.printSystem);
 		}
