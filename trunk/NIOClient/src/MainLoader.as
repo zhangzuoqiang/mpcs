@@ -10,6 +10,7 @@ package
 	 **/
 	public class MainLoader extends Sprite {
 		public function MainLoader(){
+			
 		}
 	}
 }
