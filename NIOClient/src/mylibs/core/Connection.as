@@ -47,7 +47,7 @@ package mylibs.core
 				this.port = port;
 		}
 		
-		public function buildConnection(server:String = "172.25.135.248", port:int = 843):void {
+		public function buildConnection(server:String = "localhost", port:int = 843):void {
 			this.setServerInfo(server,port);
 			if(!socket) {
 				socket = new Socket(server, port);
