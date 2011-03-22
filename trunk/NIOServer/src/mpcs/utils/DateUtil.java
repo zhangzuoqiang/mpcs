@@ -63,7 +63,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 得到当前的时间，时间格式yyyyMMddHHmmss
+	 * 得到当前的时间，时间格式yyyyMMdd HHmmss
 	 * @return
 	 */
 	public static String getCurrentDate(){
