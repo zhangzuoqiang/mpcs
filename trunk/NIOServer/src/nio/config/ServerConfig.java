@@ -9,9 +9,9 @@ public class ServerConfig {
 	/**本地字符集**/
 	public static final String LOCAL_CHARSET = "UTF-8";
 	/**host**/
-	public static final String SERVER_ADDR = "172.25.135.248";
+	public static final String SERVER_ADDR = "localhost";
 	/**本地服务器监听的端口**/
-	public static final int LISTENNING_PORT = 843;
+	public static final int LISTENNING_PORT = 1843;
 	/**缓冲区大小**/
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/
