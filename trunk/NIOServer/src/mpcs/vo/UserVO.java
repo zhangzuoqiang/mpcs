@@ -23,11 +23,24 @@ public class UserVO {
 		phones = new ArrayList<PhoneVO>();
 	}
 	
+	@Override
+	public String toString() {
+		return this.getEmail() + " " + this.getPassword() + " " + this.getIsTip() 
+					+ " " + this.getBasicInfo().toString() + " " + this.getContactInfo().toString();
+	}
+
 	public String getIsTip() {
+		if (this.isTip == null) {
+			this.isTip = "";
+		}
 		return isTip;
 	}
 	public void setIsTip(String isTip) {
-		this.isTip = isTip;
+		if (isTip == null) {
+			this.isTip = "";
+			return;
+		}
+		this.isTip = isTip.trim();
 	}
 	public ArrayList<PhoneVO> getPhones() {
 		return phones;
@@ -48,15 +61,29 @@ public class UserVO {
 		this.contactInfo = contactInfo;
 	}
 	public String getEmail() {
+		if (this.email == null) {
+			this.email = "";
+		}
 		return email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		if (email == null) {
+			this.email = "";
+			return;
+		}
+		this.email = email.trim();
 	}
 	public String getPassword() {
+		if (this.password == null) {
+			this.password = "";
+		}
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		if (password == null) {
+			this.password = "";
+			return;
+		}
+		this.password = password.trim();
 	}
 }

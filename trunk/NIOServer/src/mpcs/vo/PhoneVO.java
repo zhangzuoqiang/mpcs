@@ -34,54 +34,90 @@ public class PhoneVO {
 		return phoneID;
 	}
 	public void setPhoneID(String phoneID) {
-		this.phoneID = phoneID;
+		if (phoneID == null) {
+			this.phoneID = "";
+			return;
+		}
+		this.phoneID = phoneID.trim();
 	}
 	public String getRelationship() {
 		return relationship;
 	}
 	public void setRelationship(String relationship) {
-		this.relationship = relationship;
+		if (relationship == null) {
+			this.relationship = "";
+			return;
+		}
+		this.relationship = relationship.trim();
 	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
-		this.status = status;
+		if (status == null) {
+			this.status = "";
+			return;
+		}
+		this.status = status.trim();
 	}
 	public String getBelongto() {
 		return belongto;
 	}
 	public void setBelongto(String belongto) {
-		this.belongto = belongto;
+		if (belongto == null) {
+			this.belongto = "";
+			return;
+		}
+		this.belongto = belongto.trim();
 	}
 	public String getBegintime() {
 		return begintime;
 	}
 	public void setBegintime(String begintime) {
-		this.begintime = begintime;
+		if (begintime == null) {
+			this.begintime = "";
+			return;
+		}
+		this.begintime = begintime.trim();
 	}
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
-		this.type = type;
+		if (type == null) {
+			this.type = "";
+			return;
+		}
+		this.type = type.trim();
 	}
 	public String getLongitude() {
 		return longitude;
 	}
 	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+		if (longitude == null) {
+			this.longitude = "";
+			return;
+		}
+		this.longitude = longitude.trim();
 	}
 	public String getLatitude() {
 		return latitude;
 	}
 	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+		if (latitude == null) {
+			this.latitude = "";
+			return;
+		}
+		this.latitude = latitude.trim();
 	}
 	public String getRadius() {
 		return radius;
 	}
 	public void setRadius(String radius) {
-		this.radius = radius;
+		if (radius == null) {
+			this.radius = "";
+			return;
+		}
+		this.radius = radius.trim();
 	}
 }
