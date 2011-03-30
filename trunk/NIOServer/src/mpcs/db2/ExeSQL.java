@@ -75,8 +75,8 @@ public final class ExeSQL {
 	 * @param email
 	 * @return
 	 */
-	public static int selectAccountByEmail(String email){
-		int money = 0;
+	public static float selectAccountByEmail(String email){
+		float money = 0;
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
@@ -85,7 +85,7 @@ public final class ExeSQL {
 			 if (rs.getRow() == 0) {
 				 money = 0;
 			}else {
-				money = Integer.parseInt(rs.getString(1));
+				money = Float.parseFloat(rs.getString(1));
 			}
 		} catch (Exception e) {
 			if (Debug.printException) {
@@ -231,6 +231,7 @@ public final class ExeSQL {
 			 if (rs.getRow() == 0) {
 				 vo = null;
 			}else {
+				vo.setEmail(email);
 				vo.getContactInfo().setQQ(rs.getString(1));
 				vo.getContactInfo().setMsn(rs.getString(2));
 				vo.getContactInfo().setMobile(rs.getString(3));

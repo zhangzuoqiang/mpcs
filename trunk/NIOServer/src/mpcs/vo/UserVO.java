@@ -25,8 +25,8 @@ public class UserVO {
 	
 	@Override
 	public String toString() {
-		return this.getEmail() + " " + this.getPassword() + " " + this.getIsTip() 
-					+ " " + this.getBasicInfo().toString() + " " + this.getContactInfo().toString();
+		return "[User: " + this.getEmail() + " " + this.getPassword() + " " + this.getIsTip() 
+					+ " " + this.getBasicInfo().toString() + " " + this.getContactInfo().toString() + "]";
 	}
 
 	public String getIsTip() {
