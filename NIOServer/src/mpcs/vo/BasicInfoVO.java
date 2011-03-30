@@ -21,12 +21,15 @@ public class BasicInfoVO {
 	
 	@Override
 	public String toString() {
-		return this.getUserName() + " " + this.getGender() + " " + this.getBirthday() 
+		return "[BasicInfo: " + this.getUserName() + " " + this.getGender() + " " + this.getBirthday() 
 					+ " " + this.getBloodType() + " " + this.getMarriage() + " " + this.getCareer()
 					+ " " + this.getEducation() + " " + this.getResidence() + " " + this.getHome()
-					+ " " + this.getIdCard();
+					+ " " + this.getIdCard() + "]";
 	}
 	public String getUserName() {
+		if (this.userName == null) {
+			this.userName = "";
+		}
 		return userName;
 	}
 	public void setUserName(String userName) {

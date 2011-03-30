@@ -22,7 +22,7 @@ public final class SQLangs {
 		if (command.equals("0")) {
 			flag = 0;
 		}
-		return "update users set istip = '" + flag + "' where email = '" + email.trim() + "'";
+		return "update users set istip = '" + String.valueOf(flag).trim() + "' where email = '" + email.trim() + "'";
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public final class SQLangs {
 	public static String addBindMobile(UserVO vo){
 		PhoneVO phone = vo.getPhones().get(0);
 		return "insert into phone(phoneID, email, relationship, status, " +
-				"belongto, begintime, type, longitude, latitude, radius) values ('" + phone.getPhoneID() 
+				"belongto, begintime, viptype, longitude, latitude, radius) values ('" + phone.getPhoneID() 
 				+ "','" + vo.getEmail() + "','" + phone.getRelationship() + "','" + phone.getStatus() + "','" 
 				+ phone.getBelongto() + "','" + phone.getBegintime() + "','" + phone.getType() + "','" 
 				+ phone.getLongitude() + "','" + phone.getLatitude() + "','" + phone.getRadius() + "')";
@@ -64,7 +64,7 @@ public final class SQLangs {
 	 * @return
 	 */
 	public static String selectPhoneVOsByEmail(String email){
-		return "select phoneID, relationship, status, belongto, begintime, type, longitude, " +
+		return "select phoneID, relationship, status, belongto, begintime, viptype, longitude, " +
 				"latitude, radius from phone where email = '" + email.trim() + "'";
 	}
 	
@@ -87,7 +87,7 @@ public final class SQLangs {
 	public static String saveBasicInfo(UserVO vo){
 		return "update users set realname = '" + vo.getBasicInfo().getUserName() + "', gender = '" + vo.getBasicInfo().getGender() + 
 		"', birthday = '" + vo.getBasicInfo().getBirthday() + "', bloodtype = '" + vo.getBasicInfo().getBloodType() + "', marstatus = '" + vo.getBasicInfo().getMarriage()
-		+ "', job = '" +vo.getBasicInfo().getCareer() + "', education = '" +vo.getBasicInfo().getEducation() + "', residence = '" +vo.getBasicInfo().getResidence() 
+		+ "', job = '" + vo.getBasicInfo().getCareer() + "', education = '" + vo.getBasicInfo().getEducation() + "', residence = '" + vo.getBasicInfo().getResidence() 
 		+ "', hometown = '" + vo.getBasicInfo().getHome() + "', idcard = '" + vo.getBasicInfo().getIdCard() + "' where email = '" + vo.getEmail() + "'";
 	}
 	

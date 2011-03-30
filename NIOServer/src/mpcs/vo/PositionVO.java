@@ -12,6 +12,12 @@ public class PositionVO {
 	private float latitude;
 	private String date;
 	
+	@Override
+	public String toString() {
+		return "[Position: " + String.valueOf(this.longitude) + " " + String.valueOf(this.latitude) 
+					+ " " + this.date + "]";
+	}
+	
 	public float getLongitude() {
 		return longitude;
 	}
@@ -25,9 +31,16 @@ public class PositionVO {
 		this.latitude = latitude;
 	}
 	public String getDate() {
+		if (this.date == null) {
+			this.date = "";
+		}
 		return date;
 	}
 	public void setDate(String date) {
+		if (date == null) {
+			this.date = "";
+			return;
+		}
 		this.date = date;
 	}
 }

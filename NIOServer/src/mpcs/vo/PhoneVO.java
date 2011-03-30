@@ -24,6 +24,12 @@ public class PhoneVO {
 		positions = new ArrayList<PositionVO>();
 	}
 	
+	@Override
+	public String toString() {
+		return "[Phone: " + this.phoneID + " " + this.relationship + " " + this.status + " " + this.belongto + " " + this.begintime
+		 			+ " " + this.type + " " + this.longitude + " " + this.latitude  + " " + this.radius + "]";
+	}
+
 	public ArrayList<PositionVO> getPositions() {
 		return positions;
 	}
@@ -31,6 +37,9 @@ public class PhoneVO {
 		this.positions = positions;
 	}
 	public String getPhoneID() {
+		if (this.phoneID == null) {
+			this.phoneID = "";
+		}
 		return phoneID;
 	}
 	public void setPhoneID(String phoneID) {
@@ -41,6 +50,9 @@ public class PhoneVO {
 		this.phoneID = phoneID.trim();
 	}
 	public String getRelationship() {
+		if (this.relationship == null) {
+			this.relationship = "";
+		}
 		return relationship;
 	}
 	public void setRelationship(String relationship) {
@@ -51,6 +63,9 @@ public class PhoneVO {
 		this.relationship = relationship.trim();
 	}
 	public String getStatus() {
+		if (this.status == null) {
+			this.status = "";
+		}
 		return status;
 	}
 	public void setStatus(String status) {
@@ -61,6 +76,9 @@ public class PhoneVO {
 		this.status = status.trim();
 	}
 	public String getBelongto() {
+		if (this.belongto == null) {
+			this.belongto = "";
+		}
 		return belongto;
 	}
 	public void setBelongto(String belongto) {
@@ -71,6 +89,9 @@ public class PhoneVO {
 		this.belongto = belongto.trim();
 	}
 	public String getBegintime() {
+		if (this.begintime == null) {
+			this.begintime = "";
+		}
 		return begintime;
 	}
 	public void setBegintime(String begintime) {
@@ -81,6 +102,9 @@ public class PhoneVO {
 		this.begintime = begintime.trim();
 	}
 	public String getType() {
+		if (this.type == null) {
+			this.type = "";
+		}
 		return type;
 	}
 	public void setType(String type) {
@@ -91,6 +115,9 @@ public class PhoneVO {
 		this.type = type.trim();
 	}
 	public String getLongitude() {
+		if (this.longitude == null) {
+			this.longitude = "";
+		}
 		return longitude;
 	}
 	public void setLongitude(String longitude) {
@@ -101,6 +128,9 @@ public class PhoneVO {
 		this.longitude = longitude.trim();
 	}
 	public String getLatitude() {
+		if (this.latitude == null) {
+			this.latitude = "";
+		}
 		return latitude;
 	}
 	public void setLatitude(String latitude) {
@@ -111,6 +141,9 @@ public class PhoneVO {
 		this.latitude = latitude.trim();
 	}
 	public String getRadius() {
+		if (this.radius == null) {
+			this.radius = "";
+		}
 		return radius;
 	}
 	public void setRadius(String radius) {

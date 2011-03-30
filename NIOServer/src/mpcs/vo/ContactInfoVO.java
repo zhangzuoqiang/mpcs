@@ -16,8 +16,8 @@ public class ContactInfoVO {
 	
 	@Override
 	public String toString() {
-		return this.getQQ() + " " + this.getMsn() + " " + this.getMobile() 
-					+ " " + this.getTel() + " " + this.getZip();
+		return "[ContactInfo: " + this.getQQ() + " " + this.getMsn() + " " + this.getMobile() 
+					+ " " + this.getTel() + " " + this.getZip() + "]";
 	}
 	public String getQQ() {
 		if (this.qq == null) {
