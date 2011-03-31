@@ -5,6 +5,11 @@
 
 ====================================================
 版本:1103290130_302000
+*.[张作强]测试正常（因为依赖于Google接口，所以要保证上网的前提）
+*.[张作强]添加http方式，通过google接口将LAC转换为经纬度的类Cell2LngAndLat
+*.[张作强]添加TowerVO、CellTowerVO、WifiTowerVO、CellVO与位置相关的VO
+*.[张作强]添加测试JsonUtil的类，测试无bug
+*.[张作强]添加自写的json工具类JsonUtil，用来转换各种数据类型为json格式
 *.[张作强]添加测试数据库操作的类SQLangsTest，测试无bug
 *.[张作强]使用数据库为DB2，修改连接相关参数，以及SQL语句，添加对C3P0的支持
 *.[张作强]修改项目中VO中的getter/setter方法，防止产生空指针异常
