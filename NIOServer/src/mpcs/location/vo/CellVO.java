@@ -26,6 +26,16 @@ public class CellVO {
 //		this.wifi_towers = new ArrayList<WifiTowerVO>();
 	}
 	
+	@Override
+	public String toString() {
+		return "CellVO [version=" + version + ", host=" + host
+				+ ", home_mobile_country_code=" + home_mobile_country_code
+				+ ", home_mobile_network_code=" + home_mobile_network_code
+				+ ", address_language=" + address_language + ", radio_type="
+				+ radio_type + ", request_address=" + request_address
+				+ ", cell_towers=" + cell_towers + "]";
+	}
+
 	/*public ArrayList<WifiTowerVO> getWifi_towers() {
 		return wifi_towers;
 	}

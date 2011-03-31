@@ -23,6 +23,15 @@ public class CellTowerVO extends TowerVO{
 	private int mobile_country_code = 460;
 	private int mobile_network_code = 0;
 	private int timing_advance;
+
+	@Override
+	public String toString() {
+		return "CellTowerVO [cell_id=" + cell_id + ", location_area_code="
+				+ location_area_code + ", mobile_country_code="
+				+ mobile_country_code + ", mobile_network_code="
+				+ mobile_network_code + ", timing_advance=" + timing_advance
+				+ "]";
+	}
 	
 	public CellTowerVO(int mnc , int lac , int cell_id){
 		this.setMobile_network_code(mnc);
