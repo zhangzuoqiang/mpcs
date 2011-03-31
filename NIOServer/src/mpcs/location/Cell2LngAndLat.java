@@ -30,7 +30,7 @@ public class Cell2LngAndLat {
 	 * @param string
 	 * @return vo/null
 	 */
-	public static LngAndLatVO format2VO(String string){
+	public static synchronized LngAndLatVO format2VO(String string){
 		if (string.equals("")) {
 			return null;
 		}
