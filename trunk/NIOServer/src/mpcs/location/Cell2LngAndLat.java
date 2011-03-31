@@ -25,6 +25,11 @@ public class Cell2LngAndLat {
 	
 	private static String LOCATIONS_URL = "http://www.google.com/loc/json";
 	
+	/**
+	 * 转换处理过的string类型为LngAndLatVO实体
+	 * @param string
+	 * @return vo/null
+	 */
 	public static LngAndLatVO format2VO(String string){
 		if (string.equals("")) {
 			return null;
@@ -51,6 +56,12 @@ public class Cell2LngAndLat {
 		return vo;
 	}
 	
+	/**
+	 * 串行化，携带请求数据（json格式）发送到Google请求转换
+	 * <br/>将Google返回的json实体转换为string类型，并返回
+	 * @param
+	 * @return jsonString
+	 */
 	public static synchronized String doCellPost(int mnc , int lac , int cell_id) {
 		String request = "";
 		String response = "";// post到服务端，服务端返回的String
@@ -98,7 +109,11 @@ public class Cell2LngAndLat {
 		return response;
 	}
 	
-	public static void main(String[] args) throws IOException{
+	/**
+	 * 测试方法
+	 * @param args
+	 */
+	public static void main(String[] args) {
 		String response = doCellPost(0, 9932, 50184);
 		
 		if (!response.equals("")) {
