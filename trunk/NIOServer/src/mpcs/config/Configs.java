@@ -9,5 +9,5 @@ package mpcs.config;
 public class Configs {
 	
 	/**json存放路径前缀**/
-	public static final String JSON_PREFIX = "resources/json/";
+	public static final String JSON_PREFIX = "resources/data/";
 }

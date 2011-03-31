@@ -27,9 +27,9 @@ public class LngAndLatVO {
 		"access_token":"2:MGe02apCNrFGDgCe:_3j_V9NH8TEaMvNp"
 		}
 	*/
-	private float longitude;
-	private float latitude;
-	private float accuracy;
+	private double longitude;
+	private double latitude;
+	private double accuracy;
 	private String country;
 	private String country_code;
 	private String region;
@@ -37,7 +37,16 @@ public class LngAndLatVO {
 	private String street;
 	private String access_token;
 	
-	public LngAndLatVO(float lng, float lat, float acc){
+	@Override
+	public String toString() {
+		return "LngAndLatVO [longitude=" + longitude + ", latitude=" + latitude
+				+ ", accuracy=" + accuracy + ", country=" + country
+				+ ", country_code=" + country_code + ", region=" + region
+				+ ", city=" + city + ", street=" + street + ", access_token="
+				+ access_token + "]";
+	}
+
+	public LngAndLatVO(double lng, double lat, double acc){
 		this.setLongitude(lng);
 		this.setLatitude(lat);
 		this.setAccuracy(acc);
@@ -46,22 +55,22 @@ public class LngAndLatVO {
 	public LngAndLatVO(){
 	}
 	
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public float getAccuracy() {
+	public double getAccuracy() {
 		return accuracy;
 	}
-	public void setAccuracy(float accuracy) {
+	public void setAccuracy(double accuracy) {
 		this.accuracy = accuracy;
 	}
 	public String getCountry() {
