@@ -32,7 +32,7 @@ public class JsonTest {
 		vo.getContactInfo().setTel("0769-");
 		vo.getContactInfo().setZip("523000");
 		
-		String jsonStr = JsonUtil.object2JSON(vo);
+		String jsonStr = JsonTran.object2JSON(vo);
 		
 		MoreUtils.trace(jsonStr, true);
 	}

@@ -54,8 +54,7 @@ public class HttpTest {
 		}
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestProperty("HOST", "www.google.com");
-		connection.setRequestProperty("Accept", "image/gif,image/x-xbitmap,"
-				+ "application/json,*/*");
+		connection.setRequestProperty("Accept", "image/gif,image/x-xbitmap,application/json,*/*");
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setRequestProperty("Content-Length", "" + postData.length);
 		connection.setDoOutput(true);

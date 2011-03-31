@@ -15,7 +15,7 @@ import java.util.Set;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-30
  */
-public class JsonUtil {
+public class JsonTran {
 	
 	/**
 	 * Object对象转为json格式
