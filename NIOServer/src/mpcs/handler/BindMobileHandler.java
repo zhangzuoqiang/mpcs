@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
-import mpcs.db.ExeSQL;
+import mpcs.db2.ExeSQL;
 import mpcs.model.BaseCmd;
 import mpcs.utils.JSONUtil;
 import mpcs.vo.PhoneVO;
@@ -137,7 +137,7 @@ public class BindMobileHandler extends ListenAdapter {
 		return flag;
 	}
 	
-	private int curAccount = 0;
+	private double curAccount = 0;
 	/**
 	 * 检查账户余额是否不足
 	 * @param vo
@@ -145,8 +145,8 @@ public class BindMobileHandler extends ListenAdapter {
 	 */
 	private boolean isEnoughMoney(UserVO vo){
 		// 查询账户可用余额
-		int account = ExeSQL.selectAccountByEmail(vo.getEmail());
-		int cost = JSONUtil.getVipItem(vo.getPhones().get(0).getType(), "cost");
+		double account = ExeSQL.selectAccountByEmail(vo.getEmail());
+		double cost = JSONUtil.getVipItem(vo.getPhones().get(0).getType(), "cost");
 		curAccount = account - cost;
 		if (curAccount >= 0) {
 			return false;
