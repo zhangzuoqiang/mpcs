@@ -26,6 +26,7 @@ public class Reader extends Thread {
     protected static ByteBuffer buffer = null;
     private int command = 0;
     private static Notifier notifier = Notifier.getNotifier();
+    public static boolean isAble2Closed = false;
 
     public Reader() {
     }
@@ -118,6 +119,8 @@ public class Reader extends Thread {
 		if (count > 0) {
 			buffer.flip();
 			packet = new Packet(buffer);
+		} else if (count < 0) {
+			isAble2Closed = true;
 		}
 		buffer.clear();
 		return packet;

@@ -62,10 +62,15 @@ public final class Writer extends Thread {
             notifier.fireDoClosed((Request)key.attachment());
             MoreUtils.trace(key.attachment(), Debug.printTestInfo);
             
-            // 一次请求处理完毕，关闭连接（短连接）
+            if (Reader.isAble2Closed) {
+            	sc.finishConnect();
+                sc.socket().close();
+                sc.close();
+			}
+            /*// 一次请求处理完毕，关闭连接（短连接）
             sc.finishConnect();
             sc.socket().close();
-            sc.close();
+            sc.close();*/
         }
         catch (Exception e) {
         	if (Debug.printException) {

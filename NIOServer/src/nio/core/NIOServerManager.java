@@ -112,8 +112,8 @@ public class NIOServerManager implements Runnable {
 	 * @throws Exception
 	 */
 	protected static void processIO(SelectionKey key) throws Exception {
-		if ( (key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
-//		if(key.isAcceptable()){
+//		if ( (key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
+		if(key.isAcceptable()){
 			// 接收新的连接请求
             ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
             notifier.fireDoAccept();
@@ -127,15 +127,15 @@ public class NIOServerManager implements Runnable {
             // 注册读操作,以进行下一步的读操作
             sc.register(selector,  SelectionKey.OP_READ, request);
         }
-        else if ( (key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ ) {
-//		else if (key.isReadable()) {
+//        else if ( (key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ ) {
+		else if (key.isReadable()) {
 			// 提交读服务线程读取客户端数据
             Reader.processRequest(key);
             //将本socket的事件在选择器中删除
             key.cancel();
         }
-        else if ( (key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE ) {
-//		else if (key.isWritable()) {
+//        else if ( (key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE ) {
+		else if (key.isWritable()) {
 			// 提交写服务线程向客户端发送回应数据
             Writer.processRequest(key); 
             key.cancel();
