@@ -87,9 +87,9 @@ public class NIOServerManager implements Runnable {
                 	Iterator<SelectionKey> it = selector.selectedKeys().iterator();
                     while (it.hasNext()) {
                         SelectionKey key = (SelectionKey) it.next();
-                        it.remove();
                         //处理I/O操作
                         processIO(key);
+                        it.remove();
                     }
                 } else {
                 	// 添加新的通道注册

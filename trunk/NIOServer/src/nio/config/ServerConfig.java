@@ -11,7 +11,7 @@ public class ServerConfig {
 	/**host**/
 	public static final String SERVER_ADDR = "localhost";
 	/**本地服务器监听的端口**/
-	public static final int LISTENNING_PORT = 1843;
+	public static final int LISTENNING_PORT = 843;
 	/**缓冲区大小**/
 	public static final int BUFFER_SIZE = 1024;
 	/**超时时间,单位毫秒**/

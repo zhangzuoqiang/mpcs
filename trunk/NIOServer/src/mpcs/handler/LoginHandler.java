@@ -5,7 +5,7 @@ import java.nio.channels.SocketChannel;
 
 import mpcs.config.GlobalConst;
 import mpcs.config.GlobalErrorConst;
-import mpcs.db.ExeSQL;
+import mpcs.db2.ExeSQL;
 import mpcs.model.BaseCmd;
 import mpcs.utils.MoreUtils;
 import mpcs.vo.UserVO;

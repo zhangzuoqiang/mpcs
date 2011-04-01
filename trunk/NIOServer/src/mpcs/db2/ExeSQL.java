@@ -75,8 +75,8 @@ public final class ExeSQL {
 	 * @param email
 	 * @return
 	 */
-	public static float selectAccountByEmail(String email){
-		float money = 0;
+	public static double selectAccountByEmail(String email){
+		double money = 0;
 		try {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
