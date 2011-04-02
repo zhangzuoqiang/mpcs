@@ -1,5 +1,6 @@
 package nio.util;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -10,7 +11,8 @@ import java.util.ResourceBundle;
  */
 public class LangUtil {
 	
-	private static ResourceBundle resource = ResourceBundle.getBundle("zh_CN");
+	private static Locale locale = Locale.getDefault();
+	private static ResourceBundle resource = ResourceBundle.getBundle("res.resource", locale);
 	
 	/**
 	 * 根据key得到value
