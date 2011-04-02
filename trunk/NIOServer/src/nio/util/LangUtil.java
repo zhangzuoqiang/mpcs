@@ -11,14 +11,13 @@ import java.util.ResourceBundle;
 public class LangUtil {
 	
 	private static ResourceBundle resource = ResourceBundle.getBundle("zh_CN");
+	
 	/**
 	 * 根据key得到value
 	 * @param key
 	 * @return
 	 */
 	public static String get(String key){
-		String value = "";
-		value = LoadResUtil.getProperties().getProperty(key);
-		return value;
+		return resource.getString(key);	
 	}
 }
