@@ -1,5 +1,7 @@
 package nio.util;
 
+import java.util.ResourceBundle;
+
 /**
  * <p>Title: 语言管理 工具类</p>
  * <p>Description: </p>
@@ -8,6 +10,7 @@ package nio.util;
  */
 public class LangUtil {
 	
+	private static ResourceBundle resource = ResourceBundle.getBundle("zh_CN");
 	/**
 	 * 根据key得到value
 	 * @param key
