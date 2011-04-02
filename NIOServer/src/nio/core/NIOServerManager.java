@@ -15,6 +15,7 @@ import nio.config.ServerConfig;
 import nio.manager.HandlerManager;
 import nio.util.LangUtil;
 
+import mpcs.db2.DBConnManager;
 import mpcs.utils.MoreUtils;
 
 /**
@@ -40,6 +41,8 @@ public class NIOServerManager implements Runnable {
     	
     	// 注册Handler
     	HandlerManager.AddHandlerListener();
+    	// 初始化DB2
+    	DBConnManager.getInstance().initDB2();
     	
         this.port = port;
         // 获取事件触发器
