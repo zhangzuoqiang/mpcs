@@ -25,12 +25,6 @@ public class DBConnManager {
 	private static Connection con = null;
 	
 	private DBConnManager(){
-		if (ds != null) {
-			initDB2();
-		}
-    }
-	
-	public void initDB2(){
 		try {
 			ds = new ComboPooledDataSource();
 			
@@ -69,8 +63,7 @@ public class DBConnManager {
 				e.printStackTrace();
 			}
 		}
-		MoreUtils.trace(LangUtil.get("10022"), Debug.printSystem);
-	}
+    }
 	
 	/**
 	 * 获取连接管理类 实例
