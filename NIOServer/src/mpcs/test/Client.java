@@ -44,8 +44,7 @@ public class Client {
             in.close();
             out.close();
             client.close();
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
         	if (Debug.printException) {
 				e.printStackTrace();
 			}

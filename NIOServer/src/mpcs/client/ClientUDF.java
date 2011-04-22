@@ -1,3 +1,4 @@
+package mpcs.client;
 
 import COM.ibm.db2.app.UDF;
 
@@ -7,7 +8,7 @@ import COM.ibm.db2.app.UDF;
  * @author zhangzuoqiang
  * <br/>Date: 2011-3-31
  */
-public class TipUDF extends UDF {
+public class ClientUDF extends UDF {
 	
 	/**
 	 * 当用户绑定的phone有新的数据时触发
