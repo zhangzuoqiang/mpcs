@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import nio.interfaces.IListener;
 
-
 /**
  * <p>Title: 事件触发器</p>
  * <p>Description: 用于在适当的时候通过触发服务器事件，通知注册的事件处理器对事件做出响应。
