@@ -12,7 +12,6 @@ import java.util.Iterator;
 
 import nio.config.Debug;
 import nio.config.ServerConfig;
-import nio.manager.HandlerManager;
 import nio.util.LangUtil;
 
 import mpcs.utils.MoreUtils;
@@ -38,8 +37,6 @@ public class NIOServerManager implements Runnable {
      */
     public NIOServerManager(int port) throws Exception {
     	
-    	// 注册Handler
-    	HandlerManager.AddHandlerListener();
     	
         this.port = port;
         // 获取事件触发器

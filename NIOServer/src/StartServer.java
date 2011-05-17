@@ -3,6 +3,7 @@ import mpcs.utils.MoreUtils;
 import nio.config.Debug;
 import nio.config.ServerConfig;
 import nio.core.NIOServerManager;
+import nio.manager.HandlerManager;
 
 /**
  * <p>Title: 服务器 启动类</p>
@@ -15,6 +16,9 @@ public class StartServer {
     public static void main(String[] args) {
         try {
             MoreUtils.trace("Server starting ...", Debug.printSystem);
+        	
+            // 注册Handler
+        	HandlerManager.AddHandlerListener();
         	
             NIOServerManager server = new NIOServerManager(ServerConfig.LISTENNING_PORT);
             Thread tServer = new Thread(server);
