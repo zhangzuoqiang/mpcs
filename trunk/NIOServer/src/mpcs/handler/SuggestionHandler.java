@@ -1,5 +1,7 @@
 package mpcs.handler;
 
+import nio.core.Request;
+import nio.core.Response;
 import nio.manager.ListenAdapter;
 
 /**
@@ -9,5 +11,8 @@ import nio.manager.ListenAdapter;
  * <br/>Date: 2011-3-13
  */
 public class SuggestionHandler extends ListenAdapter {
-
+	
+	public void doWrite(Request request, Response response) throws Exception {
+		
+	}
 }

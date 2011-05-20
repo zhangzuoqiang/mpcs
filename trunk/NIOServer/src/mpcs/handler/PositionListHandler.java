@@ -1,5 +1,7 @@
 package mpcs.handler;
 
+import nio.core.Request;
+import nio.core.Response;
 import nio.manager.ListenAdapter;
 
 /**
@@ -10,5 +12,7 @@ import nio.manager.ListenAdapter;
  */
 public class PositionListHandler extends ListenAdapter {
 	
-	
+	public void doWrite(Request request, Response response) throws Exception {
+		
+	}
 }

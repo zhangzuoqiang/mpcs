@@ -1,5 +1,6 @@
 package nio.core;
 
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 
@@ -30,7 +31,7 @@ public class Request {
 	public Request(SocketChannel sc) {
         this.sc = sc;
     }
-    public java.net.InetAddress getAddress() {
+    public InetAddress getAddress() {
         return sc.socket().getInetAddress();
     }
     public int getPort() {

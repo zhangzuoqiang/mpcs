@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trufun:TClassDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:trufun="http://trufun" zoom="1.0" gridSpacing="22,22">
+  <nodes xsi:type="trufun:TInterfaceNode" owner="=NIOServer/C:\/Program Files\/IBM\/SQLLIB\/java\/jdk\/jre\/lib\/rt.jar&lt;java.io(Serializable.class[Serializable" name="Serializable" filled="true" incomingConnections="//@connections.0" location="69,60" size="135,40" autoResize="true" viewAsClass="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes name="&lt;&lt;Interface>>"/>
+    <operationCompartmentNode/>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TInterfaceNode" owner="=NIOServer/src&lt;mpcs.interfaces{ISerial.java[ISerial" name="ISerial" filled="true" incomingConnections="//@connections.1 //@connections.2" outgoingConnections="//@connections.0" location="85,162" size="95,53" autoResize="true" viewAsClass="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes name="&lt;&lt;Interface>>"/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ISerial.java[ISerial~getHeadData~I" name="getHeadData(int i) : int"/>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ISerial.java[ISerial~getTypeID" name="getTypeID() : int"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TInterfaceNode" owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd" name="ICmd" filled="true" incomingConnections="//@connections.3" outgoingConnections="//@connections.1" location="273,276" size="82,53" autoResize="true" viewAsClass="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes name="&lt;&lt;Interface>>"/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd~clear" name="clear() : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd~getPacket" name="getPacket() : Packet"/>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd~setHeadData~I~I" name="setHeadData(int i, int value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd~setTypeID~I" name="setTypeID(int typeID) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{ICmd.java[ICmd~writeHead~I~I" name="writeHead(int head1, int head2) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TInterfaceNode" owner="=NIOServer/src&lt;mpcs.interfaces{IMsg.java[IMsg" name="IMsg" filled="true" outgoingConnections="//@connections.2" location="271,88" size="82,53" autoResize="true" viewAsClass="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes name="&lt;&lt;Interface>>"/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.interfaces{IMsg.java[IMsg~getBodys" name="getBodys() : Object"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd" name="BaseCmd" filled="true" incomingConnections="//@connections.4 //@connections.5 //@connections.6 //@connections.7" outgoingConnections="//@connections.3" location="398,280" size="95,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~BaseCmd~I" name="BaseCmd(int typeID)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~BaseCmd~I~I" name="BaseCmd(int typeID, int head2)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~clear" name="clear() : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~getHeadData~I" name="getHeadData(int i) : int"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~getPacket" name="getPacket() : Packet"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~getTypeID" name="getTypeID() : int"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~setHeadData~I~I" name="setHeadData(int i, int value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~setTypeID~I" name="setTypeID(int typeID) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeByte~B" name="writeByte(byte value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeBytes~\[B" name="writeBytes(byte[] bytes) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeChar~C" name="writeChar(char value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeDouble~D" name="writeDouble(double value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeFloat~F" name="writeFloat(float value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeHead~I~I" name="writeHead(int head1, int head2) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeInt~I" name="writeInt(int value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeLong~J" name="writeLong(long value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeShort~S" name="writeShort(short value) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeString~QString;" name="writeString(String str) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeString~QString;~QString;" name="writeString(String str, String charset) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd~writeUTF~QString;" name="writeUTF(String str) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd^head" name="head : int[]"/>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd^packet" name="packet : Packet"/>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{BaseCmd.java[BaseCmd^serialVersionUID" name="serialVersionUID : long"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.model{BaseMsg.java[BaseMsg" name="BaseMsg" filled="true" outgoingConnections="//@connections.4" location="393,391" size="95,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseMsg.java[BaseMsg~BaseMsg~I~I~I" name="BaseMsg(int head0, int head1, int head2)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseMsg.java[BaseMsg~BaseMsg~I" name="BaseMsg(int typeID)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BaseMsg.java[BaseMsg~getBodys" name="getBodys() : Object"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{BaseMsg.java[BaseMsg^serialVersionUID" name="serialVersionUID : long"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.model{BasicInfoCmd.java[BasicInfoCmd" name="BasicInfoCmd" filled="true" outgoingConnections="//@connections.5" location="532,390" size="135,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BasicInfoCmd.java[BasicInfoCmd~BasicInfoCmd~I~QUserVO;" name="BasicInfoCmd(int typeID, UserVO vo)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BasicInfoCmd.java[BasicInfoCmd~BasicInfoCmd~I~I" name="BasicInfoCmd(int typeID, int head2)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{BasicInfoCmd.java[BasicInfoCmd~writeBody~QUserVO;" name="writeBody(UserVO vo) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{BasicInfoCmd.java[BasicInfoCmd^serialVersionUID" name="serialVersionUID : long"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.model{ContactInfoCmd.java[ContactInfoCmd" name="ContactInfoCmd" filled="true" outgoingConnections="//@connections.6" location="206,390" size="151,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.model{ContactInfoCmd.java[ContactInfoCmd~ContactInfoCmd~I~QUserVO;" name="ContactInfoCmd(int typeID, UserVO vo)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{ContactInfoCmd.java[ContactInfoCmd~ContactInfoCmd~I~I" name="ContactInfoCmd(int typeID, int head2)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{ContactInfoCmd.java[ContactInfoCmd~writeBody~QUserVO;" name="writeBody(UserVO vo) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{ContactInfoCmd.java[ContactInfoCmd^serialVersionUID" name="serialVersionUID : long"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.model{PhoneCmd.java[PhoneCmd" name="PhoneCmd" filled="true" outgoingConnections="//@connections.7" location="562,273" size="103,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.model{PhoneCmd.java[PhoneCmd~PhoneCmd~I~QPhoneVO;" name="PhoneCmd(int typeID, PhoneVO vo)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{PhoneCmd.java[PhoneCmd~PhoneCmd~I~I" name="PhoneCmd(int typeID, int head2)"/>
+      <operations owner="=NIOServer/src&lt;mpcs.model{PhoneCmd.java[PhoneCmd~writeBody~QPhoneVO;" name="writeBody(PhoneVO vo) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.model{PhoneCmd.java[PhoneCmd^serialVersionUID" name="serialVersionUID : long"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <connections xsi:type="trufun:TRealizeConnection" target="//@nodes.0" source="//@nodes.1">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+    <points>136,132</points>
+  </connections>
+  <connections xsi:type="trufun:TRealizeConnection" target="//@nodes.1" source="//@nodes.2">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+    <points>286,187</points>
+  </connections>
+  <connections xsi:type="trufun:TRealizeConnection" target="//@nodes.1" source="//@nodes.3">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+    <points>286,186</points>
+    <points>220,187</points>
+  </connections>
+  <connections xsi:type="trufun:TRealizeConnection" target="//@nodes.2" source="//@nodes.4">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.4" source="//@nodes.5">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.4" source="//@nodes.6">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.4" source="//@nodes.7">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.4" source="//@nodes.8">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <leftRuler unit="2"/>
+  <topRuler horizontal="true" unit="2"/>
+</trufun:TClassDiagram>
