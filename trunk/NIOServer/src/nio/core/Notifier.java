@@ -1,6 +1,7 @@
 package nio.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nio.interfaces.IListener;
 
@@ -13,7 +14,7 @@ import nio.interfaces.IListener;
  */
 public class Notifier {
 	
-    private static ArrayList<IListener> listeners = null;
+    private static List<IListener> listeners = null;
     private static Notifier instance = null;
 
     private Notifier() {
