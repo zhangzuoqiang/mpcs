@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trufun:TClassDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:trufun="http://trufun" zoom="1.0" gridSpacing="22,22">
+  <nodes xsi:type="trufun:TInterfaceNode" owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener" name="IListener" filled="true" incomingConnections="//@connections.0" location="339,0" size="111,53" autoResize="true" viewAsClass="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes name="&lt;&lt;Interface>>"/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doAccept" name="doAccept() : void"/>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doAccepted~QRequest;" name="doAccepted(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doClosed~QRequest;" name="doClosed(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doError~QString;" name="doError(String error) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doRead~QRequest;" name="doRead(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.interfaces{IListener.java[IListener~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter" name="ListenAdapter" filled="true" incomingConnections="//@connections.1 //@connections.2 //@connections.3 //@connections.4 //@connections.5 //@connections.6 //@connections.7 //@connections.8" outgoingConnections="//@connections.0" location="323,205" size="147,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~ListenAdapter" name="ListenAdapter()"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doAccept" name="doAccept() : void"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doAccepted~QRequest;" name="doAccepted(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doClosed~QRequest;" name="doClosed(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doError~QString;" name="doError(String error) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doRead~QRequest;" name="doRead(Request request) : void"/>
+      <operations owner="=NIOServer/src&lt;nio.manager{ListenAdapter.java[ListenAdapter~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler" name="LoginHandler" filled="true" outgoingConnections="//@connections.1" location="93,205" size="135,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler~LoginHandler" name="LoginHandler()"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler~isPwdWrong~QString;" name="isPwdWrong(String pwd) : boolean"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler~isUserExist~QString;" name="isUserExist(String email) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler^password" name="password : String"/>
+      <attributes owner="=NIOServer/src&lt;mpcs.handler{LoginHandler.java[LoginHandler^vo" name="vo : UserVO"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{RegisterHandler.java[RegisterHandler" name="RegisterHandler" filled="true" outgoingConnections="//@connections.2" location="74,298" size="159,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{RegisterHandler.java[RegisterHandler~addUser~QString;~QString;" name="addUser(String email, String pwd) : int"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{RegisterHandler.java[RegisterHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{RegisterHandler.java[RegisterHandler~isExist~QString;" name="isExist(String email) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{SetPositionHandler.java[SetPositionHandler" name="SetPositionHandler" filled="true" outgoingConnections="//@connections.3" location="191,378" size="183,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{SetPositionHandler.java[SetPositionHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{PositionListHandler.java[PositionListHandler" name="PositionListHandler" filled="true" outgoingConnections="//@connections.4" location="410,379" size="191,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{PositionListHandler.java[PositionListHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{ModifyPwdHandler.java[ModifyPwdHandler" name="ModifyPwdHandler" filled="true" outgoingConnections="//@connections.5" location="561,293" size="167,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{ModifyPwdHandler.java[ModifyPwdHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{ModifyPwdHandler.java[ModifyPwdHandler~updatePwd~QString;~QString;" name="updatePwd(String email, String pwd) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler" name="BindMobileHandler" filled="true" outgoingConnections="//@connections.6" location="561,194" size="175,54" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler~addBindPhone~QUserVO;" name="addBindPhone(UserVO vo) : int"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler~isEnoughMoney~QUserVO;" name="isEnoughMoney(UserVO vo) : boolean"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler~isExistPhone~QUserVO;~QString;" name="isExistPhone(UserVO vo, String phoneID) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode>
+      <attributes owner="=NIOServer/src&lt;mpcs.handler{BindMobileHandler.java[BindMobileHandler^curAccount" name="curAccount : double"/>
+    </attributeCompartmentNode>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{BaseInfoHandler.java[BaseInfoHandler" name="BaseInfoHandler" filled="true" outgoingConnections="//@connections.7" location="560,111" size="159,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BaseInfoHandler.java[BaseInfoHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{BaseInfoHandler.java[BaseInfoHandler~saveBasicInfo~QUserVO;" name="saveBasicInfo(UserVO vo) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <nodes xsi:type="trufun:TClassNode" owner="=NIOServer/src&lt;mpcs.handler{ContactInfoHandler.java[ContactInfoHandler" name="ContactInfoHandler" filled="true" outgoingConnections="//@connections.8" location="41,114" size="183,41" autoResize="true" attributesCollapsed="true" operationsCollapsed="true" nestedClassifierCollpased="true">
+    <fillColor r="255" g="255" b="255"/>
+    <lineColor r="192" g="192" b="192"/>
+    <fontColor/>
+    <stereotypeNodes/>
+    <operationCompartmentNode>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{ContactInfoHandler.java[ContactInfoHandler~doWrite~QRequest;~QResponse;" name="doWrite(Request request, Response response) : void"/>
+      <operations owner="=NIOServer/src&lt;mpcs.handler{ContactInfoHandler.java[ContactInfoHandler~saveContactInfo~QUserVO;" name="saveContactInfo(UserVO vo) : boolean"/>
+    </operationCompartmentNode>
+    <attributeCompartmentNode/>
+    <nestedClassifierCompartmentNode/>
+    <templateParameterCompartmentNode/>
+  </nodes>
+  <connections xsi:type="trufun:TRealizeConnection" target="//@nodes.0" source="//@nodes.1">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.2">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.3">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.4">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.5">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.6">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.7">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.8">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <connections xsi:type="trufun:TGeneralizeConnection" target="//@nodes.1" source="//@nodes.9">
+    <fillColor r="192" g="192" b="192"/>
+    <lineColor r="192" g="192" b="192"/>
+  </connections>
+  <leftRuler unit="2"/>
+  <topRuler horizontal="true" unit="2"/>
+</trufun:TClassDiagram>
