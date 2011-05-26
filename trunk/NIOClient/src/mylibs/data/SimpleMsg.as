@@ -1,4 +1,4 @@
-package mylibs.data
+package mpcs.mylibs.data
 {
 	import flash.utils.ByteArray;
 

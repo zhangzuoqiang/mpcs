@@ -1,10 +1,10 @@
-package mylibs.events
+package mpcs.mylibs.events
 {
 	import flash.events.Event;
 	
-	import mylibs.data.BaseMsg;
-	import mylibs.data.SimpleMsg;
-	import mylibs.interfaces.IMsg;
+	import mpcs.mylibs.data.BaseMsg;
+	import mpcs.mylibs.data.SimpleMsg;
+	import mpcs.mylibs.interfaces.IMsg;
 	
 	/**
 	 * <b>Description: </b>

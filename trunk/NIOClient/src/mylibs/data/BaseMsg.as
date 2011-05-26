@@ -1,9 +1,9 @@
-package mylibs.data
+package mpcs.mylibs.data
 {
 	import flash.utils.ByteArray;
 	
-	import mylibs.interfaces.IMsg;
-	import mylibs.interfaces.ParseAdapter;
+	import mpcs.mylibs.interfaces.IMsg;
+	import mpcs.mylibs.interfaces.ParseAdapter;
 	
 	/**
 	 * <b>Description: </b>
