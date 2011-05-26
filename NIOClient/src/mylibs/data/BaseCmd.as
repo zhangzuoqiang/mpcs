@@ -1,9 +1,9 @@
-package mylibs.data
+package mpcs.mylibs.data
 {
 	import flash.utils.ByteArray;
 	
-	import mylibs.interfaces.ICmd;
-	import mylibs.interfaces.ParseAdapter;
+	import mpcs.mylibs.interfaces.ICmd;
+	import mpcs.mylibs.interfaces.ParseAdapter;
 	
 	/**
 	 * <b>Description: </b>客户端请求数据（无消息体）

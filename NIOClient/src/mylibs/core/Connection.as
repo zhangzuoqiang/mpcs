@@ -1,4 +1,4 @@
-package mylibs.core
+package mpcs.mylibs.core
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -8,13 +8,11 @@ package mylibs.core
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
 	
-	import mylibs.data.SimpleMsg;
-	import mylibs.events.ConnectEvent;
-	import mylibs.events.GenericEvent;
-	import mylibs.interfaces.ICmd;
-	import mylibs.interfaces.IConnection;
-	
-	import test2.Test2;
+	import mpcs.mylibs.data.SimpleMsg;
+	import mpcs.mylibs.events.ConnectEvent;
+	import mpcs.mylibs.events.GenericEvent;
+	import mpcs.mylibs.interfaces.ICmd;
+	import mpcs.mylibs.interfaces.IConnection;
 	
 	/**
 	 * <b>Description: </b>连接socket服务器类
@@ -104,7 +102,7 @@ package mylibs.core
 				socket.removeEventListener(Event.CONNECT, connectHandler);
 				socket.removeEventListener(ProgressEvent.SOCKET_DATA, receivedHandler);
 				socket.close();
-				ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
+//				ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
 			}
 		}
 		
@@ -177,7 +175,7 @@ package mylibs.core
 					
 					dataLength = 0;
 					readFlag = false;
-					ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
+//					ConnectionPool.getInstance().return2Pools(Test2.getInstance().conn); // 回收连接进对象池
 				}
 			}
 		}

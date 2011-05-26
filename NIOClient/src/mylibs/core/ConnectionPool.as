@@ -1,4 +1,4 @@
-package mylibs.core
+package mpcs.mylibs.core
 {
 	/**
 	 * <b>Description: </b>Socket 连接对象池

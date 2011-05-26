@@ -1,4 +1,4 @@
-package mylibs.events
+package mpcs.mylibs.events
 {
 	import flash.events.Event;
 	import flash.utils.ByteArray;

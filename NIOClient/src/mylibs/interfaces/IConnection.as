@@ -1,4 +1,4 @@
-package mylibs.interfaces
+package mpcs.mylibs.interfaces
 {
 	import flash.events.IEventDispatcher;
 
