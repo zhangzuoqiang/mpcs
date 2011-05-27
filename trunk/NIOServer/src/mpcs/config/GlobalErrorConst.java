@@ -7,6 +7,7 @@ package mpcs.config;
  * <br/>Date: 2011-3-7
  */
 public class GlobalErrorConst {
+	
 	//================== 在我下方添加 =====================
 	
 	/**修改手机提示状态位无效**/
