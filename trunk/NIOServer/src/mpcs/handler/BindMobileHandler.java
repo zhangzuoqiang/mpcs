@@ -37,6 +37,7 @@ public class BindMobileHandler extends ListenAdapter {
 			}else {
 				// 列表不为空
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_BIND_MOBILE_LIST);
+				// 写入列表大小
         		cmd.writeInt(vo.getPhones().size());
         		for (int i = 0; i < vo.getPhones().size(); i++) {
 					PhoneVO phoneVO = vo.getPhones().get(i);

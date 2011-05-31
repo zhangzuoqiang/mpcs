@@ -17,7 +17,7 @@ public class PhoneVO {
 	private String type; // 类型
 	private String longitude; // 原点经度
 	private String latitude; // 原点纬度
-	private String radius; // 最大偏移距离	
+	private String radius; // 最大偏移距离
 	private ArrayList<PositionVO> positions; // 位置列表
 	
 	public PhoneVO(){
