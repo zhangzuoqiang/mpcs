@@ -83,8 +83,8 @@ public final class GlobalConst {
 	/**
 	 * 轨迹
 	 */
-	public static final int C_LOCUS = 100301;
-	public static final int S_LOCUS = 500301;
+	public static final int C_POSITION_LIST = 100301;
+	public static final int S_POSITION_LIST = 500301;
 	
 	/**
 	 * 收件箱

@@ -24,6 +24,8 @@ public class GlobalErrorConst {
 	public static final int E_BIND_MOBILE_OVER_FLOW = -20401;
 	/**执行修改密码错误**/
 	public static final int E_MODIFY_PASSWORD_WRONG = -20501;
+	/**执行设置初始位置错误**/
+	public static final int E_SET_POSITION_WRONG = -20601;
 	/**保存用户联系信息错误**/
 	public static final int E_SAVE_USER_CONTACT_INFO = -20401;
 	/**保存用户基本信息错误**/

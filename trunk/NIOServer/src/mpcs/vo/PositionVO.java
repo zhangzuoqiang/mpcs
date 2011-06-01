@@ -8,9 +8,10 @@ package mpcs.vo;
  */
 public class PositionVO {
 	
+	private String date;
 	private float longitude;
 	private float latitude;
-	private String date;
+	private float accuracy;
 	
 	@Override
 	public String toString() {
@@ -18,6 +19,12 @@ public class PositionVO {
 					+ " " + this.date + "]";
 	}
 	
+	public float getAccuracy() {
+		return accuracy;
+	}
+	public void setAccuracy(float accuracy) {
+		this.accuracy = accuracy;
+	}
 	public float getLongitude() {
 		return longitude;
 	}
