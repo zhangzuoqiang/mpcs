@@ -69,6 +69,15 @@ public final class SQLangs {
 	}
 	
 	/**
+	 * 根据phone，查询历史位置数据
+	 * @param phone
+	 * @return
+	 */
+	public static String selectPositionsVOsByPhone(String phone){
+		return "select POSTIMESTAMP, LNGANDLAT from POSITIONS where PHONE = '" + phone.trim() + "'";
+	}
+	
+	/**
 	 * 通过email，保存用户联系信息
 	 * @param vo
 	 * @return
@@ -89,6 +98,19 @@ public final class SQLangs {
 		"', birthday = '" + vo.getBasicInfo().getBirthday() + "', bloodtype = '" + vo.getBasicInfo().getBloodType() + "', marstatus = '" + vo.getBasicInfo().getMarriage()
 		+ "', job = '" + vo.getBasicInfo().getCareer() + "', education = '" + vo.getBasicInfo().getEducation() + "', residence = '" + vo.getBasicInfo().getResidence() 
 		+ "', hometown = '" + vo.getBasicInfo().getHome() + "', idcard = '" + vo.getBasicInfo().getIdCard() + "' where email = '" + vo.getEmail() + "'";
+	}
+	
+	/**
+	 * 修改初始位置
+	 * @param mobile
+	 * @param lat
+	 * @param lng
+	 * @param acc
+	 * @return
+	 */
+	public static String updateInitPosition(String mobile, String lat, String lng, String acc){
+		return "update phone set LONGITUDE = '" + Float.parseFloat(lng.trim()) + "', LATITUDE = '"
+		+ Float.parseFloat(lat.trim()) + "', RADIUS = '" + Float.parseFloat(acc.trim()) + "' where PHONEID = '" + mobile.trim() + "'";
 	}
 	
 	/**

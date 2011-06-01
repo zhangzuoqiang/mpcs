@@ -9,6 +9,7 @@ import nio.config.Debug;
 
 import mpcs.utils.MoreUtils;
 import mpcs.vo.PhoneVO;
+import mpcs.vo.PositionVO;
 import mpcs.vo.UserVO;
 
 
@@ -25,6 +26,44 @@ public final class ExeSQL {
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
 	
+	
+	
+	
+	/**
+	 * 根据phone，查询历史数据
+	 * @param phone
+	 * @return
+	 */
+	public static ArrayList<PositionVO> selectPositionVOs(String phone){
+		ArrayList<PositionVO> list = new ArrayList<PositionVO>();
+		String[] ss = new String[3];
+		String lngandlat = "";
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 rs = stmt.executeQuery(SQLangs.selectPositionsVOsByPhone(phone));
+			 while (rs.next()) {
+				 PositionVO position = new PositionVO();
+				 position.setDate(rs.getString(1));
+				 lngandlat = rs.getString(2);
+				 // 将经纬度字段分解
+				 if ( !lngandlat.equals("") ) {
+					 ss = (lngandlat.split(";"));
+					 position.setLatitude( Float.parseFloat(ss[0])) ;
+					 position.setLongitude( Float.parseFloat(ss[1])) ;
+					 position.setAccuracy(Float.parseFloat(ss[2]));
+				 }
+				 list.add(position);
+			}
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			releaseAll();
+		}
+		return list;
+	}
 	
 	/**
 	 * 更改手机提示的状态
@@ -184,6 +223,30 @@ public final class ExeSQL {
 			 conn = cm.getConnection();
 			 stmt = conn.createStatement();
 			 flag = stmt.execute(SQLangs.saveBasicInfo(vo));
+		} catch (Exception e) {
+			if (Debug.printException) {
+				e.printStackTrace();
+			}
+		}finally{
+			releaseAll();
+		}
+		return flag;
+	}
+	
+	/**
+	 * 修改绑定手机的初始位置
+	 * @param mobile
+	 * @param lat
+	 * @param lng
+	 * @param acc
+	 * @return
+	 */
+	public static boolean updateInitPosition(String mobile, String lat, String lng, String acc){
+		boolean flag = false;
+		try {
+			 conn = cm.getConnection();
+			 stmt = conn.createStatement();
+			 flag = stmt.execute(SQLangs.updateInitPosition(mobile, lat, lng, acc));
 		} catch (Exception e) {
 			if (Debug.printException) {
 				e.printStackTrace();
