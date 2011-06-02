@@ -36,7 +36,6 @@ public final class ExeSQL {
 	 */
 	public static ArrayList<PositionVO> selectPositionVOs(String phone){
 		ArrayList<PositionVO> list = new ArrayList<PositionVO>();
-		String[] ss = new String[3];
 		String lngandlat = "";
 		try {
 			 conn = cm.getConnection();
@@ -47,12 +46,10 @@ public final class ExeSQL {
 				 position.setDate(rs.getString(1));
 				 lngandlat = rs.getString(2);
 				 // 将经纬度字段分解
-				 if ( !lngandlat.equals("") ) {
-					 ss = (lngandlat.split(";"));
-					 position.setLatitude( Float.parseFloat(ss[0])) ;
-					 position.setLongitude( Float.parseFloat(ss[1])) ;
-					 position.setAccuracy(Float.parseFloat(ss[2]));
-				 }
+				 String[] latlngacc = lngandlat.split(";");
+				 position.setLatitude( Float.parseFloat(latlngacc[0])) ;
+				 position.setLongitude( Float.parseFloat(latlngacc[1])) ;
+//				 position.setAccuracy(Float.parseFloat(latlngacc[2]));
 				 list.add(position);
 			}
 		} catch (Exception e) {

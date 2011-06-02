@@ -13,7 +13,7 @@ public class ServerConfig {
 	/**本地服务器监听的端口**/
 	public static final int LISTENNING_PORT = 843;
 	/**缓冲区大小**/
-	public static final int BUFFER_SIZE = 2 << 45;
+	public static final int BUFFER_SIZE = 2 << 44;
 	/**超时时间,单位毫秒**/
 	public static final int CONNECT_TIMEOUT = 3000;
 	/**Session超时时间,单位毫秒, 900 000 毫秒=15分钟**/
