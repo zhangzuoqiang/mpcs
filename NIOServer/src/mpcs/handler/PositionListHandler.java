@@ -40,13 +40,13 @@ public class PositionListHandler extends ListenAdapter {
 				BaseCmd cmd = new BaseCmd(GlobalConst.S_POSITION_LIST);
 				// 写入列表大小
         		cmd.writeInt(positionVOs.size());
-        		// 此处要传输的数据量比较大，所以要设定数据缓冲区 2<<45
+        		// 此处要传输的数据量比较大，所以要设定数据缓冲区 2<<44
         		for (int i = 0; i < positionVOs.size(); i++) {
 					PositionVO posVO = positionVOs.get(i);
 					cmd.writeString(posVO.getDate());
 					cmd.writeFloat(posVO.getLongitude());
 					cmd.writeFloat(posVO.getLatitude());
-					cmd.writeFloat(posVO.getAccuracy());
+//					cmd.writeFloat(posVO.getAccuracy());
 				}
         		response.send(cmd);
 			}
