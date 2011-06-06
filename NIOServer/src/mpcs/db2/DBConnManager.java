@@ -47,7 +47,7 @@ public class DBConnManager {
 			// 最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃
 			ds.setMaxIdleTime(60);
 			// 连接关闭时默认将所有未提交的操作回滚
-			ds.setAutoCommitOnClose(false);
+			ds.setAutoCommitOnClose(true);
 			// 在取得连接的同时将校验连接的有效性
 			ds.setTestConnectionOnCheckin(true);
 			// 定义在从数据库获取新连接失败后重复尝试的次数
