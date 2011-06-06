@@ -32,16 +32,16 @@ public class DBConnManager {
 			ds.setDriverClass("com.ibm.db2.jcc.DB2Driver"); 
 			ds.setJdbcUrl("jdbc:db2://localhost:50000/MPCS:retrieveMessagesFromServerOnGetMessage=true;");
 			ds.setUser("lenovo");
-			ds.setPassword("zzq");
+			ds.setPassword("zzq");			
 			
 			// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间
 			ds.setInitialPoolSize(30);
 			// 连接池中保留的最大连接数
 			ds.setMaxPoolSize(60);
 			// 
-			ds.setMinPoolSize(20);
+			ds.setMinPoolSize(30);
 			// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数
-			ds.setAcquireIncrement(3);
+			ds.setAcquireIncrement(5);
 			// 每60秒检查所有连接池中的空闲连接
 			ds.setIdleConnectionTestPeriod(60);
 			// 最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃
