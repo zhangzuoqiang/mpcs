@@ -32,20 +32,22 @@ public class DBConnManager {
 			ds.setDriverClass("com.ibm.db2.jcc.DB2Driver"); 
 			ds.setJdbcUrl("jdbc:db2://localhost:50000/MPCS:retrieveMessagesFromServerOnGetMessage=true;");
 			ds.setUser("lenovo");
-			ds.setPassword("zzq");			
+			ds.setPassword("zzq");
 			
 			// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间
-			ds.setInitialPoolSize(30);
+			ds.setInitialPoolSize(3);
 			// 连接池中保留的最大连接数
-			ds.setMaxPoolSize(60);
+			ds.setMaxPoolSize(15);
 			// 
-			ds.setMinPoolSize(30);
+			ds.setMinPoolSize(10);
 			// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数
-			ds.setAcquireIncrement(5);
+			ds.setAcquireIncrement(3);
 			// 每60秒检查所有连接池中的空闲连接
-			ds.setIdleConnectionTestPeriod(60);
+			ds.setIdleConnectionTestPeriod(30);
 			// 最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃
-			ds.setMaxIdleTime(60);
+			ds.setMaxIdleTime(30);
+			// 
+			ds.setMaxStatements(100);			
 			// 连接关闭时默认将所有未提交的操作回滚
 			ds.setAutoCommitOnClose(true);
 			// 在取得连接的同时将校验连接的有效性
@@ -56,7 +58,9 @@ public class DBConnManager {
 			ds.setAcquireRetryDelay(1000);
 			// c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能
 			// 通过多线程实现多个操作同时被执行
-			ds.setNumHelperThreads(3);
+			ds.setNumHelperThreads(50);
+			// 
+			ds.setCheckoutTimeout(0);
 			
 		} catch (PropertyVetoException e) {
 			if (Debug.printException) {
